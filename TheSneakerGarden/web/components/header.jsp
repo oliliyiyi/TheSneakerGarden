@@ -5,16 +5,16 @@
     <div class="d-flex flex-row-reverse">
         <div class="mr-5 pe-5 pt-3">       
             <%
-                if(session.getAttribute("user")==null){
+                if (session.getAttribute("user") == null) {
             %>
             <a class="custom-lr" style="display: inline-block; margin-left: 5em;"
-               
+
                type="button" onclick="location.href = './login'">Login &nbsp </a>
             <%
-                }else{
+            } else {
             %>
             <a class="custom-lr" style="display: inline-block; margin-left: 5em;"
-               
+
                type="button" onclick="location.href = './login'">Logout &nbsp </a>
             <%
                 }
@@ -51,12 +51,22 @@
                                     <li class="nav-item">
                                         <a id="shopActive" class="nav-link" aria-current="page" href="./shop">Shop</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a id="nikeActive" class="nav-link" aria-current="page" href="./shop?bId=1">Nike</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a id="adidasActive" class="nav-link" aria-current="page" href="./shop?bId=2">Adidas</a>
-                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Product
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                           <a id="nikeActive" class="nav-link" aria-current="page" href="./shop?bId=1">Nike</a>
+                                           <a id="adidasActive" class="nav-link" aria-current="page" href="./shop?bId=2">Adidas</a>
+<!--                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>-->
+                                        </div>
+                                        <!--                                    <li class="nav-item">
+                                                                                <a id="nikeActive" class="nav-link" aria-current="page" href="./shop?bId=1">Nike</a>
+                                                                            </li>
+                                                                            <li class="nav-item">
+                                                                                <a id="adidasActive" class="nav-link" aria-current="page" href="./shop?bId=2">Adidas</a>
+                                                                            </li>-->
                                     <li class="nav-item">
                                         <a id="aboutActive" class="nav-link" aria-current="page" href="./about.jsp">About</a>
                                     </li>
