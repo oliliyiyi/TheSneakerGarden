@@ -19,7 +19,7 @@ import model.User;
 
 /**
  *
- * @author DINHTT
+ * @author admin
  */
 @WebServlet(name = "ProductManagerControl", urlPatterns = {"/item-management"})
 public class ProductManagerControl extends HttpServlet {
@@ -48,7 +48,6 @@ public class ProductManagerControl extends HttpServlet {
                 request.getRequestDispatcher("./update-item.jsp").forward(request, response);
             }
             if("delete".equals(request.getParameter("action"))){
-                request.setAttribute("delete", "OK");
                 productManager.delete(Integer.valueOf(request.getParameter("id")));
                 listProduct = productManager.getAllProduct();
             }

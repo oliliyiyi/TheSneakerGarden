@@ -4,7 +4,6 @@
  */
 package controller;
 
-import dbmanager.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,10 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.User;
+import dbmanager.UserManager;
 
 /**
  *
- * @author DINHTT
+ * @author admin
  */
 @WebServlet(name = "RegisterControl", urlPatterns = {"/register"})
 public class RegisterControl extends HttpServlet {
@@ -62,20 +62,25 @@ public class RegisterControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
                 UserManager userManager = new UserManager();
+                
                 String username = request.getParameter("username");
                 String fullname = request.getParameter("fullname");
                 String email = request.getParameter("email");
                 String phone = request.getParameter("phone");
                 String address = request.getParameter("address");
                 String password = request.getParameter("password");
-                User user = new User(1, fullname, email, phone, address, 1);
-                if(userManager.insert(user, password)){
-                    //userManager.insertAccount(username, password, userManager.getUserID());
+                User user = new User(1, username, password, fullname, email, phone, address, 1);
+                
+                user = userManager.CheckUserExist(username);
+                if(user == null){
+                    userManager.insert(user, password);
                     request.getRequestDispatcher("./login").forward(request, response);
                 }else{
-                request.getRequestDispatcher("./register.jsp").forward(request, response);
+                    request.getRequestDispatcher("./register.jsp").forward(request, response);
                 }
+                
     }
 
     /**

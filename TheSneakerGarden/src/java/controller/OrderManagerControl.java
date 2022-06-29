@@ -17,7 +17,7 @@ import model.Order;
 
 /**
  *
- * @author DINHTT
+ * @author admin
  */
 @WebServlet(name = "OrderManagerControl", urlPatterns = {"/order-management"})
 public class OrderManagerControl extends HttpServlet {

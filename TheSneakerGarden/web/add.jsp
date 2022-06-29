@@ -125,6 +125,14 @@
                                 <input type="text" name="id" value="" required disabled="" >
                             </div>
                             <div class="input-user">
+                                <span class="details">Account </span>
+                                <input
+                                    name="account"
+                                    value=""
+                                    required
+                                    />
+                            </div>
+                            <div class="input-user">
                                 <span class="details">Name </span>
                                 <input
                                     name="name"

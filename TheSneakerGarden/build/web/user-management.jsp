@@ -138,10 +138,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Account</th>
                                 <th>Name</th>
-                                <th>Email</th>
+                                <th>Email</th> 
                                 <th>Phone</th> 
-                                <th>Address</th> 
+                                <th>Address</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -153,7 +154,8 @@
                             %>
                             <tr>
                                 <td><%=user.getUserId()%></td>
-                                <td><%=user.getUserName()%></td>
+                                <td><%=user.getUserAccount()%></td>
+                                <td><%=user.getUserFullName()%></td>
                                 <td><%=user.getUserEmail()%></td>
                                 <td><%=user.getUserPhone()%></td>
                                 <td><%=user.getUserAddress()%></td>

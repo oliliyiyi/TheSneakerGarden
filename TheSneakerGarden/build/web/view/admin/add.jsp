@@ -127,6 +127,13 @@
                                         />
                                 </div>
                                 <div class="input-user">
+                                    <span class="details">Account </span>
+                                    <input
+                                        placeholder="Enter Account"
+                                        required
+                                        />
+                                </div>
+                                <div class="input-user">
                                     <span class="details">Name </span>
                                     <input
                                         placeholder="Enter name "
@@ -141,7 +148,7 @@
                                         />
                                 </div>
                                 <div class="input-user">
-                                    <span class="details">Mobile</span>
+                                    <span class="details">Phone</span>
                                     <input                                   
                                         placeholder="Enter moblie"
                                         required

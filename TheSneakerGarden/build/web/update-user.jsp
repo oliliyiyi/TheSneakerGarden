@@ -124,16 +124,22 @@ User user = (User)request.getAttribute("user");
                 <div class="container">
                     <form action="user-management?action=update" method="POST" id="someFormId">
                         <input type="hidden" name="id" value="<%=user.getUserId()%>">
+                        <input type="hidden" name="account" value="<%=user.getUserAccount()%>">
                         <div class="user-input">
                             <div class="input-user">
                                 <span class="details">ID </span>
                                 <input type="text" name="ida" value="<%=user.getUserId()%>" required disabled="" >
                             </div>
                             <div class="input-user">
+                                <span class="details">Account </span>
+                                <input type="text" name="accounta" value="<%=user.getUserAccount()%>" required disabled="" >
+                            </div>
+                            
+                            <div class="input-user">
                                 <span class="details">Name </span>
                                 <input
                                     name="name"
-                                    value="<%=user.getUserName()%>"
+                                    value="<%=user.getUserFullName()%>"
                                     required
                                     />
                             </div>
