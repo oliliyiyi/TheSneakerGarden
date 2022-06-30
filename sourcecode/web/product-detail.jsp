@@ -1,10 +1,13 @@
+<%@page import="model.Inventory"%>
+<%@page import="model.Size"%>
 <%@page import="dbmanager.ProductManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Product"%>
 <%
-Product product = (Product)request.getAttribute("detail");
-ProductManager p = new ProductManager();
-ArrayList<Integer> list = p.getAllProductSize(product.getId());
+    Product product = (Product) request.getAttribute("detail");
+    ProductManager p = new ProductManager();
+    ArrayList<Inventory> list = p.getProductQuantity(product.getId());
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,11 +46,11 @@ ArrayList<Integer> list = p.getAllProductSize(product.getId());
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
                                         <%
-                                            if(product.getcId()==1){
+                                            if (product.getcId() == 1) {
                                         %>
                                         <h6>Nike</h6>
                                         <%
-                                            }else{
+                                        } else {
                                         %>
                                         <h6>Adidas</h6>
                                         <%
@@ -60,14 +63,25 @@ ArrayList<Integer> list = p.getAllProductSize(product.getId());
                                 <p><%=product.getDescription()%></p>
 
                                 <form action="addToCart">
-                                    <h6>Size:</h6>
+                                    <%
+                                        if (list != null) {
+                                            if (list.size() > 0) {
+                                                for (Inventory inv : list) {
+                                                    Size size = p.getProductSize(inv.getSizeID());
+                                    %>
                                     <select name="size"> 
-                                        <%
-                                           for (int i = 0; i < list.size(); i++) {
-                                        %>
-                                        <option value="<%=list.get(i)%>"><%=list.get(i)%></option>
-                                        <%}%>
+                                        <h6>Size:</h6>
+                                        <option value="<%=inv.getSizeID()%>"> <%=size.getSizeNum()%> </option> 
                                     </select>
+                                    <h6>Length: <%=size.getLength()%> - Width <%= size.getLength()%></h6>
+                                    <h6>Products available: <%=inv.getQuantity()%></h6>
+<!--                                    Dùng onClick ?? thi?t k?, Khi click vào size Num nào. Thì length vào s? l??ng s? chuy?n theo cái size ??y-->
+                                    
+                                    <%
+                                                }
+                                            }
+                                        }
+                                    %>
                                     <input type="hidden" name="action" value="add">
                                     <input type="hidden" name="id" value="<%=product.getId()%>">
                                     <div class="row">
@@ -83,7 +97,7 @@ ArrayList<Integer> list = p.getAllProductSize(product.getId());
                                             </ul>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row pb-3">
                                         <div class="col d-grid">
                                             <button type="submit" class="btn btn-success btn-lg">
@@ -192,7 +206,7 @@ ArrayList<Integer> list = p.getAllProductSize(product.getId());
                                 <a href="./product-detail.jsp" class="h3 text-decoration-none">
                                     <h5>Nike Blazer Low Jumbo White/Orange</h5>
                                 </a>
-                                  <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                <ul class="list-unstyled d-flex justify-content-center mb-1">
                                     <li>
                                         <i class="text-warning fa fa-star"></i>
                                         <i class="text-warning fa fa-star"></i>
@@ -224,7 +238,7 @@ ArrayList<Integer> list = p.getAllProductSize(product.getId());
                                 <a href="./product-detail.jsp" class="h3 text-decoration-none">
                                     <h5>Nike Blazer Low Jumbo  White/Orange</h5>
                                 </a>
-                                  <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                <ul class="list-unstyled d-flex justify-content-center mb-1">
                                     <li>
                                         <i class="text-warning fa fa-star"></i>
                                         <i class="text-warning fa fa-star"></i>

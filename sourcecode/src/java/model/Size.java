@@ -9,41 +9,56 @@ package model;
  * @author DINHTT
  */
 public class Size {
-    int sizeNumber;
-    int quantity;
-    int productId;
+
+    private int sizeID;
+    private int sizeNum;
+    private String length;
+    private String width;
 
     public Size() {
+        this.sizeID = 0;
+        this.sizeNum = 0;
+        this.length = "";
+        this.width = "";
     }
 
-    public Size(int sizeNumber, int quantity, int productId) {
-        this.sizeNumber = sizeNumber;
-        this.quantity = quantity;
-        this.productId = productId;
+    public Size(int sizeID, int sizeNum, String length, String width) {
+        this.sizeID = sizeID;
+        this.sizeNum = sizeNum;
+        this.length = length;
+        this.width = width;
     }
 
-    public int getSizeNumber() {
-        return sizeNumber;
+    public int getSizeID() {
+        return sizeID;
     }
 
-    public void setSizeNumber(int sizeNumber) {
-        this.sizeNumber = sizeNumber;
+    public void setSizeID(int sizeID) {
+        this.sizeID = sizeID;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getSizeNum() {
+        return sizeNum;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setSizeNum(int sizeNum) {
+        this.sizeNum = sizeNum;
     }
 
-    public int getProductId() {
-        return productId;
+    public String getLength() {
+        return length;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setLength(String length) {
+        this.length = length;
     }
-    
+
+    public String getWidth() {
+        return width;
+    }
+
+    public void setWidth(String width) {
+        this.width = width;
+    }
+
 }
