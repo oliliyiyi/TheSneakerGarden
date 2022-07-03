@@ -83,6 +83,7 @@
                                         }
                                     %>
                                     <input type="hidden" name="action" value="add">
+
                                     <input type="hidden" name="id" value="<%=product.getId()%>">
                                     <div class="row">
                                         <div class="col-auto">

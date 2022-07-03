@@ -9,36 +9,36 @@ package model;
  * @author Admin
  */
 public class Brand {
-    private int bid;
-    private String cname;
+    private int brandID;
+    private String brandName;
 
     public Brand() {
     }
 
-    public Brand(int bid, String cname) {
-        this.bid = bid;
-        this.cname = cname;
+    public Brand(int brandID, String brandName) {
+        this.brandID = brandID;
+        this.brandName = brandName;
     }
 
-    public int getBid() {
-        return bid;
+    public int getBrandID() {
+        return brandID;
     }
 
-    public void setBid(int bid) {
-        this.bid = bid;
+    public void setBrandID(int brandID) {
+        this.brandID = brandID;
     }
 
-    public String getCname() {
-        return cname;
+    public String getBrandName() {
+        return brandName;
     }
 
-    public void setCname(String cname) {
-        this.cname = cname;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
     @Override
     public String toString() {
-        return "Category{" + "bid=" + bid + ", cname=" + cname + '}';
+        return "Brand{" + "BrandID=" + brandID + ", BrandName=" + brandName + '}';
     }
     
 }

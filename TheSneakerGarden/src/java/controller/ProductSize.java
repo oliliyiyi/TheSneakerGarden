@@ -41,7 +41,6 @@ public class ProductSize extends HttpServlet {
         int id = Integer.valueOf(request.getParameter("id"));
         ProductManager manager = new ProductManager();
         ArrayList<Size> p = manager.getProductSize(id);
-
         request.setAttribute("listSize", p);
         request.setAttribute("id", id);
         request.getRequestDispatcher("productSize.jsp").forward(request, response);

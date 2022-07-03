@@ -16,20 +16,20 @@ public class Product {
     private String image;
     private double price;
     private String description;
-    private int bId;
+    private int brandID;
     private int cId;
     private int status;
 
     public Product() {
     }
 
-    public Product(int id, String name, String image, double price, String description, int cId, int bId, int status) {
+    public Product(int id, String name, String image, double price, String description, int cId, int brandID, int status) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.price = price;
         this.description = description;
-        this.bId = bId;
+        this.brandID = brandID;
         this.cId = cId;
         this.status = status;
     }
@@ -74,12 +74,12 @@ public class Product {
         this.description = description;
     }
     
-    public int getbId() {
-        return bId;
+    public int getbrandID() {
+        return brandID;
     }
 
-    public void setbId(int bId) {
-        this.bId = bId;
+    public void setbrandID(int brandID) {
+        this.brandID = brandID;
     }
 
     public int getcId() {

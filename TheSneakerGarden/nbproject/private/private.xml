@@ -3,14 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/documents/uni/2022%20summer/swp/project/github/swp/TheSneakerGarden/src/java/dbmanager/UserManager.java</file>
-            <file>file:/E:/documents/uni/2022%20summer/swp/project/github/swp/TheSneakerGarden/web/user-management.jsp</file>
-            <file>file:/E:/documents/uni/2022%20summer/swp/project/github/swp/TheSneakerGarden/src/java/controller/RegisterControl.java</file>
-            <file>file:/E:/documents/uni/2022%20summer/swp/project/github/swp/TheSneakerGarden/web/update-user.jsp</file>
-            <file>file:/E:/documents/uni/2022%20summer/swp/project/github/swp/TheSneakerGarden/web/add.jsp</file>
-            <file>file:/E:/documents/uni/2022%20summer/swp/project/github/swp/TheSneakerGarden/web/register.jsp</file>
-            <file>file:/E:/documents/uni/2022%20summer/swp/project/github/swp/TheSneakerGarden/web/view/admin/add.jsp</file>
-            <file>file:/E:/documents/uni/2022%20summer/swp/project/github/swp/TheSneakerGarden/src/java/controller/UserManagerControl.java</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/src/java/controller/addTocart.java</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/dashboard.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/admin.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/add-inventory.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/add.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/cart.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/about.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/src/java/utils/DBUtils.java</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/add-size.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/add-order.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/src/java/controller/ProductSize.java</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/adidas.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/src/java/controller/checkout.java</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/add-item.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/index.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/product-detail.jsp</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/src/java/controller/cart.java</file>
+            <file>file:/C:/Users/user/Desktop/SWP/ProjectFinal/swp/TheSneakerGarden/web/productSize.jsp</file>
         </group>
     </open-files>
 </project-private>
