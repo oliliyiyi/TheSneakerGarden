@@ -42,7 +42,13 @@ section {
     max-width: 1300px;
     margin: auto;
 }
-
+.carousel-item {
+  	transition: -webkit-transform 0.5s ease;
+  	transition: transform 0.5s ease;
+  	transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+  	-webkit-backface-visibility: visible;
+  	backface-visibility: visible;
+}
 header {
     /*    max-width: 1300px;
         align-items: center;
@@ -77,7 +83,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-   
+
 
 }
 
@@ -174,7 +180,8 @@ header {
 }
 
 .btn {
-    background: rgba(0,0,0,.25);;
+    background: rgba(0,0,0,.25);
+    ;
     border: 1px solid var(--main-light-color);
     color: var(--btn-white-text);
     box-shadow: none;
@@ -259,15 +266,20 @@ header {
     height: 250px;
     object-fit: cover;
     object-position: center;
-       background: #ECEEF0;
+    background: #ECEEF0;
     border-radius: 0.5rem;
 }
 .shop-container .box:hover {
-      transform: scale(1.1) translate(-0.5rem, 0rem) ;
-  transition: all 0.5s;
-
-  box-shadow: 10px 5px 5px gray;
-
+    transform: scale(1.1) translate(-0.5rem, 0rem) ;
+    transition: all 0.5s;
+    cursor: pointer;
+    box-shadow: 10px 5px 5px gray;
+}
+.product-wap:hover {
+    transform: scale(1.1) translate(-0.5rem, 0rem) ;
+    transition: all 0.5s;
+    cursor: pointer;
+    box-shadow: 10px 5px 5px gray;
 }
 .shop-container .box h2 {
     font-size: 1rem;
@@ -335,9 +347,9 @@ header {
     background: var(--main-light-color);
 }
 .footer {
-   
+
     margin-top: 50px !important;
-   background: black;
+    background: black;
 }
 .footer .logo {
     margin-bottom: 1rem;
@@ -529,10 +541,10 @@ h5 {
     padding: 50px 0;
 }
 .sub-footer{
-   display: flex;
-   align-items: center;
-   justify-content: center;
-  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 .country-pin-label {
     color: #fff;
@@ -540,13 +552,19 @@ h5 {
 }
 
 .copy-right{
-        font: inherit;
+    font: inherit;
     vertical-align: baseline;
     font-size: 10px;
     color:#7B7C7E;
 }
+.carousel-height, .carousel-image {
+    height: 45rem;
+}
 /* Making Responsive */
 @media screen and (max-width: 1200px) {
+    .carousel-height, .carousel-image {
+        height: 35rem;
+    }
     .quantity-select {
         padding-top: 0.492rem;
         padding-bottom: 0.63rem;
@@ -573,6 +591,9 @@ h5 {
     }
 }
 @media screen and (max-width: 1080px) {
+    .carousel-height, .carousel-image {
+        height: 30rem;
+    }
     .quantity-select {
         padding-top: 0.39rem;
         padding-bottom: 0.53rem;
@@ -596,6 +617,9 @@ h5 {
     }
 }
 @media screen and (max-width: 991px) {
+    .carousel-height, .carousel-image {
+        height: 25rem;
+    }
     .quantity-select {
         padding-top: 0.39rem;
         padding-bottom: 0.53rem;
@@ -633,6 +657,9 @@ h5 {
     }
 }
 @media screen and (max-width: 768px) {
+    .carousel-height, .carousel-image {
+        height: 20rem;
+    }
     .footer-box {
         align-items: center;
     }
@@ -642,20 +669,20 @@ h5 {
     #menu-icon {
         display: initial;
     }
-    .navbar {
-        position: absolute;
-        top: 100%;
-        right: -100%;
-        width: 250px;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        background: var(--bg-color);
-        row-gap: 0.5rem;
-        text-align: left;
-        box-shadow: 2px 2px 15px rgb(15 54 55 / 15%);
-        transition: 0.3s;
-    }
+    /*    .navbar {
+            position: absolute;
+            top: 100%;
+            right: -100%;
+            width: 250px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-color);
+            row-gap: 0.5rem;
+            text-align: left;
+            box-shadow: 2px 2px 15px rgb(15 54 55 / 15%);
+            transition: 0.3s;
+        }*/
     .navbar a {
         display: block;
         padding: 15px;
@@ -842,7 +869,7 @@ form.example::after {
     /*color: var(--main-light-color);  Text color */
 
     cursor: pointer; /* Add a mouse pointer on hover */
-    
+
     padding: 2px 10px; /* Some padding */
     border-radius: 5px;
     font-size: 18px; /* Increase font size */

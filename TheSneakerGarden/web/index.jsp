@@ -16,18 +16,35 @@
 
         <!-- Home -->
         <section class="home" id="home">
-            <!-- Home Content -->
-            <div class="home-container container">
-                <div class="home-text">
-                    <h1>Winter Collection<br>Light Nylon</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur <br> adipisicing elit. Ipsum, optio!</p>
-                    <!-- Home Button -->
-                    <a href="#" class="btn btn-outline-success person">Buy Now</a>
+            <div id="demo" class="carousel slide w-100 carousel-height" data-bs-ride="carousel">
+
+                <!-- Indicators/dots -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
                 </div>
-                <!-- Home IMage -->
-                <div class="home-img">
-                    <img src="img/home.png" alt="">
+
+                <!-- The slideshow/carousel -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://sneakerbardetroit.com/wp-content/uploads/2015/10/nike-flash-pack-1.jpg" alt="Los Angeles" class="d-block w-100 carousel-image">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://thietkewebaio.com/wp-content/uploads/2021/08/thiet-ke-banner-chuan.png" alt="Chicago" class="d-block w-100 carousel-image">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://ordixi.com/wp-content/uploads/2019/04/giay-chay-bo-49b814ac.jpg" alt="New York" class="d-block w-100 carousel-image">
+                    </div>
                 </div>
+
+                <!-- Left and right controls/icons -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
             </div>
         </section>
         <!-- Featured -->
@@ -65,22 +82,21 @@
             </div>
             <!-- Shop Content -->
             <div class="shop-container container">
-                <%
-                    ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("listProduct");
-                    for(int i = 0; i < list.size(); i++){
+                <%                    ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("listProduct");
+                    for (int i = 0; i < list.size(); i++) {
                 %>
                 <div class="box">
                     <img src="<%=list.get(i).getImage()%>" alt="">
                     <h2><%=list.get(i).getName()%></h2>
                     <span><%=Math.round(list.get(i).getPrice())%> VNĐ</span>
-                    <a href="/TheSneakerGarden/addToCart?action=add&id=<%=list.get(i).getId()%>"><i class='bx bx-cart-alt'></i></a>
+                    <a href="./product-detail?id=<%=list.get(i).getId()%>"><i class='bx bx-cart-alt'></i></a>
                 </div>
-                    <%
-                        }
-                    %>
+                <%
+                    }
+                %>
             </div>
         </section>
-        
+
 
 
         <%@include file="components/footer.jsp" %>
@@ -99,7 +115,7 @@
                 }
             }
         </script>
-       
+
 
     </body>
 

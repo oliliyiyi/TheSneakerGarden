@@ -8,13 +8,8 @@
                      class="d-inline-block align-text-top nav-icon">
             </a>
         </div>
-<!--        <div class="col-8 col-logo-title">
-            <div class="d-flex justify-content-center">
-                <h1 class="logo-title">The Sneaker Garden</h1>
-            </div>
-        </div>-->
-        <div class="col-lg-9 col-2 my-auto">
-            
+        <div class="col-lg-9 col-12 my-auto">
+
             <nav class="navbar navbar-expand-lg navbar-dark">
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -32,13 +27,13 @@
                                     <a id="shopActive" class="nav-link" aria-current="page" href="./shop">Shop</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Product
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a id="nikeActive" class="nav-link" aria-current="page" href="./shop?bId=1">Nike</a>
-                                        <a id="adidasActive" class="nav-link" aria-current="page" href="./shop?bId=2">Adidas</a>
-                                    </div>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a id="nikeActive" class="nav-link" aria-current="page" href="./shop?bId=1">Nike</a></li>
+                                        <li><a id="adidasActive" class="nav-link" aria-current="page" href="./shop?bId=2">Adidas</a></li>
+                                    </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a id="aboutActive" class="nav-link" aria-current="page" href="./about.jsp">About</a>
@@ -66,11 +61,11 @@
                                         <%
                                             if (session.getAttribute("user") == null) {
                                         %>
-                                            <i class="bi bi-box-arrow-in-left"></i>
+                                        <i class="bi bi-box-arrow-in-left"></i>
                                         <%
                                         } else {
                                         %>
-                                            <i class="bi bi-person-circle"></i>
+                                        <i class="bi bi-person-circle"></i>
                                         <%
                                             }
                                         %>
@@ -80,20 +75,20 @@
                                         <%
                                             if (session.getAttribute("user") == null) {
                                         %>
-                                            <li><a class="dropdown-item" href="./login">Login</a></li>
-                                            <li><a class="dropdown-item" href="./register">Register</a></li>                         
-                                        <%
-                                        } else {
-                                        %>
-                                            <li><a class="dropdown-item" href="./profile.jsp">Profile</a></li>
-                                            <li><a class="dropdown-item" href="./../TheSneakerGarden/OrderDetailsCustomer">History</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item" href="./logout">Logout</a></li>
-                                        <%
-                                            }
-                                        %>
+                                        <li><a class="dropdown-item" href="./login">Login</a></li>
+                                        <li><a class="dropdown-item" href="./register">Register</a></li>                         
+                                            <%
+                                            } else {
+                                            %>
+                                        <li><a class="dropdown-item" href="./profile.jsp">Profile</a></li>
+                                        <li><a class="dropdown-item" href="./../TheSneakerGarden/OrderDetailsCustomer">History</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="./logout">Logout</a></li>
+                                            <%
+                                                }
+                                            %>
 
                                     </ul>
 

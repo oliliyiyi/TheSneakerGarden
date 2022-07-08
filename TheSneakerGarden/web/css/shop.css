@@ -56,6 +56,9 @@ Table of contents
 .far:hover{
     color: var(--main-color) !important;
 }
+.page-link {
+    color: #333;
+}
 .pagination .page-link:hover {
     color: #000;
 }
@@ -122,16 +125,7 @@ Table of contents
 .product-wap .product-color-dot.color-dot-green {
     background: #0bff7e;
 }
-.card.product-wap .card .product-overlay {
-    background: rgba(0, 0, 0, 0.2);
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.3s;
-}
-.card.product-wap:hover .card .product-overlay {
-    visibility: visible;
-    opacity: 1;
-}
+
 /*.card.product-wap a {
   color: #000;
 }*/
@@ -226,6 +220,9 @@ Table of contents
 .product-wap .product-color-dot {
     width: 6px;
     height: 6px;
+}
+.type-group a {
+    color: black
 }
 
 @media (min-width: 576px) {
