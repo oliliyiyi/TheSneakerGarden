@@ -5,9 +5,13 @@
 <%@page import="model.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-    Product product = (Product) request.getAttribute("detail");
+   Product product = (Product) request.getAttribute("detail");
+    
     ProductManager p = new ProductManager();
     ArrayList<Inventory> list = p.getProductQuantityByProID(product.getId());
+    //ArrayList<Size> listS = p.getAllSize();
+    ArrayList<Product> listP = p.getAllProduct();
+    ArrayList<Product> listP2 = new ArrayList<>();
 
 %>
 <!DOCTYPE html>
@@ -173,23 +177,33 @@
 
                 <!--Start Carousel Wrapper-->
                 <div id="carousel-related-product">
+                    <%
+                        for (int i = 0; i < listP.size(); i++) {
+                            if (listP.get(i).getbrandID() == product.getbrandID()) {
+                                if (listP.get(i).getId() != product.getId()) {
+                                    listP2.add(listP.get(i));
+                                }
+                            }
+                        }
+
+                        for (int i = 0; i < listP2.size(); i++) {
+                    %>
                     <div class="p-2 pb-3">
                         <div class="product-wap card rounded-0">
                             <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_1.jpg">
+                                <img class="card-img rounded-0 img-fluid" src=<%=listP2.get(i).getImage()%>>
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
+                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail?id=<%=listP2.get(i).getId()%>"><i
                                                     class="far fa-eye"></i></a>
                                         </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
+
                                     </ul>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo  White/Orange</h5>
+                                    <h5><%=listP2.get(i).getName()%></h5>
                                 </a>
                                 <ul class="list-unstyled d-flex justify-content-center mb-1">
                                     <li>
@@ -200,271 +214,15 @@
                                         <i class="text-muted fa fa-star"></i>
                                     </li>
                                 </ul>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
+                                <p class="text-center mb-0" style="color: #333"><b><%=Math.round(listP2.get(i).getPrice())%> VNĐ</b></p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="p-2 pb-3">
-                        <div class="product-wap card rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_2.jpg">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo  White/Orange</h5>
-                                </a>
-                                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                    <li>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                    </li>
-                                </ul>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-2 pb-3">
-                        <div class="product-wap card rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_3.jpg">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo White/Orange</h5>
-                                </a>
-                                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                    <li>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                    </li>
-                                </ul>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-2 pb-3">
-                        <div class="product-wap card rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_4.jpg">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo  White/Orange</h5>
-                                </a>
-                                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                                    <li>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                    </li>
-                                </ul>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-2 pb-3">
-                        <div class="product-wap card rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_5.jpg">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo  White/Orange</h5>
-                                </a>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-2 pb-3">
-                        <div class="product-wap card rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_6.jpg">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo  White/Orange</h5>
-                                </a>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-2 pb-3">
-                        <div class="product-wap card rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_7.jpg">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo  White/Orange</h5>
-                                </a>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-2 pb-3">
-                        <div class="product-wap card rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_1.jpg">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo White/Orange</h5>
-                                </a>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-2 pb-3">
-                        <div class="product-wap card rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_2.jpg">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo White/Orange</h5>
-                                </a>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-2 pb-3">
-                        <div class="product-wap card rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_3.jpg">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo White/Orange</h5>
-                                </a>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-2 pb-3">
-                        <div class="product-wap card rounded-0">
-                            <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="./img/nike_4.jpg">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail.jsp"><i
-                                                    class="bi bi-cart-plus-fill"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
-                                    <h5>Nike Blazer Low Jumbo White/Orange</h5>
-                                </a>
-                                <p class="text-center mb-0" style="color: #333"><b>500000 VNĐ</b></p>
-                            </div>
-                        </div>
-                    </div>
-
-
+                    <%
+                        }
+                    %>
                 </div>
-
+            </div>
         </section>
         <!-- End Article -->
 
