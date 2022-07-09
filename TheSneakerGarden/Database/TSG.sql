@@ -325,12 +325,19 @@ GO
 CREATE TABLE "Order Details" (
 	"OrderID" int NOT NULL ,
 	"ProductID" int NOT NULL ,
-	"UnitPrice" "money" NOT NULL CONSTRAINT "DF_Order_Details_UnitPrice" DEFAULT (0),
+	"SizeNumber" int,
 	"Quantity" "smallint" NOT NULL CONSTRAINT "DF_Order_Details_Quantity" DEFAULT (1),
+	"UnitPrice" "money" NOT NULL CONSTRAINT "DF_Order_Details_UnitPrice" DEFAULT (0),
 	CONSTRAINT "PK_Order_Details" PRIMARY KEY  CLUSTERED 
 	(
 		"OrderID",
 		"ProductID"
+	),
+	CONSTRAINT "FK_Order_Details_Inventory" FOREIGN KEY 
+	(
+		"SizeNumber"
+	) REFERENCES "dbo"."Sizes" (
+		"SizeNumber"
 	),
 	CONSTRAINT "FK_Order_Details_Orders" FOREIGN KEY 
 	(
@@ -348,26 +355,26 @@ CREATE TABLE "Order Details" (
 	CONSTRAINT "CK_UnitPrice" CHECK (UnitPrice >= 0)
 )
 GO
-INSERT INTO dbo.[Order Details](OrderID, ProductID, UnitPrice, Quantity)
-VALUES(1, 1, 500000, 2)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, UnitPrice, Quantity)
-VALUES(1, 5, 400000, 1)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, UnitPrice, Quantity)
-VALUES(1, 15, 700000, 2)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, UnitPrice, Quantity)
-VALUES(2, 4, 800000, 1)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, UnitPrice, Quantity)
-VALUES(2, 14, 400000, 3)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, UnitPrice, Quantity)
-VALUES(3, 8, 900000, 1)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, UnitPrice, Quantity)
-VALUES(4, 10, 400000, 1)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, UnitPrice, Quantity)
-VALUES(4, 12, 650000, 1)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, UnitPrice, Quantity)
-VALUES(5, 16, 800000, 1)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, UnitPrice, Quantity)
-VALUES(5, 5, 400000, 1)
+INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+VALUES(1, 1, 35, 2, 500000)
+INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+VALUES(1, 5, 41, 1, 400000)
+INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+VALUES(1, 15, 39, 2, 700000)
+INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+VALUES(2, 7, 46, 1, 600000)
+INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+VALUES(2, 14, 35, 3, 400000)
+INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+VALUES(3, 8, 40, 1, 900000)
+INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+VALUES(4, 10, 37, 1, 400000)
+INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+VALUES(4, 11, 39, 1, 500000)
+INSERT INTO dbo.[Order Details](OrderID, ProductID,  SizeNumber, Quantity, UnitPrice)
+VALUES(5, 16, 42, 1, 800000)
+INSERT INTO dbo.[Order Details](OrderID, ProductID,  SizeNumber, Quantity, UnitPrice)
+VALUES(5, 5, 42, 1, 400000)
 GO
 CREATE TABLE PaymentType(
 	TypeID int identity(1,1) NOT NULL,
