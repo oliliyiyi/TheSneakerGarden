@@ -46,7 +46,7 @@ public class UserManager {
     public User CheckUserExist(String userName) {        
         String query = "SELECT *"
                 + "  FROM [TSG].[dbo].[Customer]"
-                + "  WHERE [Account] =" + userName;
+                + "  WHERE [Account] =?";
         try {
             conn = db.getConnectDB();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
@@ -74,6 +74,32 @@ public class UserManager {
         String query = "SELECT *"
                 + "  FROM [TSG].[dbo].[Customer]"
                 + "  WHERE [CustomerID] =" + id;
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user = new User(
+                        rs.getInt(1),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(2));
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return user;
+    }
+    
+    public User getUserByAccount(String Account) {
+        User user = new User();
+        String query = "SELECT *"
+                + "  FROM [TSG].[dbo].[Customer]"
+                + "  WHERE [Account] =" + Account;
         try {
             conn = db.getConnectDB();//mo ket noi voi sql
             ps = conn.prepareStatement(query);

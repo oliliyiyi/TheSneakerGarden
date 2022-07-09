@@ -1,5 +1,8 @@
+<%@page import="model.User"%>
 <!-- Navbar -->
-
+<%
+    User user = (User) session.getAttribute("user");
+%>
 <header class="main-container container position-sticky top-0">
     <div class="row">
         <div class="col-lg-3 col-2 logo">
@@ -80,7 +83,7 @@
                                             <%
                                             } else {
                                             %>
-                                        <li><a class="dropdown-item" href="./profile.jsp">Profile</a></li>
+                                        <li><a class="dropdown-item" href="./profile?id=<%=user.getUserId()%>">Profile</a></li>
                                         <li><a class="dropdown-item" href="./../TheSneakerGarden/OrderDetailsCustomer">History</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
