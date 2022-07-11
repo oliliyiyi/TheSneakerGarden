@@ -113,7 +113,7 @@
                                             <ul class="list-inline pb-3">
                                                 <li class="list-inline-item text-right">
                                                     Quantity
-                                                    <input type="hidden" name="product-quanity" id="product-quanity" value="1">
+                                                    <input type="hidden" name="product-quantity" id="product-quanity" value="1">
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <span class="btn btn-black" id="btn-minus">-</span>

@@ -55,11 +55,11 @@ public class addTocart extends HttpServlet {
             for (Map.Entry<Integer, CartItem> entry : cart.entrySet()) {
                 if (entry.getKey() == ID) {
                     if (entry.getValue().getSize() != size) {
-                        if (request.getParameter("product-quanity") != null) {
-                            if (pm.getProductQuantityByProSize(size, ID) < Integer.valueOf(request.getParameter("product-quanity"))) {
+                        if (request.getParameter("product-quantity") != null) {
+                            if (pm.getProductQuantityByProSize(size, ID) < Integer.valueOf(request.getParameter("product-quantity"))) {
                                 entry.getValue().setQuantity(pm.getProductQuantityByProSize(size, ID));
                             } else {
-                                entry.getValue().setQuantity(entry.getValue().getQuantity() + Integer.valueOf(request.getParameter("product-quanity")));
+                                entry.getValue().setQuantity(entry.getValue().getQuantity() + Integer.valueOf(request.getParameter("product-quantity")));
                             }
                             found = true;
                         } else {
@@ -70,11 +70,11 @@ public class addTocart extends HttpServlet {
                 }
             }
             if (!found) {
-                if (request.getParameter("product-quanity") != null) {
-                    if (pm.getProductQuantityByProSize(size, ID) < Integer.valueOf(request.getParameter("product-quanity"))) {
+                if (request.getParameter("product-quantity") != null) {
+                    if (pm.getProductQuantityByProSize(size, ID) < Integer.valueOf(request.getParameter("product-quantity"))) {
                         cart.put((ID + 1) * size, new CartItem(ID, pm.getProductQuantityByProSize(size, ID), size));
                     } else {
-                        cart.put((ID + 1) * size, new CartItem(ID, Integer.valueOf(request.getParameter("product-quanity")), size));
+                        cart.put((ID + 1) * size, new CartItem(ID, Integer.valueOf(request.getParameter("product-quantity")), size));
                     }
 
                 } else {
