@@ -46,7 +46,7 @@ public class UserManager {
     public User CheckUserExist(String userName) {        
         String query = "SELECT *"
                 + "  FROM [TSG].[dbo].[Customer]"
-                + "  WHERE [Account] =" + userName;
+                + "  WHERE [Account] =?";
         try {
             conn = db.getConnectDB();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
@@ -94,7 +94,7 @@ public class UserManager {
         }
         return user;
     }
-
+    
     public int getUserID() {
         int id = 0;
         String query = "SELECT MAX(CustomerID) as id\n"

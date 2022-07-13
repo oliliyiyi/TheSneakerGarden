@@ -65,6 +65,11 @@ public class LoginControl extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("txtUserName");
         String pass = request.getParameter("txtPassword");
+        
+        if(username == null && pass == null){
+            request.getRequestDispatcher("./login.jsp").forward(request, response);
+        }
+        
         UserManager userManager = new UserManager();
         User user = userManager.login(username, pass);
         HttpSession session = request.getSession();

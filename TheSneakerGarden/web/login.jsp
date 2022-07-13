@@ -1,5 +1,7 @@
 <%
-session.setAttribute("user", null);
+    session.setAttribute("user", null);
+    String registerUsername = (String) request.getAttribute("register-username");
+    String registerPassword = (String) request.getAttribute("register-password");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,16 +25,15 @@ session.setAttribute("user", null);
                                       id="LoginForm">
                                     <div class="mb-3">
                                         <label class="mb-2 text-muted">User Name</label>
-                                        <input id="username" type="text" class="form-control" name="txtUserName" value=""
+                                        <input id="username" type="text" class="form-control" name="txtUserName" value="<% if (registerUsername != null) {%><%=registerUsername%><% } %>"
                                                required autofocus>
                                     </div>
-
                                     <div class="mb-3">
                                         <div class="mb-2 w-100">
-                                            <label class="text-muted" for="password">Password</label>
-                                            
+                                            <label class="text-muted" for="password" >Password</label>
+
                                         </div>
-                                        <input id="password" type="password" class="form-control" name="txtPassword"
+                                        <input id="password" type="password" class="form-control" name="txtPassword" value="<%if (registerPassword != null) {%><%=registerPassword%><% } %>"
                                                required>
                                     </div>
 
@@ -65,48 +66,50 @@ session.setAttribute("user", null);
                 const title = "Warnning";
                 const message = ' Wrong username or password !!!';
                 const position = "bottom-right";
-                const duration = 1000;
+                const duration = 1500;
                 const type = 'warning';
                 let callback = null;
 
                 if (type === 'dialog') {
-                  callback = (result) => {
-                    console.log('result = ', result);
-                    if(result === 'ok'){
-                        window.location.replace("./item-management?action=delete&id="+id);
-                    }
-                  };
+                    callback = (result) => {
+                        console.log('result = ', result);
+                        if (result === 'ok') {
+                            window.location.replace("./item-management?action=delete&id=" + id);
+                        }
+                    };
                 }
 
                 const popup = Notification({
-                  position: position,
-                  duration: duration
+                    position: position,
+                    duration: duration
                 });
 
                 if (!popup[type]) {
-                  popup.error({
-                    title: 'Error',
-                    message: `Notification has no such method "${type}"`
-                  });
-                  return;
+                    popup.error({
+                        title: 'Error',
+                        message: `Notification has no such method "${type}"`
+                    });
+                    return;
                 }
 
                 popup[type]({
-                  title: title,
-                  message: message,
-                  callback: callback
+                    title: title,
+                    message: message,
+                    callback: callback
                 });
-                }
-        </script>
-        <%
-            if(request.getAttribute("login") != null){
-            %>
-            <script>
-                alertLogin();
-            </script>
-        <%
             }
-        %>
+        </script>
+
+        <script>
+            <%
+                if (request.getAttribute("login") != null) {
+            %>
+            alertLogin();
+            <%
+                }
+            %>
+        </script>
+
         <script src="./js/login.js"></script>
     </body>
 

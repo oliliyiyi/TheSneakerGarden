@@ -1,9 +1,12 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package sample.controllers;
 
+
+import dbmanager.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,14 +15,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.User;
-import dbmanager.UserManager;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "RegisterControl", urlPatterns = {"/register"})
-public class RegisterControl extends HttpServlet {
+@WebServlet(name = "ProfileControl", urlPatterns = {"/profile"})
+public class ProfileControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +35,12 @@ public class RegisterControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        int id = Integer.valueOf(request.getParameter("id"));
+        UserManager manager = new UserManager();
+        User user = manager.getUser(id);
+
+        request.setAttribute("detail", user);
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,37 +69,7 @@ public class RegisterControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        UserManager userManager = new UserManager();
-
-        String username = request.getParameter("username");
-        String fullname = request.getParameter("fullname");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String password = request.getParameter("password");
-        // user = new User(1, username, password, fullname, email, phone, address, 1);
-
-        if (username.trim().equals("") || fullname.trim().equals("") || email.trim().equals("") || phone.trim().equals("") || address.trim().equals("") || password.trim().equals("")) {
-            request.getRequestDispatcher("./register.jsp").forward(request, response);
-        }
-
-        if (userManager.CheckUserExist(username) == null) {
-            User user = new User(1, username, fullname, email, phone, address, 2);
-            if(userManager.insert(user, password)){
-                request.setAttribute("register-username", user.getUserAccount());
-                request.setAttribute("register-password", password);
-                request.setAttribute("register", "success");
-                request.getRequestDispatcher("./login").forward(request, response);
-            }
-//        userManager.insertAccount(username, password, userManager.getUserID());
-            // if (userManager.insert(user, password)) {
-            
-
-        } else {
-            request.getRequestDispatcher("./register.jsp").forward(request, response);
-        }
-
+        processRequest(request, response);
     }
 
     /**

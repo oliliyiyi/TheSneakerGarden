@@ -55,6 +55,24 @@ $(document).ready(function () {
         size.addClass("active");
         $('#size').val(size.val());
         let text = size.attr('stock');
-        $('.product-availble').text("In stock: "+text);
+        $('.product-availble').text("In stock: " + text);
     });
 });
+
+function validateAddToCart() {
+    var flag = true;
+
+    const elWithClassExists = document.querySelectorAll('.size-button').length > 0;
+
+    if (elWithClassExists) {
+        var size = document.getElementById("size");
+        if (size !== null && size.value === "") {
+            document.getElementById("size-err").innerText = "Size is required";
+            flag = false;
+        } else if (size !== null) {
+            document.getElementById("size-err").innerText = "";
+        }
+    }
+
+    return flag;
+}

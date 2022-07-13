@@ -15,52 +15,40 @@
                         <div class="card shadow-lg">
                             <div class="card-body p-5">
                                 <h1 class="fs-4 card-title fw-bold mb-4">Register</h1>
-                                <form method="POST" action="./register" class="needs-validation" novalidate="" autocomplete="off">
+                                <form method="POST" action="./register" class="needs-validation" onsubmit="return validateForm();" autocomplete="off">
                                     <div class="mb-3">
-                                        <label class="mb-2 text-muted" for="name">UserName</label>
-                                        <input id="name" type="text" class="form-control" name="username" value="" required
+                                        <label class="mb-2 text-muted" for="username">UserName</label>
+                                        <input id="username" type="text" class="form-control" name="username" value="" required
                                                autofocus>
-                                        <div class="invalid-feedback">
-                                            Name is required
-                                        </div>
+                                        <small id="username-err" class="invalid-message"></small>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="mb-2 text-muted" for="name">FullName</label>
+                                        <label class="mb-2 text-muted" for="fullname">FullName</label>
                                         <input id="fullname" type="text" class="form-control" name="fullname" value="" required
                                                autofocus>
-                                        <div class="invalid-feedback">
-                                            FullName is required
-                                        </div>
+                                        <small id="fullname-err" class="invalid-message"></small>
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2 text-muted" for="email">E-Mail Address</label>
                                         <input id="email" type="email" class="form-control" name="email" value="" required>
-                                        <div class="invalid-feedback">
-                                            Email is invalid
-                                        </div>
+                                        <small id="email-err" class="invalid-message"></small>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="mb-2 text-muted" for="name">Phone</label>
-                                        <input id="name" type="text" class="form-control" name="phone" value="" required
+                                        <label class="mb-2 text-muted" for="phone">Phone</label>
+                                        <input id="phone" type="text" class="form-control" name="phone" value="" required
                                                autofocus>
-                                        <div class="invalid-feedback">
-                                            Phone is required
-                                        </div>
+                                        <small id="phone-err" class="invalid-message"></small>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="mb-2 text-muted" for="name">Address</label>
-                                        <input id="name" type="text" class="form-control" name="address" value="" required
+                                        <label class="mb-2 text-muted" for="address">Address</label>
+                                        <input id="address" type="text" class="form-control" name="address" value="" required
                                                autofocus>
-                                        <div class="invalid-feedback">
-                                            Address is required
-                                        </div>
+                                        <small id="address-err" class="invalid-message"></small>
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2 text-muted" for="password">Password</label>
                                         <input id="password" type="password" class="form-control" name="password" required>
-                                        <div class="invalid-feedback">
-                                            Password is required
-                                        </div>
+                                        <small id="password-err" class="invalid-message"></small>
                                     </div>
 
                                     <p class="form-text text-muted mb-3">
@@ -86,6 +74,8 @@
         </section>
 
         <%@include file="components/footer.jsp" %>
+        <script><%@include file="./js/form-validation.js" %></script>
+        <!--<script src="./js/form-validation.js"></script>-->
     </body>
-
+    
 </html>

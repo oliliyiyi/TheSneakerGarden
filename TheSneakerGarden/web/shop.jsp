@@ -49,14 +49,14 @@
                         <div class="col-md-9">
                             <ul class="list-inline shop-top-menu pb-3 pt-1">
                                 <li class="list-inline-item">
-                                    <a class="h3 text-decoration-none mr-1 ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.cId==null?"active text-white btn-black":"text-dark not-active"}"
+                                    <a class="h3 text-decoration-none mr-1 ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.bId==null?"active text-white btn-black":"text-dark not-active"}"
                                        href="./shop">All</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="h3 text-decoration-none mr-1 ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.cId==1?"active text-white btn-black":"text-dark not-active"}" href="shop?cId=1">Nike</a>
+                                    <a class="h3 text-decoration-none mr-1 ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.bId==1?"active text-white btn-black":"text-dark not-active"}" href="shop?bId=1">Nike</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="h3 text-decoration-none ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.cId==2?"active text-white btn-black":"text-dark not-active"}" href="shop?cId=2">Adidas</a>
+                                    <a class="h3 text-decoration-none ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.bId==2?"active text-white btn-black":"text-dark not-active"}" href="shop?bId=2">Adidas</a>
                                 </li>
                             </ul>
                         </div>

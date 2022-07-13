@@ -962,3 +962,6 @@ a {
     border: none;
     background: transparent;
 }
+.invalid-message {
+    color: red;
+}

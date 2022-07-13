@@ -1,3 +1,7 @@
+<%@page import="model.User"%>
+<%
+   User userInfo = (User) request.getAttribute("detail");    
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +24,7 @@
                                      style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; background-color: #ff7c03">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar"
                                          class="img-fluid my-5" style="width: 80px;" />
-                                    <h5>Marie Horwitz</h5>
+                                    <h5><%=userInfo.getUserFullName()%></h5>
                                     <i class="far fa-edit mb-5"></i>
                                 </div>
                                 <div class="col-md-8">
@@ -30,11 +34,11 @@
                                         <div class="row pt-1">
                                             <div class="col-6 mb-3">
                                                 <h6>Email</h6>
-                                                <p class="text-muted">ariehorwitz@example.com</p>
+                                                <p class="text-muted"><%=userInfo.getUserEmail()%></p>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <h6>Phone</h6>
-                                                <p class="text-muted">123 456 789</p>
+                                                <p class="text-muted"><%=userInfo.getUserPhone()%></p>
                                             </div>
                                         </div>
                                         <hr class="mt-0 mb-4">
@@ -42,9 +46,7 @@
                                             <div class="col-12 mb-3">
                                                 <h6>Address</h6>
                                                 <p class="text-muted">
-                                                    No. 99, Jiangwancheng Road,
-                                                    Yangpu District,
-                                                    Shanghai 200438</p>
+                                                    <%=userInfo.getUserAddress()%></p>
                                             </div>
 
                                         </div>

@@ -26,7 +26,7 @@
                             ProductManager pm = new ProductManager();
                             ArrayList<CartItem> list = (ArrayList<CartItem>)request.getAttribute("orderHistory");
                             for (int i = 0; i < list.size(); i++) {
-                             Product product = pm.getProduct(list.get(i).getID());
+                             Product product = pm.getProductByID(list.get(i).getID());
                                 
                         %>
                         <div id="myCart">
