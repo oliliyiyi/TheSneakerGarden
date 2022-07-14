@@ -177,19 +177,8 @@
                                             <%=product.getDescription()%>
                                         </div>
                                     </div>
-                                    <div class="card-header" id="headingTwo">
-                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            <i class="bi bi-chevron-down"></i>
-                                            <span>Length - Width</span>
-                                        </button>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Length:  - Width: 
-                                        </div>
-                                    </div>
+                                    
                                 </div>
-
 
                             </div>
                         </div>
