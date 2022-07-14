@@ -111,7 +111,7 @@ public class ProductManagerControl extends HttpServlet {
                 String price = request.getParameter("price");
                 String image = request.getParameter("image");
                 String description = request.getParameter("description");
-                Product product = new Product(0, name, image, Double.valueOf(price), description, Integer.valueOf(cate), Integer.valueOf(brand), 1);
+                Product product = new Product(id, name, image, Double.valueOf(price), description, Integer.valueOf(cate), Integer.valueOf(brand), 1);
                 if(productManager.edit(product)){
                     listProduct = productManager.getAllProduct();
                     request.setAttribute("listProduct", listProduct);

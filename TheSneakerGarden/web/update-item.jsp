@@ -22,9 +22,7 @@
                 padding: 0;
                 box-sizing: border-box;
                 font-family: 'Poppins', sans-serif;
-
             }
-
             .container form .user-input {
                 display: flex;
                 flex-wrap: wrap;
@@ -87,9 +85,7 @@
                     margin-bottom: 15px;
                     width: 100%;
                 }
-
             }
-
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
