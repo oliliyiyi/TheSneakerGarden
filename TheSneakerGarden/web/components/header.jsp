@@ -48,8 +48,7 @@
                             <div class="d-flex">
                                 <li class="nav-item">
                                     <form action="search" class="d-flex justify-content-center">
-                                        <input name="keyword" class="form-control search" type="text" placeholder="Search" aria-label="Search" 
-                                               >
+                                        <input name="keyword" class="form-control search" type="text" placeholder="Search" aria-label="Search">
                                         <button type="submit" class="btn btn-black"
                                                 style=" border-top-right-radius: 30px;
                                                 border-bottom-right-radius: 30px;"
@@ -92,22 +91,15 @@
                                             <%
                                                 }
                                             %>
-
                                     </ul>
-
                                 </li>
                                 <button class="btn btn-outline-success custom-btn person" type="button"
                                         style="display: inline-block; margin-left: .5em;" onclick="location.href = './cart'"><i
                                         class="bi bi-cart-plus-fill"></i></button>
-
                             </div>
                         </div>
                     </ul>
-
-
                 </div>
-
-
             </nav>
         </div>
     </div>

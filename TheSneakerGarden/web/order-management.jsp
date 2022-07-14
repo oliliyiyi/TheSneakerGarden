@@ -10,10 +10,12 @@
 <%@page import="model.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+
+    User user = (User) session.getAttribute("user");
     if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
-        User user = (User) session.getAttribute("user");
+
         if (user.getRoleID() != 1) {
             response.sendRedirect("./login");
         }
@@ -131,8 +133,8 @@
                         <img src="./img/shop1.png" width="40px" height="40px"  alt="">
                     </div>
                     <div>
-                        <h4>John Doe</h4>   
-                        <a style="color: black; text-decoration: none" href="././admin.jsp">Logout</a>    
+                        <h4><%=user.getUserFullName()%></h4>   
+                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
                     </div>
                 </div>
             </header>
@@ -155,13 +157,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                             <%
                                 ArrayList<Order> list = (ArrayList<Order>) request.getAttribute("listOrder");
                                 for (Order order : list) {
                             %>
-                        
-                        <tr>
+
+                            <tr>
                         <form action="order-management" method="POST">
                             <td><%=order.getOrderId()%></td>
                             <td><%=order.getFullName()%></td>
@@ -180,10 +182,10 @@
                             </td>
                             <td>
                                 <input type="submit" name="action" value="update"  style="color: green"/>
-                                <!--                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-                                                                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
-                                                                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
-                                                                    </svg>-->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                                </svg>
                             </td>
                             <input type="hidden" name="id" value="<%=order.getOrderId()%>" />
                         </form>

@@ -34,7 +34,7 @@
                     </li>
                     <li>
                         <a href="./item-management" id="item-management"><span class="las la-clipboard-list"></span>
-                            <span>Item</span></a>
+                            <span>Product</span></a>
                     </li>
                     <li>
                         <a href="./order-management" id="order-management"><span class="las la-shopping-bag"></span>

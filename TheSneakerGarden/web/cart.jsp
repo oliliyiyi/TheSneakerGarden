@@ -23,7 +23,7 @@
                                                             <button class="btn" style="background: #ff7c03; color: #fff">Go to
                                                                 shopping</button>
                                                         </a>-->
-                            <button type="button" onclick="location.href = './shop'" class="btn btn-primary ms-auto">
+                            <button type="button" onclick="location.href = './shop.jsp'" class="btn btn-primary ms-auto">
                                 Go to shopping
                             </button>
                         </div>
@@ -44,10 +44,16 @@
                                         <div class="col-md-2 col-lg-2 col-xl-2">
                                             <img src="<%=product.getImage()%>" class="img-fluid rounded-3" alt="Cotton T-shirt">
                                         </div>
+                                        <% if (en.getValue().getSize() != 0) {%>
                                         <input type="hidden" name="size" value="<%=en.getValue().getSize()%>">
                                         <div class="col-md-3 col-lg-3 col-xl-3">
                                             <p class="lead fw-normal mb-2"><%=product.getName()%> - Size: <%=en.getValue().getSize()%></p>
                                         </div>
+                                        <% } else { %>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                            <p class="lead fw-normal mb-2"><%=product.getName()%></p>
+                                        </div>
+                                        <% } %>
 
                                         <div class="col-md col-xl d-flex">
                                             <button class="btn btn-link px-2" 

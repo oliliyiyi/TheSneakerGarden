@@ -4,9 +4,18 @@
     Author     : Admin
 --%>
 
+<%@page import="model.User"%>
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    User user = (User) session.getAttribute("user");
+    if (session.getAttribute("user") == null) {
+        response.sendRedirect("./login");
+    } else {
+        if (user.getRoleID() != 1) {
+            response.sendRedirect("./login");
+        }
+    }
     Product product = (Product) request.getAttribute("product");
 %>
 <!DOCTYPE html>
@@ -22,9 +31,7 @@
                 padding: 0;
                 box-sizing: border-box;
                 font-family: 'Poppins', sans-serif;
-
             }
-
             .container form .user-input {
                 display: flex;
                 flex-wrap: wrap;
@@ -87,9 +94,7 @@
                     margin-bottom: 15px;
                     width: 100%;
                 }
-
             }
-
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -98,22 +103,13 @@
         <%@include file="./components/sidebar-dashboard.jsp" %>  
         <div class="main-content">
             <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label> 
-                    Dashboard
-                </h2>
                 <div class="search-wrapper"><span class="las la-search"></span>
                     <input type="search" placeholder="Search..."/>
                 </div> 
                 <div class="user-wrapper">
-                    <div class="profile-avatar">
-                        <img src="./img/shop1.png" width="40px" height="40px"  alt="">
-                    </div>
                     <div>
-                        <h4>John Doe</h4>   
-                        <a style="color: black; text-decoration: none" href="./admin.jsp">Logout</a>    
+                        <h4><%=user.getUserFullName()%></h4>   
+                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
                     </div>
                 </div>
             </header>
@@ -211,7 +207,7 @@
                      success
                      info
                      dialog 
-                 
+                     
                      If you use dialog - 
                      the third parameter is the callback function
                      */

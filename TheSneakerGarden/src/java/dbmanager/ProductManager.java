@@ -137,14 +137,15 @@ public class ProductManager {
         try {
             conn = db.getConnectDB();//mo ket noi voi sql
 
-            PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[Products] SET [ProductName] = '" + product.getName() + "',"
-                    + " [CategoryID]= " + product.getcId() + ", "
-                    + " [BrandID]= " + product.getbrandID() + ", "
-                    + " [Price]= " + product.getPrice() + ", "
-                    + "[ImageLink] = '" + product.getImage() + "', "
-                    + "[Description] = '" + product.getDescription() + "', "
-                    + "[Status] = " + product.getStatus() + ", "
-                    + "WHERE [ProductID] = " + product.getId());
+            PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[Products] "
+                    + "SET "
+                    + "[ProductName] = '" + product.getName() 
+                    + "', [CategoryID] = '" + product.getcId() 
+                    + "', [BrandID] = '" + product.getbrandID() 
+                    + "', [Price] = '" + product.getPrice() 
+                    + "', [ImageLink] = '" + product.getImage() 
+                    + "', [Description] = '" + product.getDescription() 
+                    + "' WHERE [ProductID] = " + product.getId());
             ps.executeUpdate();
             status = true;
         } catch (SQLException e) {
