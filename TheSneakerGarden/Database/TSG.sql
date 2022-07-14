@@ -268,15 +268,15 @@ CREATE TABLE Customer (
 GO
 SET IDENTITY_INSERT [dbo].[Customer] ON
 INSERT INTO dbo.Customer([CustomerID], [RoleID], [Account], [Password], [FullName], [Email], [Phone], [Address], [Status])
-VALUES (1, 1, N'admin', N'admin', N'Cong',  N'congttse@gmail.com', N'0123456789', N'TP.HCM, Quan 9, Le Van Viet Street', 1)
+VALUES (1, 1, N'admin', N'admin', N'Cong',  N'congttse@gmail.com', N'0123456789', N'Le Van Viet, TP.Thu Duc, TP.HCM', 1)
 INSERT INTO dbo.Customer([CustomerID], [RoleID], [Account], [Password], [FullName], [Email], [Phone], [Address], [Status])
-VALUES (2, 1, N'admin1', N'admin1', N'Phai', N'phailvse@gmail.com', N'0123456788', N'TP.HCM, Quan 9, Le Van Viet Street', 1)
+VALUES (2, 1, N'admin1', N'admin1', N'Phai', N'phailvse@gmail.com', N'0123456788', N'Le Van Viet, TP.Thu Duc, TP.HCM', 1)
 INSERT INTO dbo.Customer([CustomerID], [RoleID], [Account], [Password], [FullName], [Email], [Phone], [Address], [Status])
-VALUES (3, 2, N'customer', N'customer', N'Linh', N'linhltqse@gmail.com', N'0123456787', N'TP.HCM, Quan 9, Vo Chi Cong Street', 1)
+VALUES (3, 2, N'customer', N'customer', N'Linh', N'linhltqse@gmail.com', N'0123456787', N'Nguyen Xien, TP.Thu Duc, TP.HCM', 1)
 INSERT INTO dbo.Customer([CustomerID], [RoleID], [Account], [Password], [FullName], [Email], [Phone], [Address], [Status])
-VALUES (4, 2, N'customer1', N'customer1', N'Khanh', N'khanhndbse@gmail.com', N'0123456786', N'TP.HCM, Quan 12, Mai Chi Tho Street', 1) 
+VALUES (4, 2, N'customer1', N'customer1', N'Khanh', N'khanhndbse@gmail.com', N'0123456786', N'Mai Chi Tho, Quan 12, TP.HCM', 1) 
 INSERT INTO dbo.Customer([CustomerID], [RoleID], [Account], [Password], [FullName], [Email], [Phone], [Address], [Status])
-VALUES (5, 2, N'customer299', N'customer2', N'Cong', N'congnqse@gmail.com', N'0123456785', N'TP.Thu Duc, Quan 9, Man Thien Street', 1)
+VALUES (5, 2, N'customer299', N'customer2', N'Cong', N'congnqse@gmail.com', N'0123456785', N'Man Thien,  TP.Thu Duc, TP.HCM', 1)
 GO
 CREATE TABLE Review(
 	ReviewID int identity(1,1) NOT NULL,
@@ -318,11 +318,15 @@ VALUES(16, 3, N'So happy with these - They look great and super comfy even from 
 GO
 
 CREATE TABLE [Orders] (
-    OrderID int identity(1,1) NOT NULL ,
-	CustomerID int NOT NULL,
-    ShipVia varchar(20)  NOT NULL ,
+    OrderID int identity(1,1) NOT NULL,
+	CustomerID int,
+	FullName nvarchar(30) NOT NULL,
+	Phone varchar(10) NOT NULL,
+	ShipAddress nvarchar(100) NOT NULL,
+	Email nvarchar(100) NOT NULL,
     OrderDate datetime  NOT NULL ,
-    ShippedDate datetime NOT NULL,
+    ShippedDate datetime,
+	[Status] int not null
     CONSTRAINT PK_Orders PRIMARY KEY CLUSTERED (
         OrderID 
     ),
@@ -334,43 +338,43 @@ CREATE TABLE [Orders] (
 	)
 )
 GO
-INSERT INTO dbo.[Orders](CustomerID, ShipVia, OrderDate, ShippedDate) 
-VALUES(3, N'Speedy Express', '2022-05-06', '2022-07-06')
-INSERT INTO dbo.[Orders](CustomerID, ShipVia, OrderDate, ShippedDate) 
-VALUES(4, N'United Package', '2022-03-06', '2022-10-06')
-INSERT INTO dbo.[Orders](CustomerID, ShipVia, OrderDate, ShippedDate) 
-VALUES(5, N'Federal Shipping', '2022-11-05', '2022-03-06')
-INSERT INTO dbo.[Orders](CustomerID, ShipVia, OrderDate, ShippedDate) 
-VALUES(5, N'Federal Shipping', '2022-02-22', '2022-05-05')
-INSERT INTO dbo.[Orders](CustomerID, ShipVia, OrderDate, ShippedDate) 
-VALUES(3, N'United Package', '2022-12-03', '2022-12-10')
+INSERT INTO dbo.[Orders](CustomerID, FullName, Phone, ShipAddress, Email, OrderDate, ShippedDate, [Status]) 
+VALUES(3, 'Quang Linh', '0123456787', 'Nguyen Xien, TP.Thu Duc, TP.HCM', 'linhltqse@gmail.com', '2022-05-06', '2022-07-06', 1)
+INSERT INTO dbo.[Orders](CustomerID, FullName, Phone, ShipAddress, Email, OrderDate, ShippedDate, [Status]) 
+VALUES(4, 'Khanh', '0123456786', 'Mai Chi Tho, Quan 12, TP.HCM', 'khanhndbse@gmail.com', '2022-03-06', '2022-10-06', 1)
+INSERT INTO dbo.[Orders](CustomerID, FullName, Phone, ShipAddress, Email, OrderDate, ShippedDate, [Status]) 
+VALUES(5, 'Quoc Cong', '0123456785', 'Man Thien, TP.Thu Duc, TP.HCM', 'congnqse@gmail.com', '2022-11-05', '2022-03-06', 1)
+INSERT INTO dbo.[Orders](FullName, Phone, ShipAddress, Email, OrderDate, ShippedDate, [Status]) 
+VALUES('Lisa Manobal', '0123999999', 'Bui Vien, P.Pham Ngu Lao, Quan 1, TP.HCM', 'lalisa@gmail.com', '2022-12-03', '2022-12-10', 1)
+INSERT INTO dbo.[Orders](FullName, Phone, ShipAddress, Email, OrderDate, [Status]) 
+VALUES('Lam Van Phai', '0123456788', 'Tran Hung Dao B, P.6, Quan 5, TP.HCM','phailvse@gmail.com', '2022-02-22', 0)
 
 GO
 
-CREATE TABLE "Order Details" (
+CREATE TABLE "OrderDetails" (
 	"OrderID" int NOT NULL ,
 	"ProductID" int NOT NULL ,
 	"SizeNumber" int,
-	"Quantity" "smallint" NOT NULL CONSTRAINT "DF_Order_Details_Quantity" DEFAULT (1),
-	"UnitPrice" "money" NOT NULL CONSTRAINT "DF_Order_Details_UnitPrice" DEFAULT (0),
-	CONSTRAINT "PK_Order_Details" PRIMARY KEY  CLUSTERED 
+	"Quantity" "smallint" NOT NULL CONSTRAINT "DF_OrderDetails_Quantity" DEFAULT (1),
+	"UnitPrice" "money" NOT NULL CONSTRAINT "DF_OrderDetails_UnitPrice" DEFAULT (0),
+	CONSTRAINT "PK_OrderDetails" PRIMARY KEY  CLUSTERED 
 	(
 		"OrderID",
 		"ProductID"
 	),
-	CONSTRAINT "FK_Order_Details_Inventory" FOREIGN KEY 
+	CONSTRAINT "FK_OrderDetails_Inventory" FOREIGN KEY 
 	(
 		"SizeNumber"
 	) REFERENCES "dbo"."Sizes" (
 		"SizeNumber"
 	),
-	CONSTRAINT "FK_Order_Details_Orders" FOREIGN KEY 
+	CONSTRAINT "FK_OrderDetails_Orders" FOREIGN KEY 
 	(
 		"OrderID"
 	) REFERENCES "dbo"."Orders" (
 		"OrderID"
 	),
-	CONSTRAINT "FK_Order_Details_Products" FOREIGN KEY 
+	CONSTRAINT "FK_OrderDetails_Products" FOREIGN KEY 
 	(
 		"ProductID"
 	) REFERENCES "dbo"."Products" (
@@ -380,25 +384,25 @@ CREATE TABLE "Order Details" (
 	CONSTRAINT "CK_UnitPrice" CHECK (UnitPrice >= 0)
 )
 GO
-INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+INSERT INTO dbo.[OrderDetails](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
 VALUES(1, 1, 35, 2, 500000)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+INSERT INTO dbo.[OrderDetails](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
 VALUES(1, 5, 41, 1, 400000)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+INSERT INTO dbo.[OrderDetails](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
 VALUES(1, 15, 39, 2, 700000)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+INSERT INTO dbo.[OrderDetails](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
 VALUES(2, 7, 46, 1, 600000)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+INSERT INTO dbo.[OrderDetails](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
 VALUES(2, 14, 35, 3, 400000)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+INSERT INTO dbo.[OrderDetails](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
 VALUES(3, 8, 40, 1, 900000)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+INSERT INTO dbo.[OrderDetails](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
 VALUES(4, 10, 37, 1, 400000)
-INSERT INTO dbo.[Order Details](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
+INSERT INTO dbo.[OrderDetails](OrderID, ProductID, SizeNumber, Quantity, UnitPrice)
 VALUES(4, 11, 39, 1, 500000)
-INSERT INTO dbo.[Order Details](OrderID, ProductID,  SizeNumber, Quantity, UnitPrice)
+INSERT INTO dbo.[OrderDetails](OrderID, ProductID,  SizeNumber, Quantity, UnitPrice)
 VALUES(5, 16, 42, 1, 800000)
-INSERT INTO dbo.[Order Details](OrderID, ProductID,  SizeNumber, Quantity, UnitPrice)
+INSERT INTO dbo.[OrderDetails](OrderID, ProductID,  SizeNumber, Quantity, UnitPrice)
 VALUES(5, 5, 42, 1, 400000)
 GO
 CREATE TABLE PaymentType(
