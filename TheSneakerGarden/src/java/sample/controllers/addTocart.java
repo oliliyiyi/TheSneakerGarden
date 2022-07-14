@@ -39,7 +39,11 @@ public class addTocart extends HttpServlet {
         //response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         int ID = Integer.valueOf(request.getParameter("id"));
-        int size = Integer.valueOf(request.getParameter("size"));
+        int size = 0;
+        if (request.getParameter("size") != null) {
+            size = Integer.valueOf(request.getParameter("size"));
+
+        }
 
         ProductManager pm = new ProductManager();
         System.out.println(pm.getProductQuantityByProSize(size, ID) + "===========");

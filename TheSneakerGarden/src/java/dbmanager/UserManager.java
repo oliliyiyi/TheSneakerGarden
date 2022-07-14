@@ -26,6 +26,7 @@ public class UserManager {
     public User login(String username, String pass) {
         User user = new User();
         String query = "SELECT  [CustomerID]\n"
+                + "      ,[FullName]\n"
                 + "      ,[RoleID]\n"
                 + "  FROM [dbo].[Customer]\n"
                 + "  WHERE [Account] = '" + username + "' AND [Password] = '" + pass + "'";
@@ -36,14 +37,15 @@ public class UserManager {
             while (rs.next()) {
                 user = new User(
                         rs.getInt(1),
-                        rs.getInt(2));
+                        rs.getString(2),
+                        rs.getInt(3));
             }
         } catch (SQLException e) {
         }
         return user;
     }
 
-    public User CheckUserExist(String userName) {        
+    public User CheckUserExist(String userName) {
         String query = "SELECT *"
                 + "  FROM [TSG].[dbo].[Customer]"
                 + "  WHERE [Account] =?";
@@ -94,7 +96,7 @@ public class UserManager {
         }
         return user;
     }
-    
+
     public int getUserID() {
         int id = 0;
         String query = "SELECT MAX(CustomerID) as id\n"
@@ -155,7 +157,7 @@ public class UserManager {
                     + "           ,[Status])"
                     + "VALUES "
                     + "(2"
-                    + ", N'" + user.getUserAccount() 
+                    + ", N'" + user.getUserAccount()
                     + "', '" + password
                     + "', N'" + user.getUserFullName()
                     + "', N'" + user.getUserEmail()

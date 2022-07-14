@@ -9,12 +9,17 @@
 <%@page import="model.User"%>
 <%@page import="java.util.ArrayList"%>
 <%
-    if(session.getAttribute("user")==null){
+    User user = (User) session.getAttribute("user");
+    if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
+    } else {
+        if (user.getRoleID() != 1) {
+            response.sendRedirect("./login");
+        }
     }
-ArrayList<User> listUser = (ArrayList<User>)request.getAttribute("listUser");
-ArrayList<Product> listProduct = (ArrayList<Product>)request.getAttribute("listProduct");
-ArrayList<Order> listOrder = (ArrayList<Order>)request.getAttribute("listOrder");
+    ArrayList<User> listUser = (ArrayList<User>) request.getAttribute("listUser");
+    ArrayList<Product> listProduct = (ArrayList<Product>) request.getAttribute("listProduct");
+    ArrayList<Order> listOrder = (ArrayList<Order>) request.getAttribute("listOrder");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,22 +35,13 @@ ArrayList<Order> listOrder = (ArrayList<Order>)request.getAttribute("listOrder")
         <%@include file="./components/sidebar-dashboard.jsp" %>
         <div class="main-content">
             <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label> 
-                    Dashboard
-                </h2>
                 <div class="search-wrapper"><span class="las la-search"></span>
                     <input type="search" placeholder="Search..."/>
                 </div> 
                 <div class="user-wrapper">
-                    <div class="profile-avatar">
-                        <img src="./img/shop1.png" width="40px" height="40px"  alt="">
-                    </div>
                     <div>
-                        <h4>John Doe</h4>   
-                        <a  style="color: black; text-decoration: none" href="./login.jsp">Logout</a>    
+                        <h4><%=user.getUserFullName()%></h4>   
+                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
                     </div>
                 </div>
             </header>
@@ -56,7 +52,7 @@ ArrayList<Order> listOrder = (ArrayList<Order>)request.getAttribute("listOrder")
                         <div> <span class="las la-users"></span> </div>
                     </div>
                     <div class="card-sigle">
-                        <div>   <h1><%=listProduct.size()%></h1><span>Items</span></div>
+                        <div>   <h1><%=listProduct.size()%></h1><span>Products</span></div>
                         <div> <span class="las la-clipboard"></span> </div>
                     </div>
                     <div class="card-sigle">
@@ -68,7 +64,7 @@ ArrayList<Order> listOrder = (ArrayList<Order>)request.getAttribute("listOrder")
                     <div class="projects">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Recent projects</h3>
+                                <h3>Recent products</h3>
                                 <button>See all<span class="las la-arrow-right"></span></button>
                             </div>
                             <div class="card-body">
@@ -76,27 +72,54 @@ ArrayList<Order> listOrder = (ArrayList<Order>)request.getAttribute("listOrder")
                                     <table style="width: 100%">
                                         <thead>
                                             <tr>
-                                                <td>Items name</td>
-                                                <td>Department</td>
-                                                <td>Status</td>
+                                                <td>Name</td>
+                                                <td>Brand</td>
+                                                <td>Category</td>
+                                                <td>Price</td>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <%
+                                                String brand = null;
+                                                String cate = null;
+                                                Product p1 = listProduct.get(listProduct.size() - 1);
+                                                Product p2 = listProduct.get(listProduct.size() - 2);
+                                                Product p3 = listProduct.get(listProduct.size() - 3);
+                                                Product p4 = listProduct.get(listProduct.size() - 4);
+                                                Product p5 = listProduct.get(listProduct.size() - 5);
+                                                ArrayList<Product> listRecentProduct = new ArrayList<Product>();
+                                                listRecentProduct.add(p1);
+                                                listRecentProduct.add(p2);
+                                                listRecentProduct.add(p3);
+                                                listRecentProduct.add(p4);
+                                                listRecentProduct.add(p5);
+
+                                                for (Product product : listRecentProduct) {
+                                                    if (product.getbrandID() == 1) {
+                                                        brand = "Nike";
+                                                    } else {
+                                                        brand = "Adidas";
+                                                    }
+
+                                                    if (product.getcId() == 1) {
+                                                        cate = "Shoes";
+                                                    } else if (product.getcId() == 2) {
+                                                        cate = "Shock";
+                                                    } else if (product.getcId() == 3) {
+                                                        cate = "Hat";
+                                                    } else {
+                                                        cate = "Backpack";
+                                                    }
+                                            %>
                                             <tr>
-                                                <td>Nike</td>
-                                                <td>Nike Therma</td>
-                                                <td><span class="status purple">review</span></td>
+                                                <td><%=product.getName()%></td>
+                                                <td><%=brand%></td>
+                                                <td><%=cate%></td>
+                                                <td><%=Math.round(product.getPrice())%> VNĐ</td>
                                             </tr>
-                                            <tr>
-                                                <td>Nike</td>
-                                                <td>Nike Therma</td>
-                                                <td><span class="status pink">review</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Nike</td>
-                                                <td>Nike Therma</td>
-                                                <td><span class="status orange">review</span></td>
-                                            </tr>
+                                            <%
+                                                }
+                                            %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -110,12 +133,27 @@ ArrayList<Order> listOrder = (ArrayList<Order>)request.getAttribute("listOrder")
                                 <button>See all<span class="las la-arrow-right"></span></button>
                             </div>
                             <div class="card-body">
+                                <%
+                                    User u1 = listUser.get(listUser.size() - 1);
+                                    User u2 = listUser.get(listUser.size() - 2);
+                                    User u3 = listUser.get(listUser.size() - 3);
+                                    ArrayList<User> listRecentUser = new ArrayList<User>();
+                                    listRecentUser.add(u1);
+                                    listRecentUser.add(u2);
+                                    listRecentUser.add(u3);
+                                    String role = null;
+                                    for (User userRecent : listRecentUser) {
+                                        if (userRecent.getRoleID() == 1) {
+                                            role = "Admin";
+                                        } else {
+                                            role = "Customer";
+                                        }
+                                %>
                                 <div class="customer">
                                     <div class="infor">
-                                        <img src="./img/shop1.png" width="30px" height="30px" alt="">
                                         <div>
-                                            <h5>John Doe</h5>
-                                            <small>CEO excerpt</small>
+                                            <h5><%=userRecent.getUserFullName()%></h5>
+                                            <small><%=role%></small>
                                         </div>
                                     </div>
                                     <div class="contact">
@@ -124,41 +162,17 @@ ArrayList<Order> listOrder = (ArrayList<Order>)request.getAttribute("listOrder")
                                         <span class="las la-phone"></span>
                                     </div>
                                 </div>
-                                <div class="customer">  
-                                    <div class="infor">
-                                        <img src="./img/shop1.png" width="30px" height="30px" alt="">
-                                        <div>
-                                            <h5>John Doe</h5>
-                                            <small>CEO excerpt</small>
-                                        </div>
-                                    </div>
-                                    <div class="contact">
-                                        <span class="las la-user-circle"></span>
-                                        <span class="las la-comment"></span>
-                                        <span class="las la-phone"></span>
-                                    </div>
-                                </div>
-                                <div class="customer">  
-                                    <div class="infor">
-                                        <img src="./img/shop1.png" width="30px" height="30px" alt="">
-                                        <div>
-                                            <h5>John Doe</h5>
-                                            <small>CEO excerpt</small>
-                                        </div>
-                                    </div>
-                                    <div class="contact">
-                                        <span class="las la-user-circle"></span>
-                                        <span class="las la-comment"></span>
-                                        <span class="las la-phone"></span>
-                                    </div>
-                                </div>
+                                <%
+                                    }
+                                %>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    </body>
+    </main>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</body>
 </html>

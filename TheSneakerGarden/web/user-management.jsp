@@ -8,14 +8,14 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    if(session.getAttribute("user")==null){
+    User user = (User) session.getAttribute("user");
+    if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
-    }else{
-         User user = (User) session.getAttribute("user");
-         if(user.getRoleID() != 1){
-             response.sendRedirect("./login");
-         }
-     }
+    } else {
+        if (user.getRoleID() != 1) {
+            response.sendRedirect("./login");
+        }
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -119,19 +119,13 @@
         <%@include file="./components/sidebar-dashboard.jsp" %>  
         <div class="main-content">
             <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label> 
-                    Dashboard
-                </h2>
                 <div class="search-wrapper"><span class="las la-search"></span>
                     <input type="search" placeholder="Search..."/>
                 </div> 
                 <div class="user-wrapper">
-                    
                     <div>
-                        <a style="color: black; text-decoration: none" href="./login">Logout</a>    
+                        <h4><%=user.getUserFullName()%></h4>   
+                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
                     </div>
                 </div>
             </header>
@@ -159,26 +153,26 @@
                         </thead>
                         <tbody>
                             <%
-                                ArrayList<User> list = (ArrayList<User>)request.getAttribute("listUser");
-                                for (User user : list) {
+                                ArrayList<User> list = (ArrayList<User>) request.getAttribute("listUser");
+                                for (User user1 : list) {
                             %>
                             <tr>
-                                <td><%=user.getUserId()%></td>
-                                <td><%=user.getUserAccount()%></td>
-                                <td><%=user.getUserFullName()%></td>
-                                <td><%=user.getUserEmail()%></td>
-                                <td><%=user.getUserPhone()%></td>
-                                <td><%=user.getUserAddress()%></td>
-                                <td> <a href="./user-management?action=update&id=<%=user.getUserId()%>" style="color: green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                <td><%=user1.getUserId()%></td>
+                                <td><%=user1.getUserAccount()%></td>
+                                <td><%=user1.getUserFullName()%></td>
+                                <td><%=user1.getUserEmail()%></td>
+                                <td><%=user1.getUserPhone()%></td>
+                                <td><%=user1.getUserAddress()%></td>
+                                <td> <a href="./user-management?action=update&id=<%=user1.getUserId()%>" style="color: green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
                                         <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
                                         <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
                                         </svg></a></td>
-                                <td><a href="#" onclick="alertDelete(<%=user.getUserId()%>)" style="color: red"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <td><a href="#" onclick="alertDelete(<%=user1.getUserId()%>)" style="color: red"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                         </svg></a></td>
                             </tr>   
-                              <%
-                                  }
+                            <%
+                                }
                             %>
                         </tbody>
                     </table>
@@ -190,81 +184,81 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         <script src="./notification/notification.js" type="text/javascript"></script>
         <script>
-            function alertDelete(id) {
-                const title = "Warnning";
-                const message = ' Are you want to delete this item?';
-                const position = "center";
-                const duration = 3000;
-                const type = 'dialog';
-                let callback = null;
+                                    function alertDelete(id) {
+                                        const title = "Warnning";
+                                        const message = ' Are you want to delete this item?';
+                                        const position = "center";
+                                        const duration = 3000;
+                                        const type = 'dialog';
+                                        let callback = null;
 
-                if (type === 'dialog') {
-                  callback = (result) => {
-                    console.log('result = ', result);
-                    if(result === 'ok'){
-                        //sleep(3500).then(() => { window.location.replace("./item-management?action=delete&id="+id) });
-                        window.location.replace("./user-management?action=delete&id="+id);
-                    }
-                  };
-                }
+                                        if (type === 'dialog') {
+                                            callback = (result) => {
+                                                console.log('result = ', result);
+                                                if (result === 'ok') {
+                                                    //sleep(3500).then(() => { window.location.replace("./item-management?action=delete&id="+id) });
+                                                    window.location.replace("./user-management?action=delete&id=" + id);
+                                                }
+                                            };
+                                        }
 
-                const popup = Notification({
-                  position: position,
-                  duration: duration
-                });
+                                        const popup = Notification({
+                                            position: position,
+                                            duration: duration
+                                        });
 
-                if (!popup[type]) {
-                  popup.error({
-                    title: 'Error',
-                    message: `Notification has no such method "${type}"`
-                  });
-                  return;
-                }
+                                        if (!popup[type]) {
+                                            popup.error({
+                                                title: 'Error',
+                                                message: `Notification has no such method "${type}"`
+                                            });
+                                            return;
+                                        }
 
-                popup[type]({
-                  title: title,
-                  message: message,
-                  callback: callback
-                });
-                }
-                
-            function alertSuccess() {
-                const title = "Delete";
-                const message = 'Delete user success';
-                const position = "bottom-right";
-                const duration = 3000;
-                const type = 'success';
-                let callback = null;
+                                        popup[type]({
+                                            title: title,
+                                            message: message,
+                                            callback: callback
+                                        });
+                                    }
 
-                const popup = Notification({
-                  position: position,
-                  duration: duration
-                });
+                                    function alertSuccess() {
+                                        const title = "Delete";
+                                        const message = 'Delete user success';
+                                        const position = "bottom-right";
+                                        const duration = 3000;
+                                        const type = 'success';
+                                        let callback = null;
 
-                if (!popup[type]) {
-                  popup.error({
-                    title: 'Error',
-                    message: `Notification has no such method "${type}"`
-                  });
-                  return;
-                }
+                                        const popup = Notification({
+                                            position: position,
+                                            duration: duration
+                                        });
 
-                popup[type]({
-                  title: title,
-                  message: message,
-                  callback: callback
-                });
-                }
-                function sleep(ms) {
-                    return new Promise(resolve => setTimeout(resolve, ms));
-                  }
+                                        if (!popup[type]) {
+                                            popup.error({
+                                                title: 'Error',
+                                                message: `Notification has no such method "${type}"`
+                                            });
+                                            return;
+                                        }
+
+                                        popup[type]({
+                                            title: title,
+                                            message: message,
+                                            callback: callback
+                                        });
+                                    }
+                                    function sleep(ms) {
+                                        return new Promise(resolve => setTimeout(resolve, ms));
+                                    }
         </script>
         <%
-            if(request.getAttribute("delete") != null){
-                %>
-                <script>
-                    alertSuccess();
-                </script>
+            if (request.getAttribute("delete") != null) {
+        %>
+        <script>
+            alertSuccess();
+        </script>
         <%
             }
         %>

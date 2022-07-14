@@ -9,14 +9,14 @@
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    if(session.getAttribute("user")==null){
+    User user = (User) session.getAttribute("user");
+    if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
-    }else{
-         User user = (User) session.getAttribute("user");
-         if(user.getRoleID() != 1){
-             response.sendRedirect("./login");
-         }
-     }
+    } else {
+        if (user.getRoleID() != 1) {
+            response.sendRedirect("./login");
+        }
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -117,22 +117,13 @@
         <%@include file="./components/sidebar-dashboard.jsp"%>  
         <div class="main-content">
             <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label> 
-                    Dashboard
-                </h2>
                 <div class="search-wrapper"><span class="las la-search"></span>
                     <input type="search" placeholder="Search..."/>
                 </div> 
                 <div class="user-wrapper">
-                    <div class="profile-avatar">
-                        <img src="./img/shop1.png" width="40px" height="40px"  alt="">
-                    </div>
                     <div>
-                        <h4>John Doe</h4>   
-                        <a style="color: black; text-decoration: none" href="./login.jsp">Logout</a>    
+                        <h4><%=user.getUserFullName()%></h4>   
+                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
                     </div>
                 </div>
             </header>

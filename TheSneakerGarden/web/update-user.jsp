@@ -7,7 +7,14 @@
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-User user = (User)request.getAttribute("user");
+    User user = (User) session.getAttribute("user");
+    if (session.getAttribute("user") == null) {
+        response.sendRedirect("./login");
+    } else {
+        if (user.getRoleID() != 1) {
+            response.sendRedirect("./login");
+        }
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -98,22 +105,13 @@ User user = (User)request.getAttribute("user");
         <%@include file="./components/sidebar-dashboard.jsp" %>  
         <div class="main-content">
             <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label> 
-                    Dashboard
-                </h2>
                 <div class="search-wrapper"><span class="las la-search"></span>
                     <input type="search" placeholder="Search..."/>
                 </div> 
                 <div class="user-wrapper">
-                    <div class="profile-avatar">
-                        <img src="./img/shop1.png" width="40px" height="40px"  alt="">
-                    </div>
                     <div>
-                        <h4>John Doe</h4>   
-                        <a style="color: black; text-decoration: none" href="./login.jsp">Logout</a>    
+                        <h4><%=user.getUserFullName()%></h4>   
+                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
                     </div>
                 </div>
             </header>
@@ -134,7 +132,7 @@ User user = (User)request.getAttribute("user");
                                 <span class="details">Account </span>
                                 <input type="text" name="accounta" value="<%=user.getUserAccount()%>" required disabled="" >
                             </div>
-                            
+
                             <div class="input-user">
                                 <span class="details">Name </span>
                                 <input
@@ -146,29 +144,29 @@ User user = (User)request.getAttribute("user");
                             <div class="input-user">
                                 <span class="details">Email </span>
                                 <input type="email"
-                                    name="email"
-                                    value="<%=user.getUserEmail()%>"
-                                    
-                                    required
-                                    />
+                                       name="email"
+                                       value="<%=user.getUserEmail()%>"
+
+                                       required
+                                       />
                             </div>
                             <div class="input-user">
                                 <span class="details">Phone</span>
                                 <input type="text"  
-                                    name="phone"
-                                    value="<%=user.getUserPhone()%>"
-                                    
-                                    required
-                                    />
+                                       name="phone"
+                                       value="<%=user.getUserPhone()%>"
+
+                                       required
+                                       />
                             </div>
                             <div class="input-user">
                                 <span class="details">Address</span>
                                 <input type="text"      
-                                    name="address" 
-                                    value="<%=user.getUserAddress()%>"
-                                    
-                                    required
-                                    >
+                                       name="address" 
+                                       value="<%=user.getUserAddress()%>"
+
+                                       required
+                                       >
                             </div>
                         </div>
                         <div class="buttonAdd">
@@ -181,70 +179,72 @@ User user = (User)request.getAttribute("user");
 
 
                 </div>
-                
+
             </main>
         </div>
         <script src="./notification/notification.js" type="text/javascript"></script>
-    <script>
-      window.addEventListener('DOMContentLoaded', function () {
-        
-        const form = document.querySelector('form');
+        <script>
+            window.addEventListener('DOMContentLoaded', function () {
+
+                const form = document.querySelector('form');
 
 
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          
-          // Form elements
-          const title = "Success";
-          const message = "Update user successful";
-          const position = "bottom-right";
-          const duration = 3000;
-          /*
-            Available methods:
-              error
-              warning
-              success
-              info
-              dialog 
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
 
-            If you use dialog - 
-              the third parameter is the callback function
-          */  
-          const type = "success";
-          let callback = null;
-          const popup = Notification({
-            position: position,
-            duration: duration
-          });
+                    // Form elements
+                    const title = "Success";
+                    const message = "Update user successful";
+                    const position = "bottom-right";
+                    const duration = 3000;
+                    /*
+                     Available methods:
+                     error
+                     warning
+                     success
+                     info
+                     dialog 
+                 
+                     If you use dialog - 
+                     the third parameter is the callback function
+                     */
+                    const type = "success";
+                    let callback = null;
+                    const popup = Notification({
+                        position: position,
+                        duration: duration
+                    });
 
-          if (!popup[type]) {
-            popup.error({
-              title: 'Error',
-              message: `Notification has no such method "${type}"`
+                    if (!popup[type]) {
+                        popup.error({
+                            title: 'Error',
+                            message: `Notification has no such method "${type}"`
+                        });
+                        return;
+                    }
+
+                    popup[type]({
+                        title: title,
+                        message: message,
+                        callback: callback
+                    });
+                    sleep(3500).then(() => {
+                        document.getElementById('someFormId').submit();
+                    });
+                });
+
+
             });
-            return;
-          }
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
 
-          popup[type]({
-            title: title,
-            message: message,
-            callback: callback
-          });
-          sleep(3500).then(() => { document.getElementById('someFormId').submit(); });
-        });
-
-
-      });
-      function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-      
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-    <script>
-      document.querySelectorAll('pre code').forEach((el) => {
-        hljs.highlightElement(el);
-      });
-    </script>
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        </script>
     </body>
 </html>
