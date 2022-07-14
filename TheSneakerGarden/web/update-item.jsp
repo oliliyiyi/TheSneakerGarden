@@ -7,7 +7,7 @@
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
- Product product = (Product)request.getAttribute("product");
+    Product product = (Product) request.getAttribute("product");
 %>
 <!DOCTYPE html>
 <html>
@@ -123,124 +123,135 @@
                     font-size: 40px; color:#00C897  ">Update item</h3>
                 <div class="container">
                     <form action="item-management?action=edit" method="POST" id="someFormId">
-                            <div class="user-input">
-                                <input type="hidden" name="id" value="<%=product.getId()%>">
-                                <div class="input-user">
-                                    <span class="details">Name </span>
-                                    <input
-                                        name="name"
-                                        type="text"
-                                        required
-                                        value="<%=product.getName()%>"
-                                        />
-                                </div>
-                                <div class="input-user">
-                                    <span class="details">Type</span>
-                                    <input
-                                        name="type"
-                                        type="number"
-                                        value="<%=product.getcId()%>"
-                                        required
-                                        />
-                                </div>
-                                <div class="input-user">
-                                    <span class="details">Price</span>
-                                    <input   
-                                        name="price"
-                                        type="number"
-                                        value="<%=product.getPrice()%>"
-                                        required
-                                        />
-                                </div>
-                                <div class="input-user">
-                                    <span class="details">Image</span>
-                                    <input
-                                        name="image"
-                                        type="text"
-                                        value="<%=product.getImage()%>"
-                                        required
-                                        >
-                                </div>
-                                <div class="input-user">
-                                    <span class="details">Description</span>
-                                    <input
-                                        name="description"
-                                        type="text"
-                                        value="<%=product.getDescription()%>"
-                                        required
-                                        >
-                                </div>
+                        <div class="user-input">
+                            <input type="hidden" name="id" value="<%=product.getId()%>">
+                            <div class="input-user">
+                                <span class="details">Name</span>
+                                <input
+                                    name="name"
+                                    type="text"
+                                    required
+                                    value="<%=product.getName()%>"
+                                    />
                             </div>
-                            <div class="buttonAdd"> 
-                                <Button type="submit">
-                                    Update Item
-                                </Button>
+                            <div class="input-user">
+                                <span class="details">Category</span>
+                                <input
+                                    name="cate"
+                                    type="number"
+                                    value="<%=product.getcId()%>"
+                                    required
+                                    />
                             </div>
-                        </form>
+                            <div class="input-user">
+                                <span class="details">Brand</span>
+                                <input
+                                    name="brand"
+                                    type="number"
+                                    value="<%=product.getbrandID()%>"
+                                    required
+                                    />
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Price</span>
+                                <input   
+                                    name="price"
+                                    type="number"
+                                    value="<%=product.getPrice()%>"
+                                    required
+                                    />
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Image</span>
+                                <input
+                                    name="image"
+                                    type="text"
+                                    value="<%=product.getImage()%>"
+                                    required
+                                    >
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Description</span>
+                                <input
+                                    name="description"
+                                    type="text"
+                                    value="<%=product.getDescription()%>"
+                                    required
+                                    >
+                            </div>
+                        </div>
+                        <div class="buttonAdd"> 
+                            <Button type="submit">
+                                Update Item
+                            </Button>
+                        </div>
+                    </form>
                 </div>
             </main>
         </div>
-                                        <script src="./notification/notification.js" type="text/javascript"></script>
-    <script>
-      window.addEventListener('DOMContentLoaded', function () {
-        
-        const form = document.querySelector('form');
+        <script src="./notification/notification.js" type="text/javascript"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', function () {
+
+                const form = document.querySelector('form');
 
 
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          
-          // Form elements
-          const title = "Success";
-          const message = "Update product successful";
-          const position = "bottom-right";
-          const duration = 3000;
-          /*
-            Available methods:
-              error
-              warning
-              success
-              info
-              dialog 
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
 
-            If you use dialog - 
-              the third parameter is the callback function
-          */  
-          const type = "success";
-          let callback = null;
-          const popup = Notification({
-            position: position,
-            duration: duration
-          });
+                    // Form elements
+                    const title = "Success";
+                    const message = "Update product successful";
+                    const position = "bottom-right";
+                    const duration = 3000;
+                    /*
+                     Available methods:
+                     error
+                     warning
+                     success
+                     info
+                     dialog 
+                 
+                     If you use dialog - 
+                     the third parameter is the callback function
+                     */
+                    const type = "success";
+                    let callback = null;
+                    const popup = Notification({
+                        position: position,
+                        duration: duration
+                    });
 
-          if (!popup[type]) {
-            popup.error({
-              title: 'Error',
-              message: `Notification has no such method "${type}"`
+                    if (!popup[type]) {
+                        popup.error({
+                            title: 'Error',
+                            message: `Notification has no such method "${type}"`
+                        });
+                        return;
+                    }
+
+                    popup[type]({
+                        title: title,
+                        message: message,
+                        callback: callback
+                    });
+                    sleep(3500).then(() => {
+                        document.getElementById('someFormId').submit();
+                    });
+                });
+
+
             });
-            return;
-          }
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
 
-          popup[type]({
-            title: title,
-            message: message,
-            callback: callback
-          });
-          sleep(3500).then(() => { document.getElementById('someFormId').submit(); });
-        });
-
-
-      });
-      function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-      
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-    <script>
-      document.querySelectorAll('pre code').forEach((el) => {
-        hljs.highlightElement(el);
-      });
-    </script>
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        </script>
     </body>
 </html>

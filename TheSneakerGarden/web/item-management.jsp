@@ -150,7 +150,8 @@
                                 <th>ID</th>
                                 <th>Image</th> 
                                 <th>Name</th>
-                                <th>Type</th>
+                                <th>Brand</th>
+                                <th>Category</th>
                                 <th>Price</th> 
                                 <th>Description</th> 
                                 <th>Update</th>
@@ -161,19 +162,30 @@
                         <tbody>
                             <%
                                 ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("listProduct");
-                                String type = null;
+                                String brand = null;
+                                String cate = null;
                                 for (Product product : list) {
-                                if(product.getcId()==1){
-                                    type = "Nike";
+                                if(product.getbrandID()==1){
+                                    brand = "Nike";
                                 }else{
-                                    type = "Adidas";
+                                    brand = "Adidas";
+                                }
+                                if(product.getcId()==1){
+                                    cate = "Shoes";
+                                }else if (product.getcId()==2){
+                                    cate = "Shock";
+                                }else if (product.getcId()==3){
+                                    cate = "Hat";
+                                }else {
+                                    cate = "Backpack";
                                 }
                             %>
                             <tr>
                                 <td><%=product.getId()%></td>
                                 <td><img src="<%=product.getImage()%>" alt="" width="50" height="50"></td>
                                 <td><%=product.getName()%></td>
-                                <td><%=type%></td>
+                                <td><%=brand%></td>
+                                <td><%=cate%></td>
                                 <td><%=Math.round(product.getPrice())%> VNĐ</td>
                                 <td><%=product.getDescription()%></td>
                                 <td> <a href="./item-management?action=update&id=<%=product.getId()%>" style="color: green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">

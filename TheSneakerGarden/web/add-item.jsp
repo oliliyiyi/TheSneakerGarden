@@ -132,9 +132,18 @@
                                         />
                                 </div>
                                 <div class="input-user">
-                                    <span class="details">Type</span>
+                                    <span class="details">Category</span>
                                     <input
-                                        name="type"
+                                        name="cate"
+                                        type="number"
+                                        placeholder="Enter type"
+                                        required
+                                        />
+                                </div>
+                                <div class="input-user">
+                                    <span class="details">Brand</span>
+                                    <input
+                                        name="brand"
                                         type="number"
                                         placeholder="Enter type"
                                         required

@@ -104,10 +104,23 @@ public class ProductManager {
             conn = db.getConnectDB();//mo ket noi voi sql
 
             PreparedStatement ps = conn.prepareStatement(""
-                    + "INSERT [dbo].[Products] "
-                    + "([ProductName], [Price], [ImageLink], [Description], [Status], [CategoryID], [ImportDate],[Inventory],[Color],[Rate], [SizeID]) "
+                    + "INSERT [Products]\n"
+                    + "           ([CategoryID]\n"
+                    + "           ,[BrandID]\n"
+                    + "           ,[ProductName]\n"
+                    + "           ,[Price]\n"
+                    + "           ,[ImageLink]\n"
+                    + "           ,[Description]\n"
+                    + "           ,[Rate]\n"
+                    + "           ,[Status])"
                     + "VALUES "
-                    + "(N'" + product.getName() + "'," + product.getPrice() + ", N'" + product.getImage() + "', N'" + product.getDescription() + "', 1, N'" + product.getcId() + "', '2022-06-01 00:00:00', 10 , 'White', 5, 1)");
+                    + "(" + product.getcId()
+                    + ", " + product.getbrandID()
+                    + ", N'" + product.getName()
+                    + "', " + product.getPrice()
+                    + ", N'" + product.getImage()
+                    + "', N'" + product.getDescription()
+                    + "', 3 ,1)");
 
             ps.executeUpdate();
 
@@ -125,9 +138,12 @@ public class ProductManager {
             conn = db.getConnectDB();//mo ket noi voi sql
 
             PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[Products] SET [ProductName] = '" + product.getName() + "',"
-                    + " [Price]= '" + product.getPrice() + "', "
-                    + "[ImageLink] = '" + product.getImage() + "', [Description] = '" + product.getDescription() + "', "
-                    + "[Status] = '" + product.getStatus() + "' , [CategoryID] = '" + product.getcId() + "' "
+                    + " [CategoryID]= " + product.getcId() + ", "
+                    + " [BrandID]= " + product.getbrandID() + ", "
+                    + " [Price]= " + product.getPrice() + ", "
+                    + "[ImageLink] = '" + product.getImage() + "', "
+                    + "[Description] = '" + product.getDescription() + "', "
+                    + "[Status] = " + product.getStatus() + ", "
                     + "WHERE [ProductID] = " + product.getId());
             ps.executeUpdate();
             status = true;
@@ -207,7 +223,7 @@ public class ProductManager {
         }
         return quantity;
     }
-    
+
     public int getProductQuantityByProductID(int proID) {
         int quantity = 0;
         String query = "SELECT [Quantity] FROM [dbo].[Inventory] WHERE [ProductID] = " + proID;

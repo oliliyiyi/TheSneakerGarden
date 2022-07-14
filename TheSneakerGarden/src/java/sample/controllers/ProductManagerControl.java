@@ -88,13 +88,13 @@ public class ProductManagerControl extends HttpServlet {
             if("add".equals(request.getParameter("action"))){
                 //int id = Integer.valueOf(request.getParameter("id"));
                 String name = request.getParameter("name");
-                String cid = request.getParameter("cid");
-                String bid = request.getParameter("bid");
+                String cate = request.getParameter("cate");
+                String brand = request.getParameter("brand");
                 String price = request.getParameter("price");
                 String image = request.getParameter("image");
                 String description = request.getParameter("description");
                 //Product product = new Product(0, name, image, Double.valueOf(price), description, Integer.valueOf(type), 1);
-                Product product = new Product(0, name, image, Double.valueOf(price), description, Integer.valueOf(cid), Integer.valueOf(bid), 1);
+                Product product = new Product(0, name, image, Double.valueOf(price), description, Integer.valueOf(cate), Integer.valueOf(brand), 1);
                 if(productManager.insert(product)){
                     listProduct = productManager.getAllProduct();
                     request.setAttribute("listProduct", listProduct);
@@ -106,12 +106,12 @@ public class ProductManagerControl extends HttpServlet {
             if("edit".equals(request.getParameter("action"))){
                 int id = Integer.valueOf(request.getParameter("id"));
                 String name = request.getParameter("name");
-                String cid = request.getParameter("cid");
-                String bid = request.getParameter("bid");
+                String cate = request.getParameter("cate");
+                String brand = request.getParameter("brand");
                 String price = request.getParameter("price");
                 String image = request.getParameter("image");
                 String description = request.getParameter("description");
-                Product product = new Product(0, name, image, Double.valueOf(price), description, Integer.valueOf(cid), Integer.valueOf(bid), 1);
+                Product product = new Product(0, name, image, Double.valueOf(price), description, Integer.valueOf(cate), Integer.valueOf(brand), 1);
                 if(productManager.edit(product)){
                     listProduct = productManager.getAllProduct();
                     request.setAttribute("listProduct", listProduct);
