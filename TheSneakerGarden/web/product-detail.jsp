@@ -224,16 +224,10 @@
                             <div class="card rounded-0">
                                 <img class="card-img rounded-0 img-fluid" src=<%=listP2.get(i).getImage()%>>
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><a class="btn btn-main text-white mt-2" href="./product-detail?id=<%=listP2.get(i).getId()%>"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-
-                                    </ul>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <a href="./product-detail.jsp" class="h3 text-decoration-none">
+                                <a href="./product-detail?id=<%=listP2.get(i).getId()%>" class="h3 text-decoration-none">
                                     <h5><%=listP2.get(i).getName()%></h5>
                                 </a>
                                 <ul class="list-unstyled d-flex justify-content-center mb-1">
