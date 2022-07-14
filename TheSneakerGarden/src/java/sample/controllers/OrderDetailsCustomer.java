@@ -4,7 +4,7 @@
  */
 package sample.controllers;
 
-import dbmanager.OderManager;
+import dbmanager.OrderManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class OrderDetailsCustomer extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         ArrayList<CartItem> listItem = new ArrayList<>();
-        OderManager order = new OderManager();
+        OrderManager order = new OrderManager();
         if(session.getAttribute("user") != null){
             User user = (User) session.getAttribute("user");
             ArrayList<Order> listOrder = order.getAllOrderByUserID(user.getUserId());

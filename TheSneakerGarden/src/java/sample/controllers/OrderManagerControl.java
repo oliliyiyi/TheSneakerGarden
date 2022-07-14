@@ -4,9 +4,10 @@
  */
 package sample.controllers;
 
-import dbmanager.OderManager;
+import dbmanager.OrderManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +35,7 @@ public class OrderManagerControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        OderManager oderManager = new OderManager();
+        OrderManager oderManager = new OrderManager();
         ArrayList<Order> listOrder = oderManager.getAllProduct();
         request.setAttribute("listOrder", listOrder);
         request.getRequestDispatcher("./order-management.jsp").forward(request, response);
@@ -66,14 +67,21 @@ public class OrderManagerControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        OrderManager om = new OrderManager();
+        int orderID = Integer.parseInt(request.getParameter("id"));
+        Date shipDate = Date.valueOf(request.getParameter("shipDate"));
+        int status =  Integer.parseInt(request.getParameter("status"));
+        boolean check = om.updateOrderShipDate_Status(orderID, shipDate, status);
+        OrderManager oderManager = new OrderManager();
+        ArrayList<Order> listOrder = oderManager.getAllProduct();
+        if(check){
+            request.setAttribute("listOrder", listOrder);
+            request.getRequestDispatcher("./order-management.jsp").forward(request, response);
+        }
+        request.getRequestDispatcher("./order-management.jsp").forward(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+    
     @Override
     public String getServletInfo() {
         return "Short description";

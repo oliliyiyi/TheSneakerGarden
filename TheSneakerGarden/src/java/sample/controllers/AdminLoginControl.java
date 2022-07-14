@@ -4,7 +4,7 @@
  */
 package sample.controllers;
 
-import dbmanager.OderManager;
+import dbmanager.OrderManager;
 import dbmanager.ProductManager;
 import dbmanager.UserManager;
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class AdminLoginControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         UserManager userManager = new UserManager();
         ProductManager productManager = new ProductManager();
-        OderManager oderManager = new OderManager();
+        OrderManager oderManager = new OrderManager();
         
         ArrayList<User> listUser = userManager.getAllUser();
         ArrayList<Product> listProduct = productManager.getAllProduct();

@@ -4,7 +4,7 @@
  */
 package sample.controllers;
 
-import dbmanager.OderManager;
+import dbmanager.OrderManager;
 import dbmanager.ProductManager;
 import java.io.IOException;
 import java.util.Map;
@@ -77,7 +77,7 @@ public class checkout extends HttpServlet {
         long millis = System.currentTimeMillis();
         java.sql.Date orderDate = new java.sql.Date(millis);
 
-        OderManager oderDAO = new OderManager();
+        OrderManager oderDAO = new OrderManager();
         HttpSession session = request.getSession();
         Map<Integer, CartItem> cart = null;
 

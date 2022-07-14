@@ -4,7 +4,7 @@
  */
 package sample.controllers;
 
-import dbmanager.OderManager;
+import dbmanager.OrderManager;
 import dbmanager.ProductManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +37,7 @@ public class HistoryOrderControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         int id = Integer.valueOf(request.getParameter("id"));
-        OderManager manager = new OderManager();
+        OrderManager manager = new OrderManager();
         ArrayList<CartItem> p = manager.getAllProductByOrderID(id);
 
         request.setAttribute("orderHistory", p);

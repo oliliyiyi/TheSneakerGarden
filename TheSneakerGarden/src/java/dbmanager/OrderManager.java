@@ -19,7 +19,7 @@ import utils.DBUtils;
  *
  * @author Admin
  */
-public class OderManager {
+public class OrderManager {
 
     Connection con = null;
     PreparedStatement ps = null;
@@ -200,5 +200,24 @@ public class OderManager {
         } catch (SQLException e) {
         }
         return list;
+    }
+    
+    public boolean updateOrderShipDate_Status(int orderID, Date shipDate, int status){
+        boolean check = false;
+        String query = "UPDATE [dbo].[Orders] SET ShippedDate = ?, Status = ? WHERE OrderID = ?";
+      
+        try{
+             con = db.getConnectDB();
+             if(con!=null){
+                 ps = con.prepareStatement(query);
+                 ps.setDate(1, shipDate);
+                 ps.setInt(2, status);
+                 ps.setInt(3, orderID);
+                 check = ps.executeUpdate() > 0 ? true : false;
+             }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return check;
     }
 }
