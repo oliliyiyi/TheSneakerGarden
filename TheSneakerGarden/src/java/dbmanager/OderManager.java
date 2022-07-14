@@ -34,7 +34,7 @@ public class OderManager {
                 + "           ,[ShipAddress]\n"
                 + "           ,[Email]\n"
                 + "           ,[OrderDate]\n"
-                + "           ,[Status])) VALUES (?, ?, ?, ?, ?, ?, 0)";//query insert
+                + "           ,[Status]) VALUES (?, ?, ?, ?, ?, ?, 0)";//query insert
         try {
             con = db.getConnectDB();//mo ket noi voi sql
             PreparedStatement pst = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);//create prepare statement
@@ -45,6 +45,35 @@ public class OderManager {
             pst.setString(4, shipAddress);
             pst.setString(5, email);
             pst.setDate(6, orderDate);
+            pst.executeUpdate();
+            rs = pst.getGeneratedKeys();
+            rs.next();//
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());//display warning message
+            return false;
+        } catch (Exception e) {
+            System.out.println("can't insert product to list.");//display warning message
+            return false;
+        }
+    }
+    
+    public boolean insertOder(String fullName, String phone, String shipAddress, String email, Date orderDate, double price) {
+        String query = "INSERT [dbo].[Orders]\n"
+                + "           ([FullName]\n"
+                + "           ,[Phone]\n"
+                + "           ,[ShipAddress]\n"
+                + "           ,[Email]\n"
+                + "           ,[OrderDate]\n"
+                + "           ,[Status]) VALUES (?, ?, ?, ?, ?, 0)";//query insert
+        try {
+            con = db.getConnectDB();//mo ket noi voi sql
+            PreparedStatement pst = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);//create prepare statement
+            pst.setString(1, fullName);
+            pst.setString(2, phone);
+            pst.setString(3, shipAddress);
+            pst.setString(4, email);
+            pst.setDate(5, orderDate);
             pst.executeUpdate();
             rs = pst.getGeneratedKeys();
             rs.next();//

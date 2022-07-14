@@ -79,8 +79,6 @@ UserManager userManager = new UserManager();
                                 <strong><%=total%></strong>
                             </li>
                             <%
-                                
-                                
                                 } 
                             %>
                         </ul>

@@ -107,7 +107,7 @@ public class checkout extends HttpServlet {
                 Product product = pro.getProductByID(en.getValue().getID());
                 total += product.getPrice() * en.getValue().getQuantity();
             }
-            if (oderDAO.insertOder(-1, fullname, phone, address, email, orderDate, total)) {
+            if (oderDAO.insertOder(fullname, phone, address, email, orderDate, total)) {
                 for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
                     Product product = pro.getProductByID(en.getValue().getID());
                     oderDAO.insertOderItem(oderDAO.getOrderID(), en.getValue().getID(), en.getValue().getQuantity(), product.getPrice());
