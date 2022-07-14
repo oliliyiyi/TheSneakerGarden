@@ -15,6 +15,7 @@
             response.sendRedirect("./login");
         }
     }
+    User user1 = (User) request.getAttribute("user1");
 %>
 <!DOCTYPE html>
 <html>
@@ -121,23 +122,23 @@
                     font-size: 40px; color:#00C897  ">Update user</h3>
                 <div class="container">
                     <form action="user-management?action=update" method="POST" id="someFormId">
-                        <input type="hidden" name="id" value="<%=user.getUserId()%>">
-                        <input type="hidden" name="account" value="<%=user.getUserAccount()%>">
+                        <input type="hidden" name="id" value="<%=user1.getUserId()%>">
+                        <input type="hidden" name="account" value="<%=user1.getUserAccount()%>">
                         <div class="user-input">
                             <div class="input-user">
                                 <span class="details">ID </span>
-                                <input type="text" name="ida" value="<%=user.getUserId()%>" required disabled="" >
+                                <input type="text" name="ida" value="<%=user1.getUserId()%>" required disabled="" >
                             </div>
                             <div class="input-user">
                                 <span class="details">Account </span>
-                                <input type="text" name="accounta" value="<%=user.getUserAccount()%>" required disabled="" >
+                                <input type="text" name="accounta" value="<%=user1.getUserAccount()%>" required disabled="" >
                             </div>
 
                             <div class="input-user">
                                 <span class="details">Name </span>
                                 <input
                                     name="name"
-                                    value="<%=user.getUserFullName()%>"
+                                    value="<%=user1.getUserFullName()%>"
                                     required
                                     />
                             </div>
@@ -145,7 +146,7 @@
                                 <span class="details">Email </span>
                                 <input type="email"
                                        name="email"
-                                       value="<%=user.getUserEmail()%>"
+                                       value="<%=user1.getUserEmail()%>"
 
                                        required
                                        />
@@ -154,7 +155,7 @@
                                 <span class="details">Phone</span>
                                 <input type="text"  
                                        name="phone"
-                                       value="<%=user.getUserPhone()%>"
+                                       value="<%=user1.getUserPhone()%>"
 
                                        required
                                        />
@@ -163,7 +164,7 @@
                                 <span class="details">Address</span>
                                 <input type="text"      
                                        name="address" 
-                                       value="<%=user.getUserAddress()%>"
+                                       value="<%=user1.getUserAddress()%>"
 
                                        required
                                        >

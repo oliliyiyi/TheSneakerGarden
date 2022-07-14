@@ -39,7 +39,7 @@ public class UserManagerControl extends HttpServlet {
         if (request.getParameter("action") != null) {
             if ("update".equals(request.getParameter("action"))) {
                 User user = userManager.getUser(Integer.valueOf(request.getParameter("id")));
-                request.setAttribute("user", user);
+                request.setAttribute("user1", user);
                 request.getRequestDispatcher("./update-user.jsp").forward(request, response);
             }
             if ("add".equals(request.getParameter("action"))) {
