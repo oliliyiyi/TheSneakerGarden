@@ -37,9 +37,9 @@ public class checkout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         request.getRequestDispatcher("/checkout.jsp").include(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,48 +68,55 @@ public class checkout extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        long millis=System.currentTimeMillis();  
-        java.sql.Date date = new java.sql.Date(millis);
+
+        String fullname = request.getParameter("fullname");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+
+        long millis = System.currentTimeMillis();
+        java.sql.Date orderDate = new java.sql.Date(millis);
+
         OderManager oderDAO = new OderManager();
         HttpSession session = request.getSession();
-        Map<Integer,CartItem> cart = null;
-        if(session.getAttribute("cart") == null){
-                request.getRequestDispatcher("/cart").include(request, response);
-        }else if(session.getAttribute("user")!=null){
-            User userSession = (User)session.getAttribute("user");
+        Map<Integer, CartItem> cart = null;
+
+        if (session.getAttribute("cart") == null) {
+            request.getRequestDispatcher("/cart").include(request, response);
+        } else if (session.getAttribute("user") != null) {
+            User userSession = (User) session.getAttribute("user");
             ProductManager pro = new ProductManager();
-            cart = (Map<Integer,CartItem>)session.getAttribute("cart");
+            cart = (Map<Integer, CartItem>) session.getAttribute("cart");
             int total = 0;
-            for (Map.Entry<Integer,CartItem> en : cart.entrySet()) {
-                Product product =  pro.getProductByID(en.getKey());
-                total += product.getPrice()*en.getValue().getQuantity();
+            for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
+                Product product = pro.getProductByID(en.getKey());
+                total += product.getPrice() * en.getValue().getQuantity();
             }
-            if(oderDAO.insertOder(date, date, total,userSession.getUserId())){
-                for (Map.Entry<Integer,CartItem> en : cart.entrySet()) {
-                    Product product =  pro.getProductByID(en.getValue().getID());
-                    oderDAO.insertOderItem(oderDAO.getOrderID(), en.getValue().getID(), en.getValue().getQuantity(), product.getPrice());
-                    pro.updateSize(en.getValue().getSize(), en.getValue().getID(), pro.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
-               }
-            }
-        }else{
-            ProductManager pro = new ProductManager();
-            cart = (Map<Integer,CartItem>)session.getAttribute("cart");
-            int total = 0;
-            for (Map.Entry<Integer,CartItem> en : cart.entrySet()) {
-                Product product =  pro.getProductByID(en.getValue().getID());
-                total += product.getPrice()*en.getValue().getQuantity();
-            }
-            if(oderDAO.insertOder(date, date, total,-1)){
-                for (Map.Entry<Integer,CartItem> en : cart.entrySet()) {
-                    Product product =  pro.getProductByID(en.getValue().getID());
+            if (oderDAO.insertOder(userSession.getUserId(), fullname, phone, address, email, orderDate, total)) {
+                for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
+                    Product product = pro.getProductByID(en.getValue().getID());
                     oderDAO.insertOderItem(oderDAO.getOrderID(), en.getValue().getID(), en.getValue().getQuantity(), product.getPrice());
                     pro.updateSize(en.getValue().getSize(), en.getValue().getID(), pro.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
                 }
             }
-           
+        } else {
+            ProductManager pro = new ProductManager();
+            cart = (Map<Integer, CartItem>) session.getAttribute("cart");
+            int total = 0;
+            for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
+                Product product = pro.getProductByID(en.getValue().getID());
+                total += product.getPrice() * en.getValue().getQuantity();
+            }
+            if (oderDAO.insertOder(-1, fullname, phone, address, email, orderDate, total)) {
+                for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
+                    Product product = pro.getProductByID(en.getValue().getID());
+                    oderDAO.insertOderItem(oderDAO.getOrderID(), en.getValue().getID(), en.getValue().getQuantity(), product.getPrice());
+                    pro.updateSize(en.getValue().getSize(), en.getValue().getID(), pro.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
+                }
+            }
         }
-         session.invalidate();
-         request.getRequestDispatcher("./cart").include(request, response);
+        session.setAttribute("cart", null);
+        request.getRequestDispatcher("./cart").include(request, response);
     }
 
     /**

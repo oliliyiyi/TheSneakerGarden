@@ -27,7 +27,7 @@ function validateForm() {
     var address = document.getElementById("address");
     var password = document.getElementById("password");
 
-    const phoneValid = /([(84)+90|(84)+91|090|091])+([0-9]{9})\b/;
+    const phoneValid = /([(84)+90|(84)+91|090|091])+([0-9]{8})\b/;
     const emailValid = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const numberValid = /^[0-9]+$/;
     const makhValid = /^KH+[0-9]{5}$/;

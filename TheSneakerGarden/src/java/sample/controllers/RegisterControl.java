@@ -71,24 +71,13 @@ public class RegisterControl extends HttpServlet {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         String password = request.getParameter("password");
-        // user = new User(1, username, password, fullname, email, phone, address, 1);
 
-        if (username.trim().equals("") || fullname.trim().equals("") || email.trim().equals("") || phone.trim().equals("") || address.trim().equals("") || password.trim().equals("")) {
-            request.getRequestDispatcher("./register.jsp").forward(request, response);
-        }
+        User user = new User(1, username, fullname, email, phone, address, 2);
 
         if (userManager.CheckUserExist(username) == null) {
-            User user = new User(1, username, fullname, email, phone, address, 2);
-            if(userManager.insert(user, password)){
-                request.setAttribute("register-username", user.getUserAccount());
-                request.setAttribute("register-password", password);
-                request.setAttribute("register", "success");
-                request.getRequestDispatcher("./login").forward(request, response);
-            }
-//        userManager.insertAccount(username, password, userManager.getUserID());
-            // if (userManager.insert(user, password)) {
-            
+            userManager.insert(user, password);
 
+            request.getRequestDispatcher("./login").forward(request, response);
         } else {
             request.getRequestDispatcher("./register.jsp").forward(request, response);
         }

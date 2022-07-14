@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import model.CartItem;
 import model.Order;
-import model.Product;
 import utils.DBUtils;
 
 /**
@@ -21,24 +20,34 @@ import utils.DBUtils;
  * @author Admin
  */
 public class OderManager {
+
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    DBUtils  db = new DBUtils();
-    public boolean insertOder(Date orderDate,Date shipDate, double price,  int userID){
-        String query = "INSERT [dbo].[Orders] ([OrderDate], [ShippedDate], [ShipVia], [CustomerID]) VALUES (?, ?, ?, ?)";//query insert
+    DBUtils db = new DBUtils();
+
+    public boolean insertOder(int userID, String fullName, String phone, String shipAddress, String email, Date orderDate, double price) {
+        String query = "INSERT [dbo].[Orders]\n"
+                + "           ([CustomerID]\n"
+                + "           ,[FullName]\n"
+                + "           ,[Phone]\n"
+                + "           ,[ShipAddress]\n"
+                + "           ,[Email]\n"
+                + "           ,[OrderDate]\n"
+                + "           ,[Status])) VALUES (?, ?, ?, ?, ?, ?, 0)";//query insert
         try {
             con = db.getConnectDB();//mo ket noi voi sql
             PreparedStatement pst = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);//create prepare statement
 
-            pst.setDate(1, orderDate);
-            pst.setDate(2, shipDate);
-            pst.setString(3, "Speedy Express");
-            pst.setInt(4, userID);
+            pst.setInt(1, userID);
+            pst.setString(2, fullName);
+            pst.setString(3, phone);
+            pst.setString(4, shipAddress);
+            pst.setString(5, email);
+            pst.setDate(6, orderDate);
             pst.executeUpdate();
             rs = pst.getGeneratedKeys();
             rs.next();//
-
             return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());//display warning message
@@ -46,11 +55,10 @@ public class OderManager {
         } catch (Exception e) {
             System.out.println("can't insert product to list.");//display warning message
             return false;
-
         }
     }
-    
-    public boolean insertOderItem(int orderId,int itemId, int quantity, double price){
+
+    public boolean insertOderItem(int orderId, int itemId, int quantity, double price) {
         String query = "INSERT [dbo].[OrderDetails] ([OrderID], [ProductID], [Quantity], [UnitPrice]) VALUES (?, ?, ?, ?)";//query insert
         try {
             con = db.getConnectDB();//mo ket noi voi sql
@@ -66,7 +74,7 @@ public class OderManager {
 
             return true;
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage()+"+++++++++++++++" + orderId);//display warning message
+            System.out.println(ex.getMessage() + "+++++++++++++++" + orderId);//display warning message
             return false;
         } catch (Exception e) {
             System.out.println("can't insert product to list.");//display warning message
@@ -74,81 +82,91 @@ public class OderManager {
 
         }
     }
+
     public int getOrderID() {
         int id = 0;
         try {
-           String sql = "SELECT MAX(OrderID) as id\n" +
-                        "  FROM [dbo].[Orders]";
-        Statement st2 = this.con.createStatement();
-        ResultSet rs2 = st2.executeQuery(sql);
-        while (rs2.next()) {
-            id = rs2.getInt("id");
-        }
-        
+            String sql = "SELECT MAX(OrderID) as id\n"
+                    + "  FROM [dbo].[Orders]";
+            Statement st2 = this.con.createStatement();
+            ResultSet rs2 = st2.executeQuery(sql);
+            while (rs2.next()) {
+                id = rs2.getInt("id");
+            }
+
         } catch (Exception e) {
         }
         return id;
     }
+
     public ArrayList<Order> getAllProduct() {
         ArrayList<Order> list = new ArrayList<>();
-        String query = "SELECT [OrderID]\n" +
-                        "      ,[CustomerID]\n" +
-                        "      ,[ShipVia]\n" +
-                        "      ,[OrderDate]\n" +
-                        "      ,[ShippedDate]\n" +
-                        "  FROM [dbo].[Orders]";
+        String query = "SELECT *"
+                + "  FROM [dbo].[Orders]";
         try {
             con = db.getConnectDB();//mo ket noi voi sql
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Order(rs.getInt("OrderID"),
-                        rs.getDate("OrderDate"),
-                        rs.getDate("ShippedDate"),0,
-                        rs.getInt("CustomerID")));
+                list.add(new Order(rs.getInt("OrderID"), 
+                        rs.getInt("CustomerID"), 
+                        rs.getString("FullName"), 
+                        rs.getString("Phone"), 
+                        rs.getString("ShipAddress"), 
+                        rs.getString("Email"), 
+                        rs.getDate("OrderDate"), 
+                        rs.getDate("ShippedDate"), 
+                        0, 
+                        rs.getInt("Status")));
             }
         } catch (SQLException e) {
         }
         return list;
     }
-     public ArrayList<Order> getAllProductByUserID(int id) {
+
+    public ArrayList<Order> getAllOrderByUserID(int id) {
         ArrayList<Order> list = new ArrayList<>();
-        String query = "SELECT [OrderID]\n" +
-                        "      ,[CustomerID]\n" +
-                        "      ,[ShipVia]\n" +
-                        "      ,[OrderDate]\n" +
-                        "      ,[ShippedDate]\n" +
-                        "  FROM [dbo].[Orders] " +
-                        "  WHERE [CustomerID] = "+ id;
+        String query = "SELECT *"
+                + "  FROM [dbo].[Orders] "
+                + "  WHERE [CustomerID] = " + id;
         try {
             con = db.getConnectDB();//mo ket noi voi sql
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Order(rs.getInt("OrderID"),
-                        rs.getDate("OrderDate"),
-                        rs.getDate("ShippedDate"),0,
-                        rs.getInt("CustomerID")));
+                list.add(new Order(rs.getInt("OrderID"), 
+                        rs.getInt("CustomerID"), 
+                        rs.getString("FullName"), 
+                        rs.getString("Phone"), 
+                        rs.getString("ShipAddress"), 
+                        rs.getString("Email"), 
+                        rs.getDate("OrderDate"), 
+                        rs.getDate("ShippedDate"), 
+                        0, 
+                        rs.getInt("Status")));
             }
         } catch (SQLException e) {
         }
         return list;
     }
-        public ArrayList<CartItem> getAllItemByID(int id) {
+
+    public ArrayList<CartItem> getAllProductByOrderID(int id) {
         ArrayList<CartItem> list = new ArrayList<>();
-        String query = "SELECT [OrderID]\n" +
-                        "      ,[ProductID]\n" +
-                        "      ,[UnitPrice]\n" +
-                        "      ,[Quantity]\n" +
-                        "  FROM [dbo].[OrderDetails]" +
-                    "  WHERE [OrderDetails].[OrderID] = " + id;
+        String query = "SELECT [OrderID]\n"
+                + "      ,[ProductID]\n"
+                + "      ,[UnitPrice]\n"
+                + "      ,[Quantity]\n"
+                + "      ,[SizeNumber]\n"
+                + "  FROM [dbo].[OrderDetails]"
+                + "  WHERE [OrderDetails].[OrderID] = " + id;
         try {
             con = db.getConnectDB();//mo ket noi voi sql
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new CartItem(rs.getInt("ProductID"),
-                        rs.getInt("Quantity")));
+                        rs.getInt("Quantity"),
+                        rs.getInt("SizeNumber")));
             }
         } catch (SQLException e) {
         }

@@ -68,9 +68,11 @@ function validateAddToCart() {
         var size = document.getElementById("size");
         if (size !== null && size.value === "") {
             document.getElementById("size-err").innerText = "Size is required";
+            $(".size-box").addClass("invalid-border");
             flag = false;
         } else if (size !== null) {
             document.getElementById("size-err").innerText = "";
+            $(".size-box").removeClass("invalid-border");
         }
     }
 

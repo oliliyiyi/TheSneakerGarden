@@ -42,10 +42,10 @@ public class OrderDetailsCustomer extends HttpServlet {
         OderManager order = new OderManager();
         if(session.getAttribute("user") != null){
             User user = (User) session.getAttribute("user");
-            ArrayList<Order> listOrder = order.getAllProductByUserID(user.getUserId());
+            ArrayList<Order> listOrder = order.getAllOrderByUserID(user.getUserId());
             
             for(int i =0 ; i < listOrder.size(); i++){
-                listItem.addAll(order.getAllItemByID(listOrder.get(i).getOrderId()));
+                listItem.addAll(order.getAllProductByOrderID(listOrder.get(i).getOrderId()));
             }
             request.setAttribute("orderHistory", listItem);
             request.getRequestDispatcher("userHistory.jsp").forward(request, response);

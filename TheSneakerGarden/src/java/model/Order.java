@@ -12,20 +12,30 @@ import java.sql.Date;
  */
 public class Order {
     int orderId;
+    int userId;
+    String fullName;
+    String phone;
+    String shipAddress;
+    String email;
     Date orderDate;
     Date shipDate;
     double totalPrice;
-    int userId;
-
+    int status;
+    
     public Order() {
     }
 
-    public Order(int orderId, Date orderDate, Date shipDate, double totalPrice, int userId) {
+    public Order(int orderId, int userId, String fullName, String phone, String shipAddress, String email, Date orderDate, Date shipDate, double totalPrice, int status) {
         this.orderId = orderId;
+        this.userId = userId;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.shipAddress = shipAddress;
+        this.email = email;
         this.orderDate = orderDate;
         this.shipDate = shipDate;
         this.totalPrice = totalPrice;
-        this.userId = userId;
+        this.status = status;
     }
 
     public int getOrderId() {
@@ -34,6 +44,46 @@ public class Order {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getShipAddress() {
+        return shipAddress;
+    }
+
+    public void setShipAddress(String shipAddress) {
+        this.shipAddress = shipAddress;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getOrderDate() {
@@ -60,12 +110,12 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getStatus() {
+        return status;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setStatus(int status) {
+        this.status = status;
     }
-    
+
 }

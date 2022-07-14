@@ -38,7 +38,7 @@ public class HistoryOrderControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         int id = Integer.valueOf(request.getParameter("id"));
         OderManager manager = new OderManager();
-        ArrayList<CartItem> p = manager.getAllItemByID(id);
+        ArrayList<CartItem> p = manager.getAllProductByOrderID(id);
 
         request.setAttribute("orderHistory", p);
         request.getRequestDispatcher("history.jsp").forward(request, response);

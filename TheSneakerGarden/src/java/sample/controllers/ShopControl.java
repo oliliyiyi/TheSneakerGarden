@@ -9,6 +9,7 @@ import dbmanager.ProductManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,28 +40,74 @@ public class ShopControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ProductManager manager = new ProductManager();
         ArrayList<Product> list = manager.getAllProduct();
-        ArrayList<Product> list2 = new ArrayList<>();
+        ArrayList<Product> list2 = new ArrayList<>(list);
+        String paramPrice = "";
+        String paramBId = "-1";
+        String paramType = "-1";
+        if(request.getParameter("price") != null){
+            String price = request.getParameter("price");
+            paramPrice = price;
+            if(price != ""){
+                if(price.equals("ascending")){
+                list2.sort(new Comparator<Product>() {
+                @Override
+                public int compare(Product m1, Product m2) {
+                    if(m1.getPrice() == m2.getPrice()){
+                        return 0;
+                    }
+                    return m1.getPrice() < m2.getPrice() ? -1 : 1;
+                 }
+            });
+            }else{
+                list2.sort(new Comparator<Product>() {
+                @Override
+                public int compare(Product m1, Product m2) {
+                    if(m1.getPrice() == m2.getPrice()){
+                        return 0;
+                    }
+                    return m1.getPrice() > m2.getPrice() ? -1 : 1;
+                 }
+            });
+            }
+            }
+        }
+        ArrayList<Product> list3 = new ArrayList<>(list2);
         if (request.getParameter("bId") != null) {
             int brandID = Integer.valueOf(request.getParameter("bId"));
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getbrandID() == brandID) {
-                    list2.add(list.get(i));
+            if(brandID != -1){
+                paramBId = request.getParameter("bId");
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getbrandID() != brandID) {
+                        list3.remove(list.get(i));
+                    }
                 }
             }
-            request.setAttribute("listProduct", list2);
-            request.getRequestDispatcher("shop.jsp").forward(request, response);
-        } else if (request.getParameter("tab") != null) {
+        }
+        ArrayList<Product> list4 = new ArrayList<>(list3);
+        if (request.getParameter("tab") != null) {
             int tab = Integer.valueOf(request.getParameter("tab"));
             request.setAttribute("tab", tab);
-            request.setAttribute("listProduct", list);
-            request.getRequestDispatcher("shop.jsp").forward(request, response);
-        } else {
-            //b2: set data to jsp
-            request.setAttribute("listProduct", list);
-            request.getRequestDispatcher("shop.jsp").forward(request, response);
-            //404 -> url
-            //500 -> jsp properties
         }
+        ArrayList<Product> list5 = new ArrayList<>(list4);
+        if(request.getParameter("type") != null ){
+            int type = Integer.valueOf(request.getParameter("type"));
+            if(type != -1){
+                paramType = request.getParameter("type");
+                for(int i = 0; i < list.size(); i++){
+                    if(list.get(i).getcId() != type){
+                        list5.remove(list.get(i));
+                    }
+                }
+            }
+        }
+        request.setAttribute("paramPrice", paramPrice);
+        request.setAttribute("paramBId", paramBId);
+        request.setAttribute("paramType", paramType);
+       
+        request.setAttribute("listProduct", list5);
+        request.getRequestDispatcher("shop.jsp").forward(request, response);
+            
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

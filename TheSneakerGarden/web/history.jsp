@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
                                             <p class="lead fw-normal mb-2"><%=product.getName()%></p>
-                                            <p><span class="text-muted">Size: </span>39 <span class="text-muted">
+                                            <p><span class="text-muted">Size: </span><%=list.get(i).getSize()%><span class="text-muted">
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                                             x<%=list.get(i).getQuantity()%>

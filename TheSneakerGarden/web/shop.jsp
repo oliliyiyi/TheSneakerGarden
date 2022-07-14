@@ -7,6 +7,18 @@
     if (tab * 6 < list.size()) {
         tab += 1;
     }
+    int paramBId = -1;
+    String paramPrice = "";
+    int paramType = -1;
+    if(request.getAttribute("paramBId") != null){
+       paramBId = Integer.valueOf(request.getAttribute("paramBId").toString());
+    }
+    if(request.getAttribute("paramPrice") != null){
+       paramPrice = request.getAttribute("paramPrice").toString();
+    }
+    if(request.getAttribute("paramType") != null){
+       paramType = Integer.valueOf(request.getAttribute("paramType").toString());
+    }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,8 +27,25 @@
 
         <title>The Sneaker Garden</title>
 
+        
         <link rel="stylesheet" href="./css/shop.css" />
         <link rel="stylesheet" href="./css/style.css">
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            $("select.form-control").change(function(){
+                var selected = $(this).children("option:selected").val();
+                var data = "";
+                if(selected === "High To Low"){
+                    data = "descending";
+                }else{
+                    data = "ascending";
+                }
+                window.location.replace("./shop?bId="+<%=paramBId%>+"&type="+<%=paramType%>+"&price="+data);
+            });
+        });
+        </script>
 
     </head>
 
@@ -34,10 +63,10 @@
                                 Type
                             </a>
                             <ul class="pl-3">
-                                <li><a class="text-decoration-none" href="#">Shoes</a></li>
-                                <li><a class="text-decoration-none" href="#">Socks</a></li>
-                                <li><a class="text-decoration-none" href="#">Hats</a></li>
-                                <li><a class="text-decoration-none" href="#">Backpacks</a></li>
+                                <li><a class="text-decoration-none" href="./shop?bId=<%=paramBId%>&type=1&price=<%=paramPrice%>">Shoes</a></li>
+                                <li><a class="text-decoration-none" href="./shop?bId=<%=paramBId%>&type=2&price=<%=paramPrice%>">Socks</a></li>
+                                <li><a class="text-decoration-none" href="./shop?bId=<%=paramBId%>&type=3&price=<%=paramPrice%>">Hats</a></li>
+                                <li><a class="text-decoration-none" href="./shop?bId=<%=paramBId%>&type=4&price=<%=paramPrice%>">Backpacks</a></li>
                             </ul>
                         </li>
 
@@ -53,10 +82,10 @@
                                        href="./shop">All</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="h3 text-decoration-none mr-1 ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.bId==1?"active text-white btn-black":"text-dark not-active"}" href="shop?bId=1">Nike</a>
+                                    <a class="h3 text-decoration-none mr-1 ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.bId==1?"active text-white btn-black":"text-dark not-active"}" href="shop?bId=1&type=<%=paramType%>&price=<%=paramPrice%>">Nike</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="h3 text-decoration-none ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.bId==2?"active text-white btn-black":"text-dark not-active"}" href="shop?bId=2">Adidas</a>
+                                    <a class="h3 text-decoration-none ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.bId==2?"active text-white btn-black":"text-dark not-active"}" href="shop?bId=2&type=<%=paramType%>&price=<%=paramPrice%>">Adidas</a>
                                 </li>
                             </ul>
                         </div>
@@ -72,7 +101,8 @@
                     </div>
 
                     <div class="row">
-                        <%                            int index = 6;
+                        <%                            
+                            int index = 6;
                             int step = 0;
                             if (list.size() < 6) {
                                 index = list.size();
@@ -122,7 +152,7 @@
                                     for (int i = 0; i < tab; i++) {
                                 %>
                                 <li class="page-item text-dark">
-                                    <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="./shop?tab=<%=i + 1%>"
+                                    <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="./shop?tab=<%=i + 1%>&bId=<%=paramBId%>&type=<%=paramType%>&price=<%=paramPrice%>"
                                        ><%=i + 1%></a>
                                 </li>
                                 <%}%>

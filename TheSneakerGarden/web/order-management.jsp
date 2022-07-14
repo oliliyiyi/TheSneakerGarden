@@ -12,7 +12,12 @@
 <%
      if(session.getAttribute("user")==null){
         response.sendRedirect("./login");
-    }
+    }else{
+         User user = (User) session.getAttribute("user");
+         if(user.getRoleID() != 1){
+             response.sendRedirect("./login");
+         }
+     }
 %>
 <!DOCTYPE html>
 <html>
@@ -139,26 +144,35 @@
                             <tr>
                                 <th>ID</th>
                                 <th>User Name</th>
-                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Ship Address</th>
+                                <th>Email</th>
                                 <th>Order date</th>
                                 <th>Ship date</th>
                                 <th>Details</th>
+                                <th>Status</th>
+                                <th>Update</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
                                 ArrayList<Order> list = (ArrayList<Order>)request.getAttribute("listOrder");
-                                UserManager userManager = new UserManager();
                                 for (Order order : list) {
-                                    User user = userManager.getUser(order.getUserId());
                             %>
                             <tr>
                                 <td><%=order.getOrderId()%></td>
-                                <td><%=user.getUserFullName()%></td>
-                                <td><%=user.getUserAddress()%></td>
+                                <td><%=order.getFullName()%></td>
+                                <td><%=order.getPhone()%></td>
+                                <td><%=order.getShipAddress()%></td>
+                                <td><%=order.getEmail()%></td>
                                 <td><%=order.getOrderDate()%></td>
                                 <td><%=order.getShipDate()%></td>
                                 <td><a href="./history?id=<%=order.getOrderId()%>">Details</a></td>
+                                <td><%=order.getStatus()%></td>
+                                <td> <a href="./order-management?action=update&id=<%=order.getOrderId()%>" style="color: green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                                        </svg></a></td>
                             </tr> 
                             <%
                                 }

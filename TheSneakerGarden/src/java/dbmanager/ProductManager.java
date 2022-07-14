@@ -192,11 +192,10 @@ public class ProductManager {
 //        }
 //        return size;
 //    }
-    
-    public int getProductQuantityByProSize(int sizeNum, int proID){
+    public int getProductQuantityByProSize(int sizeNum, int proID) {
         int quantity = 0;
         String query = "SELECT [Quantity] FROM [dbo].[Inventory] WHERE [ProductID] = " + proID + "AND [SizeNumber] = " + sizeNum;
-         try {
+        try {
             conn = db.getConnectDB();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
@@ -207,8 +206,24 @@ public class ProductManager {
             System.out.println(e.getMessage());
         }
         return quantity;
-        
     }
+    
+    public int getProductQuantityByProductID(int proID) {
+        int quantity = 0;
+        String query = "SELECT [Quantity] FROM [dbo].[Inventory] WHERE [ProductID] = " + proID;
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                quantity = rs.getInt("Quantity");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return quantity;
+    }
+
     public boolean checkQuantityProduct(int size, int productId) {
         boolean quantity = false;
         String query = "SELECT [Quantity] FROM [dbo].[Inventory] WHERE [ProductID] = " + productId + " and [SizeNumber] " + size;
@@ -219,7 +234,7 @@ public class ProductManager {
             while (rs.next()) {
                 quantity = true;
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -240,25 +255,22 @@ public class ProductManager {
     }
 
     //in all sp 
-     //    public ArrayList<Size> getProductSize(int id) {
-            //        ArrayList<Size> list = new ArrayList<>();
-            //        String query = "SELECT * FROM [dbo].[Sizes] WHERE [ProductID] = " + id;
-            //        try {
-            //            conn = db.getConnectDB();//mo ket noi voi sql
-            //            ps = conn.prepareStatement(query);
-            //            rs = ps.executeQuery();
-            //            while (rs.next()) {
-            //                list.add(new Size(rs.getInt("SizeNumber"), rs.getInt("quantity"), rs.getInt("productid")));
-            //            }
-            //        } catch (SQLException e) {
-            //            e.getMessage();
-            //        }
-            //        return list;
-            //    }
-
-
-
-    public boolean insertSize(int sizeNum , int proID, int quantity) {
+    //    public ArrayList<Size> getProductSize(int id) {
+    //        ArrayList<Size> list = new ArrayList<>();
+    //        String query = "SELECT * FROM [dbo].[Sizes] WHERE [ProductID] = " + id;
+    //        try {
+    //            conn = db.getConnectDB();//mo ket noi voi sql
+    //            ps = conn.prepareStatement(query);
+    //            rs = ps.executeQuery();
+    //            while (rs.next()) {
+    //                list.add(new Size(rs.getInt("SizeNumber"), rs.getInt("quantity"), rs.getInt("productid")));
+    //            }
+    //        } catch (SQLException e) {
+    //            e.getMessage();
+    //        }
+    //        return list;
+    //    }
+    public boolean insertSize(int sizeNum, int proID, int quantity) {
         boolean check = false;
         String query = "INSERT [dbo].[Inventory] ([ProductID], [SizeNumber], [Quantity]) VALUES(" + proID + "," + sizeNum + ", " + quantity + ")";
         try {

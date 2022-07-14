@@ -91,13 +91,17 @@
                                                         <h6>Size:</h6>
                                                     </div>
                                                     <div class="col-11 pl-5">
+                                                        
                                                         <%
                                                             for (Inventory inv : list) {
                                                         %>
+                                                        <div class="size-box" style="display:inline-block">
                                                         <button type="button" value="<%= inv.getSizeNum()%>" stock="<%=inv.getQuantity()%>" class="size-button"><%= inv.getSizeNum()%></button>
+                                                        </div>
                                                         <%
                                                             }
                                                         %>
+                                                        
                                                     </div>
                  
                                                 </div>

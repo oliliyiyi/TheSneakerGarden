@@ -94,27 +94,27 @@ UserManager userManager = new UserManager();
                     </div>
                     <div class="col-md-7 col-lg-8">
                         <h4 class="mb-3">Billing address</h4>
-                        <form class="needs-validation" novalidate action="checkout" method="POST">
+                        <form class="needs-validation" novalidate action="./checkout" method="POST">
                             <div class="row g-3">
                                 <div class="col-sm-6">
-                                    <label for="firstName" class="form-label">Full name</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                    <label for="fullname" class="form-label">Full name</label>
+                                    <input type="text" class="form-control" placeholder="" name="fullname" value="" required>
                                     <div class="invalid-feedback">
                                         Valid Full name is required.
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Phone</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="text" class="form-control" placeholder="" name="phone" value="" required>
                                     <div class="invalid-feedback">
                                         Valid Phone is required.
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                                    <input type="email" class="form-control" id="email" value="">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" name="email" value="">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address for shipping updates.
                                     </div>
@@ -122,7 +122,7 @@ UserManager userManager = new UserManager();
 
                                 <div class="col-12">
                                     <label for="address" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="address" value="" required>
+                                    <input type="text" class="form-control" name="address" value="" required>
                                     <div class="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
