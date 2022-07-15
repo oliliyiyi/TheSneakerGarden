@@ -35,10 +35,19 @@ public class OrderManagerControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        OrderManager oderManager = new OrderManager();
-        ArrayList<Order> listOrder = oderManager.getAllProduct();
-        request.setAttribute("listOrder", listOrder);
-        request.getRequestDispatcher("./order-management.jsp").forward(request, response);
+        OrderManager manager = new OrderManager();
+        ArrayList<Order> listOrder = manager.getAllOrder();
+
+        if (request.getParameter("action") != null) {
+            if ("update".equals(request.getParameter("action"))) {
+                Order order = manager.getOrderByID(Integer.valueOf(request.getParameter("id")));
+                request.setAttribute("order", order);
+                request.getRequestDispatcher("update-order.jsp").forward(request, response);
+            }
+        } else {
+            request.setAttribute("listOrder", listOrder);
+            request.getRequestDispatcher("./order-management.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,21 +76,41 @@ public class OrderManagerControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        OrderManager om = new OrderManager();
-        int orderID = Integer.parseInt(request.getParameter("id"));
-        Date shipDate = Date.valueOf(request.getParameter("shipDate"));
-        int status =  Integer.parseInt(request.getParameter("status"));
-        boolean check = om.updateOrderShipDate_Status(orderID, shipDate, status);
-        OrderManager oderManager = new OrderManager();
-        ArrayList<Order> listOrder = oderManager.getAllProduct();
-        if(check){
+        OrderManager orderManager = new OrderManager();
+        ArrayList<Order> listOrder = orderManager.getAllOrder();
+        if (request.getParameter("action") != null) {
+            if ("update".equals(request.getParameter("action"))) {
+                int id = Integer.valueOf(request.getParameter("id"));
+                String username = request.getParameter("username");
+                String phone = request.getParameter("phone");
+                String email = request.getParameter("email");
+                String shipaddress = request.getParameter("shipaddress");
+                Date orderdate = Date.valueOf(request.getParameter("orderdate"));
+                Date shipdate = Date.valueOf(request.getParameter("shipdate"));
+                int status = Integer.valueOf(request.getParameter("status"));
+
+                Order order = new Order(id, username, phone, shipaddress, email, orderdate, shipdate, status);
+                if (orderManager.edit(order)) {
+                    listOrder = orderManager.getAllOrder();
+                    request.setAttribute("listOrder", listOrder);
+                    request.getRequestDispatcher("./order-management.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("order", order);
+                    request.getRequestDispatcher("./update-order.jsp").forward(request, response);
+                }
+            }
+
+        } else {
             request.setAttribute("listOrder", listOrder);
-            request.getRequestDispatcher("./order-management.jsp").forward(request, response);
+            request.getRequestDispatcher("./user-management.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("./order-management.jsp").forward(request, response);
     }
 
-    
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

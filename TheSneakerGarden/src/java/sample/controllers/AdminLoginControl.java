@@ -44,7 +44,7 @@ public class AdminLoginControl extends HttpServlet {
         
         ArrayList<User> listUser = userManager.getAllUser();
         ArrayList<Product> listProduct = productManager.getAllProduct();
-        ArrayList<Order> listOrder = oderManager.getAllProduct();
+        ArrayList<Order> listOrder = oderManager.getAllOrder();
         
         request.setAttribute("listUser", listUser);
         request.setAttribute("listOrder", listOrder);

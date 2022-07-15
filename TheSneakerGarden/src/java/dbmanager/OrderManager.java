@@ -111,6 +111,35 @@ public class OrderManager {
 
         }
     }
+    
+    public Order getOrderByID(int id) {
+        Order order = new Order();
+        String query = "SELECT *"
+                + "  FROM [TSG].[dbo].[Orders]"
+                + "  WHERE [OrderID] =" + id;
+        try {
+            con = db.getConnectDB();//mo ket noi voi sql
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                order = new Order(
+                        rs.getInt("OrderID"), 
+                        rs.getInt("CustomerID"), 
+                        rs.getString("FullName"), 
+                        rs.getString("Phone"), 
+                        rs.getString("ShipAddress"), 
+                        rs.getString("Email"), 
+                        rs.getDate("OrderDate"), 
+                        rs.getDate("ShippedDate"), 
+                        0, 
+                        rs.getInt("Status"));
+                      
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return order;
+    }
 
     public int getOrderID() {
         int id = 0;
@@ -128,7 +157,7 @@ public class OrderManager {
         return id;
     }
 
-    public ArrayList<Order> getAllProduct() {
+    public ArrayList<Order> getAllOrder() {
         ArrayList<Order> list = new ArrayList<>();
         String query = "SELECT *"
                 + "  FROM [dbo].[Orders]";
@@ -219,5 +248,28 @@ public class OrderManager {
             e.printStackTrace();
         }
         return check;
+    }
+    
+    public boolean edit(Order Order) {
+        boolean status = false;
+        try {
+            con = db.getConnectDB();//mo ket noi voi sql
+
+            PreparedStatement ps = con.prepareStatement("UPDATE [dbo].[Orders] "
+                    + "SET [FullName] = '" + Order.getFullName()
+                    + "', [Phone] = '" + Order.getPhone()
+                    + "', [ShipAddress] = '" + Order.getShipAddress()
+                    + "', [Email] = '" + Order.getEmail()
+                    + "', [OrderDate] = '" + Order.getOrderDate()
+                    + "', [ShippedDate] = '" + Order.getShipDate()
+                    + "', [Status] = '" + Order.getStatus()
+                    + "' WHERE [OrderID] = " + Order.getUserId());
+            ps.executeUpdate();
+            status = true;
+            //System.out.println("UPDATE [dbo].[tblUser] SET [userName] = '"+user.getUserName()+"',[userEmail] = '"+user.getUserEmail()+"', [userPhone]= '"+user.getUserPhone()+"', [userAddress] = "+user.getUserAddress()+" WHERE [userId] = "+user.getUserId());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return status;
     }
 }

@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="model.Order"%>
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -15,6 +16,7 @@
             response.sendRedirect("./login");
         }
     }
+    Order order = (Order) request.getAttribute("order");
 %>
 <!DOCTYPE html>
 <html>
@@ -107,51 +109,126 @@
                 <h3 style="display: flex;
                     justify-content: center;
                     font-size: 40px; color:#00C897  ">Update order</h3>
-
-                <div style="display: flex; justify-content: space-between">
-                    <div class="container" >
-                        <form action="#">
-                            <div class="user-input">
-                                <div class="input-user">
-                                    <span class="details">ID </span>
-                                    <input
-                                        placeholder="ODER_0001"
-                                        required
-                                        />
-                                </div>
-                                <div class="input-user">
-                                    <span class="details">Date order</span>
-                                    <input
-                                        placeholder="30-12-2021"
-                                        />
-                                </div>
-                                <div class="input-user">
-                                    <span class="details">Date ship</span>
-                                    <input
-
-                                        placeholder="10-1-2022  "
-                                        required
-                                        />
-                                </div>
-                                <div class="input-user">
-                                    <span class="details">Total price</span>
-                                    <input                                   
-                                        placeholder="$99.99"
-                                        required
-                                        />
-                                </div>
+                <div class="container" >
+                    <form action="order-management?action=update" method="POST" id="someFormId">
+                        <input type="hidden" name="username" value="<%=order.getFullName()%>">
+                        <input type="hidden" name="phone" value="<%=order.getPhone()%>">
+                        <input type="hidden" name="shipaddress" value="<%=order.getShipAddress()%>">
+                        <input type="hidden" name="email" value="<%=order.getEmail()%>">
+                        <input type="hidden" name="orderdate" value="<%=order.getOrderDate()%>">
+                        <div class="user-input">
+                            <div class="input-user">
+                                <span class="details">Username</span>
+                                <input type="text" name="usernamea" value="<%=order.getFullName()%>" required disabled="" >
                             </div>
-                        </form>
-                    </div>
-                </div>
+                            <div class="input-user">
+                                <span class="details">Phone</span>
+                                <input type="number" name="phonea" value="<%=order.getPhone()%>" required disabled="" >
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Ship Address</span>
+                                <input type="string" name="shipaddressa" value="<%=order.getShipAddress()%>" required disabled="" >
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Email</span>
+                                <input type="email" name="emaila" value="<%=order.getEmail()%>" required disabled="" >
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Order Date</span>
+                                <input type="date" name="orderdatea" value="<%=order.getOrderDate()%>" required disabled="" >
+                            </div>
 
-
-                <div class="buttonAdd"> 
-                    <Button>
-                        Update order
-                    </Button>
+                            <div class="input-user">
+                                <span class="details">Ship Date</span>
+                                <input
+                                    type="date"
+                                    name="shipdate"
+                                    value="<%=order.getShipDate()%>"
+                                    required
+                                    />
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Status</span>
+                                <input 
+                                    type="number"
+                                    name="status"
+                                    value="<%=order.getStatus()%>"
+                                    required
+                                    />
+                            </div>
+                        </div>
+                        <div class="buttonAdd"> 
+                            <Button>
+                                Update order
+                            </Button>
+                        </div>
+                    </form>
                 </div>
             </main>
         </div>
+        <script src="./notification/notification.js" type="text/javascript"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', function () {
+
+                const form = document.querySelector('form');
+
+
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Form elements
+                    const title = "Success";
+                    const message = "Update user successful";
+                    const position = "bottom-right";
+                    const duration = 3000;
+                    /*
+                     Available methods:
+                     error
+                     warning
+                     success
+                     info
+                     dialog 
+                     
+                     If you use dialog - 
+                     the third parameter is the callback function
+                     */
+                    const type = "success";
+                    let callback = null;
+                    const popup = Notification({
+                        position: position,
+                        duration: duration
+                    });
+
+                    if (!popup[type]) {
+                        popup.error({
+                            title: 'Error',
+                            message: `Notification has no such method "${type}"`
+                        });
+                        return;
+                    }
+
+                    popup[type]({
+                        title: title,
+                        message: message,
+                        callback: callback
+                    });
+                    sleep(3500).then(() => {
+                        document.getElementById('someFormId').submit();
+                    });
+                });
+
+
+            });
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        </script>
     </body>
 </html>

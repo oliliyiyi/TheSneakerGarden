@@ -22,7 +22,7 @@
                         </div>
                         <%
                             ProductManager pm = new ProductManager();
-                            ArrayList<CartItem> list = (ArrayList<CartItem>)request.getAttribute("orderHistory");
+                            ArrayList<CartItem> list = (ArrayList<CartItem>)request.getAttribute("orderDetails");
                             for (int i = 0; i < list.size(); i++) {
                              Product product = pm.getProductByID(list.get(i).getID());
                                 

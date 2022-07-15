@@ -122,20 +122,16 @@
                     font-size: 40px; color:#00C897  ">Update user</h3>
                 <div class="container">
                     <form action="user-management?action=update" method="POST" id="someFormId">
-                        <input type="hidden" name="id" value="<%=user1.getUserId()%>">
+
                         <input type="hidden" name="account" value="<%=user1.getUserAccount()%>">
                         <div class="user-input">
                             <div class="input-user">
-                                <span class="details">ID </span>
-                                <input type="text" name="ida" value="<%=user1.getUserId()%>" required disabled="" >
-                            </div>
-                            <div class="input-user">
-                                <span class="details">Account </span>
+                                <span class="details">Account</span>
                                 <input type="text" name="accounta" value="<%=user1.getUserAccount()%>" required disabled="" >
                             </div>
 
                             <div class="input-user">
-                                <span class="details">Name </span>
+                                <span class="details">Name</span>
                                 <input
                                     name="name"
                                     value="<%=user1.getUserFullName()%>"
@@ -143,7 +139,7 @@
                                     />
                             </div>
                             <div class="input-user">
-                                <span class="details">Email </span>
+                                <span class="details">Email</span>
                                 <input type="email"
                                        name="email"
                                        value="<%=user1.getUserEmail()%>"
@@ -176,11 +172,7 @@
                             </Button>
                         </div>
                     </form>
-
-
-
                 </div>
-
             </main>
         </div>
         <script src="./notification/notification.js" type="text/javascript"></script>
@@ -205,7 +197,7 @@
                      success
                      info
                      dialog 
-                 
+                     
                      If you use dialog - 
                      the third parameter is the callback function
                      */
