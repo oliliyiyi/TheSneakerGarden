@@ -102,7 +102,7 @@ public class OrderManagerControl extends HttpServlet {
 
         } else {
             request.setAttribute("listOrder", listOrder);
-            request.getRequestDispatcher("./user-management.jsp").forward(request, response);
+            request.getRequestDispatcher("./order-management.jsp").forward(request, response);
         }
     }
 

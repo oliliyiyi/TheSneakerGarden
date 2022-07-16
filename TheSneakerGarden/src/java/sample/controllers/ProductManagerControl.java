@@ -38,16 +38,16 @@ public class ProductManagerControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ProductManager productManager = new ProductManager();
         ArrayList<Product> listProduct = productManager.getAllProduct();
-        if(request.getParameter("action")!=null){
-            if("add".equals(request.getParameter("action"))){
+        if (request.getParameter("action") != null) {
+            if ("add".equals(request.getParameter("action"))) {
                 request.getRequestDispatcher("./add-item.jsp").forward(request, response);
             }
-            if("update".equals(request.getParameter("action"))){
+            if ("update".equals(request.getParameter("action"))) {
                 Product product = productManager.getProductByID(Integer.valueOf(request.getParameter("id")));
                 request.setAttribute("product", product);
                 request.getRequestDispatcher("./update-item.jsp").forward(request, response);
             }
-            if("delete".equals(request.getParameter("action"))){
+            if ("delete".equals(request.getParameter("action"))) {
                 productManager.delete(Integer.valueOf(request.getParameter("id")));
                 listProduct = productManager.getAllProduct();
             }
@@ -84,8 +84,8 @@ public class ProductManagerControl extends HttpServlet {
             throws ServletException, IOException {
         ProductManager productManager = new ProductManager();
         ArrayList<Product> listProduct = productManager.getAllProduct();
-        if(request.getParameter("action")!=null){
-            if("add".equals(request.getParameter("action"))){
+        if (request.getParameter("action") != null) {
+            if ("add".equals(request.getParameter("action"))) {
                 //int id = Integer.valueOf(request.getParameter("id"));
                 String name = request.getParameter("name");
                 String cate = request.getParameter("cate");
@@ -93,17 +93,16 @@ public class ProductManagerControl extends HttpServlet {
                 String price = request.getParameter("price");
                 String image = request.getParameter("image");
                 String description = request.getParameter("description");
-                //Product product = new Product(0, name, image, Double.valueOf(price), description, Integer.valueOf(type), 1);
                 Product product = new Product(0, name, image, Double.valueOf(price), description, Integer.valueOf(cate), Integer.valueOf(brand), 1);
-                if(productManager.insert(product)){
+                if (productManager.insert(product)) {
                     listProduct = productManager.getAllProduct();
                     request.setAttribute("listProduct", listProduct);
-                }else{
+                } else {
                     request.getRequestDispatcher("./add-item.jsp").forward(request, response);
                 }
-                
             }
-            if("edit".equals(request.getParameter("action"))){
+            
+            if ("update".equals(request.getParameter("action"))) {
                 int id = Integer.valueOf(request.getParameter("id"));
                 String name = request.getParameter("name");
                 String cate = request.getParameter("cate");
@@ -112,10 +111,10 @@ public class ProductManagerControl extends HttpServlet {
                 String image = request.getParameter("image");
                 String description = request.getParameter("description");
                 Product product = new Product(id, name, image, Double.valueOf(price), description, Integer.valueOf(cate), Integer.valueOf(brand), 1);
-                if(productManager.edit(product)){
+                if (productManager.edit(product)) {
                     listProduct = productManager.getAllProduct();
                     request.setAttribute("listProduct", listProduct);
-                }else{
+                } else {
                     request.getRequestDispatcher("./update-item.jsp").forward(request, response);
                 }
             }

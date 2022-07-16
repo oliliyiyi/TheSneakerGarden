@@ -111,12 +111,13 @@
                     font-size: 40px; color:#00C897  ">Update order</h3>
                 <div class="container" >
                     <form action="order-management?action=update" method="POST" id="someFormId">
-                        <input type="hidden" name="username" value="<%=order.getFullName()%>">
-                        <input type="hidden" name="phone" value="<%=order.getPhone()%>">
-                        <input type="hidden" name="shipaddress" value="<%=order.getShipAddress()%>">
-                        <input type="hidden" name="email" value="<%=order.getEmail()%>">
-                        <input type="hidden" name="orderdate" value="<%=order.getOrderDate()%>">
                         <div class="user-input">
+                            <input type="hidden" name="id" value="<%=order.getOrderId()%>">
+                            <input type="hidden" name="username" value="<%=order.getFullName()%>">
+                            <input type="hidden" name="phone" value="<%=order.getPhone()%>">
+                            <input type="hidden" name="shipaddress" value="<%=order.getShipAddress()%>">
+                            <input type="hidden" name="email" value="<%=order.getEmail()%>">
+                            <input type="hidden" name="orderdate" value="<%=order.getOrderDate()%>">
                             <div class="input-user">
                                 <span class="details">Username</span>
                                 <input type="text" name="usernamea" value="<%=order.getFullName()%>" required disabled="" >

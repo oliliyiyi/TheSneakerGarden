@@ -123,8 +123,10 @@
                 <div class="container">
                     <form action="user-management?action=update" method="POST" id="someFormId">
 
-                        <input type="hidden" name="account" value="<%=user1.getUserAccount()%>">
                         <div class="user-input">
+                            <input type="hidden" name="id" value="<%=user1.getUserId()%>">
+                            <input type="hidden" name="account" value="<%=user1.getUserAccount()%>">
+
                             <div class="input-user">
                                 <span class="details">Account</span>
                                 <input type="text" name="accounta" value="<%=user1.getUserAccount()%>" required disabled="" >
@@ -168,7 +170,7 @@
                         </div>
                         <div class="buttonAdd">
                             <Button type="submit">
-                                Update users
+                                Update user
                             </Button>
                         </div>
                     </form>

@@ -179,9 +179,10 @@ public class UserManager {
             conn = db.getConnectDB();//mo ket noi voi sql
 
             PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[Customer] "
-                    + "SET [Account] = '" + user.getUserAccount()
-                    + "',[FullName] = '" + user.getUserFullName()
-                    + "',[Email] = '" + user.getUserEmail()
+                    + "SET "
+                    + "[Account] = '" + user.getUserAccount()
+                    + "', [FullName] = '" + user.getUserFullName()
+                    + "', [Email] = '" + user.getUserEmail()
                     + "', [Phone]= '" + user.getUserPhone()
                     + "', [Address] = '" + user.getUserAddress()
                     + "' WHERE [CustomerID] = " + user.getUserId());

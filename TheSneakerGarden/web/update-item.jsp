@@ -118,7 +118,7 @@
                     justify-content: center;
                     font-size: 40px; color:#00C897  ">Update item</h3>
                 <div class="container">
-                    <form action="item-management?action=edit" method="POST" id="someFormId">
+                    <form action="item-management?action=update" method="POST" id="someFormId">
                         <div class="user-input">
                             <input type="hidden" name="id" value="<%=product.getId()%>">
                             <div class="input-user">

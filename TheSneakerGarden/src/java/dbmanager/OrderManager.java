@@ -263,7 +263,7 @@ public class OrderManager {
                     + "', [OrderDate] = '" + Order.getOrderDate()
                     + "', [ShippedDate] = '" + Order.getShipDate()
                     + "', [Status] = '" + Order.getStatus()
-                    + "' WHERE [OrderID] = " + Order.getUserId());
+                    + "' WHERE [OrderID] = " + Order.getOrderId());
             ps.executeUpdate();
             status = true;
             //System.out.println("UPDATE [dbo].[tblUser] SET [userName] = '"+user.getUserName()+"',[userEmail] = '"+user.getUserEmail()+"', [userPhone]= '"+user.getUserPhone()+"', [userAddress] = "+user.getUserAddress()+" WHERE [userId] = "+user.getUserId());

@@ -1,11 +1,11 @@
 <%-- 
-    Document   : user-management
+    Document   : order-management
     Created on : Mar 19, 2022, 6:13:37 PM
     Author     : Admin
 --%>
 
 <%@page import="model.User"%>
-<%@page import="dbmanager.UserManager"%>
+<%@page import="dbmanager.OrderManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Order"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
