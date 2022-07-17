@@ -57,7 +57,7 @@ public class OrderManager {
             return false;
         }
     }
-    
+
     public boolean insertOder(String fullName, String phone, String shipAddress, String email, Date orderDate, double price) {
         String query = "INSERT [dbo].[Orders]\n"
                 + "           ([FullName]\n"
@@ -87,16 +87,17 @@ public class OrderManager {
         }
     }
 
-    public boolean insertOderItem(int orderId, int itemId, int quantity, double price) {
-        String query = "INSERT [dbo].[OrderDetails] ([OrderID], [ProductID], [Quantity], [UnitPrice]) VALUES (?, ?, ?, ?)";//query insert
+    public boolean insertOderItem(int orderId, int itemId, int size, int quantity, double price) {
+        String query = "INSERT [dbo].[OrderDetails] ([OrderID], [ProductID], [SizeNumber], [Quantity], [UnitPrice]) VALUES (?, ?, ?, ?, ?)";//query insert
         try {
             con = db.getConnectDB();//mo ket noi voi sql
             PreparedStatement pst = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);//create prepare statement
 
             pst.setInt(1, orderId);
             pst.setInt(2, itemId);
-            pst.setInt(3, quantity);
-            pst.setDouble(4, price);
+            pst.setInt(3, size);
+            pst.setInt(4, quantity);
+            pst.setDouble(5, price);
             pst.executeUpdate();
             rs = pst.getGeneratedKeys();
             rs.next();//
@@ -111,7 +112,7 @@ public class OrderManager {
 
         }
     }
-    
+
     public Order getOrderByID(int id) {
         Order order = new Order();
         String query = "SELECT *"
@@ -123,17 +124,17 @@ public class OrderManager {
             rs = ps.executeQuery();
             while (rs.next()) {
                 order = new Order(
-                        rs.getInt("OrderID"), 
-                        rs.getInt("CustomerID"), 
-                        rs.getString("FullName"), 
-                        rs.getString("Phone"), 
-                        rs.getString("ShipAddress"), 
-                        rs.getString("Email"), 
-                        rs.getDate("OrderDate"), 
-                        rs.getDate("ShippedDate"), 
-                        0, 
+                        rs.getInt("OrderID"),
+                        rs.getInt("CustomerID"),
+                        rs.getString("FullName"),
+                        rs.getString("Phone"),
+                        rs.getString("ShipAddress"),
+                        rs.getString("Email"),
+                        rs.getDate("OrderDate"),
+                        rs.getDate("ShippedDate"),
+                        0,
                         rs.getInt("Status"));
-                      
+
             }
         } catch (SQLException e) {
             e.getMessage();
@@ -166,15 +167,15 @@ public class OrderManager {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Order(rs.getInt("OrderID"), 
-                        rs.getInt("CustomerID"), 
-                        rs.getString("FullName"), 
-                        rs.getString("Phone"), 
-                        rs.getString("ShipAddress"), 
-                        rs.getString("Email"), 
-                        rs.getDate("OrderDate"), 
-                        rs.getDate("ShippedDate"), 
-                        0, 
+                list.add(new Order(rs.getInt("OrderID"),
+                        rs.getInt("CustomerID"),
+                        rs.getString("FullName"),
+                        rs.getString("Phone"),
+                        rs.getString("ShipAddress"),
+                        rs.getString("Email"),
+                        rs.getDate("OrderDate"),
+                        rs.getDate("ShippedDate"),
+                        0,
                         rs.getInt("Status")));
             }
         } catch (SQLException e) {
@@ -192,15 +193,15 @@ public class OrderManager {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Order(rs.getInt("OrderID"), 
-                        rs.getInt("CustomerID"), 
-                        rs.getString("FullName"), 
-                        rs.getString("Phone"), 
-                        rs.getString("ShipAddress"), 
-                        rs.getString("Email"), 
-                        rs.getDate("OrderDate"), 
-                        rs.getDate("ShippedDate"), 
-                        0, 
+                list.add(new Order(rs.getInt("OrderID"),
+                        rs.getInt("CustomerID"),
+                        rs.getString("FullName"),
+                        rs.getString("Phone"),
+                        rs.getString("ShipAddress"),
+                        rs.getString("Email"),
+                        rs.getDate("OrderDate"),
+                        rs.getDate("ShippedDate"),
+                        0,
                         rs.getInt("Status")));
             }
         } catch (SQLException e) {
@@ -230,26 +231,7 @@ public class OrderManager {
         }
         return list;
     }
-    
-    public boolean updateOrderShipDate_Status(int orderID, Date shipDate, int status){
-        boolean check = false;
-        String query = "UPDATE [dbo].[Orders] SET ShippedDate = ?, Status = ? WHERE OrderID = ?";
-      
-        try{
-             con = db.getConnectDB();
-             if(con!=null){
-                 ps = con.prepareStatement(query);
-                 ps.setDate(1, shipDate);
-                 ps.setInt(2, status);
-                 ps.setInt(3, orderID);
-                 check = ps.executeUpdate() > 0 ? true : false;
-             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return check;
-    }
-    
+
     public boolean edit(Order Order) {
         boolean status = false;
         try {

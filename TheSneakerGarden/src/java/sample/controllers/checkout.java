@@ -95,7 +95,7 @@ public class checkout extends HttpServlet {
             if (oderDAO.insertOder(userSession.getUserId(), fullname, phone, address, email, orderDate, total)) {
                 for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
                     Product product = pro.getProductByID(en.getValue().getID());
-                    oderDAO.insertOderItem(oderDAO.getOrderID(), en.getValue().getID(), en.getValue().getQuantity(), product.getPrice());
+                    oderDAO.insertOderItem(oderDAO.getOrderID(), en.getValue().getID(), en.getValue().getSize(), en.getValue().getQuantity(), product.getPrice());
                     pro.updateSize(en.getValue().getSize(), en.getValue().getID(), pro.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
                 }
             }
@@ -110,7 +110,7 @@ public class checkout extends HttpServlet {
             if (oderDAO.insertOder(fullname, phone, address, email, orderDate, total)) {
                 for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
                     Product product = pro.getProductByID(en.getValue().getID());
-                    oderDAO.insertOderItem(oderDAO.getOrderID(), en.getValue().getID(), en.getValue().getQuantity(), product.getPrice());
+                    oderDAO.insertOderItem(oderDAO.getOrderID(), en.getValue().getID(), en.getValue().getSize(),  en.getValue().getQuantity(), product.getPrice());
                     pro.updateSize(en.getValue().getSize(), en.getValue().getID(), pro.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
                 }
             }

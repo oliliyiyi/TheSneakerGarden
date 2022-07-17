@@ -22,12 +22,11 @@
                         </div>
                         <%
                             ProductManager pm = new ProductManager();
-                            ArrayList<CartItem> list = (ArrayList<CartItem>)request.getAttribute("orderDetails");
+                            ArrayList<CartItem> list = (ArrayList<CartItem>) request.getAttribute("orderDetails");
                             for (int i = 0; i < list.size(); i++) {
-                             Product product = pm.getProductByID(list.get(i).getID());
-                                
-                        %>
+                                Product product = pm.getProductByID(list.get(i).getID());
 
+                        %>
                         <div id="myCart">
                             <div class="card artItem rounded-3 mb-4">
                                 <div class="card-body p-4" style="background-color: #eee;">
@@ -43,14 +42,15 @@
                                             x<%=list.get(i).getQuantity()%>
                                         </div>
                                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                            <h5 class="mb-0"><%=list.get(i).getQuantity()* product.getPrice()%> $</h5>
+                                            <h5 class="mb-0"><%=list.get(i).getQuantity() * product.getPrice()%> $</h5>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-                            <%}%>
                         </div>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
             </div>
