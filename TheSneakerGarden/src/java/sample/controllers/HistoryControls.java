@@ -41,24 +41,31 @@ public class HistoryControls extends HttpServlet {
         //history
         HttpSession session = request.getSession();
         ArrayList<CartItem> listItem = new ArrayList<>();
+        ArrayList<Order> listOrder = new ArrayList<>();
         OrderManager order = new OrderManager();
-        if(session.getAttribute("user") != null){
-            User user = (User) session.getAttribute("user");
-            ArrayList<Order> listOrder = order.getAllOrderByUserID(user.getUserId());
-            
-            for(int i =0 ; i < listOrder.size(); i++){
-                listItem.addAll(order.getAllProductByOrderID(listOrder.get(i).getOrderId()));
+        int id = Integer.valueOf(request.getParameter("id"));
+        if (session.getAttribute("user") == null) {
+            response.sendRedirect("./login");
+        } else {
+            User userSession = (User) session.getAttribute("user");
+            if (id != userSession.getUserId()) {
+                response.sendRedirect("./login");
+            } else {
+                listOrder = order.getAllOrderByUserID(userSession.getUserId());
+
+                for (int i = 0; i < listOrder.size(); i++) {
+                    listItem.addAll(order.getAllProductByOrderID(listOrder.get(i).getOrderId()));
+                }
+                UserManager manager = new UserManager();
+                User user = manager.getUser(id);
+
+                request.setAttribute("detail", user);
+                request.setAttribute("tab", "history");
+                request.setAttribute("listOrderHistory", listOrder);
+                request.setAttribute("orderHistory", listItem);
+                request.getRequestDispatcher("./view/customer/profile.jsp").forward(request, response);
             }
         }
-        //profile
-        int id = Integer.valueOf(request.getParameter("id"));
-        UserManager manager = new UserManager();
-        User user = manager.getUser(id);
-
-        request.setAttribute("detail", user);
-        request.setAttribute("tab", "history");
-        request.setAttribute("orderHistory", listItem);
-        request.getRequestDispatcher("./view/customer/profile.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

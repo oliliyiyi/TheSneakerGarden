@@ -23,7 +23,7 @@
                                                             <button class="btn" style="background: #ff7c03; color: #fff">Go to
                                                                 shopping</button>
                                                         </a>-->
-                            <button type="button" onclick="location.href = './shop.jsp'" class="btn btn-primary ms-auto">
+                            <button type="button" onclick="location.href = './shop'" class="btn btn-primary ms-auto">
                                 Go to shopping
                             </button>
                         </div>

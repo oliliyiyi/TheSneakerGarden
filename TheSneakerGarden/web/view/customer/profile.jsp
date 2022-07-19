@@ -1,3 +1,4 @@
+<%@page import="model.Order"%>
 <%@page import="model.User"%>
 <%@page import="model.Product"%>
 <%@page import="java.util.ArrayList"%>
@@ -170,9 +171,11 @@
                                 <%
                                     if (session.getAttribute("user") != null && ((ArrayList<CartItem>) request.getAttribute("orderHistory")).size() > 0) {
                                         ProductManager pm = new ProductManager();
+                                        ArrayList<Order> listOrder = (ArrayList<Order>) request.getAttribute("listOrderHistory");
                                         ArrayList<CartItem> list = (ArrayList<CartItem>) request.getAttribute("orderHistory");
-                                        for (int i = 0; i < list.size(); i++) {
-                                            Product product = pm.getProductByID(list.get(i).getID());
+                                        CartItem product1 = list.get(1);
+                                        Product product = pm.getProductByID(product1.getID());
+                                        for (Order order : listOrder) {
                                 %>
                                 <div id="myCart">
                                     <div class="card artItem rounded-3 mb-4">
@@ -182,15 +185,13 @@
                                                     <img src="<%=product.getImage()%>" class="img-fluid rounded-3" alt="Cotton T-shirt">
                                                 </div>
                                                 <div class="col-md-4 col-lg-4 col-xl-4">
-                                                    <p class="lead fw-normal mb-2"><%=product.getName()%></p>
-                                                    <p><span class="text-muted">Size: </span><%=list.get(i).getSize()%>
-                                                        <a class="view-detail" href="product-detail?id=<%=product.getId()%>"><span>View detail</span></a>
+                                                    <p class="lead fw-normal mb-2">Invoice: <%=order.getOrderId()%> </p>
+                                                    <p><span class="text-muted">Ship Address: </span><%=order.getShipAddress()%>
+                                                    <p><span class="text-muted">Order Date: </span><%=order.getOrderDate()%></p>    
                                                 </div>
-                                                <div class="col-md-1 col-lg-1 col-xl-1" style="font-size:1.2rem;">
-                                                    x <%=list.get(i).getQuantity()%>
-                                                </div>
+
                                                 <div class="col-md-3 col-lg-2 col-xl-3 offset-lg-1">
-                                                    <h5 class="mb-0 text-end"><%=Math.round(product.getPrice() * list.get(i).getQuantity())%> VNĐ</h5>
+                                                    <p><a class="view-detail" href="detail-history?id=<%=order.getOrderId()%>"><span>View detail</span></a></p> 
                                                 </div>
 
                                             </div>
@@ -200,7 +201,8 @@
                                         }
                                     %>
                                     <%
-                                        if (session.getAttribute("user") == null) {
+                                        if (session.getAttribute(
+                                                "user") == null) {
                                     %>   
                                     <div id="emptyCart"
                                          class="container d-flex align-items-center justify-content-center border rounded bg-white pt-5 pb-5"
@@ -227,7 +229,8 @@
         </section>
 
         <%@include file="../../components/footer.jsp" %>
-        <% if (session.getAttribute("Message") != null) {
+        <% if (session.getAttribute(
+                    "Message") != null) {
         %>
         <script>
             alert("<%=(String) session.getAttribute("Message")%>")
@@ -238,5 +241,4 @@
         <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>-->
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/cart.js"></script>
     </body>
-
 </html>

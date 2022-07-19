@@ -26,7 +26,7 @@
                             ProductManager pm = new ProductManager();
                             ArrayList<CartItem> list = (ArrayList<CartItem>)request.getAttribute("orderHistory");
                             for (int i = 0; i < list.size(); i++) {
-                             Product product = pm.getProductByID(list.get(i).getID());                                
+                            Product product = pm.getProductByID(list.get(i).getID());                                
                         %>
                         <div id="myCart">
                             <div class="card artItem rounded-3 mb-4">
@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
                                             <p class="lead fw-normal mb-2"><%=product.getName()%></p>
-                                            <p><span class="text-muted">Size: </span><%=list.get(i).getSize()%>
+                                            <p><span class="text-muted">Order date: </span><%=list.get(i).getSize()%>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                                             x<%=list.get(i).getQuantity()%>

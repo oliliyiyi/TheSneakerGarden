@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.CartItem;
-import model.Product;
 
 /**
  *
@@ -95,7 +94,10 @@ public class addTocart extends HttpServlet {
                 if (entry.getValue().getID() == ID && entry.getValue().getSize() == size) {
                     entry.getValue().setQuantity(entry.getValue().getQuantity() - 1);
                     if (entry.getValue().getQuantity() <= 0) {
-                        cart.remove(ID);
+                        cart.remove(entry.getKey());
+                    }
+                    if (cart.size() <= 0) {
+                        session.setAttribute("cart", null);
                     }
                 }
 
@@ -119,7 +121,10 @@ public class addTocart extends HttpServlet {
             for (Map.Entry<Integer, CartItem> entry : cart.entrySet()) {
                 if (entry.getValue().getID() == ID && entry.getValue().getSize() == size) {
                     cart.remove(entry.getKey());
-                }
+                    }
+                    if (cart.size() <= 0) {
+                        session.setAttribute("cart", null);
+                    }
 
             }
 
