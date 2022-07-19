@@ -4,8 +4,8 @@
     Author     : Admin
 --%>
 
+<%@page import="model.Order"%>
 <%@page import="model.User"%>
-<%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     User user = (User) session.getAttribute("user");
@@ -16,15 +16,14 @@
             response.sendRedirect("./login");
         }
     }
-    Product product = (Product) request.getAttribute("product");
+    Order order = (Order) request.getAttribute("order");
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <%--<%@include file="./components/head.jsp" %>--%>   
-        <link rel="shortcut icon" href="./images/LogoTheSneakerGarden.png" type="image/x-icon">
-        <title>Update item</title>
-        <link href="./notification/notification.css" rel="stylesheet" type="text/css">
+        <%--<%@include file="../../components/head.jsp" %>--%>  
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" type="image/x-icon">
+        <title>Update order</title>
         <style type="text/css">
             *{
                 margin: 0;
@@ -36,7 +35,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
-                margin: 20px 0 12px 0;
+                margin: 20px 60px 12px 60px;
             }
             form .user-input .input-user {
                 margin-bottom: 15px;
@@ -58,17 +57,7 @@
                 border-bottom-width: 2px;
                 transition: all 0.3s ease;
             }
-            .user-input .input-user textarea {
-                height: 80px;
-                width: 100%;
-                outline: none;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-                padding-left: 15px;
-                font-size: 16px;
-                border-bottom-width: 2px;
-                transition: all 0.3s ease;
-            }
+
             .user-input .input-user input:focus,
             .user-input .input-user input:valid {
                 border-color: #9b59b6;
@@ -94,13 +83,15 @@
                     margin-bottom: 15px;
                     width: 100%;
                 }
+
             }
+
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
     </head>
     <body>
-        <%@include file="./components/sidebar-dashboard.jsp" %>  
+        <%@include file="../../components/sidebar-dashboard.jsp" %>  
         <div class="main-content">
             <header>
                 <div class="search-wrapper"><span class="las la-search"></span>
@@ -109,83 +100,74 @@
                 <div class="user-wrapper">
                     <div>
                         <h4><%=user.getUserFullName()%></h4>   
-                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
+                        <a  style="color: black; text-decoration: none" href="login">Logout</a>    
                     </div>
                 </div>
             </header>
+
             <main>
                 <h3 style="display: flex;
                     justify-content: center;
-                    font-size: 40px; color:#00C897  ">Update item</h3>
-                <div class="container">
-                    <form action="item-management?action=update" method="POST" id="someFormId">
+                    font-size: 40px; color:#00C897  ">Update order</h3>
+                <div class="container" >
+                    <form action="order-management?action=update" method="POST" id="someFormId">
                         <div class="user-input">
-                            <input type="hidden" name="id" value="<%=product.getId()%>">
+                            <input type="hidden" name="id" value="<%=order.getOrderId()%>">
+                            <input type="hidden" name="username" value="<%=order.getFullName()%>">
+                            <input type="hidden" name="phone" value="<%=order.getPhone()%>">
+                            <input type="hidden" name="shipaddress" value="<%=order.getShipAddress()%>">
+                            <input type="hidden" name="email" value="<%=order.getEmail()%>">
+                            <input type="hidden" name="orderdate" value="<%=order.getOrderDate()%>">
                             <div class="input-user">
-                                <span class="details">Name</span>
+                                <span class="details">Username</span>
+                                <input type="text" name="usernamea" value="<%=order.getFullName()%>" required disabled="" >
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Phone</span>
+                                <input type="number" name="phonea" value="<%=order.getPhone()%>" required disabled="" >
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Ship Address</span>
+                                <input type="string" name="shipaddressa" value="<%=order.getShipAddress()%>" required disabled="" >
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Email</span>
+                                <input type="email" name="emaila" value="<%=order.getEmail()%>" required disabled="" >
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Order Date</span>
+                                <input type="date" name="orderdatea" value="<%=order.getOrderDate()%>" required disabled="" >
+                            </div>
+
+                            <div class="input-user">
+                                <span class="details">Ship Date</span>
                                 <input
-                                    name="name"
-                                    type="text"
+                                    type="date"
+                                    name="shipdate"
+                                    value="<%=order.getShipDate()%>"
                                     required
-                                    value="<%=product.getName()%>"
                                     />
                             </div>
                             <div class="input-user">
-                                <span class="details">Category</span>
-                                <input
-                                    name="cate"
+                                <span class="details">Status</span>
+                                <input 
                                     type="number"
-                                    value="<%=product.getcId()%>"
+                                    name="status"
+                                    value="<%=order.getStatus()%>"
                                     required
                                     />
-                            </div>
-                            <div class="input-user">
-                                <span class="details">Brand</span>
-                                <input
-                                    name="brand"
-                                    type="number"
-                                    value="<%=product.getbrandID()%>"
-                                    required
-                                    />
-                            </div>
-                            <div class="input-user">
-                                <span class="details">Price</span>
-                                <input   
-                                    name="price"
-                                    type="number"
-                                    value="<%=product.getPrice()%>"
-                                    required
-                                    />
-                            </div>
-                            <div class="input-user">
-                                <span class="details">Image</span>
-                                <input
-                                    name="image"
-                                    type="text"
-                                    value="<%=product.getImage()%>"
-                                    required
-                                    >
-                            </div>
-                            <div class="input-user">
-                                <span class="details">Description</span>
-                                <input
-                                    name="description"
-                                    type="text"
-                                    value="<%=product.getDescription()%>"
-                                    required
-                                    >
                             </div>
                         </div>
                         <div class="buttonAdd"> 
-                            <Button type="submit">
-                                Update Item
+                            <Button>
+                                Update order
                             </Button>
                         </div>
                     </form>
                 </div>
             </main>
         </div>
-        <script src="./notification/notification.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
         <script>
             window.addEventListener('DOMContentLoaded', function () {
 
@@ -197,7 +179,7 @@
 
                     // Form elements
                     const title = "Success";
-                    const message = "Update product successful";
+                    const message = "Update user successful";
                     const position = "bottom-right";
                     const duration = 3000;
                     /*

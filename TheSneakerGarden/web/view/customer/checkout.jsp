@@ -12,7 +12,7 @@ UserManager userManager = new UserManager();
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%@include file="components/head.jsp" %>
+        <%@include file="../../components/head.jsp" %>
         <title>The Sneaker Garden</title>
 
         <style>
@@ -31,12 +31,12 @@ UserManager userManager = new UserManager();
             }
         </style>
         <!-- Custom styles for this template -->
-        <link href="./css/form-validation.css" rel="stylesheet">
-        <link href="./css/checkout.css" rel="stylesheet">
-        <link href="./css/style.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/form-validation.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/checkout.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
     </head>
     <body class="bg-light" style="margin-bottom: 20%;">
-        <%@include file="components/header.jsp" %>
+        <%@include file="../../components/header.jsp" %>
 
         <div class="container" style="margin-top: 130px; margin-bottom: 200px">
             <main>
@@ -133,8 +133,8 @@ UserManager userManager = new UserManager();
           alert("Thank you for your order!!!");
         }
         </script>
-        <%@include file="components/footer.jsp" %>
-        <script src="./js/form-validation.js"></script>
+        <%@include file="../../components/footer.jsp" %>
+        <script src="${pageContext.request.contextPath}/js/form-validation.js"></script>
     </body>
 
 </html>

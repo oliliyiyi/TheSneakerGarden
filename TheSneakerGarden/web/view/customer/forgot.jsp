@@ -2,14 +2,14 @@
 <html lang="en">
 
     <head>
-        <%@include file="components/head.jsp" %>
+        <%@include file="../../components/head.jsp" %>
         <title>Forgot Password</title>
-        <link rel="stylesheet" href="./css/style.css">
-        <link rel="stylesheet" href="./css/forgot.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/forgot.css">
     </head>
 
     <body>
-        <%@include file="components/header.jsp" %>
+        <%@include file="../../components/header.jsp" %>
         <section class="h-100" style="margin-top: 130px; margin-bottom: 200px">
             <div class="container h-100">
                 <div class="row justify-content-sm-center h-100">
@@ -36,7 +36,7 @@
                             </div>
                             <div class="card-footer py-3 border-0">
                                 <div class="text-center">
-                                    Remember your password? <a href="./login.jsp" class="label-login">Login</a>
+                                    Remember your password? <a href="login" class="label-login">Login</a>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </section>
-        <%@include file="components/footer.jsp" %>
+        <%@include file="../../components/footer.jsp" %>
     </body>
 
 </html>

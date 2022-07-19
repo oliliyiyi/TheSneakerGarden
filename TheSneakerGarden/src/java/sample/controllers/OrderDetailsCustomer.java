@@ -48,10 +48,10 @@ public class OrderDetailsCustomer extends HttpServlet {
                 listItem.addAll(order.getAllProductByOrderID(listOrder.get(i).getOrderId()));
             }
             request.setAttribute("orderHistory", listItem);
-            request.getRequestDispatcher("userHistory.jsp").forward(request, response);
+            request.getRequestDispatcher("./view/customer/userHistory.jsp").forward(request, response);
         }else{
             request.setAttribute("orderHistory", listItem);
-            request.getRequestDispatcher("userHistory.jsp").forward(request, response);
+            request.getRequestDispatcher("./view/customer/userHistory.jsp").forward(request, response);
         }
     }
 

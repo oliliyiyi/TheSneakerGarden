@@ -24,8 +24,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%--<%@include file="./components/head.jsp" %>--%>
-        <link rel="shortcut icon" href="./images/LogoTheSneakerGarden.png" type="image/x-icon">
+        <%--<%@include file="../../components/head.jsp" %>--%>
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" type="image/x-icon">
         <title>Order management</title>
         <style type="text/css">
             *{
@@ -116,7 +116,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     </head>
     <body>
-        <%@include file="./components/sidebar-dashboard.jsp" %>  
+        <%@include file="../../components/sidebar-dashboard.jsp" %>  
         <div class="main-content">
             <header>
                 <div class="search-wrapper"><span class="las la-search"></span>
@@ -125,7 +125,7 @@
                 <div class="user-wrapper">
                     <div>
                         <h4><%=user.getUserFullName()%></h4>   
-                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
+                        <a  style="color: black; text-decoration: none" href="login">Logout</a>    
                     </div>
                 </div>
             </header>
@@ -161,9 +161,9 @@
                                 <td><%=order.getEmail()%></td>
                                 <td><%=order.getOrderDate()%></td>
                                 <td><%=order.getShipDate()%></td>
-                                <td><a href="./orderdetails?id=<%=order.getOrderId()%>">Details</a></td>
+                                <td><a href="orderdetails?id=<%=order.getOrderId()%>">Details</a></td>
                                 <td><%=order.getStatus()%></td>
-                                <td><a href="./order-management?action=update&id=<%=order.getOrderId()%>" style="color: green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                <td><a href="order-management?action=update&id=<%=order.getOrderId()%>" style="color: green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
                                         <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
                                         <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
                                         </svg></a></td>

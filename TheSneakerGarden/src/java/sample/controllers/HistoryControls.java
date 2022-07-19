@@ -1,27 +1,30 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package sample.controllers;
 
-import dbmanager.ProductManager;
+import dbmanager.OrderManager;
+import dbmanager.UserManager;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Category;
-import model.Product;
+import javax.servlet.http.HttpSession;
+import model.CartItem;
+import model.Order;
+import model.User;
 
 /**
  *
- * @author Admin
+ * @author voanh
  */
-@WebServlet(name = "HomeControl", urlPatterns = {"/home"})
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "HistoryControls", urlPatterns = {"/history"})
+public class HistoryControls extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,19 +38,27 @@ public class HomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //b1: get data from dao
-        ProductManager manager = new ProductManager();
-        List<Product> list = manager.getAllProduct();
-        //List<Category> listC = manager.getAllCategory();
-        //Product last = manager.getLast();
-        
-        //b2: set data to jsp
-        request.setAttribute("listProduct", list);
-        //request.setAttribute("listCC", listC);
-        //request.setAttribute("p", last);
-        request.getRequestDispatcher("./view/customer/index.jsp").forward(request, response);
-        //404 -> url
-        //500 -> jsp properties
+        //history
+        HttpSession session = request.getSession();
+        ArrayList<CartItem> listItem = new ArrayList<>();
+        OrderManager order = new OrderManager();
+        if(session.getAttribute("user") != null){
+            User user = (User) session.getAttribute("user");
+            ArrayList<Order> listOrder = order.getAllOrderByUserID(user.getUserId());
+            
+            for(int i =0 ; i < listOrder.size(); i++){
+                listItem.addAll(order.getAllProductByOrderID(listOrder.get(i).getOrderId()));
+            }
+        }
+        //profile
+        int id = Integer.valueOf(request.getParameter("id"));
+        UserManager manager = new UserManager();
+        User user = manager.getUser(id);
+
+        request.setAttribute("detail", user);
+        request.setAttribute("tab", "history");
+        request.setAttribute("orderHistory", listItem);
+        request.getRequestDispatcher("./view/customer/profile.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

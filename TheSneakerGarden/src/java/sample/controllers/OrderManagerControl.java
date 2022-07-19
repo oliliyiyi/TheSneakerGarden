@@ -42,11 +42,11 @@ public class OrderManagerControl extends HttpServlet {
             if ("update".equals(request.getParameter("action"))) {
                 Order order = manager.getOrderByID(Integer.valueOf(request.getParameter("id")));
                 request.setAttribute("order", order);
-                request.getRequestDispatcher("update-order.jsp").forward(request, response);
+                request.getRequestDispatcher("./view/admin/update-order.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("listOrder", listOrder);
-            request.getRequestDispatcher("./order-management.jsp").forward(request, response);
+            request.getRequestDispatcher("./view/admin/order-management.jsp").forward(request, response);
         }
     }
 
@@ -93,16 +93,16 @@ public class OrderManagerControl extends HttpServlet {
                 if (orderManager.edit(order)) {
                     listOrder = orderManager.getAllOrder();
                     request.setAttribute("listOrder", listOrder);
-                    request.getRequestDispatcher("./order-management.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/order-management.jsp").forward(request, response);
                 } else {
                     request.setAttribute("order", order);
-                    request.getRequestDispatcher("./update-order.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/update-order.jsp").forward(request, response);
                 }
             }
 
         } else {
             request.setAttribute("listOrder", listOrder);
-            request.getRequestDispatcher("./order-management.jsp").forward(request, response);
+            request.getRequestDispatcher("./view/admin/order-management.jsp").forward(request, response);
         }
     }
 

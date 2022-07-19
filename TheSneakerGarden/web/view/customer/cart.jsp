@@ -5,13 +5,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%@include file="components/head.jsp" %>
+        <%@include file="../../components/head.jsp" %>
         <title>Cart</title>
-        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
     </head>
     <body>
-        <%@include file="components/header.jsp" %>
+        <%@include file="../../components/header.jsp" %>
 
         <section class="h-100" style="margin-top: 80px">
             <div class="container h-100 py-5">
@@ -19,7 +19,7 @@
                     <div class="col-25">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
-                            <!--                            <a href="./shop.jsp">
+                            <!--                            <a href="shop.jsp">
                                                             <button class="btn" style="background: #ff7c03; color: #fff">Go to
                                                                 shopping</button>
                                                         </a>-->
@@ -84,7 +84,7 @@
                             %>
                             <div class="card" style="background-color: #eee;">
                                 <div class="card-body">
-                                    <a href="./checkout">
+                                    <a href="checkout">
                                         <button type="button" class="btn">Proceed to
                                             Pay</button>
                                     </a>
@@ -102,7 +102,7 @@
                             <div class="text-center">
                                 <img src=" ./img/empty_cart.png" alt="">
                                 <p class="">There are no products in your shopping cart.</p>
-                                <a href="./shop">
+                                <a href="shop">
                                     <button type="button" class="btn btn-lg"
                                             style="background: #ff7c03; color: #fff">Continue
                                         shopping</button>
@@ -117,8 +117,8 @@
             </div>
         </section>
 
-        <%@include file="components/footer.jsp" %>
-        <script src="./js/product-detail.js"></script>
+        <%@include file="../../components/footer.jsp" %>
+        <script src="${pageContext.request.contextPath}/js/product-detail.js"></script>
         <!-- MDB -->
         <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>-->
 

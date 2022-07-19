@@ -41,7 +41,7 @@ public class OrderDetailsControl extends HttpServlet {
         ArrayList<CartItem> p = manager.getAllProductByOrderID(id);
 
         request.setAttribute("orderDetails", p);
-        request.getRequestDispatcher("orderdetails.jsp").forward(request, response);
+        request.getRequestDispatcher("./view/customer/orderdetails.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

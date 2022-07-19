@@ -19,8 +19,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%--<%@include file="./components/head.jsp" %>--%>  
-        <link rel="shortcut icon" href="./images/LogoTheSneakerGarden.png" type="image/x-icon">
+        <%--<%@include file="../../components/head.jsp" %>--%>  
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" type="image/x-icon">
         <title>Update inventory</title>
         <style type="text/css">
             *{
@@ -93,7 +93,7 @@
 
     </head>
     <body>
-        <%@include file="./components/sidebar-dashboard.jsp" %>  
+        <%@include file="../../components/sidebar-dashboard.jsp" %>  
         <div class="main-content">
             <header>
                 <div class="search-wrapper"><span class="las la-search"></span>
@@ -102,7 +102,7 @@
                 <div class="user-wrapper">
                     <div>
                         <h4><%=user.getUserFullName()%></h4>   
-                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
+                        <a  style="color: black; text-decoration: none" href="login">Logout</a>    
                     </div>
                 </div>
             </header>

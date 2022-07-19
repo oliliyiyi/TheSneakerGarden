@@ -14,35 +14,35 @@
         <title>Admin</title>
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-        <link rel="stylesheet" href="././css/dashboard.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
     </head>
     <body>
         <input type="checkbox" id="nav-toggle">
         <div class="sidebar">
             <div class="sidebar-brand">
-                <a href="./home"> <img  src="././images/LogoTheSneakerGarden.png" style="width: 180px"></a>
+                <a href="home"> <img src="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" style="width: 180px"></a>
             </div>
             <div class="sidebar-menu">
                 <ul>
                     <li>
-                        <a href="./homeAdmin" id="dashboard"><span class="las la-igloo"></span>
+                        <a href="homeAdmin" id="dashboard"><span class="las la-igloo"></span>
                             <span>Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="./user-management" id="user-management"><span class="las la-users"></span>
+                        <a href="user-management" id="user-management"><span class="las la-users"></span>
                             <span>User</span></a>
                     </li>
                     <li>
-                        <a href="./item-management" id="item-management"><span class="las la-clipboard-list"></span>
+                        <a href="item-management" id="item-management"><span class="las la-clipboard-list"></span>
                             <span>Product</span></a>
                     </li>
                     <li>
-                        <a href="./order-management" id="order-management"><span class="las la-shopping-bag"></span>
+                        <a href="order-management" id="order-management"><span class="las la-shopping-bag"></span>
                             <span>Order</span></a>
                     </li>
                 </ul>
             </div>
         </div>
-        <script src="./js/header_dashboard.js"></script>
+        <script src="${pageContext.request.contextPath}/js/header_dashboard.js"></script>
     </body>
 </html>

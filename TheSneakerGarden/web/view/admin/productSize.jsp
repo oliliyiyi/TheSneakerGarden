@@ -7,9 +7,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%@include file="components/head.jsp" %>
+        <%@include file="../../components/head.jsp" %>
         <title>Product Size</title>
-        <link href="./notification/notification.css" rel="stylesheet" type="text/css">
+        <link href="${pageContext.request.contextPath}/notification/notification.css" rel="stylesheet" type="text/css">
         <style type="text/css">
             *{
                 margin: 0;
@@ -96,11 +96,11 @@
                 }
             }
         </style>
-        <link rel="stylesheet" href="./css/style.css">
-        <link href="./css/history.css" rel="stylesheet">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+        <link href="${pageContext.request.contextPath}/css/history.css" rel="stylesheet">
     </head>
     <body>
-        <%@include file="./components/sidebar-dashboard.jsp" %>
+        <%@include file="../../components/sidebar-dashboard.jsp" %>
         <%
             Product pro = (Product) request.getAttribute("Product");
         %>
@@ -148,9 +148,9 @@
         </section>
         <!-- MDB -->
         <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>-->
-        <script type="text/javascript" src="./js/cart.js"></script>
-        <script type="text/javascript" src="./js/main.js"></script>
-        <script src="./notification/notification.js" type="text/javascript"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/cart.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
         <script>
             function alertSuccess() {
                 const title = "Message";

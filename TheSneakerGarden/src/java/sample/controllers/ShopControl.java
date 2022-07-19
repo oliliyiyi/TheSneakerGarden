@@ -105,7 +105,7 @@ public class ShopControl extends HttpServlet {
         request.setAttribute("paramType", paramType);
        
         request.setAttribute("listProduct", list5);
-        request.getRequestDispatcher("shop.jsp").forward(request, response);
+        request.getRequestDispatcher("./view/customer/shop.jsp").forward(request, response);
             
        
     }

@@ -18,8 +18,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%--<%@include file="./components/head.jsp" %>--%>  
-        <link rel="shortcut icon" href="./images/LogoTheSneakerGarden.png" type="image/x-icon">
+        <%--<%@include file="../../components/head.jsp" %>--%>  
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" type="image/x-icon">
         <title>Inventory management</title>
         <style type="text/css">
             *{
@@ -110,7 +110,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     </head>
     <body>
-        <%@include file="./components/sidebar-dashboard.jsp" %>  
+        <%@include file="../../components/sidebar-dashboard.jsp" %>  
         <div class="main-content">
             <header>
                 <div class="search-wrapper"><span class="las la-search"></span>
@@ -119,7 +119,7 @@
                 <div class="user-wrapper">
                     <div>
                         <h4><%=user.getUserFullName()%></h4>   
-                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
+                        <a  style="color: black; text-decoration: none" href="login">Logout</a>    
                     </div>
                 </div>
             </header>

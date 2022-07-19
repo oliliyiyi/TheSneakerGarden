@@ -1,27 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package sample.controllers;
 
-import dbmanager.ProductManager;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Category;
-import model.Product;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "HomeControl", urlPatterns = {"/home"})
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "AboutControl", urlPatterns = {"/about"})
+public class AboutControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,19 +32,7 @@ public class HomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //b1: get data from dao
-        ProductManager manager = new ProductManager();
-        List<Product> list = manager.getAllProduct();
-        //List<Category> listC = manager.getAllCategory();
-        //Product last = manager.getLast();
-        
-        //b2: set data to jsp
-        request.setAttribute("listProduct", list);
-        //request.setAttribute("listCC", listC);
-        //request.setAttribute("p", last);
-        request.getRequestDispatcher("./view/customer/index.jsp").forward(request, response);
-        //404 -> url
-        //500 -> jsp properties
+        request.getRequestDispatcher("./view/customer/about.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

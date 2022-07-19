@@ -19,19 +19,19 @@
 
     <head>
 
-        <%@include file="components/head.jsp" %>    
+        <%@include file="../../components/head.jsp" %>    
 
         <title>The Sneaker Garden</title>
-        <link rel="stylesheet" href="./css/product-detail.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product-detail.css" />
         <!-- Slick -->
-        <link rel="stylesheet" type="text/css" href="./css/slick.min.css">
-        <link rel="stylesheet" type="text/css" href="./css/slick-theme.css">
-        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/slick.min.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/slick-theme.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
     </head>
 
     <body>
-        <%@include file="components/header.jsp" %>
+        <%@include file="../../components/header.jsp" %>
         <!-- Open Content -->
         <section class="bg-white">
             <div class="container pb-5">
@@ -216,7 +216,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <a href="./product-detail?id=<%=listP2.get(i).getId()%>" class="h3 text-decoration-none">
+                                <a href="product-detail?id=<%=listP2.get(i).getId()%>" class="h3 text-decoration-none">
                                     <h5><%=listP2.get(i).getName()%></h5>
                                 </a>
                                 <ul class="list-unstyled d-flex justify-content-center mb-1">
@@ -240,17 +240,17 @@
         </section>
         <!-- End Article -->
 
-        <%@include file="components/footer.jsp" %>
+        <%@include file="../../components/footer.jsp" %>
 
         <!-- Start Script -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
                 integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="./js/product-detail.js"></script>
+        <script src="${pageContext.request.contextPath}/js/product-detail.js"></script>
         <!-- End Script -->
 
         <!-- Start Slider Script -->
-        <script src="./js/slick.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/slick.min.js"></script>
         <script>
             $('#carousel-related-product').slick({
                 infinite: true,

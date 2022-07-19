@@ -5,14 +5,14 @@
 <html lang="en">
 
     <head>
-        <%@include file="components/head.jsp" %>
+        <%@include file="./../../components/head.jsp" %>
         <title>The Sneaker Garden</title>
         <!-- Link To CSS -->
-        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     </head>
 
     <body>
-        <%@include file="components/header.jsp" %>
+        <%@include file="./../../components/header.jsp" %>
 
         <!-- Home -->
         <section class="home" id="home">
@@ -57,7 +57,7 @@
             <div class="featured-container container">
                 <!-- Box 1 -->
                 <div class="box">
-                    <img src="img/featured1.png" alt="">
+                    <img src="${pageContext.request.contextPath}/img/featured1.png" alt="">
                     <div class="text">
                         <h2>New Collection <br>Of Shoes</h2>
                         <a href="#">View More</a>
@@ -69,7 +69,7 @@
                         <h2>20% Discount <br>On Shoes</h2>
                         <a href="#">View More</a>
                     </div>
-                    <img src="img/featured2.png" alt="">
+                    <img src="${pageContext.request.contextPath}/img/featured2.png" alt="">
                 </div>
 
 
@@ -89,7 +89,7 @@
                     <img src="<%=list.get(i).getImage()%>" alt="">
                     <h2><%=list.get(i).getName()%></h2>
                     <span><%=Math.round(list.get(i).getPrice())%> VNĐ</span>
-                    <a href="./product-detail?id=<%=list.get(i).getId()%>"><i class='bx bx-cart-alt'></i></a>
+                    <a href="product-detail?id=<%=list.get(i).getId()%>"><i class='bx bx-cart-alt'></i></a>
                 </div>
                 <%
                     }
@@ -99,7 +99,7 @@
 
 
 
-        <%@include file="components/footer.jsp" %>
+        <%@include file="./../../components/footer.jsp" %>
         <script>
             function changeTheme() {
                 var theme = document.querySelector('.lightmode');

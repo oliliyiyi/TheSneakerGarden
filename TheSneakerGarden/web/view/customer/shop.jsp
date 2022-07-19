@@ -23,13 +23,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%@include file="components/head.jsp" %>
+        <%@include file="../../components/head.jsp" %>
 
         <title>The Sneaker Garden</title>
 
         
-        <link rel="stylesheet" href="./css/shop.css" />
-        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shop.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
         
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script>
@@ -50,7 +50,7 @@
     </head>
 
     <body>
-        <%@include file="components/header.jsp" %>
+        <%@include file="../../components/header.jsp" %>
         <!-- Start Content -->
         <div class="container py-5 mt-0" style="margin-top: 80px">
             <div class="row mt-5">
@@ -63,10 +63,10 @@
                                 Type
                             </a>
                             <ul class="pl-3">
-                                <li><a class="text-decoration-none" href="./shop?bId=<%=paramBId%>&type=1&price=<%=paramPrice%>">Shoes</a></li>
-                                <li><a class="text-decoration-none" href="./shop?bId=<%=paramBId%>&type=2&price=<%=paramPrice%>">Socks</a></li>
-                                <li><a class="text-decoration-none" href="./shop?bId=<%=paramBId%>&type=3&price=<%=paramPrice%>">Hats</a></li>
-                                <li><a class="text-decoration-none" href="./shop?bId=<%=paramBId%>&type=4&price=<%=paramPrice%>">Backpacks</a></li>
+                                <li><a class="text-decoration-none" href="shop?bId=<%=paramBId%>&type=1&price=<%=paramPrice%>">Shoes</a></li>
+                                <li><a class="text-decoration-none" href="shop?bId=<%=paramBId%>&type=2&price=<%=paramPrice%>">Socks</a></li>
+                                <li><a class="text-decoration-none" href="shop?bId=<%=paramBId%>&type=3&price=<%=paramPrice%>">Hats</a></li>
+                                <li><a class="text-decoration-none" href="shop?bId=<%=paramBId%>&type=4&price=<%=paramPrice%>">Backpacks</a></li>
                             </ul>
                         </li>
 
@@ -79,7 +79,7 @@
                             <ul class="list-inline shop-top-menu pb-3 pt-1">
                                 <li class="list-inline-item">
                                     <a class="h3 text-decoration-none mr-1 ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.bId==null?"active text-white btn-black":"text-dark not-active"}"
-                                       href="./shop">All</a>
+                                       href="shop">All</a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a class="h3 text-decoration-none mr-1 ps-3 pe-3 pt-1 pb-1 rounded button-category ${param.bId==1?"active text-white btn-black":"text-dark not-active"}" href="shop?bId=1&type=<%=paramType%>&price=<%=paramPrice%>">Nike</a>
@@ -118,7 +118,7 @@
                             for (int i = step; i < index; i++) {
                         %>
                         <div class="col-md-4">
-                            <a class="card mb-4 product-wap rounded-0" href="./product-detail?id=<%=list.get(i).getId()%>" tabindex="0">
+                            <a class="card mb-4 product-wap rounded-0" href="product-detail?id=<%=list.get(i).getId()%>" tabindex="0">
                                 <div class="card rounded-0">
                                     <img class="card-img-product card-img rounded-0 img-fluid" src="<%=list.get(i).getImage()%>" />
                                     <div class="card-img-overlay rounded-0 product-card-img d-flex align-items-center justify-content-center">
@@ -152,7 +152,7 @@
                                     for (int i = 0; i < tab; i++) {
                                 %>
                                 <li class="page-item text-dark">
-                                    <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="./shop?tab=<%=i + 1%>&bId=<%=paramBId%>&type=<%=paramType%>&price=<%=paramPrice%>"
+                                    <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="shop?tab=<%=i + 1%>&bId=<%=paramBId%>&type=<%=paramType%>&price=<%=paramPrice%>"
                                        ><%=i + 1%></a>
                                 </li>
                                 <%}%>
@@ -196,16 +196,16 @@
                                         <div class="carousel-item active">
                                             <div class="row">
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_01.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_01.png" alt="Brand Logo" /></a>
                                                 </div>
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_02.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_02.png" alt="Brand Logo" /></a>
                                                 </div>
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_03.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_03.png" alt="Brand Logo" /></a>
                                                 </div>
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_04.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_04.png" alt="Brand Logo" /></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,16 +215,16 @@
                                         <div class="carousel-item">
                                             <div class="row">
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_01.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_01.png" alt="Brand Logo" /></a>
                                                 </div>
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_02.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_02.png" alt="Brand Logo" /></a>
                                                 </div>
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_03.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_03.png" alt="Brand Logo" /></a>
                                                 </div>
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_04.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_04.png" alt="Brand Logo" /></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -234,16 +234,16 @@
                                         <div class="carousel-item">
                                             <div class="row">
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_01.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_01.png" alt="Brand Logo" /></a>
                                                 </div>
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_02.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_02.png" alt="Brand Logo" /></a>
                                                 </div>
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_03.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_03.png" alt="Brand Logo" /></a>
                                                 </div>
                                                 <div class="col-3 p-md-5">
-                                                    <a href="#"><img class="img-fluid brand-img" src="./img/brand_04.png" alt="Brand Logo" /></a>
+                                                    <a href="#"><img class="img-fluid brand-img" src="${pageContext.request.contextPath}/img/brand_04.png" alt="Brand Logo" /></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -268,13 +268,13 @@
         </section>
         <!--End Brands-->
 
-        <%@include file="components/footer.jsp" %>
+        <%@include file="../../components/footer.jsp" %>
 
         <!-- Start Script -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
                 integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="./js/shop.js"></script>
+        <script src="${pageContext.request.contextPath}/js/shop.js"></script>
         <!-- End Script -->
     </body>
 

@@ -41,7 +41,7 @@ public class ProductSize extends HttpServlet {
         Product pro = pm.getProductByID(id);
         request.setAttribute("ListInv", inv);
         request.setAttribute("Product", pro);
-        request.getRequestDispatcher("productSize.jsp").forward(request, response);
+        request.getRequestDispatcher("./view/admin/productSize.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -85,9 +85,9 @@ public class ProductSize extends HttpServlet {
                         request.setAttribute("ListInv", inv);
                         request.setAttribute("Product", pro);
                         request.setAttribute("addSize", "OK");
-                        request.getRequestDispatcher("./productSize.jsp").forward(request, response);
+                        request.getRequestDispatcher("./view/admin/productSize.jsp").forward(request, response);
                     } else {
-                        request.getRequestDispatcher("./add-size.jsp").forward(request, response);
+                        request.getRequestDispatcher("./view/admin/add-size.jsp").forward(request, response);
                     }
                 }else{
                     if(pm.insertSize(sizeNum, proID, quantity)){
@@ -97,9 +97,9 @@ public class ProductSize extends HttpServlet {
                         request.setAttribute("ListInv", inv);
                         request.setAttribute("Product", pro);
                         request.setAttribute("addSize", "OK");
-                        request.getRequestDispatcher("./productSize.jsp").forward(request, response);
+                        request.getRequestDispatcher("./view/admin/productSize.jsp").forward(request, response);
                     }else{
-                        request.getRequestDispatcher("./add-size.jsp").forward(request, response);
+                        request.getRequestDispatcher("./view/admin/add-size.jsp").forward(request, response);
                     }
                 }
                 

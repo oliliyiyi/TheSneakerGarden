@@ -1,6 +1,6 @@
 <!-- Footer -->
  <!-- Link To JS -->
-        <script src="./js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/js/main.js"></script>
 <section class="footer  ">
 
     <div class="container">
@@ -8,7 +8,7 @@
              <div class="footer-box logo col-12 col-sm-4">
         <!-- Logo -->
         <a href="#" class="logo-footer">
-            <img src="img/logo1.png" alt="">
+            <img src="${pageContext.request.contextPath}/img/logo1.png" alt="">
         </a>
         <div class="social">
             <a href="#"><i class='bx bxl-facebook'></i></a>
@@ -23,7 +23,7 @@
         <h3>Pages</h3>
         <a href="#home">Home</a>
         <a href="#featured">Featured</a>
-        <a href="./shop">Shop</a>
+        <a href="shop">Shop</a>
         <a href="#new">New</a>
     </div>
     <div class="footer-box col-12 col-sm-4">
@@ -36,8 +36,8 @@
     </div>
     <div class="footer-box col-12 col-sm-4">
         <h3>Brands</h3>
-        <p><a href="./shop">Nike</a></p>
-        <p><a  href="./shop">Adidas</a></p>
+        <p><a href="shop">Nike</a></p>
+        <p><a href="shop">Adidas</a></p>
      
     </div>
             </div>

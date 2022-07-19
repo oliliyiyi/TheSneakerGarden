@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%@include file="components/head.jsp" %>
+        <%@include file="../../components/head.jsp" %>
         <title>Register</title>
-        <link rel="stylesheet" href="./css/style.css">
-        <link rel="stylesheet" href="./css/register.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
     </head>
     <body>
-        <%@include file="components/header.jsp" %>
+        <%@include file="../../components/header.jsp" %>
         <section class="h-100" style="margin-top: 130px; margin-bottom: 200px">
             <div class="container h-100">
                 <div class="row justify-content-sm-center h-100">
@@ -64,7 +64,7 @@
                             </div>
                             <div class="card-footer py-3 border-0">
                                 <div class="text-center">
-                                    Already have an account? <a href="./login.jsp" class="lable-login">Login</a>
+                                    Already have an account? <a href="login" class="lable-login">Login</a>
                                 </div>
                             </div>
                         </div>
@@ -73,9 +73,9 @@
             </div>
         </section>
 
-        <%@include file="components/footer.jsp" %>
-        <script><%@include file="./js/form-validation.js" %></script>
-        <!--<script src="./js/form-validation.js"></script>-->
+        <%@include file="../../components/footer.jsp" %>
+        <script><%@include file="../../js/form-validation.js" %></script>
+        <!--<script src="${pageContext.request.contextPath}/js/form-validation.js"></script>-->
     </body>
     
 </html>

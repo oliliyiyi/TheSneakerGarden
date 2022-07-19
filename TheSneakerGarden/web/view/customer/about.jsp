@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%@include file="components/head.jsp" %>
+        <%@include file="../../components/head.jsp" %>
         <title>The Sneaker Garden</title>
-        <link href="./css/style.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
     </head>
     <body>
-        <%@include file="components/header.jsp" %>
+        <%@include file="../../components/header.jsp" %>
         <!-- Open Banner -->
         <section class="py-5" style="background: #333; margin-top: 130px">
             <div class="container">
@@ -26,7 +26,7 @@
 
                     </div>
                     <div class="col-md-4">
-                        <img src="./images/LogoTheSneakerGarden.png" alt="About Hero">
+                        <img src="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" alt="About Hero">
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
 
 
 
-        <%@include file="components/footer.jsp" %>
+        <%@include file="../../components/footer.jsp" %>
         <!-- Start Script -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
                 integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="

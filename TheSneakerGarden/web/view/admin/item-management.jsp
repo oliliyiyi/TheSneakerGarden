@@ -6,6 +6,7 @@
 
 <%@page import="model.User"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     User user = (User) session.getAttribute("user");
@@ -20,10 +21,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%--<%@include file="./components/head.jsp" %>--%>    
-        <link rel="shortcut icon" href="./images/LogoTheSneakerGarden.png" type="image/x-icon">
-        <title>User management</title>
-        <link href="./notification/notification.css" rel="stylesheet" type="text/css">
+        <%--<%@include file="../../components/head.jsp" %>--%>   
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" type="image/x-icon">
+        <title>Item management</title>
+        <link href="${pageContext.request.contextPath}/notification/notification.css" rel="stylesheet" type="text/css">
         <style type="text/css">
             *{
                 margin: 0;
@@ -108,15 +109,12 @@
                     text-align: left;
 
                 }
-
             }
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     </head>
-
-
     <body>
-        <%@include file="./components/sidebar-dashboard.jsp" %>  
+        <%@include file="../../components/sidebar-dashboard.jsp"%>  
         <div class="main-content">
             <header>
                 <div class="search-wrapper"><span class="las la-search"></span>
@@ -125,51 +123,72 @@
                 <div class="user-wrapper">
                     <div>
                         <h4><%=user.getUserFullName()%></h4>   
-                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
+                        <a  style="color: black; text-decoration: none" href="login">Logout</a>    
                     </div>
                 </div>
             </header>
             <main>
                 <div class="table-container">
-                    <h1 class="heading">User Management</h1>
+                    <h1 class="heading">Items Management</h1>
                     <div class="button-add">
-                        <button type="button" onclick="location.href = './user-management?action=add'" ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <button type="button" onclick="location.href = './item-management?action=add'" ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                            </svg>Add user</button>
+                            </svg>Add items</button>
                     </div>
-
                     <table class="table" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Account</th>
+                                <th>Image</th> 
                                 <th>Name</th>
-                                <th>Email</th> 
-                                <th>Phone</th> 
-                                <th>Address</th>
+                                <th>Brand</th>
+                                <th>Category</th>
+                                <th>Price</th> 
+                                <th>Description</th> 
                                 <th>Update</th>
                                 <th>Delete</th>
+                                <th>Details</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
-                                ArrayList<User> list = (ArrayList<User>) request.getAttribute("listUser");
-                                for (User user1 : list) {
+                                ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("listProduct");
+                                String brand = null;
+                                String cate = null;
+                                for (Product product : list) {
+                                if(product.getbrandID()==1){
+                                    brand = "Nike";
+                                }else{
+                                    brand = "Adidas";
+                                }
+                                if(product.getcId()==1){
+                                    cate = "Shoes";
+                                }else if (product.getcId()==2){
+                                    cate = "Shock";
+                                }else if (product.getcId()==3){
+                                    cate = "Hat";
+                                }else {
+                                    cate = "Backpack";
+                                }
                             %>
                             <tr>
-                                <td><%=user1.getUserId()%></td>
-                                <td><%=user1.getUserAccount()%></td>
-                                <td><%=user1.getUserFullName()%></td>
-                                <td><%=user1.getUserEmail()%></td>
-                                <td><%=user1.getUserPhone()%></td>
-                                <td><%=user1.getUserAddress()%></td>
-                                <td> <a href="./user-management?action=update&id=<%=user1.getUserId()%>" style="color: green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                <td><%=product.getId()%></td>
+                                <td><img src="<%=product.getImage()%>" alt="" width="50" height="50"></td>
+                                <td><%=product.getName()%></td>
+                                <td><%=brand%></td>
+                                <td><%=cate%></td>
+                                <td><%=Math.round(product.getPrice())%> VNĐ</td>
+                                <td><%=product.getDescription()%></td>
+                                <td> <a href="item-management?action=update&id=<%=product.getId()%>" style="color: green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
                                         <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
                                         <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
                                         </svg></a></td>
-                                <td><a href="#" onclick="alertDelete(<%=user1.getUserId()%>)" style="color: red"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <td><a href="#" onclick="alertDelete(<%=product.getId()%>)" style="color: red"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                         </svg></a></td>
+                                <td><a href="ProductSize?action=view&id=<%=product.getId()%>" style="color: blue">
+                                    Details
+                                    </a></td>
                             </tr>   
                             <%
                                 }
@@ -178,87 +197,87 @@
                     </table>
                 </div>
             </main>
-        </div>   
+        </div>
         <div class="overlay"></div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-        <script src="./notification/notification.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
         <script>
-                                    function alertDelete(id) {
-                                        const title = "Warnning";
-                                        const message = ' Are you want to delete this item?';
-                                        const position = "center";
-                                        const duration = 3000;
-                                        const type = 'dialog';
-                                        let callback = null;
+            function alertDelete(id) {
+                const title = "Warnning";
+                const message = ' Are you want to delete this item?';
+                const position = "center";
+                const duration = 3000;
+                const type = 'dialog';
+                let callback = null;
 
-                                        if (type === 'dialog') {
-                                            callback = (result) => {
-                                                console.log('result = ', result);
-                                                if (result === 'ok') {
-                                                    //sleep(3500).then(() => { window.location.replace("./item-management?action=delete&id="+id) });
-                                                    window.location.replace("./user-management?action=delete&id=" + id);
-                                                }
-                                            };
-                                        }
+                if (type === 'dialog') {
+                  callback = (result) => {
+                    console.log('result = ', result);
+                    if(result === 'ok'){
+                        //sleep(3500).then(() => { window.location.replace("./item-management?action=delete&id="+id) });
+                        window.location.replace("./item-management?action=delete&id="+id);
+                    }
+                  };
+                }
 
-                                        const popup = Notification({
-                                            position: position,
-                                            duration: duration
-                                        });
+                const popup = Notification({
+                  position: position,
+                  duration: duration
+                });
 
-                                        if (!popup[type]) {
-                                            popup.error({
-                                                title: 'Error',
-                                                message: `Notification has no such method "${type}"`
-                                            });
-                                            return;
-                                        }
+                if (!popup[type]) {
+                  popup.error({
+                    title: 'Error',
+                    message: `Notification has no such method "${type}"`
+                  });
+                  return;
+                }
 
-                                        popup[type]({
-                                            title: title,
-                                            message: message,
-                                            callback: callback
-                                        });
-                                    }
+                popup[type]({
+                  title: title,
+                  message: message,
+                  callback: callback
+                });
+                }
+                
+            function alertSuccess() {
+                const title = "Delete";
+                const message = 'Delete product success';
+                const position = "bottom-right";
+                const duration = 3000;
+                const type = 'success';
+                let callback = null;
 
-                                    function alertSuccess() {
-                                        const title = "Delete";
-                                        const message = 'Delete user success';
-                                        const position = "bottom-right";
-                                        const duration = 3000;
-                                        const type = 'success';
-                                        let callback = null;
+                const popup = Notification({
+                  position: position,
+                  duration: duration
+                });
 
-                                        const popup = Notification({
-                                            position: position,
-                                            duration: duration
-                                        });
+                if (!popup[type]) {
+                  popup.error({
+                    title: 'Error',
+                    message: `Notification has no such method "${type}"`
+                  });
+                  return;
+                }
 
-                                        if (!popup[type]) {
-                                            popup.error({
-                                                title: 'Error',
-                                                message: `Notification has no such method "${type}"`
-                                            });
-                                            return;
-                                        }
-
-                                        popup[type]({
-                                            title: title,
-                                            message: message,
-                                            callback: callback
-                                        });
-                                    }
-                                    function sleep(ms) {
-                                        return new Promise(resolve => setTimeout(resolve, ms));
-                                    }
+                popup[type]({
+                  title: title,
+                  message: message,
+                  callback: callback
+                });
+                }
+                function sleep(ms) {
+                    return new Promise(resolve => setTimeout(resolve, ms));
+                  }
         </script>
         <%
-            if (request.getAttribute("delete") != null) {
-        %>
-        <script>
-            alertSuccess();
-        </script>
+            if(request.getAttribute("delete") != null){
+                %>
+                <script>
+                    alertSuccess();
+                </script>
         <%
             }
         %>

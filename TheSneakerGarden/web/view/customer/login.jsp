@@ -6,14 +6,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%@include file="components/head.jsp" %>
+        <%@include file="../../components/head.jsp" %>
         <title>Login</title>
-        <link rel="stylesheet" href="./css/style.css">
-        <link rel="stylesheet" href="./css/login.css">
-        <link href="./notification/notification.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+        <link href="${pageContext.request.contextPath}/notification/notification.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <%@include file="components/header.jsp" %>
+        <%@include file="../../components/header.jsp" %>
         <section class="h-100" style="margin-top: 130px; margin-bottom: 200px">
             <div class="container h-100">
                 <div class="row justify-content-sm-center h-100">
@@ -50,7 +50,7 @@
                             </div>
                             <div class="card-footer py-3 border-0">
                                 <div class="text-center">
-                                    Don't have an account? <a href="./register.jsp" class="create-one">Create One</a>
+                                    Don't have an account? <a href="register" class="create-one">Create One</a>
                                 </div>
                             </div>
                         </div>
@@ -59,8 +59,8 @@
             </div>
         </section>
 
-        <%@include file="components/footer.jsp" %>
-        <script src="./notification/notification.js" type="text/javascript"></script>
+        <%@include file="../../components/footer.jsp" %>
+        <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
         <script>
             function alertLogin() {
                 const title = "Warnning";
@@ -110,7 +110,7 @@
             %>
         </script>
 
-        <script src="./js/login.js"></script>
+        <script src="${pageContext.request.contextPath}/js/login.js"></script>
     </body>
 
 </html>

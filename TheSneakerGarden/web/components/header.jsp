@@ -6,8 +6,8 @@
 <header class="main-container container position-sticky top-0">
     <div class="row">
         <div class="col-lg-3 col-2 logo">
-            <a class="navbar-brand pb-4" href="./home">
-                <img src="img/logo1.png" alt=""width="100px" height="150"
+            <a class="navbar-brand pb-4" href="home">
+                <img src="${pageContext.request.contextPath}/img/logo1.png" alt=""width="100px" height="150"
                      class="d-inline-block align-text-top nav-icon">
             </a>
         </div>
@@ -24,22 +24,22 @@
                         <div class="d-block">
                             <div class="d-flex">
                                 <li class="nav-item" >
-                                    <a id="homeActive" class="nav-link" aria-current="page" href="./home">Home</a>
+                                    <a id="homeActive" class="nav-link" aria-current="page" href="home">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="shopActive" class="nav-link" aria-current="page" href="./shop">Shop</a>
+                                    <a id="shopActive" class="nav-link" aria-current="page" href="shop">Shop</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Product
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a id="nikeActive" class="nav-link" aria-current="page" href="./shop?bId=1">Nike</a></li>
-                                        <li><a id="adidasActive" class="nav-link" aria-current="page" href="./shop?bId=2">Adidas</a></li>
+                                        <li><a id="nikeActive" class="nav-link" aria-current="page" href="shop?bId=1">Nike</a></li>
+                                        <li><a id="adidasActive" class="nav-link" aria-current="page" href="shop?bId=2">Adidas</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="aboutActive" class="nav-link" aria-current="page" href="./about.jsp">About</a>
+                                    <a id="aboutActive" class="nav-link" aria-current="page" href="about">About</a>
                                 </li>
                             </div>
                         </div>
@@ -77,17 +77,17 @@
                                         <%
                                             if (session.getAttribute("user") == null) {
                                         %>
-                                        <li><a class="dropdown-item" href="./login">Login</a></li>
-                                        <li><a class="dropdown-item" href="./register">Register</a></li>                         
+                                        <li><a class="dropdown-item" href="login">Login</a></li>
+                                        <li><a class="dropdown-item" href="register">Register</a></li>                         
                                             <%
                                             } else {
                                             %>
-                                        <li><a class="dropdown-item" href="./profile?id=<%=user.getUserId()%>">Profile</a></li>
-                                        <li><a class="dropdown-item" href="./../TheSneakerGarden/OrderDetailsCustomer">History</a></li>
+                                        <li><a class="dropdown-item" href="profile?id=<%=user.getUserId()%>">Profile</a></li>
+                                        <li><a class="dropdown-item" href="history?id=<%=user.getUserId()%>">History</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="./logout">Logout</a></li>
+                                        <li><a class="dropdown-item" href="logout">Logout</a></li>
                                             <%
                                                 }
                                             %>

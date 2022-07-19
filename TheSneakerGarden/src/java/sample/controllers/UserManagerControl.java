@@ -40,10 +40,10 @@ public class UserManagerControl extends HttpServlet {
             if ("update".equals(request.getParameter("action"))) {
                 User user1 = userManager.getUser(Integer.valueOf(request.getParameter("id")));
                 request.setAttribute("user1", user1);
-                request.getRequestDispatcher("./update-user.jsp").forward(request, response);
+                request.getRequestDispatcher("./view/admin/update-user.jsp").forward(request, response);
             }
             if ("add".equals(request.getParameter("action"))) {
-                request.getRequestDispatcher("./add.jsp").forward(request, response);
+                request.getRequestDispatcher("./view/admin/add.jsp").forward(request, response);
             }
             if ("delete".equals(request.getParameter("action"))) {
                 int id = Integer.valueOf(request.getParameter("id"));
@@ -51,14 +51,14 @@ public class UserManagerControl extends HttpServlet {
                 if (userManager.delete(id)) {
                     listUser = userManager.getAllUser();
                     request.setAttribute("listUser", listUser);
-                    request.getRequestDispatcher("./user-management.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
                 } else {
-                    request.getRequestDispatcher("./user-management.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
                 }
             }
         }
         request.setAttribute("listUser", listUser);
-        request.getRequestDispatcher("./user-management.jsp").forward(request, response);
+        request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
 
     }
 
@@ -104,9 +104,9 @@ public class UserManagerControl extends HttpServlet {
                 if (userManager.insert(user, "12345")) {
                     listUser = userManager.getAllUser();
                     request.setAttribute("listUser", listUser);
-                    request.getRequestDispatcher("./user-management.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
                 } else {
-                    request.getRequestDispatcher("./add.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/add.jsp").forward(request, response);
                 }
             }
 
@@ -122,14 +122,14 @@ public class UserManagerControl extends HttpServlet {
                 if (userManager.edit(user1)) {
                     listUser = userManager.getAllUser();
                     request.setAttribute("listUser", listUser);
-                    request.getRequestDispatcher("./user-management.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
                 } else {
-                    request.getRequestDispatcher("./update-user.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/update-user.jsp").forward(request, response);
                 }
             }
         }
         request.setAttribute("listUser", listUser);
-        request.getRequestDispatcher("./user-management.jsp").forward(request, response);
+        request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
 
     }
 

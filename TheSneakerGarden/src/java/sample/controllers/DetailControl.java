@@ -41,7 +41,7 @@ public class DetailControl extends HttpServlet {
         Product p = manager.getProductByID(id);
 
         request.setAttribute("detail", p);
-        request.getRequestDispatcher("product-detail.jsp").forward(request, response);
+        request.getRequestDispatcher("./view/customer/product-detail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

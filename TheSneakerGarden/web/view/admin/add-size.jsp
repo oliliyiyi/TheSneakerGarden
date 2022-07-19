@@ -20,9 +20,8 @@
 <html>
     <head>
         <%--<%@include file="./../../components/head.jsp" %>--%>   
-        <link rel="shortcut icon" href="./../../images/LogoTheSneakerGarden.png" type="image/x-icon">
-        <title>Add user</title>
-        <link href="./notification/notification.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" type="image/x-icon">
+        <title>Add Size</title>
         <style type="text/css">
             *{
                 margin: 0;
@@ -108,7 +107,7 @@
                 <div class="user-wrapper">
                     <div>
                         <h4><%=user.getUserFullName()%></h4>   
-                        <a  style="color: black; text-decoration: none" href="./login">Logout</a>    
+                        <a  style="color: black; text-decoration: none" href="login">Logout</a>    
                     </div>
                 </div>
             </header>
@@ -116,63 +115,34 @@
             <main>
                 <h3 style="display: flex;
                     justify-content: center;
-                    font-size: 40px; color:#00C897 ">Add user</h3>
+                    font-size: 40px; color:#00C897 ">Add or Update Product Size </h3>
 
                 <div style="display: flex; justify-content: space-between">
                     <div class="container" >
-                        <form action="user-management?action=add" method="POST" id="someFormId">
+                        <form action="ProductSize?action=add" method="POST">
                         <div class="user-input">
                             <div class="input-user">
-                                <span class="details">ID </span>
-                                <input type="text" name="id" value="" required disabled="" >
+                                <span class="details">Quantity</span>
+                                <input type="number"
+                                    name="quantity"
+                                    value=""
+                                    required
+                                    />
+                                <input type="hidden" name="id" value="<%=request.getParameter("id").toString()%>"  >
                             </div>
                             <div class="input-user">
-                                <span class="details">Account </span>
+                                <span class="details">Size </span>
                                 <input
-                                    name="account"
+                                    name="size"
                                     value=""
+                                    type="number"
                                     required
                                     />
-                            </div>
-                            <div class="input-user">
-                                <span class="details">Name </span>
-                                <input
-                                    name="name"
-                                    value=""
-                                    required
-                                    />
-                            </div>
-                            <div class="input-user">
-                                <span class="details">Email </span>
-                                <input type="email"
-                                    name="email"
-                                    value=""
-                                    
-                                    required
-                                    />
-                            </div>
-                            <div class="input-user">
-                                <span class="details">Phone</span>
-                                <input type="text"  
-                                    name="phone"
-                                    value=""
-                                    
-                                    required
-                                    />
-                            </div>
-                            <div class="input-user">
-                                <span class="details">Address</span>
-                                <input type="text"      
-                                    name="address" 
-                                    value=""
-                                    
-                                    required
-                                    >
                             </div>
                         </div>
                         <div class="buttonAdd">
                             <Button type="submit">
-                                Add users
+                                Add or Update Product Size
                             </Button>
                         </div>
                     </form>
@@ -180,67 +150,5 @@
                 </div>
             </main>
         </div>
-        <script src="./notification/notification.js" type="text/javascript"></script>
-    <script>
-      window.addEventListener('DOMContentLoaded', function () {
-        
-        const form = document.querySelector('form');
-
-
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          
-          // Form elements
-          const title = "Success";
-          const message = "Add new user successful";
-          const position = "bottom-right";
-          const duration = 3000;
-          /*
-            Available methods:
-              error
-              warning
-              success
-              info
-              dialog 
-
-            If you use dialog - 
-              the third parameter is the callback function
-          */  
-          const type = "success";
-          let callback = null;
-          const popup = Notification({
-            position: position,
-            duration: duration
-          });
-
-          if (!popup[type]) {
-            popup.error({
-              title: 'Error',
-              message: `Notification has no such method "${type}"`
-            });
-            return;
-          }
-
-          popup[type]({
-            title: title,
-            message: message,
-            callback: callback
-          });
-          sleep(3500).then(() => { document.getElementById('someFormId').submit(); });
-        });
-
-
-      });
-      function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-      
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-    <script>
-      document.querySelectorAll('pre code').forEach((el) => {
-        hljs.highlightElement(el);
-      });
-    </script>
     </body>
 </html>

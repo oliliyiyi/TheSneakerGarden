@@ -40,12 +40,12 @@ public class ProductManagerControl extends HttpServlet {
         ArrayList<Product> listProduct = productManager.getAllProduct();
         if (request.getParameter("action") != null) {
             if ("add".equals(request.getParameter("action"))) {
-                request.getRequestDispatcher("./add-item.jsp").forward(request, response);
+                request.getRequestDispatcher("./view/admin/add-item.jsp").forward(request, response);
             }
             if ("update".equals(request.getParameter("action"))) {
                 Product product = productManager.getProductByID(Integer.valueOf(request.getParameter("id")));
                 request.setAttribute("product", product);
-                request.getRequestDispatcher("./update-item.jsp").forward(request, response);
+                request.getRequestDispatcher("./view/admin/update-item.jsp").forward(request, response);
             }
             if ("delete".equals(request.getParameter("action"))) {
                 productManager.delete(Integer.valueOf(request.getParameter("id")));
@@ -53,7 +53,7 @@ public class ProductManagerControl extends HttpServlet {
             }
         }
         request.setAttribute("listProduct", listProduct);
-        request.getRequestDispatcher("./item-management.jsp").forward(request, response);
+        request.getRequestDispatcher("./view/admin/item-management.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -98,7 +98,7 @@ public class ProductManagerControl extends HttpServlet {
                     listProduct = productManager.getAllProduct();
                     request.setAttribute("listProduct", listProduct);
                 } else {
-                    request.getRequestDispatcher("./add-item.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/add-item.jsp").forward(request, response);
                 }
             }
             
@@ -115,12 +115,12 @@ public class ProductManagerControl extends HttpServlet {
                     listProduct = productManager.getAllProduct();
                     request.setAttribute("listProduct", listProduct);
                 } else {
-                    request.getRequestDispatcher("./update-item.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/update-item.jsp").forward(request, response);
                 }
             }
         }
         request.setAttribute("listProduct", listProduct);
-        request.getRequestDispatcher("./item-management.jsp").forward(request, response);
+        request.getRequestDispatcher("./view/admin/item-management.jsp").forward(request, response);
     }
 
     /**

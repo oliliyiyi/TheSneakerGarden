@@ -38,7 +38,7 @@ public class checkout extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        request.getRequestDispatcher("/checkout.jsp").include(request, response);
+        request.getRequestDispatcher("./view/customer/checkout.jsp").include(request, response);
 
     }
 
@@ -116,7 +116,7 @@ public class checkout extends HttpServlet {
             }
         }
         session.setAttribute("cart", null);
-        request.getRequestDispatcher("./cart").include(request, response);
+        request.getRequestDispatcher("./view/customer/cart").include(request, response);
     }
 
     /**

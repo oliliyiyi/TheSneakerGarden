@@ -560,6 +560,79 @@ h5 {
 .carousel-height, .carousel-image {
     height: 45rem;
 }
+.account-profile {
+    text-decoration: none;
+    color: rgba(0,0,0,.87);
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.9375rem;
+    text-transform: capitalize;
+    transition: color .1s cubic-bezier(.4,0,.2,1);
+}
+.account-profile-img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    line-height: 1.25rem;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    flex-shrink: 0;
+    margin-right: 0.625rem;
+}
+.account-profile-img i{
+    font-size: 20px;
+}
+.account-profile-title {
+    line-height: 1rem;
+    font-size: 1.2rem;
+}
+.account-profile-title span {
+    font-weight: 500;
+    margin-right: 0.3125rem;
+}
+.list-down a {
+    color: white;
+}
+.my-account-item{
+    display: block;
+    padding: 0 0 0.1875rem 2.125rem;
+}
+.my-account-itemlist{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    display: block;
+    margin-bottom: 0.9375rem;
+}
+.my-account-itemlist span {
+    text-transform: capitalize;
+    transition: color .1s cubic-bezier(.4,0,.2,1);
+    font-size: 1rem;
+    display: block;
+}
+.my-account-itemlist.active, .account-profile-title.active {
+    padding-bottom: 0.25rem;
+    border-bottom-style: solid;
+    border-bottom-color: var(--btn-white-text);
+}
+.card-profile-1 .text-muted {
+    font-size: 1.1rem;
+}
+.card-profile-2 .text-muted {
+    font-size: 1.1rem;
+}
+.view-detail {
+    color: blue;
+    margin-left: 15px; 
+    cursor: pointer;
+}
+.input-profile {
+    padding: 5px;
+    width: 60%;
+}
 /* Making Responsive */
 @media screen and (max-width: 1200px) {
     .carousel-height, .carousel-image {

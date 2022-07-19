@@ -49,7 +49,7 @@ public class AdminLoginControl extends HttpServlet {
         request.setAttribute("listUser", listUser);
         request.setAttribute("listOrder", listOrder);
         request.setAttribute("listProduct", listProduct);
-        request.getRequestDispatcher("./dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("./view/admin/dashboard.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

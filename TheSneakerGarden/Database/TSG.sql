@@ -256,6 +256,7 @@ CREATE TABLE Customer (
 	[Phone] [varchar](10) NOT NULL,
 	[Address] [nvarchar](100) NOT NULL,
 	[Status] [int] NULL,
+	[token] [nvarchar](30) NULL,
     CONSTRAINT PK_Customer_Customer PRIMARY KEY CLUSTERED (
         CustomerID 
     ),

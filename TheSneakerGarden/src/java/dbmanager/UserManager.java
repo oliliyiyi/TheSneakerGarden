@@ -209,4 +209,96 @@ public class UserManager {
         }
         return status;
     }
+    
+    public boolean updateResetPasswordToken(String token, int userId) {
+        boolean status = false;
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[Customer] SET [token] = ?"
+                    + " WHERE [CustomerID] = " + userId);
+            ps.setString(1, token);
+            ps.executeUpdate();
+            status = true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return status;
+    }
+
+    public int findUserByEmail(String email) {
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            PreparedStatement ps = conn.prepareStatement("SELECT [CustomerID] FROM [dbo].[Customer]"
+                    + " WHERE [Email] = ?");
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next() == false) {
+                return -1;
+            } else {
+                int uid = rs.getInt(1);
+                return uid;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return -1;
+    }
+
+    public User findUserByToken(String token) {
+        User user = null;
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM [dbo].[Customer]"
+                    + " WHERE [token] = ?");
+            ps.setString(1, token);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                user = new User(
+                        rs.getInt(1),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(2));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return user;
+    }
+
+    public boolean updatePassword(String pass, String token) {
+        boolean status = false;
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[Customer] SET [Password] = ?, [token] = NULL"
+                    + " WHERE [token] = ?");
+            ps.setString(1, pass);
+            ps.setString(2, token);
+            ps.executeUpdate();
+            status = true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return status;
+    }
+    
+    public boolean updateProfile(String fullname, String email, String phone, int userId) {
+        boolean status = false;
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[Customer] SET [FullName] = ?, [Email] = ?, [Phone] = ?"
+                    + " WHERE [CustomerID] = " + userId);
+            ps.setString(1, fullname);
+            ps.setString(2, email);
+            ps.setString(3, phone);
+            ps.executeUpdate();
+            status = true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return status;
+    }
 }
