@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import model.CartItem;
 import model.Order;
+import model.PaymentType;
 import utils.DBUtils;
 
 /**
@@ -26,7 +27,7 @@ public class OrderManager {
     ResultSet rs = null;
     DBUtils db = new DBUtils();
 
-    public boolean insertOder(int userID, String fullName, String phone, String shipAddress, String email, Date orderDate, double price) {
+    public boolean insertOder(int userID, String fullName, String phone, String shipAddress, String email, Date orderDate) {
         String query = "INSERT [dbo].[Orders]\n"
                 + "           ([CustomerID]\n"
                 + "           ,[FullName]\n"
@@ -58,7 +59,7 @@ public class OrderManager {
         }
     }
 
-    public boolean insertOder(String fullName, String phone, String shipAddress, String email, Date orderDate, double price) {
+    public boolean insertOder(String fullName, String phone, String shipAddress, String email, Date orderDate) {
         String query = "INSERT [dbo].[Orders]\n"
                 + "           ([FullName]\n"
                 + "           ,[Phone]\n"
@@ -68,7 +69,7 @@ public class OrderManager {
                 + "           ,[Status]) VALUES (?, ?, ?, ?, ?, 0)";//query insert
         try {
             con = db.getConnectDB();//mo ket noi voi sql
-            PreparedStatement pst = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);//create prepare statement
+            PreparedStatement pst = con.prepareStatement(query);//create prepare statement
             pst.setString(1, fullName);
             pst.setString(2, phone);
             pst.setString(3, shipAddress);
@@ -253,5 +254,64 @@ public class OrderManager {
             System.out.println(e.getMessage());
         }
         return status;
+    }
+    
+    public ArrayList<PaymentType> getPaymentType() {
+        ArrayList<PaymentType> list = new ArrayList<>();
+        String query = "SELECT *\n"
+                + "  FROM [dbo].[PaymentType]";
+        try {
+            con = db.getConnectDB();//mo ket noi voi sql
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new PaymentType(rs.getInt("TypeID"),
+                        rs.getString("TypeName")));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
+    public boolean insertPayment(int userId, int typeId, int orderId, double amount) {
+        String query = "INSERT INTO [dbo].[Payment] ([CustomerID], [TypeID], [OrderID], [Amount]) VALUES (?, ?, ?, ?)";//query insert
+        try {
+            con = db.getConnectDB();//mo ket noi voi sql
+            PreparedStatement pst = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);//create prepare statement
+
+            pst.setInt(1, userId);
+            pst.setInt(2, typeId);
+            pst.setInt(3, orderId);
+            pst.setDouble(4, amount);
+            pst.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage() + "+++++++++++++++" + orderId);//display warning message
+            return false;
+        } catch (Exception e) {
+            System.out.println("can't insert product to list.");//display warning message
+            return false;
+        }
+    }
+    
+    public boolean insertPayment(int typeId, int orderId, double amount) {
+        String query = "INSERT INTO [dbo].[Payment] ([TypeID], [OrderID], [Amount]) VALUES (?, ?, ?)";//query insert
+        try {
+            con = db.getConnectDB();//mo ket noi voi sql
+            PreparedStatement pst = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);//create prepare statement
+            pst.setInt(1, typeId);
+            pst.setInt(2, orderId);
+            pst.setDouble(3, amount);
+            pst.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage() + "+++++++++++++++" + orderId);//display warning message
+            return false;
+        } catch (Exception e) {
+            System.out.println("can't insert product to list.");//display warning message
+            return false;
+        }
     }
 }

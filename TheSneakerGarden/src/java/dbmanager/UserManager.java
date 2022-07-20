@@ -26,7 +26,11 @@ public class UserManager {
     public User login(String username, String pass) {
         User user = new User();
         String query = "SELECT  [CustomerID]\n"
+                + "      ,[Account]\n"
                 + "      ,[FullName]\n"
+                + "      ,[Email]\n"
+                + "      ,[Phone]\n"
+                + "      ,[Address]\n"
                 + "      ,[RoleID]\n"
                 + "  FROM [dbo].[Customer]\n"
                 + "  WHERE [Account] = '" + username + "' AND [Password] = '" + pass + "'";
@@ -38,7 +42,12 @@ public class UserManager {
                 user = new User(
                         rs.getInt(1),
                         rs.getString(2),
-                        rs.getInt(3));
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7));
+
             }
         } catch (SQLException e) {
         }
@@ -209,7 +218,7 @@ public class UserManager {
         }
         return status;
     }
-    
+
     public boolean updateResetPasswordToken(String token, int userId) {
         boolean status = false;
         try {
@@ -284,7 +293,7 @@ public class UserManager {
         }
         return status;
     }
-    
+
     public boolean updateProfile(String fullname, String email, String phone, int userId) {
         boolean status = false;
         try {

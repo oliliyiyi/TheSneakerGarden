@@ -414,6 +414,7 @@ CREATE TABLE PaymentType(
 	)
 )
 GO
+INSERT INTO dbo.PaymentType(TypeName) VALUES (N'Cash on delivery')
 INSERT INTO dbo.PaymentType(TypeName) VALUES (N'Momo')
 INSERT INTO dbo.PaymentType(TypeName) VALUES (N'Viettelpay')
 INSERT INTO dbo.PaymentType(TypeName) VALUES (N'Credit card')
@@ -421,7 +422,7 @@ INSERT INTO dbo.PaymentType(TypeName) VALUES (N'Visa')
 GO
 CREATE TABLE Payment(
 	PaymentID int identity(1,1) NOT NULL,
-	CustomerID int NOT NULL,
+	CustomerID int NULL,
 	TypeID int NOT NULL,
 	OrderID int NOT NULL,
 	Amount float NOT NULL,

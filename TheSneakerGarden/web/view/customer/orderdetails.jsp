@@ -61,7 +61,7 @@
 
 
                     <!--History-->
-                    <div class="card-profile-4 card-body p-4">
+                    <div class="col-md-9 card-profile-4 card-body p-4">
                         <h3>Order Details</h3>
                         <hr class="mt-0 mb-4">
                         <div class="row pt-1 align-items-center">

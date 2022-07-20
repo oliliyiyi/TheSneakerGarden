@@ -7,6 +7,7 @@ package sample.controllers;
 import dbmanager.OrderManager;
 import dbmanager.ProductManager;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.CartItem;
+import model.PaymentType;
 import model.Product;
 import model.User;
 
@@ -37,7 +39,9 @@ public class checkout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        OrderManager orderManager = new OrderManager();
+        ArrayList<PaymentType> type = orderManager.getPaymentType();
+        request.setAttribute("type", type);
         request.getRequestDispatcher("./view/customer/checkout.jsp").include(request, response);
 
     }
@@ -68,16 +72,13 @@ public class checkout extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String fullname = request.getParameter("fullname");
-        String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
-        String address = request.getParameter("address");
+        String typeId = request.getParameter("typeId");
+        String amount = request.getParameter("amount");
 
         long millis = System.currentTimeMillis();
         java.sql.Date orderDate = new java.sql.Date(millis);
 
-        OrderManager oderDAO = new OrderManager();
+        OrderManager orderManager = new OrderManager();
         HttpSession session = request.getSession();
         Map<Integer, CartItem> cart = null;
 
@@ -85,38 +86,46 @@ public class checkout extends HttpServlet {
             request.getRequestDispatcher("/cart").include(request, response);
         } else if (session.getAttribute("user") != null) {
             User userSession = (User) session.getAttribute("user");
-            ProductManager pro = new ProductManager();
+            ProductManager productManager = new ProductManager();
             cart = (Map<Integer, CartItem>) session.getAttribute("cart");
             int total = 0;
             for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
-                Product product = pro.getProductByID(en.getKey());
+                Product product = productManager.getProductByID(en.getKey());
                 total += product.getPrice() * en.getValue().getQuantity();
             }
-            if (oderDAO.insertOder(userSession.getUserId(), fullname, phone, address, email, orderDate, total)) {
+            if (orderManager.insertOder(userSession.getUserId(), userSession.getUserFullName(), userSession.getUserPhone(), userSession.getUserAddress(), userSession.getUserEmail(), orderDate)) {
                 for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
-                    Product product = pro.getProductByID(en.getValue().getID());
-                    oderDAO.insertOderItem(oderDAO.getOrderID(), en.getValue().getID(), en.getValue().getSize(), en.getValue().getQuantity(), product.getPrice());
-                    pro.updateSize(en.getValue().getSize(), en.getValue().getID(), pro.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
+                    Product product = productManager.getProductByID(en.getValue().getID());
+                    orderManager.insertOderItem(orderManager.getOrderID(), en.getValue().getID(), en.getValue().getSize(), en.getValue().getQuantity(), product.getPrice());
+                    orderManager.insertPayment(userSession.getUserId(), Integer.parseInt(typeId), orderManager.getOrderID(), Double.parseDouble(amount));
+                    productManager.updateSize(en.getValue().getSize(), en.getValue().getID(), productManager.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
                 }
             }
         } else {
-            ProductManager pro = new ProductManager();
+            String fullname = request.getParameter("fullname");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+            ProductManager productManager = new ProductManager();
             cart = (Map<Integer, CartItem>) session.getAttribute("cart");
             int total = 0;
             for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
-                Product product = pro.getProductByID(en.getValue().getID());
+                Product product = productManager.getProductByID(en.getValue().getID());
                 total += product.getPrice() * en.getValue().getQuantity();
             }
-            if (oderDAO.insertOder(fullname, phone, address, email, orderDate, total)) {
+            if (orderManager.insertOder(fullname, phone, address, email, orderDate)) {
                 for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
-                    Product product = pro.getProductByID(en.getValue().getID());
-                    oderDAO.insertOderItem(oderDAO.getOrderID(), en.getValue().getID(), en.getValue().getSize(),  en.getValue().getQuantity(), product.getPrice());
-                    pro.updateSize(en.getValue().getSize(), en.getValue().getID(), pro.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
+                    Product product = productManager.getProductByID(en.getValue().getID());
+                    orderManager.insertOderItem(orderManager.getOrderID(), en.getValue().getID(), en.getValue().getSize(), en.getValue().getQuantity(), product.getPrice());
+                    orderManager.insertPayment(Integer.parseInt(typeId), orderManager.getOrderID(), Double.parseDouble(amount));
+                    productManager.updateSize(en.getValue().getSize(), en.getValue().getID(), productManager.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
                 }
             }
         }
+
         session.setAttribute("cart", null);
-        request.getRequestDispatcher("./view/customer/cart").include(request, response);
+        response.sendRedirect("./cart");
+        return;
     }
 
     /**
