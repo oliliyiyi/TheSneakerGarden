@@ -71,7 +71,7 @@
                                             <img src="<%=product.getImage()%>"/>
                                         </div>
                                         <div class="my-2 mx-5">
-                                            <h6 class="my-0"><%=product.getName()%>x<%=en.getValue().getQuantity()%></h6>
+                                            <h6 class="my-0"><%=product.getName()%> x <%=en.getValue().getQuantity()%></h6>
                                             <small class="text-muted"><%=product.getPrice()%></small>
                                         </div>
                                     </div>

@@ -28,7 +28,8 @@ public class ReviewManager {
 
     public ArrayList<Review> getAllReview() {
         ArrayList<Review> list = new ArrayList<>();
-        String sql = "select ReviewID, ProductID, CustomerID, [Message], ReviewDate from dbo.Review";
+        String sql = "SELECT *"
+                + " FROM [TSG].[dbo].[Review]";
         try {
             conn = db.getConnectDB();
             ps = conn.prepareCall(sql);
@@ -39,7 +40,8 @@ public class ReviewManager {
                         rs.getInt(2),
                         rs.getInt(3),
                         rs.getString(4),
-                        rs.getDate(5)));
+                        rs.getDate(5),
+                        rs.getDouble(6)));
             }
             return list;
         } catch (Exception e) {
@@ -49,7 +51,7 @@ public class ReviewManager {
     }
 
     public ArrayList<Review> getReviewByProductID(int pID) {
-        String sql = "select ReviewID, ProductID, CustomerID, [Message], ReviewDate from dbo.Review "
+        String sql = "SELECT * FROM [TSG].[dbo].[Review] "
                 + "where ProductID = ?";
         ArrayList<Review> list = new ArrayList<>();
         try {
@@ -63,7 +65,8 @@ public class ReviewManager {
                         rs.getInt("ProductID"),
                         rs.getInt("CustomerID"),
                         rs.getString("Message"),
-                        rs.getDate("ReviewDate")));
+                        rs.getDate("ReviewDate"),
+                        rs.getDouble("Rating")));
             }
             return list;
         } catch (Exception e) {
@@ -71,7 +74,7 @@ public class ReviewManager {
         }
         return null;
     }
-    
+
     public ArrayList<Review> getAllReviewProductID(int id) {
         ArrayList<Review> list = new ArrayList<>();
         String query = "SELECT *"
@@ -87,7 +90,31 @@ public class ReviewManager {
                         rs.getInt("ProductID"),
                         rs.getInt("CustomerID"),
                         rs.getString("Message"),
-                        rs.getDate("ReviewDate")));
+                        rs.getDate("ReviewDate"),
+                        rs.getDouble("Rating")));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
+    public ArrayList<Review> getAllReviewByRating(double rating, int productID) {
+        ArrayList<Review> list = new ArrayList<>();
+        String query = "SELECT *"
+                + "  FROM [dbo].[Review] "
+                + "  WHERE [ProductID] = " + productID + " and [Rating] = " + rating;
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Review(
+                        rs.getInt("ReviewID"),
+                        rs.getInt("ProductID"),
+                        rs.getInt("CustomerID"),
+                        rs.getString("Message"),
+                        rs.getDate("ReviewDate"),
+                        rs.getDouble("Rating")));
             }
         } catch (SQLException e) {
         }
@@ -108,7 +135,8 @@ public class ReviewManager {
                         rs.getInt("ProductID"),
                         rs.getInt("CustomerID"),
                         rs.getString("Message"),
-                        rs.getDate("ReviewDate"));
+                        rs.getDate("ReviewDate"),
+                        rs.getDouble("Rating"));
             }
             return review;
         } catch (Exception e) {
@@ -116,13 +144,14 @@ public class ReviewManager {
         }
     }
 
-    public boolean addReview(int productID, int userID, String mess, Date rvDate) {
+    public boolean addReview(int productID, int userID, String mess, Date rvDate, double rating) {
         String sql = "INSERT INTO [dbo].[Review]\n"
                 + "           ([ProductID]\n"
                 + "           ,[CustomerID]\n"
                 + "           ,[Message]\n"
-                + "           ,[ReviewDate])\n"
-                + " VALUES(?, ?, ?, ?)";
+                + "           ,[ReviewDate]\n"
+                + "           ,[Rating])\n"
+                + " VALUES(?, ?, ?, ?, ?)";
         try {
             conn = db.getConnectDB();
             ps = conn.prepareCall(sql);
@@ -130,6 +159,7 @@ public class ReviewManager {
             ps.setInt(2, userID);
             ps.setString(3, mess);
             ps.setDate(4, rvDate);
+            ps.setDouble(5, rating);
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -138,14 +168,15 @@ public class ReviewManager {
         }
     }
 
-    public boolean updateReviewByID(int reviewID, String message, Date rvDate) {
-        String sql = "UPDATE dbo.Review SET [Message] = ? ReviewDate = ? WHERE ReviewID = ?";
+    public boolean updateReviewByID(int reviewID, String message, Date rvDate, double rating) {
+        String sql = "UPDATE dbo.Review SET [Message] = ? ReviewDate = ? Rating = ? WHERE ReviewID = ?";
         try {
             conn = db.getConnectDB();
             ps = conn.prepareCall(sql);
             ps.setString(1, message);
             ps.setDate(2, rvDate);
-            ps.setInt(3, reviewID);
+            ps.setDouble(3, rating);
+            ps.setInt(4, reviewID);
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -167,4 +198,5 @@ public class ReviewManager {
             return false;
         }
     }
+
 }

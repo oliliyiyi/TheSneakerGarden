@@ -17,16 +17,18 @@ public class Review {
     public int customerID;
     public String message;
     public Date reviewDate;
+    public double rating;
     
     public  Review(){
     }
 
-    public Review(int reviewID, int pID, int customerID, String message, Date reviewDate) {
+    public Review(int reviewID, int pID, int customerID, String message, Date reviewDate, double rating) {
         this.reviewID = reviewID;
         this.pID = pID;
         this.customerID = customerID;
         this.message = message;
         this.reviewDate = reviewDate;
+        this.rating = rating;
     }
 
     public int getReviewID() {
@@ -68,6 +70,15 @@ public class Review {
     public void setReviewDate(Date reviewDate) {
         this.reviewDate = reviewDate;
     }
-    
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+   
     
 }

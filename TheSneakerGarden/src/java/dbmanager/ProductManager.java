@@ -271,22 +271,6 @@ public class ProductManager {
         return check;
     }
 
-    //in all sp 
-    //    public ArrayList<Size> getProductSize(int id) {
-    //        ArrayList<Size> list = new ArrayList<>();
-    //        String query = "SELECT * FROM [dbo].[Sizes] WHERE [ProductID] = " + id;
-    //        try {
-    //            conn = db.getConnectDB();//mo ket noi voi sql
-    //            ps = conn.prepareStatement(query);
-    //            rs = ps.executeQuery();
-    //            while (rs.next()) {
-    //                list.add(new Size(rs.getInt("SizeNumber"), rs.getInt("quantity"), rs.getInt("productid")));
-    //            }
-    //        } catch (SQLException e) {
-    //            e.getMessage();
-    //        }
-    //        return list;
-    //    }
     public boolean insertSize(int sizeNum, int proID, int quantity) {
         boolean check = false;
         String query = "INSERT [dbo].[Inventory] ([ProductID], [SizeNumber], [Quantity]) VALUES(" + proID + "," + sizeNum + ", " + quantity + ")";
