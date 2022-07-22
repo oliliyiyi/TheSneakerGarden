@@ -8,15 +8,14 @@
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    User user = (User) session.getAttribute("user");
     if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
+        User user = (User) session.getAttribute("user");
         if (user.getRoleID() != 1) {
             response.sendRedirect("./login");
-        }
-    }
-    Product product = (Product) request.getAttribute("product");
+        } else {
+            Product product = (Product) request.getAttribute("product");
 %>
 <!DOCTYPE html>
 <html>
@@ -251,3 +250,7 @@
         </script>
     </body>
 </html>
+<%
+        }
+    }
+%>

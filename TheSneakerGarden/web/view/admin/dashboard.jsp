@@ -9,17 +9,16 @@
 <%@page import="model.User"%>
 <%@page import="java.util.ArrayList"%>
 <%
-    User user = (User) session.getAttribute("user");
     if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
+        User user = (User) session.getAttribute("user");
         if (user.getRoleID() != 1) {
             response.sendRedirect("./login");
-        }
-    }
-    ArrayList<User> listUser = (ArrayList<User>) request.getAttribute("listUser");
-    ArrayList<Product> listProduct = (ArrayList<Product>) request.getAttribute("listProduct");
-    ArrayList<Order> listOrder = (ArrayList<Order>) request.getAttribute("listOrder");
+        } else {
+            ArrayList<User> listUser = (ArrayList<User>) request.getAttribute("listUser");
+            ArrayList<Product> listProduct = (ArrayList<Product>) request.getAttribute("listProduct");
+            ArrayList<Order> listOrder = (ArrayList<Order>) request.getAttribute("listOrder");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -176,3 +175,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>
+<%
+        }
+    }
+%>

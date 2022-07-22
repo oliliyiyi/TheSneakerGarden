@@ -71,7 +71,7 @@
                                             <img src="<%=product.getImage()%>"/>
                                         </div>
                                         <div class="my-2 mx-5">
-                                            <h6 class="my-0"><%=product.getName()%> x <%=en.getValue().getQuantity()%></h6>
+                                            <h6 class="my-0"><%=product.getName()%>x<%=en.getValue().getQuantity()%></h6>
                                             <small class="text-muted"><%=product.getPrice()%></small>
                                         </div>
                                     </div>
@@ -124,9 +124,9 @@
                                 <% } else {%>
                                 <li class="list-group-item d-flex align-items-center justify-content-between py-4">
                                     <h5 class="my-0">Payment Method</h5>
-                                    <div class="d-flex justify-content-between">
-                                        <!--<h6 class="mx-5 text-uppercase">Cash on delivery</h6>-->
-                                        <select class="custom-select text-uppercase p-1" id="inputGroupSelect01" name="typeId">
+                                    <div class="">
+                                            <img class="payment-image-type mx-2 d-none" style="width:50px" src="#"/>
+                                        <select onchange="handleChange()" class="custom-select text-uppercase p-1" id="inputGroupSelect01" name="typeId">
                                             <%
                                                 for (PaymentType type : types) {
                                             %>
@@ -144,7 +144,7 @@
                                     <strong style="font-size: 1.5rem;"><%=total%></strong>
                                     <input type="hidden" value="<%=total%>" name="amount"/>
                                 </li>
-                                <button class="btn btn-black btn-lg mt-5" onclick="myFunction()" type="submit">Continue to checkout</button>
+                                <button class="btn btn-black btn-lg mt-5" onclick="" type="submit">Continue to checkout</button>
                                 <%
                                     }
                                 %>
@@ -158,9 +158,32 @@
         </div>
 
         <script>
-            function myFunction() {
-                alert("Thank you for your order!!!");
+            function handleChange() {
+                if($('.custom-select').val()==="1"){
+                    $('.payment-image-type').addClass('d-none')
+                }
+                if($('.custom-select').val()==="2"){
+                    $('.payment-image-type').css('width','50px')
+                    $('.payment-image-type').removeClass('d-none')
+                    $('.payment-image-type').attr('src','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1bHjHnPSDXgBS2WSVOAm57BdPvoAmwBMcqXwjTGUiiJGYrkvUZuVgZHXeZJWWX7kLlCg&usqp=CAU')
+                }
+                if($('.custom-select').val()==="3"){
+                    $('.payment-image-type').css('width','50px')
+                    $('.payment-image-type').removeClass('d-none')
+                    $('.payment-image-type').attr('src','https://monfin.vn/images/source/Congty/viettelpay.png')
+                }
+                if($('.custom-select').val()==="4"){
+                    $('.payment-image-type').css('width','200px')
+                    $('.payment-image-type').removeClass('d-none')
+                    $('.payment-image-type').attr('src','http://hangkhong247.vn/image/thanhtoanvisa.png')
+                }
+                if($('.custom-select').val()==="5"){
+                    $('.payment-image-type').css('width','50px')
+                    $('.payment-image-type').removeClass('d-none')
+                    $('.payment-image-type').attr('src','https://brademar.com/wp-content/uploads/2022/05/Visa-Logo-PNG-1976-%E2%80%93-1992.png')
+                }
             }
+            
         </script>
         <%@include file="../../components/footer.jsp" %>
         <script src="${pageContext.request.contextPath}/js/form-validation.js"></script>

@@ -7,14 +7,13 @@
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    User user = (User) session.getAttribute("user");
     if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
+        User user = (User) session.getAttribute("user");
         if (user.getRoleID() != 1) {
             response.sendRedirect("./login");
-        }
-    }
+        } else {
 %>
 <!DOCTYPE html>
 <html>
@@ -189,70 +188,76 @@
                 </div>
 
 
-                
+
             </main>
         </div>
-    <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
-    <script>
-      window.addEventListener('DOMContentLoaded', function () {
-        
-        const form = document.querySelector('form');
+        <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', function () {
+
+                const form = document.querySelector('form');
 
 
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          
-          // Form elements
-          const title = "Success";
-          const message = "Add new product successful";
-          const position = "bottom-right";
-          const duration = 3000;
-          /*
-            Available methods:
-              error
-              warning
-              success
-              info
-              dialog 
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
 
-            If you use dialog - 
-              the third parameter is the callback function
-          */  
-          const type = "success";
-          let callback = null;
-          const popup = Notification({
-            position: position,
-            duration: duration
-          });
+                    // Form elements
+                    const title = "Success";
+                    const message = "Add new product successful";
+                    const position = "bottom-right";
+                    const duration = 3000;
+                    /*
+                     Available methods:
+                     error
+                     warning
+                     success
+                     info
+                     dialog 
+                 
+                     If you use dialog - 
+                     the third parameter is the callback function
+                     */
+                    const type = "success";
+                    let callback = null;
+                    const popup = Notification({
+                        position: position,
+                        duration: duration
+                    });
 
-          if (!popup[type]) {
-            popup.error({
-              title: 'Error',
-              message: `Notification has no such method "${type}"`
+                    if (!popup[type]) {
+                        popup.error({
+                            title: 'Error',
+                            message: `Notification has no such method "${type}"`
+                        });
+                        return;
+                    }
+
+                    popup[type]({
+                        title: title,
+                        message: message,
+                        callback: callback
+                    });
+                    sleep(3500).then(() => {
+                        document.getElementById('someFormId').submit();
+                    });
+                });
+
+
             });
-            return;
-          }
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
 
-          popup[type]({
-            title: title,
-            message: message,
-            callback: callback
-          });
-          sleep(3500).then(() => { document.getElementById('someFormId').submit(); });
-        });
-
-
-      });
-      function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-      
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-    <script>
-      document.querySelectorAll('pre code').forEach((el) => {
-        hljs.highlightElement(el);
-      });
-    </script>
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>
+            document.querySelectorAll('pre code').forEach((el) => {
+                hljs.highlightElement(el);
+            });
+        </script>
     </body>
 </html>
+<%
+        }
+    }
+%>

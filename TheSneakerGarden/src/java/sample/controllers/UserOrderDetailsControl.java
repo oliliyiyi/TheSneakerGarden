@@ -47,20 +47,22 @@ public class UserOrderDetailsControl extends HttpServlet {
             User user = (User) session.getAttribute("user");
             listOrder = order.getAllOrderByUserID(user.getUserId());
 
-            for (int i = 0; i < listOrder.size(); i++) {
-                listItem.addAll(order.getAllProductByOrderID(listOrder.get(i).getOrderId()));
-            }
+            int id = Integer.valueOf(request.getParameter("id"));
+            OrderManager manager = new OrderManager();
+            listItem = manager.getAllProductByOrderID(id);
+
+            User userSession = (User) session.getAttribute("user");
+            UserManager userManager = new UserManager();
+            User user1 = userManager.getUser(userSession.getUserId());
+
+            request.setAttribute("detail", user1);
+            request.setAttribute("tab", "history");
+            request.setAttribute("listOrderHistory", listOrder);
+            request.setAttribute("orderHistory", listItem);
+            request.getRequestDispatcher("./view/customer/orderdetails.jsp").forward(request, response);
         }
         //profile
-        User userSession = (User) session.getAttribute("user");
-        UserManager manager = new UserManager();
-        User user = manager.getUser(userSession.getUserId());
 
-        request.setAttribute("detail", user);
-        request.setAttribute("tab", "history");
-        request.setAttribute("listOrderHistory", listOrder);
-        request.setAttribute("orderHistory", listItem);
-        request.getRequestDispatcher("./view/customer/orderdetails.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

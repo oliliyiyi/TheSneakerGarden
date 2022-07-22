@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Inventory;
-import model.Size;
+
 
 /**
  *
@@ -191,24 +191,6 @@ public class ProductManager {
         return list;
     }
 
-//    public Size getProductSize(int id) {
-//        Size size = new Size();
-//        String query = "SELECT [SizeID], [SizeNumber], [Width], [Length] FROM [dbo].[Sizes] WHERE [SizeID]=" + id;
-//        try {
-//            conn = db.getConnectDB();//mo ket noi voi sql
-//            ps = conn.prepareStatement(query);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                int sizeNum = rs.getInt("SizeNumber");
-//                String width = rs.getString("Width");
-//                String length = rs.getString("Length");
-//                size = new Size(sizeNum, sizeNum, length, width);
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return size;
-//    }
     public int getProductQuantityByProSize(int sizeNum, int proID) {
         int quantity = 0;
         String query = "SELECT [Quantity] FROM [dbo].[Inventory] WHERE [ProductID] = " + proID + "AND [SizeNumber] = " + sizeNum;
@@ -283,4 +265,27 @@ public class ProductManager {
         }
         return check;
     }
+    
+//    public ArrayList<Category> getAllCategory() {
+//        ArrayList<Product> list = new ArrayList<>();
+//        String query = "SELECT * FROM [dbo].[Products] WHERE [status] = 1";
+//        try {
+//            conn = db.getConnectDB();//mo ket noi voi sql
+//            ps = conn.prepareStatement(query);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                list.add(new Product(rs.getInt("ProductID"),
+//                        rs.getString("ProductName"),
+//                        rs.getString("ImageLink"),
+//                        rs.getDouble("Price"),
+//                        rs.getString("Description"),
+//                        rs.getInt("CategoryID"),
+//                        rs.getInt("BrandID"),
+//                        rs.getInt("Status")));
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return list;
+//    }
 }

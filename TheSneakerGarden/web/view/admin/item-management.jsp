@@ -9,14 +9,13 @@
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    User user = (User) session.getAttribute("user");
     if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
+        User user = (User) session.getAttribute("user");
         if (user.getRoleID() != 1) {
             response.sendRedirect("./login");
-        }
-    }
+        } else {
 %>
 <!DOCTYPE html>
 <html>
@@ -152,24 +151,24 @@
                         </thead>
                         <tbody>
                             <%
-                                ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("listProduct");
+                                ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("listProduct");
                                 String brand = null;
                                 String cate = null;
                                 for (Product product : list) {
-                                if(product.getbrandID()==1){
-                                    brand = "Nike";
-                                }else{
-                                    brand = "Adidas";
-                                }
-                                if(product.getcId()==1){
-                                    cate = "Shoes";
-                                }else if (product.getcId()==2){
-                                    cate = "Shock";
-                                }else if (product.getcId()==3){
-                                    cate = "Hat";
-                                }else {
-                                    cate = "Backpack";
-                                }
+                                    if (product.getbrandID() == 1) {
+                                        brand = "Nike";
+                                    } else {
+                                        brand = "Adidas";
+                                    }
+                                    if (product.getcId() == 1) {
+                                        cate = "Shoes";
+                                    } else if (product.getcId() == 2) {
+                                        cate = "Shock";
+                                    } else if (product.getcId() == 3) {
+                                        cate = "Hat";
+                                    } else {
+                                        cate = "Backpack";
+                                    }
                             %>
                             <tr>
                                 <td><%=product.getId()%></td>
@@ -187,7 +186,7 @@
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                         </svg></a></td>
                                 <td><a href="ProductSize?action=view&id=<%=product.getId()%>" style="color: blue">
-                                    Details
+                                        Details
                                     </a></td>
                             </tr>   
                             <%
@@ -203,84 +202,88 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
         <script>
-            function alertDelete(id) {
-                const title = "Warnning";
-                const message = ' Are you want to delete this item?';
-                const position = "center";
-                const duration = 3000;
-                const type = 'dialog';
-                let callback = null;
+                                    function alertDelete(id) {
+                                        const title = "Warnning";
+                                        const message = ' Are you want to delete this item?';
+                                        const position = "center";
+                                        const duration = 3000;
+                                        const type = 'dialog';
+                                        let callback = null;
 
-                if (type === 'dialog') {
-                  callback = (result) => {
-                    console.log('result = ', result);
-                    if(result === 'ok'){
-                        //sleep(3500).then(() => { window.location.replace("./item-management?action=delete&id="+id) });
-                        window.location.replace("./item-management?action=delete&id="+id);
-                    }
-                  };
-                }
+                                        if (type === 'dialog') {
+                                            callback = (result) => {
+                                                console.log('result = ', result);
+                                                if (result === 'ok') {
+                                                    //sleep(3500).then(() => { window.location.replace("./item-management?action=delete&id="+id) });
+                                                    window.location.replace("./item-management?action=delete&id=" + id);
+                                                }
+                                            };
+                                        }
 
-                const popup = Notification({
-                  position: position,
-                  duration: duration
-                });
+                                        const popup = Notification({
+                                            position: position,
+                                            duration: duration
+                                        });
 
-                if (!popup[type]) {
-                  popup.error({
-                    title: 'Error',
-                    message: `Notification has no such method "${type}"`
-                  });
-                  return;
-                }
+                                        if (!popup[type]) {
+                                            popup.error({
+                                                title: 'Error',
+                                                message: `Notification has no such method "${type}"`
+                                            });
+                                            return;
+                                        }
 
-                popup[type]({
-                  title: title,
-                  message: message,
-                  callback: callback
-                });
-                }
-                
-            function alertSuccess() {
-                const title = "Delete";
-                const message = 'Delete product success';
-                const position = "bottom-right";
-                const duration = 3000;
-                const type = 'success';
-                let callback = null;
+                                        popup[type]({
+                                            title: title,
+                                            message: message,
+                                            callback: callback
+                                        });
+                                    }
 
-                const popup = Notification({
-                  position: position,
-                  duration: duration
-                });
+                                    function alertSuccess() {
+                                        const title = "Delete";
+                                        const message = 'Delete product success';
+                                        const position = "bottom-right";
+                                        const duration = 3000;
+                                        const type = 'success';
+                                        let callback = null;
 
-                if (!popup[type]) {
-                  popup.error({
-                    title: 'Error',
-                    message: `Notification has no such method "${type}"`
-                  });
-                  return;
-                }
+                                        const popup = Notification({
+                                            position: position,
+                                            duration: duration
+                                        });
 
-                popup[type]({
-                  title: title,
-                  message: message,
-                  callback: callback
-                });
-                }
-                function sleep(ms) {
-                    return new Promise(resolve => setTimeout(resolve, ms));
-                  }
+                                        if (!popup[type]) {
+                                            popup.error({
+                                                title: 'Error',
+                                                message: `Notification has no such method "${type}"`
+                                            });
+                                            return;
+                                        }
+
+                                        popup[type]({
+                                            title: title,
+                                            message: message,
+                                            callback: callback
+                                        });
+                                    }
+                                    function sleep(ms) {
+                                        return new Promise(resolve => setTimeout(resolve, ms));
+                                    }
         </script>
         <%
-            if(request.getAttribute("delete") != null){
-                %>
-                <script>
-                    alertSuccess();
-                </script>
+            if (request.getAttribute("delete") != null) {
+        %>
+        <script>
+            alertSuccess();
+        </script>
         <%
             }
         %>
     </body>
 
 </html>
+<%
+        }
+    }
+%>

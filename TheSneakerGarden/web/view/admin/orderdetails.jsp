@@ -2,6 +2,17 @@
 <%@page import="model.Product"%>
 <%@page import="model.CartItem"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="model.User"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if (session.getAttribute("user") == null) {
+        response.sendRedirect("./login");
+    } else {
+        User user = (User) session.getAttribute("user");
+        if (user.getRoleID() != 1) {
+            response.sendRedirect("./login");
+        } else {
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -60,3 +71,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/cart.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
 </html>
+<%
+        }
+    }
+%>

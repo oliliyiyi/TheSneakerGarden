@@ -8,14 +8,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    User user = (User) session.getAttribute("user");
     if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
+        User user = (User) session.getAttribute("user");
         if (user.getRoleID() != 1) {
             response.sendRedirect("./login");
-        }
-    }
+        } else {
 %>
 <!DOCTYPE html>
 <html>
@@ -265,3 +264,7 @@
     </body>
 
 </html>
+<%
+        }
+    }
+%>

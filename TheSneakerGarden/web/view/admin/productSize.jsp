@@ -4,6 +4,17 @@
 <%@page import="model.Product"%>
 <%@page import="model.CartItem"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="model.User"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if (session.getAttribute("user") == null) {
+        response.sendRedirect("./login");
+    } else {
+        User user = (User) session.getAttribute("user");
+        if (user.getRoleID() != 1) {
+            response.sendRedirect("./login");
+        } else {
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -112,15 +123,14 @@
                             <h3 class="fw-normal mb-0 text-black">Product Size</h3>
                         </div>
                         <div class="button-add">
-                        <button type="button" onclick="location.href = './add-size.jsp?id=<%=pro.getId()%>'" ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                            </svg>Add New</button>
-                    </div>
+                            <button type="button" onclick="location.href = 'add-size?id=<%=pro.getId()%>'" ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                                </svg>Add New</button>
+                        </div>
                         <%
-                            ArrayList<Inventory> list = (ArrayList<Inventory>)request.getAttribute("ListInv");
+                            ArrayList<Inventory> list = (ArrayList<Inventory>) request.getAttribute("ListInv");
                             for (Inventory inv : list) {
                         %>
-
                         <div id="myCart">
                             <div class="card artItem rounded-3 mb-4">
                                 <div class="card-body p-4" style="background-color: #eee;">
@@ -134,14 +144,15 @@
                                             Quantity: <%=inv.getQuantity()%>
                                         </div>
                                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                            <h5 class="mb-0">Size: <%=inv.getSizeNum() %></h5>
+                                            <h5 class="mb-0">Size: <%=inv.getSizeNum()%></h5>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-                            <%}%>
                         </div>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
             </div>
@@ -152,44 +163,48 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
         <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
         <script>
-            function alertSuccess() {
-                const title = "Message";
-                const message = 'Add new size success';
-                const position = "bottom-right";
-                const duration = 3000;
-                const type = 'success';
-                let callback = null;
+                                function alertSuccess() {
+                                    const title = "Message";
+                                    const message = 'Add new size success';
+                                    const position = "bottom-right";
+                                    const duration = 3000;
+                                    const type = 'success';
+                                    let callback = null;
 
-                const popup = Notification({
-                  position: position,
-                  duration: duration
-                });
+                                    const popup = Notification({
+                                        position: position,
+                                        duration: duration
+                                    });
 
-                if (!popup[type]) {
-                  popup.error({
-                    title: 'Error',
-                    message: `Notification has no such method "${type}"`
-                  });
-                  return;
-                }
+                                    if (!popup[type]) {
+                                        popup.error({
+                                            title: 'Error',
+                                            message: `Notification has no such method "${type}"`
+                                        });
+                                        return;
+                                    }
 
-                popup[type]({
-                  title: title,
-                  message: message,
-                  callback: callback
-                });
-                }
-                function sleep(ms) {
-                    return new Promise(resolve => setTimeout(resolve, ms));
-                  }
+                                    popup[type]({
+                                        title: title,
+                                        message: message,
+                                        callback: callback
+                                    });
+                                }
+                                function sleep(ms) {
+                                    return new Promise(resolve => setTimeout(resolve, ms));
+                                }
         </script>
         <%
-            if(request.getAttribute("addSize") != null){
-                %>
-                <script>
-                    alertSuccess();
-                </script>
+            if (request.getAttribute("addSize") != null) {
+        %>
+        <script>
+            alertSuccess();
+        </script>
         <%
             }
         %>
 </html>
+<%
+        }
+    }
+%>

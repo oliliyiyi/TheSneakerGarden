@@ -71,13 +71,13 @@ public class ProductSize extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProductManager pm = new ProductManager();
-        if(request.getParameter("action")!=null){
+        if (request.getParameter("action") != null) {
             if ("add".equals(request.getParameter("action"))) {
                 //int id = Integer.valueOf(request.getParameter("id"));
                 int proID = Integer.parseInt(request.getParameter("id"));
-                int sizeNum= Integer.parseInt( request.getParameter("size"));
+                int sizeNum = Integer.parseInt(request.getParameter("size"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
-                if (pm.getProductQuantityByProSize(proID,sizeNum)!= 0) {
+                if (pm.getProductQuantityByProSize(proID, sizeNum) != 0) {
                     if (pm.updateSize(sizeNum, proID, quantity)) {
                         ProductManager manager = new ProductManager();
                         ArrayList<Inventory> inv = manager.getProductQuantityByProID(proID);
@@ -89,8 +89,8 @@ public class ProductSize extends HttpServlet {
                     } else {
                         request.getRequestDispatcher("./view/admin/add-size.jsp").forward(request, response);
                     }
-                }else{
-                    if(pm.insertSize(sizeNum, proID, quantity)){
+                } else {
+                    if (pm.insertSize(sizeNum, proID, quantity)) {
                         ProductManager manager = new ProductManager();
                         ArrayList<Inventory> inv = manager.getProductQuantityByProID(proID);
                         Product pro = pm.getProductByID(proID);
@@ -98,15 +98,14 @@ public class ProductSize extends HttpServlet {
                         request.setAttribute("Product", pro);
                         request.setAttribute("addSize", "OK");
                         request.getRequestDispatcher("./view/admin/productSize.jsp").forward(request, response);
-                    }else{
+                    } else {
                         request.getRequestDispatcher("./view/admin/add-size.jsp").forward(request, response);
                     }
                 }
-                
-                
+
             }
         }
-        
+
     }
 
     /**

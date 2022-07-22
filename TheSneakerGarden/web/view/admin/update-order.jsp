@@ -8,15 +8,14 @@
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    User user = (User) session.getAttribute("user");
     if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
+        User user = (User) session.getAttribute("user");
         if (user.getRoleID() != 1) {
             response.sendRedirect("./login");
-        }
-    }
-    Order order = (Order) request.getAttribute("order");
+        } else {
+            Order order = (Order) request.getAttribute("order");
 %>
 <!DOCTYPE html>
 <html>
@@ -233,3 +232,7 @@
         </script>
     </body>
 </html>
+<%
+        }
+    }
+%>

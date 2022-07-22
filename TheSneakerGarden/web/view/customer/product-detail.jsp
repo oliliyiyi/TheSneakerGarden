@@ -117,7 +117,7 @@
             }
             .user-img{
                 width:48%;
-                float:left;
+/*                float:left;*/
                 text-align: center;
             }
             .user-text{
@@ -137,6 +137,93 @@
                 width:68%;
                 float:right;
             }
+            .cardComments {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+
+    width: 450px;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 6px;
+    -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1)
+}
+
+.comment-box{
+    
+    padding:5px;
+}
+
+
+
+.comment-area textarea{
+   resize: none; 
+        border: 1px solid #ad9f9f;
+}
+
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 1px #f1a8bb !important;
+}
+
+.send {
+    color: #fff;
+    background-color: #ff0000;
+    border-color: #ff0000;
+}
+
+.send:hover {
+    color: #fff;
+    /*color button send hover*/
+    background-color: #f50202; 
+    border-color: #f50202;
+}
+
+
+.rating {
+ display: flex;
+        margin-top: -10px;
+    flex-direction: row-reverse;
+    margin-left: -4px;
+        float: left;
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+        position: relative;
+    width: 19px;
+    font-size: 25px;
+    color:#ffd250;
+    cursor: pointer;
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
         </style>
     </head>
 
@@ -403,11 +490,11 @@
                                     for (User u : userList) {
                                         if (u.getUserId() == rv.getCustomerID()) {
                         %>
-                        <div class="user-img-part">
-                            <div class="user-img">
+                        <div class="user-img-part row">
+                            <div class="user-img col-12 col-md-6">
                                 <img src="/demo/man01.png">
                             </div>
-                            <div class="user-text">
+                            <div class="user-text col-12 col-md-6">
                                 <h4><%=rv.getReviewDate()%></h4>
                                 <p><%=u.getUserFullName()%></p> 
                             </div>
@@ -446,10 +533,69 @@
                             <form action="product-detail?action=add&id=<%=product.getId()%>" method="POST">
                                 <div id="rating"></div>
                                 <input type="hidden" id="hdrating" name="hdrating">
-                                <div>
-                                    <textarea style="width: 70%; resize: none" class="form-control" name='feedback' placeholder="Enter your feedback"></textarea>
-                                </div>
-                                <input type="submit" value="Post" class="btn btn-primary" style="margin: 10px 0px 50px 0px">
+                               <div class="cardComments">
+               
+              <div class="row">
+                  
+           
+                  <div class="col-10">
+                      
+                      <div class="comment-box ml-2">
+                          
+                          <h4>Add a comment</h4>
+                          
+                          <div class="rating"> 
+                              <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                              <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
+                              <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                              <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                              <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                          </div>
+                          
+                          <div class="comment-area">
+                              
+                              <textarea class="form-control" placeholder="what is your view?" rows="4"></textarea>
+                          
+                          </div>
+                          
+                          <div class="comment-btns mt-2">
+                              
+                              <div class="row">
+                                  
+                                  <div class="col-6">
+                                      
+                                      <div class="pull-left">
+                                      
+                                      <button class="btn btn-success btn-sm">Cancel</button>      
+                                          
+                                      </div>
+                                  
+                                  </div>
+                                  
+                                  <div class="col-6">
+                                      
+                                      <div class="pull-right">
+                                      
+                                      <button class="btn btn-success send btn-sm">Send <i class="fa fa-long-arrow-right ml-1"></i></button>      
+                                          
+                                      </div>
+                                  
+                                  </div>
+                              
+                              </div>
+                          
+                          </div>
+                      
+                      
+                      </div>
+                  
+                  </div>
+              
+              
+              </div>
+    
+          </div>
+                              
                             </form>
                         </div>
                         <div style="clear: both;"></div>
@@ -460,7 +606,8 @@
                 </div>
             </div>
         </section>
-        <!-- Start Article -->
+     
+                        
         <section class="py-5">
             <div class="container">
                 <div class="row text-left p-2 pb-3">

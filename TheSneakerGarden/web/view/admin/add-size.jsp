@@ -7,14 +7,13 @@
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    User user = (User) session.getAttribute("user");
     if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
+        User user = (User) session.getAttribute("user");
         if (user.getRoleID() != 1) {
             response.sendRedirect("./login");
-        }
-    }
+        } else {
 %>
 <!DOCTYPE html>
 <html>
@@ -120,35 +119,39 @@
                 <div style="display: flex; justify-content: space-between">
                     <div class="container" >
                         <form action="ProductSize?action=add" method="POST">
-                        <div class="user-input">
-                            <div class="input-user">
-                                <span class="details">Quantity</span>
-                                <input type="number"
-                                    name="quantity"
-                                    value=""
-                                    required
-                                    />
-                                <input type="hidden" name="id" value="<%=request.getParameter("id").toString()%>"  >
+                            <div class="user-input">
+                                <div class="input-user">
+                                    <span class="details">Quantity</span>
+                                    <input type="number"
+                                           name="quantity"
+                                           value=""
+                                           required
+                                           />
+                                    <input type="hidden" name="id" value="<%=request.getParameter("id").toString()%>"  >
+                                </div>
+                                <div class="input-user">
+                                    <span class="details">Size </span>
+                                    <input
+                                        name="size"
+                                        value=""
+                                        type="number"
+                                        required
+                                        />
+                                </div>
                             </div>
-                            <div class="input-user">
-                                <span class="details">Size </span>
-                                <input
-                                    name="size"
-                                    value=""
-                                    type="number"
-                                    required
-                                    />
+                            <div class="buttonAdd">
+                                <Button type="submit">
+                                    Add or Update Product Size
+                                </Button>
                             </div>
-                        </div>
-                        <div class="buttonAdd">
-                            <Button type="submit">
-                                Add or Update Product Size
-                            </Button>
-                        </div>
-                    </form>
+                        </form>
                     </div>
                 </div>
             </main>
         </div>
     </body>
 </html>
+<%
+        }
+    }
+%>
