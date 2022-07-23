@@ -36,7 +36,7 @@
                                     for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
                                         Object key = en.getKey();
                                         CartItem val = en.getValue();
-                                        Product product = pro.getProductByID(en.getValue().getID());
+                                        Product product = pro.getProductByID(en.getValue().getProductID());
                             %>
                             <div class="card cartItem rounded-3 mb-4">
                                 <div class="card-body p-4" style="background-color: #eee;">
@@ -57,7 +57,7 @@
 
                                         <div class="col-md col-xl d-flex">
                                             <button class="btn btn-link px-2" 
-                                                    onclick="location.href = '/TheSneakerGarden/addToCart?action=minus&id=<%=en.getValue().getID()%>&size=<%=en.getValue().getSize()%>'" style="margin-right: 1em">
+                                                    onclick="location.href = '/TheSneakerGarden/addToCart?action=minus&id=<%=en.getValue().getProductID()%>&size=<%=en.getValue().getSize()%>'" style="margin-right: 1em">
                                                 <i class="bi bi-dash"></i>
                                             </button>
 
@@ -65,7 +65,7 @@
                                                    class="form-control form-control-sm" style="margin-right: 1em"/>
 
                                             <button class="btn btn-link px-2"
-                                                    onclick="location.href = '/TheSneakerGarden/addToCart?action=plus&id=<%=en.getValue().getID()%>&size=<%=en.getValue().getSize()%>'">
+                                                    onclick="location.href = '/TheSneakerGarden/addToCart?action=plus&id=<%=en.getValue().getProductID()%>&size=<%=en.getValue().getSize()%>'">
                                                 <i class="bi bi-plus"></i>
                                             </button>
                                         </div>
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                             <a href="#!" class="text-danger"><i class="bi bi-trash-fill"
-                                                                                onclick="location.href = '/TheSneakerGarden/addToCart?action=remove&id=<%=en.getValue().getID()%>&size=<%=en.getValue().getSize()%>'"></i></a>
+                                                                                onclick="location.href = '/TheSneakerGarden/addToCart?action=remove&id=<%=en.getValue().getProductID()%>&size=<%=en.getValue().getSize()%>'"></i></a>
                                         </div>
                                     </div>
                                 </div>

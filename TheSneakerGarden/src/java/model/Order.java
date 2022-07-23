@@ -49,6 +49,12 @@ public class Order {
         this.status = status;
     }
 
+    public Order(int orderId, int userId) {
+        this.orderId = orderId;
+        this.userId = userId;
+    }
+
+    
     public int getOrderId() {
         return orderId;
     }

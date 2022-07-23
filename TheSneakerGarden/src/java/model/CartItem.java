@@ -10,22 +10,40 @@ package model;
  * @author Admin
  */
 public class CartItem {
-    int ID;
+    int orderId;
+    int productID;
     int quantity;
     int size;
 
     public CartItem() {
     }
 
-    public CartItem(int ID, int quantity) {
-        this.ID = ID;
+    public CartItem(int productID, int quantity) {
+        this.productID = productID;
         this.quantity = quantity;
     }
 
-    public CartItem(int ID, int quantity, int size) {
-        this.ID = ID;
+    public CartItem(int orderId, int productID, int quantity, int size) {
+        this.orderId = orderId;
+        this.productID = productID;
         this.quantity = quantity;
         this.size = size;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public int getSize() {
@@ -34,14 +52,6 @@ public class CartItem {
 
     public void setSize(int size) {
         this.size = size;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public int getQuantity() {

@@ -1,3 +1,5 @@
+<%@page import="model.CartItem"%>
+<%@page import="model.Order"%>
 <%@page import="model.Review"%>
 <%@page import="model.Inventory"%>
 <%@page import="model.Size"%>
@@ -117,7 +119,7 @@
             }
             .user-img{
                 width:48%;
-/*                float:left;*/
+                /*                float:left;*/
                 text-align: center;
             }
             .user-text{
@@ -138,92 +140,92 @@
                 float:right;
             }
             .cardComments {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
 
-    width: 450px;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border-radius: 6px;
-    -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1)
-}
+                width: 450px;
+                word-wrap: break-word;
+                background-color: #fff;
+                background-clip: border-box;
+                border-radius: 6px;
+                -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1)
+            }
 
-.comment-box{
-    
-    padding:5px;
-}
+            .comment-box{
 
-
-
-.comment-area textarea{
-   resize: none; 
-        border: 1px solid #ad9f9f;
-}
+                padding:5px;
+            }
 
 
-.form-control:focus {
-    color: #495057;
-    background-color: #fff;
-    border-color: #ffffff;
-    outline: 0;
-    box-shadow: 0 0 0 1px #f1a8bb !important;
-}
 
-.send {
-    color: #fff;
-    background-color: #ff0000;
-    border-color: #ff0000;
-}
-
-.send:hover {
-    color: #fff;
-    /*color button send hover*/
-    background-color: #f50202; 
-    border-color: #f50202;
-}
+            .comment-area textarea{
+                resize: none; 
+                border: 1px solid #ad9f9f;
+            }
 
 
-.rating {
- display: flex;
-        margin-top: -10px;
-    flex-direction: row-reverse;
-    margin-left: -4px;
-        float: left;
-}
+            .form-control:focus {
+                color: #495057;
+                background-color: #fff;
+                border-color: #ffffff;
+                outline: 0;
+                box-shadow: 0 0 0 1px #f1a8bb !important;
+            }
 
-.rating>input {
-    display: none
-}
+            .send {
+                color: #fff;
+                background-color: #ff0000;
+                border-color: #ff0000;
+            }
 
-.rating>label {
-        position: relative;
-    width: 19px;
-    font-size: 25px;
-    color:#ffd250;
-    cursor: pointer;
-}
+            .send:hover {
+                color: #fff;
+                /*color button send hover*/
+                background-color: #f50202; 
+                border-color: #f50202;
+            }
 
-.rating>label::before {
-    content: "\2605";
-    position: absolute;
-    opacity: 0
-}
 
-.rating>label:hover:before,
-.rating>label:hover~label:before {
-    opacity: 1 !important
-}
+            .rating {
+                display: flex;
+                margin-top: -10px;
+                flex-direction: row-reverse;
+                margin-left: -4px;
+                float: left;
+            }
 
-.rating>input:checked~label:before {
-    opacity: 1
-}
+            .rating>input {
+                display: none
+            }
 
-.rating:hover>input:checked~label:before {
-    opacity: 0.4
-}
+            .rating>label {
+                position: relative;
+                width: 19px;
+                font-size: 25px;
+                color:#ffd250;
+                cursor: pointer;
+            }
+
+            .rating>label::before {
+                content: "\2605";
+                position: absolute;
+                opacity: 0
+            }
+
+            .rating>label:hover:before,
+            .rating>label:hover~label:before {
+                opacity: 1 !important
+            }
+
+            .rating>input:checked~label:before {
+                opacity: 1
+            }
+
+            .rating:hover>input:checked~label:before {
+                opacity: 0.4
+            }
         </style>
     </head>
 
@@ -425,7 +427,7 @@
                         <%
                         } else if (avgRate < 1 & avgRate >= 0) {
                         %>        
-                                                
+
                         <%
                             }
                         %>
@@ -438,13 +440,13 @@
                         <div class="progress-4"></div>
                         <div class="progress-5"></div>
                     </div>
-                        <%
-                             ArrayList<Review> listReviewByRating1 = (ArrayList<Review>) request.getAttribute("listReviewByRating1");
-                             ArrayList<Review> listReviewByRating2 = (ArrayList<Review>) request.getAttribute("listReviewByRating2");
-                             ArrayList<Review> listReviewByRating3 = (ArrayList<Review>) request.getAttribute("listReviewByRating3");
-                             ArrayList<Review> listReviewByRating4 = (ArrayList<Review>) request.getAttribute("listReviewByRating4");
-                             ArrayList<Review> listReviewByRating5 = (ArrayList<Review>) request.getAttribute("listReviewByRating5");
-                        %>
+                    <%
+                        ArrayList<Review> listReviewByRating1 = (ArrayList<Review>) request.getAttribute("listReviewByRating1");
+                        ArrayList<Review> listReviewByRating2 = (ArrayList<Review>) request.getAttribute("listReviewByRating2");
+                        ArrayList<Review> listReviewByRating3 = (ArrayList<Review>) request.getAttribute("listReviewByRating3");
+                        ArrayList<Review> listReviewByRating4 = (ArrayList<Review>) request.getAttribute("listReviewByRating4");
+                        ArrayList<Review> listReviewByRating5 = (ArrayList<Review>) request.getAttribute("listReviewByRating5");
+                    %>
                     <div class="start-part">
                         <i aria-hidden="true" class="fa fa-star"></i>
                         <i aria-hidden="true" class="fa fa-star"></i>
@@ -501,11 +503,43 @@
                             <div style="clear: both;"></div>
                         </div>
                         <div class="comment">
+                            <%
+                                if (rv.getRating() == 5) {
+                            %>        
                             <i aria-hidden="true" class="fa fa-star"></i>
                             <i aria-hidden="true" class="fa fa-star"></i>
                             <i aria-hidden="true" class="fa fa-star"></i>
                             <i aria-hidden="true" class="fa fa-star"></i>
-                            <i aria-hidden="true" class="fa fa-star-o"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 5 & rv.getRating() >= 4) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 4 & rv.getRating() >= 3) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 3 & rv.getRating() >= 2) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 2 & rv.getRating() >= 1) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 1 & rv.getRating() >= 0) {
+                            %>        
+
+                            <%
+                                }
+                            %>
                             <p><%=rv.getMessage()%></p>
                         </div>
                         <div style="clear: both;"></div>
@@ -531,71 +565,39 @@
                         </div>
                         <div class="comment">
                             <form action="product-detail?action=add&id=<%=product.getId()%>" method="POST">
-                                <div id="rating"></div>
-                                <input type="hidden" id="hdrating" name="hdrating">
-                               <div class="cardComments">
-               
-              <div class="row">
-                  
-           
-                  <div class="col-10">
-                      
-                      <div class="comment-box ml-2">
-                          
-                          <h4>Add a comment</h4>
-                          
-                          <div class="rating"> 
-                              <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
-                              <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
-                              <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
-                              <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
-                              <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-                          </div>
-                          
-                          <div class="comment-area">
-                              
-                              <textarea class="form-control" placeholder="what is your view?" rows="4"></textarea>
-                          
-                          </div>
-                          
-                          <div class="comment-btns mt-2">
-                              
-                              <div class="row">
-                                  
-                                  <div class="col-6">
-                                      
-                                      <div class="pull-left">
-                                      
-                                      <button class="btn btn-success btn-sm">Cancel</button>      
-                                          
-                                      </div>
-                                  
-                                  </div>
-                                  
-                                  <div class="col-6">
-                                      
-                                      <div class="pull-right">
-                                      
-                                      <button class="btn btn-success send btn-sm">Send <i class="fa fa-long-arrow-right ml-1"></i></button>      
-                                          
-                                      </div>
-                                  
-                                  </div>
-                              
-                              </div>
-                          
-                          </div>
-                      
-                      
-                      </div>
-                  
-                  </div>
-              
-              
-              </div>
-    
-          </div>
-                              
+                                <div class="cardComments">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <div class="comment-box ml-2">
+                                                <h4>Add a comment</h4>
+                                                <div class="rating"> 
+                                                    <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                                                    <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
+                                                    <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                                                    <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                                                    <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                                                </div>
+                                                <div class="comment-area">
+                                                    <textarea class="form-control" placeholder="what is your view?" name="feedback" rows="4"></textarea>
+                                                </div>
+                                                <div class="comment-btns mt-2">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="pull-left">
+                                                                <button class="btn btn-success btn-sm">Cancel</button>      
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="pull-right">
+                                                                <button class="btn btn-success send btn-sm">Send <i class="fa fa-long-arrow-right ml-1"></i></button>      
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div style="clear: both;"></div>
@@ -606,8 +608,8 @@
                 </div>
             </div>
         </section>
-     
-                        
+
+
         <section class="py-5">
             <div class="container">
                 <div class="row text-left p-2 pb-3">

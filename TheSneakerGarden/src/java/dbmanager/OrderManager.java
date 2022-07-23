@@ -224,7 +224,8 @@ public class OrderManager {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new CartItem(rs.getInt("ProductID"),
+                list.add(new CartItem(rs.getInt("OrderID"),
+                        rs.getInt("ProductID"),
                         rs.getInt("Quantity"),
                         rs.getInt("SizeNumber")));
             }
@@ -232,6 +233,7 @@ public class OrderManager {
         }
         return list;
     }
+    
 
     public boolean edit(Order Order) {
         boolean status = false;
@@ -255,7 +257,7 @@ public class OrderManager {
         }
         return status;
     }
-    
+
     public ArrayList<PaymentType> getPaymentType() {
         ArrayList<PaymentType> list = new ArrayList<>();
         String query = "SELECT *\n"
@@ -272,7 +274,7 @@ public class OrderManager {
         }
         return list;
     }
-    
+
     public boolean insertPayment(int userId, int typeId, int orderId, double amount) {
         String query = "INSERT INTO [dbo].[Payment] ([CustomerID], [TypeID], [OrderID], [Amount]) VALUES (?, ?, ?, ?)";//query insert
         try {
@@ -294,7 +296,7 @@ public class OrderManager {
             return false;
         }
     }
-    
+
     public boolean insertPayment(int typeId, int orderId, double amount) {
         String query = "INSERT INTO [dbo].[Payment] ([TypeID], [OrderID], [Amount]) VALUES (?, ?, ?)";//query insert
         try {
@@ -314,4 +316,26 @@ public class OrderManager {
             return false;
         }
     }
+    
+    public ArrayList<CartItem> getAllOrderByProductID(int id) {
+        ArrayList<CartItem> list = new ArrayList<>();
+        String query = "SELECT *"
+                + "  FROM [dbo].[OrderDetails] "
+                + "  WHERE [ProductID] = " + id;
+        try {
+            con = db.getConnectDB();//mo ket noi voi sql
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new CartItem(rs.getInt("OrderID"),
+                        rs.getInt("ProductID"),
+                        rs.getInt("Quantity"),
+                        rs.getInt("SizeNumber")));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    
+
 }

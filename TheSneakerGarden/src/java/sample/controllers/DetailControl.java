@@ -5,6 +5,7 @@
  */
 package sample.controllers;
 
+import dbmanager.OrderManager;
 import dbmanager.ProductManager;
 import dbmanager.ReviewManager;
 import dbmanager.UserManager;
@@ -18,7 +19,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.CartItem;
 import model.Category;
+import model.Order;
 import model.Product;
 import model.Review;
 import model.User;
@@ -54,7 +57,7 @@ public class DetailControl extends HttpServlet {
         ArrayList<Review> listReviewByRating3 = reviewManager.getAllReviewByRating(3, pID);
         ArrayList<Review> listReviewByRating4 = reviewManager.getAllReviewByRating(4, pID);
         ArrayList<Review> listReviewByRating5 = reviewManager.getAllReviewByRating(5, pID);
-        
+
         double sumRate = 0, averageRating;
         for (int i = 0; i < listReview.size(); i++) {
             sumRate = sumRate + listReview.get(i).getRating();
@@ -64,6 +67,14 @@ public class DetailControl extends HttpServlet {
         UserManager userManager = new UserManager();
         ArrayList<User> userList = userManager.getAllUser();
 
+        OrderManager odermanager = new OrderManager();
+        ArrayList<CartItem> listOrder = odermanager.getAllOrderByProductID(pID);
+        ArrayList<CartItem> listItem = new ArrayList<>();
+        for (int i = 0; i < listOrder.size(); i++) {
+
+        }
+        request.setAttribute("listOrder", listOrder);
+        request.setAttribute("list", listItem);
         request.setAttribute("averageRating", averageRating);
         request.setAttribute("listReviewByRating1", listReviewByRating1);
         request.setAttribute("listReviewByRating2", listReviewByRating2);
@@ -110,7 +121,7 @@ public class DetailControl extends HttpServlet {
         User userSession = (User) session.getAttribute("user");
         int customerID = userSession.getUserId();
         String feedback = request.getParameter("feedback");
-        double rating = Double.parseDouble(request.getParameter("hdrating"));
+        double rating = Double.parseDouble(request.getParameter("rating"));
         ReviewManager reviewManager = new ReviewManager();
         if (request.getParameter("action") != null) {
             if ("add".equals(request.getParameter("action"))) {

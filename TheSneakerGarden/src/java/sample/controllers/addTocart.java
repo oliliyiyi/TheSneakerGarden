@@ -76,13 +76,13 @@ public class addTocart extends HttpServlet {
             if (!found) {
                 if (request.getParameter("product-quantity") != null) {
                     if (pm.getProductQuantityByProSize(size, ID) < Integer.valueOf(request.getParameter("product-quantity"))) {
-                        cart.put((ID + 1) * size, new CartItem(ID, pm.getProductQuantityByProSize(size, ID), size));
+                        cart.put((ID + 1) * size, new CartItem(1, ID, pm.getProductQuantityByProSize(size, ID), size));
                     } else {
-                        cart.put((ID + 1) * size, new CartItem(ID, Integer.valueOf(request.getParameter("product-quantity")), size));
+                        cart.put((ID + 1) * size, new CartItem(1, ID, Integer.valueOf(request.getParameter("product-quantity")), size));
                     }
 
                 } else {
-                    cart.put((ID + 1) * size, new CartItem(ID, 1, size));
+                    cart.put((ID + 1) * size, new CartItem(1, ID, 1, size));
                 }
 
             }
@@ -91,7 +91,7 @@ public class addTocart extends HttpServlet {
         }
         if ("minus".equals(action)) {
             for (Map.Entry<Integer, CartItem> entry : cart.entrySet()) {
-                if (entry.getValue().getID() == ID && entry.getValue().getSize() == size) {
+                if (entry.getValue().getProductID() == ID && entry.getValue().getSize() == size) {
                     entry.getValue().setQuantity(entry.getValue().getQuantity() - 1);
                     if (entry.getValue().getQuantity() <= 0) {
                         cart.remove(entry.getKey());
@@ -105,7 +105,7 @@ public class addTocart extends HttpServlet {
         }
         if ("plus".equals(action)) {
             for (Map.Entry<Integer, CartItem> entry : cart.entrySet()) {
-                if (entry.getValue().getID() == ID && entry.getValue().getSize() == size) {
+                if (entry.getValue().getProductID() == ID && entry.getValue().getSize() == size) {
                     System.out.println(size + "ddddddddddd");
                     if (pm.getProductQuantityByProSize(entry.getValue().getSize(), ID) <= entry.getValue().getQuantity()) {
                         entry.getValue().setQuantity(entry.getValue().getQuantity());
@@ -119,7 +119,7 @@ public class addTocart extends HttpServlet {
         }
         if ("remove".equals(action)) {
             for (Map.Entry<Integer, CartItem> entry : cart.entrySet()) {
-                if (entry.getValue().getID() == ID && entry.getValue().getSize() == size) {
+                if (entry.getValue().getProductID() == ID && entry.getValue().getSize() == size) {
                     cart.remove(entry.getKey());
                     }
                     if (cart.size() <= 0) {

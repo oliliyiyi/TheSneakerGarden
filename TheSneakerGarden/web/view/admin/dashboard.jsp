@@ -64,7 +64,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3>Recent products</h3>
-                                <button>See all<span class="las la-arrow-right"></span></button>
+                                <button href="item-management">See all<span class="las la-arrow-right"></span></button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">   
@@ -129,7 +129,7 @@
                         <div class="card-user"> 
                             <div class="card-header">
                                 <h3>Users</h3>
-                                <button>See all<span class="las la-arrow-right"></span></button>
+                                <button href="user-management">See all<span class="las la-arrow-right"></span></button>
                             </div>
                             <div class="card-body">
                                 <%

@@ -95,10 +95,10 @@ public class checkout extends HttpServlet {
             }
             if (orderManager.insertOder(userSession.getUserId(), userSession.getUserFullName(), userSession.getUserPhone(), userSession.getUserAddress(), userSession.getUserEmail(), orderDate)) {
                 for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
-                    Product product = productManager.getProductByID(en.getValue().getID());
-                    orderManager.insertOderItem(orderManager.getOrderID(), en.getValue().getID(), en.getValue().getSize(), en.getValue().getQuantity(), product.getPrice());
+                    Product product = productManager.getProductByID(en.getValue().getProductID());
+                    orderManager.insertOderItem(orderManager.getOrderID(), en.getValue().getProductID(), en.getValue().getSize(), en.getValue().getQuantity(), product.getPrice());
                     orderManager.insertPayment(userSession.getUserId(), Integer.parseInt(typeId), orderManager.getOrderID(), Double.parseDouble(amount));
-                    productManager.updateSize(en.getValue().getSize(), en.getValue().getID(), productManager.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
+                    productManager.updateSize(en.getValue().getSize(), en.getValue().getProductID(), productManager.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getProductID()) - en.getValue().getQuantity());
                 }
             }
         } else {
@@ -110,15 +110,15 @@ public class checkout extends HttpServlet {
             cart = (Map<Integer, CartItem>) session.getAttribute("cart");
             int total = 0;
             for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
-                Product product = productManager.getProductByID(en.getValue().getID());
+                Product product = productManager.getProductByID(en.getValue().getProductID());
                 total += product.getPrice() * en.getValue().getQuantity();
             }
             if (orderManager.insertOder(fullname, phone, address, email, orderDate)) {
                 for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
-                    Product product = productManager.getProductByID(en.getValue().getID());
-                    orderManager.insertOderItem(orderManager.getOrderID(), en.getValue().getID(), en.getValue().getSize(), en.getValue().getQuantity(), product.getPrice());
+                    Product product = productManager.getProductByID(en.getValue().getProductID());
+                    orderManager.insertOderItem(orderManager.getOrderID(), en.getValue().getProductID(), en.getValue().getSize(), en.getValue().getQuantity(), product.getPrice());
                     orderManager.insertPayment(Integer.parseInt(typeId), orderManager.getOrderID(), Double.parseDouble(amount));
-                    productManager.updateSize(en.getValue().getSize(), en.getValue().getID(), productManager.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getID()) - en.getValue().getQuantity());
+                    productManager.updateSize(en.getValue().getSize(), en.getValue().getProductID(), productManager.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getProductID()) - en.getValue().getQuantity());
                 }
             }
         }

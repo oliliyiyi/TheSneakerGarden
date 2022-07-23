@@ -36,12 +36,6 @@ public class User {
         this.roleID = roleID;
     }
 
-    public User(int userId, String userFullName, int roleID) {
-        this.userId = userId;
-        this.userFullName = userFullName;
-        this.roleID = roleID;
-    }
-
     public User() {
     }
 

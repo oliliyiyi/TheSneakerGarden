@@ -61,7 +61,7 @@
                                         for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
                                             Object key = en.getKey();
                                             CartItem val = en.getValue();
-                                            Product product = pro.getProductByID(en.getValue().getID());
+                                            Product product = pro.getProductByID(en.getValue().getProductID());
                                             total += product.getPrice() * en.getValue().getQuantity();
 
                                 %>
