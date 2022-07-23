@@ -75,7 +75,7 @@ public class ReviewManager {
         return null;
     }
 
-    public ArrayList<Review> getAllReviewProductID(int id) {
+    public ArrayList<Review> getAllReviewByProductID(int id) {
         ArrayList<Review> list = new ArrayList<>();
         String query = "SELECT *"
                 + "  FROM [dbo].[Review] "

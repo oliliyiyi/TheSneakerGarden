@@ -1,3 +1,5 @@
+<%@page import="model.Review"%>
+<%@page import="dbmanager.ReviewManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -10,14 +12,14 @@
     int paramBId = -1;
     String paramPrice = "";
     int paramType = -1;
-    if(request.getAttribute("paramBId") != null){
-       paramBId = Integer.valueOf(request.getAttribute("paramBId").toString());
+    if (request.getAttribute("paramBId") != null) {
+        paramBId = Integer.valueOf(request.getAttribute("paramBId").toString());
     }
-    if(request.getAttribute("paramPrice") != null){
-       paramPrice = request.getAttribute("paramPrice").toString();
+    if (request.getAttribute("paramPrice") != null) {
+        paramPrice = request.getAttribute("paramPrice").toString();
     }
-    if(request.getAttribute("paramType") != null){
-       paramType = Integer.valueOf(request.getAttribute("paramType").toString());
+    if (request.getAttribute("paramType") != null) {
+        paramType = Integer.valueOf(request.getAttribute("paramType").toString());
     }
 %>
 <!DOCTYPE html>
@@ -27,24 +29,24 @@
 
         <title>The Sneaker Garden</title>
 
-        
+
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shop.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-        
+
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script>
-        $(document).ready(function(){
-            $("select.form-control").change(function(){
-                var selected = $(this).children("option:selected").val();
-                var data = "";
-                if(selected === "High To Low"){
-                    data = "descending";
-                }else{
-                    data = "ascending";
-                }
-                window.location.replace("./shop?bId="+<%=paramBId%>+"&type="+<%=paramType%>+"&price="+data);
+            $(document).ready(function () {
+                $("select.form-control").change(function () {
+                    var selected = $(this).children("option:selected").val();
+                    var data = "";
+                    if (selected === "High To Low") {
+                        data = "descending";
+                    } else {
+                        data = "ascending";
+                    }
+                    window.location.replace("./shop?bId=" +<%=paramBId%> + "&type=" +<%=paramType%> + "&price=" + data);
+                });
             });
-        });
         </script>
 
     </head>
@@ -101,7 +103,7 @@
                     </div>
 
                     <div class="row">
-                        <%                            
+                        <%
                             int index = 6;
                             int step = 0;
                             if (list.size() < 6) {
@@ -131,12 +133,10 @@
                                 <div class="card-body card-body-height">
                                     <h5 class="h3 text-decoration-none text-dark"><%=list.get(i).getName()%></h5>
                                     <ul class="list-unstyled d-flex justify-content-center mb-1">
+
                                         <li>
-                                            <i class="text-warning fa fa-star"></i>
-                                            <i class="text-warning fa fa-star"></i>
-                                            <i class="text-warning fa fa-star"></i>
-                                            <i class="text-muted fa fa-star"></i>
-                                            <i class="text-muted fa fa-star"></i>
+                                            
+
                                         </li>
                                     </ul>
                                     <p class="text-center mb-0" style="color: #333"><b><%=Math.round(list.get(i).getPrice())%> VNĐ</b></p>
@@ -144,12 +144,15 @@
                             </a>
                         </div>
                         <%
-                            }
+                                }
+                            
+
                         %>
                         <div div="row">
                             <ul class="pagination pagination-lg justify-content-end">
-                                <%
-                                    for (int i = 0; i < tab; i++) {
+                                <%                                    for (int i = 0;
+                                            i < tab;
+                                            i++) {
                                 %>
                                 <li class="page-item text-dark">
                                     <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="shop?tab=<%=i + 1%>&bId=<%=paramBId%>&type=<%=paramType%>&price=<%=paramPrice%>"

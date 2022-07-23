@@ -6,6 +6,7 @@
 package sample.controllers;
 
 import dbmanager.ProductManager;
+import dbmanager.ReviewManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Category;
 import model.Product;
+import model.Review;
 
 /**
  *
@@ -41,6 +43,8 @@ public class ShopControl extends HttpServlet {
         ProductManager manager = new ProductManager();
         ArrayList<Product> list = manager.getAllProduct();
         ArrayList<Product> list2 = new ArrayList<>(list);
+
+        
         String paramPrice = "";
         String paramBId = "-1";
         String paramType = "-1";

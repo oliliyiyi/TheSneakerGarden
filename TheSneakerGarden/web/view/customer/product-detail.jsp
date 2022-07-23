@@ -1,3 +1,5 @@
+<%@page import="dbmanager.ReviewManager"%>
+<%@page import="dbmanager.OrderManager"%>
 <%@page import="model.CartItem"%>
 <%@page import="model.Order"%>
 <%@page import="model.Review"%>
@@ -549,10 +551,11 @@
                                 }
                             }
                         %>
-
                         <%
                             if (session.getAttribute("user") != null) {
-                                User userSession = (User) session.getAttribute("user");
+                                ArrayList<CartItem> listDetail = (ArrayList<CartItem>) request.getAttribute("orderDetails");
+                                for (int i = 0; i < listDetail.size(); i++) {
+                                    if (listDetail.get(i).getProductID() == product.getId()) {
                         %>
                         <div class="user-img-part">
                             <div class="user-img">
@@ -601,7 +604,23 @@
                             </form>
                         </div>
                         <div style="clear: both;"></div>
+                        <%                            break;
+                        } else {
+                        %>
+                        <div class="user-img-part row">
+                            <div class="user-img col-12 col-md-6">
+                                <img src="/demo/man01.png">
+                            </div>
+                            <div class="user-text col-12 col-md-6">
+                                <p>Buy this product to add review</p> 
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+                        <div style="clear: both;"></div>
                         <%
+                                        break;
+                                    }
+                                }
                             }
                         %>
                     </div>
@@ -625,7 +644,6 @@
                                 }
                             }
                         }
-
                         for (int i = 0; i < listP2.size(); i++) {
                     %>
                     <div class="p-2 pb-3">
@@ -641,11 +659,7 @@
                                 </a>
                                 <ul class="list-unstyled d-flex justify-content-center mb-1">
                                     <li>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
-                                        <i class="text-muted fa fa-star"></i>
+                                        
                                     </li>
                                 </ul>
                                 <p class="text-center mb-0" style="color: #333"><b><%=Math.round(listP2.get(i).getPrice())%> VNĐ</b></p>
@@ -700,17 +714,6 @@
                                                 }
                                             }
                                         ]
-                                    });
-                                    $(function () {
-                                        $("#rating").rateYo({
-                                            rating: 0,
-                                            numStars: 5,
-                                            maxValue: 5,
-                                            halfStar: true,
-                                            onChange: function (rating, rateYoInstance) {
-                                                $('#hdrating').val(rating)
-                                            }
-                                        });
                                     });
         </script>
         <!-- End Slider Script -->

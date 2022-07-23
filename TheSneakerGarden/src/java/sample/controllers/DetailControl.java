@@ -51,7 +51,7 @@ public class DetailControl extends HttpServlet {
         Product p = manager.getProductByID(pID);
 
         ReviewManager reviewManager = new ReviewManager();
-        ArrayList<Review> listReview = reviewManager.getAllReviewProductID(pID);
+        ArrayList<Review> listReview = reviewManager.getAllReviewByProductID(pID);
         ArrayList<Review> listReviewByRating1 = reviewManager.getAllReviewByRating(1, pID);
         ArrayList<Review> listReviewByRating2 = reviewManager.getAllReviewByRating(2, pID);
         ArrayList<Review> listReviewByRating3 = reviewManager.getAllReviewByRating(3, pID);
@@ -67,14 +67,20 @@ public class DetailControl extends HttpServlet {
         UserManager userManager = new UserManager();
         ArrayList<User> userList = userManager.getAllUser();
 
-        OrderManager odermanager = new OrderManager();
-        ArrayList<CartItem> listOrder = odermanager.getAllOrderByProductID(pID);
+        HttpSession session = request.getSession();
         ArrayList<CartItem> listItem = new ArrayList<>();
-        for (int i = 0; i < listOrder.size(); i++) {
-
+        ArrayList<Order> listOrder = new ArrayList<>();
+        OrderManager order = new OrderManager();
+        if (session.getAttribute("user") != null) {
+            User userSession = (User) session.getAttribute("user");
+            listOrder = order.getAllOrderByUserID(userSession.getUserId());
+            for (int i = 0; i < listOrder.size(); i++) {
+                listItem.addAll(order.getAllProductByOrderID(listOrder.get(i).getOrderId()));
+            }
+            request.setAttribute("listOrderHistory", listOrder);
+            request.setAttribute("orderDetails", listItem);
         }
-        request.setAttribute("listOrder", listOrder);
-        request.setAttribute("list", listItem);
+        
         request.setAttribute("averageRating", averageRating);
         request.setAttribute("listReviewByRating1", listReviewByRating1);
         request.setAttribute("listReviewByRating2", listReviewByRating2);
