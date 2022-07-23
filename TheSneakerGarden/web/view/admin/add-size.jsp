@@ -141,7 +141,7 @@
                             </div>
                             <div class="buttonAdd">
                                 <Button type="submit">
-                                    Add or Update Product Size
+                                    Add Product Size
                                 </Button>
                             </div>
                         </form>

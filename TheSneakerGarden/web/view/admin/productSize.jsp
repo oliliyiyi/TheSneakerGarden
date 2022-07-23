@@ -123,7 +123,7 @@
                             <h3 class="fw-normal mb-0 text-black">Product Size</h3>
                         </div>
                         <div class="button-add">
-                            <button type="button" onclick="location.href = 'add-size?id=<%=pro.getId()%>'" ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                            <button type="button" onclick="location.href = './ProductSize?action=add&id=<%=pro.getId()%>'" ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                                 </svg>Add New</button>
                         </div>

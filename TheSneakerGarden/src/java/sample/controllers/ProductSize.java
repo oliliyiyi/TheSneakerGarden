@@ -39,6 +39,12 @@ public class ProductSize extends HttpServlet {
         ProductManager pm = new ProductManager();
         ArrayList<Inventory> inv = pm.getProductQuantityByProID(id);
         Product pro = pm.getProductByID(id);
+        if (request.getParameter("action") != null) {
+            if ("add".equals(request.getParameter("action"))) {
+                request.getRequestDispatcher("./view/admin/add-size.jsp").forward(request, response);
+            }
+        }
+        
         request.setAttribute("ListInv", inv);
         request.setAttribute("Product", pro);
         request.getRequestDispatcher("./view/admin/productSize.jsp").forward(request, response);
@@ -77,7 +83,7 @@ public class ProductSize extends HttpServlet {
                 int proID = Integer.parseInt(request.getParameter("id"));
                 int sizeNum = Integer.parseInt(request.getParameter("size"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
-                if (pm.getProductQuantityByProSize(proID, sizeNum) != 0) {
+                if (pm.getProductQuantityByProSize(sizeNum, proID) != 0) {
                     if (pm.updateSize(sizeNum, proID, quantity)) {
                         ProductManager manager = new ProductManager();
                         ArrayList<Inventory> inv = manager.getProductQuantityByProID(proID);
