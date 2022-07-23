@@ -174,7 +174,7 @@
                                         ArrayList<Order> listOrder = (ArrayList<Order>) request.getAttribute("listOrderHistory");
                                         ArrayList<CartItem> list = (ArrayList<CartItem>) request.getAttribute("orderHistory");
                                         CartItem product1 = list.get(1);
-                                        Product product = pm.getProductByID(product1.getID());
+                                        Product product = pm.getProductByID(product1.getProductID());
                                         for (Order order : listOrder) {
                                 %>
                                 <div id="myCart">
