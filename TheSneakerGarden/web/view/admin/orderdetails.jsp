@@ -53,7 +53,7 @@
                                             x<%=list.get(i).getQuantity()%>
                                         </div>
                                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                            <h5 class="mb-0"><%=list.get(i).getQuantity() * product.getPrice()%> $</h5>
+                                            <h5 class="mb-0"><%=list.get(i).getQuantity() * product.getPrice()%> VND</h5>
                                         </div>
                                     </div>
                                 </div>

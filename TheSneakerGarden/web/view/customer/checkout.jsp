@@ -63,7 +63,6 @@
                                             CartItem val = en.getValue();
                                             Product product = pro.getProductByID(en.getValue().getProductID());
                                             total += product.getPrice() * en.getValue().getQuantity();
-
                                 %>
                                 <li class="list-group-item d-flex justify-content-between align-items-center lh-sm py-4">
                                     <div class="d-flex justify-content-between">
@@ -71,14 +70,13 @@
                                             <img src="<%=product.getImage()%>"/>
                                         </div>
                                         <div class="my-2 mx-5">
-                                            <h6 class="my-0"><%=product.getName()%>x<%=en.getValue().getQuantity()%></h6>
+                                            <h6 class="my-0"><%=product.getName()%> x<%=en.getValue().getQuantity()%></h6>
                                             <small class="text-muted"><%=product.getPrice()%></small>
                                         </div>
                                     </div>
-                                    <span class="text-muted my-2"><%=product.getPrice() * en.getValue().getQuantity()%></span>
+                                    <span class="text-muted my-2"><%=product.getPrice() * en.getValue().getQuantity()%> VND</span>
                                 </li>
                                 <%
-
                                     }
                                 %>
                                 <% if (session.getAttribute("user") == null) {%>
@@ -141,7 +139,7 @@
                                 <% }%>
                                 <li class="list-group-item d-flex justify-content-between align-items-center py-4">
                                     <span class="my-0">Total</span>
-                                    <strong style="font-size: 1.5rem;"><%=total%></strong>
+                                    <strong style="font-size: 1.5rem;"><%=total%> VND</strong>
                                     <input type="hidden" value="<%=total%>" name="amount"/>
                                 </li>
                                 <button class="btn btn-black btn-lg mt-5" onclick="" type="submit">Continue to checkout</button>

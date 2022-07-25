@@ -29,13 +29,22 @@
         <title>Admin</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <style>
+            body{
+                overflow: hidden !important;
+            }
+        </style>
     </head>
     <body>
         <%@include file="../../components/sidebar-dashboard.jsp" %>
         <div class="main-content">
             <header>
-                <div class="search-wrapper"><span class="las la-search"></span>
-                    <input type="search" placeholder="Search..."/>
+
+                <div class="search-wrapper">
+                    <form action="Search">
+                        <input type="text" placeholder="Search..."/>
+                        <button style="submit" class="btn btn-warning"><span class="las la-search"></span></button>
+                    </form>
                 </div> 
                 <div class="user-wrapper">
                     <div>
@@ -65,7 +74,7 @@
                             <div class="card-header">
                                 <h3>Recent products</h3>
                                 <a href="item-management"><button>See all<span class="las la-arrow-right"></span></button></a>
-                                    
+
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">   
@@ -115,7 +124,7 @@
                                                 <td><%=product.getName()%></td>
                                                 <td><%=brand%></td>
                                                 <td><%=cate%></td>
-                                                <td><%=Math.round(product.getPrice())%> VNĐ</td>
+                                                <td><%=Math.round(product.getPrice())%> VND</td>
                                             </tr>
                                             <%
                                                 }

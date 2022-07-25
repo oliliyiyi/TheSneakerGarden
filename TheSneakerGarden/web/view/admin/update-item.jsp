@@ -4,6 +4,8 @@
     Author     : Admin
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Category"%>
 <%@page import="model.User"%>
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,6 +18,7 @@
             response.sendRedirect("./login");
         } else {
             Product product = (Product) request.getAttribute("product");
+            ArrayList<Category> listcate = (ArrayList<Category>) request.getAttribute("listCate");
 %>
 <!DOCTYPE html>
 <html>
@@ -174,6 +177,16 @@
                                     required
                                     >
                             </div>
+
+                            <div class="input-user">
+                                <span class="details">Cate</span>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected><%=product.getcId()%></option>
+
+
+                                </select>
+                            </div>
+
                         </div>
                         <div class="buttonAdd"> 
                             <Button type="submit">
