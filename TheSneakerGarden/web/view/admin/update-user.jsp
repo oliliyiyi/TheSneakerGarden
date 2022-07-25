@@ -166,6 +166,15 @@
                                        required
                                        >
                             </div>
+                            <div class="input-user">
+                                <span class="details">Role</span>
+                                <input type="text"      
+                                       name="role" 
+                                       value="<%=user1.getRoleID()%>"
+
+                                       required
+                                       >
+                            </div>
                         </div>
                         <div class="buttonAdd">
                             <Button type="submit">

@@ -19,8 +19,8 @@ import model.User;
  *
  * @author Admin
  */
-@WebServlet(name = "UserManagerControl", urlPatterns = {"/user-management"})
-public class UserManagerControl extends HttpServlet {
+@WebServlet(name = "AdminManagerControl", urlPatterns = {"/admin-management"})
+public class AdminManagerControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +35,7 @@ public class UserManagerControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         UserManager userManager = new UserManager();
-        ArrayList<User> listUser = userManager.getAllCustomer();
+        ArrayList<User> listUser = userManager.getAllAdmin();
         if (request.getParameter("action") != null) {
             if ("update".equals(request.getParameter("action"))) {
                 User user1 = userManager.getUser(Integer.valueOf(request.getParameter("id")));
@@ -51,15 +51,14 @@ public class UserManagerControl extends HttpServlet {
                 if (userManager.delete(id)) {
                     listUser = userManager.getAllUser();
                     request.setAttribute("listUser", listUser);
-                    request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/admin-management.jsp").forward(request, response);
                 } else {
-                    request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
+                    request.getRequestDispatcher("./view/admin/admin-management.jsp").forward(request, response);
                 }
             }
         }
         request.setAttribute("listUser", listUser);
-        request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
-
+        request.getRequestDispatcher("./view/admin/admin-management.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -88,50 +87,7 @@ public class UserManagerControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserManager userManager = new UserManager();
-        ArrayList<User> listUser = userManager.getAllCustomer();
-        if (request.getParameter("action") != null) {
-
-            if ("add".equals(request.getParameter("action"))) {
-                //int id = Integer.valueOf(request.getParameter("id"));
-                String account = request.getParameter("account");
-                //String password = request.getParameter("password");
-                String name = request.getParameter("name");
-                String email = request.getParameter("email");
-                String phone = request.getParameter("phone");
-                String address = request.getParameter("address");
-                User user = new User(1, account, name, email, phone, address, 1);
-                if (userManager.insert(user, "12345")) {
-                    listUser = userManager.getAllCustomer();
-                    request.setAttribute("listUser", listUser);
-                    request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
-                } else {
-                    request.getRequestDispatcher("./view/admin/add.jsp").forward(request, response);
-                }
-            }
-
-            if ("update".equals(request.getParameter("action"))) {
-                int id = Integer.valueOf(request.getParameter("id"));
-                String account = request.getParameter("account");
-                //String password = request.getParameter("password");
-                String name = request.getParameter("name");
-                String email = request.getParameter("email");
-                String phone = request.getParameter("phone");
-                String address = request.getParameter("address");
-                int role = Integer.valueOf(request.getParameter("role"));
-                User user1 = new User(id, account, name, email, phone, address, role);
-                if (userManager.edit(user1)) {
-                    listUser = userManager.getAllCustomer();
-                    request.setAttribute("listUser", listUser);
-                    request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
-                } else {
-                    request.getRequestDispatcher("./view/admin/update-user.jsp").forward(request, response);
-                }
-            }
-        }
-        request.setAttribute("listUser", listUser);
-        request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**

@@ -16,14 +16,6 @@
                         <p>
                             The Sneaker Garden is the place for those of you who have an intense love and vitality for sneakers. The Sneaker Garden places a lot of emphasis on customer service and ease of shopping experience.
                         </p>
-                        <h4>Here we:</h4>
-                        <ul style="list-style-type:disc">
-                            <li> Receiving orders, selling available all lines of shoes, sandals, shoe accessories from Nike, Adidas, Jordan... </li>
-                            <li> Commitment to only sell genuine products, say no to fake. </li>
-                            <li> Goods are shipped directly from foreign stores with full invoices and documents. </li>
-                            <li> Offers free shipping, free exchanges, and free returns within 3 days of shoe purchase. </li>
-                        </ul>
-
                     </div>
                     <div class="col-md-4">
                         <img src="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" alt="About Hero">
@@ -42,10 +34,14 @@
             <div class="row text-center pt-5 pb-3">
                 <div class="col-lg-6 m-auto">
                     <h1 class="h1">Our Services</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        Lorem ipsum dolor sit amet.
-                    </p>
+                    <p><ul style="list-style-type:disc">
+                        <li> Receiving orders, selling available all lines of shoes, sandals, shoe accessories from Nike, Adidas, Jordan... </li>
+                        <li> Commitment to only sell genuine products, say no to fake. </li>
+                        <li> Goods are shipped directly from foreign stores with full invoices and documents. </li>
+                        <li> Offers free shipping, free exchanges, and free returns within 3 days of shoe purchase. </li>
+                    </ul></p>
+                    
+                    
                 </div>
             </div>
             <div class="row">

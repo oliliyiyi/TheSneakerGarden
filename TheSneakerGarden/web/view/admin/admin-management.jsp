@@ -132,10 +132,7 @@
                 <div class="table-container">
                     <h1 class="heading">User Management</h1>
                     <div class="button-add">
-                        <h1>Customer</h1>
-                        <button type="button" onclick="location.href = './user-management?action=add'" ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                            </svg>Add user</button>
+                        <h1>Admin</h1>
                     </div>
 
                     <table class="table" style="width: 100%">
@@ -147,8 +144,7 @@
                                 <th>Email</th> 
                                 <th>Phone</th> 
                                 <th>Address</th>
-                                <th>Update</th>
-                                <th>Delete</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -163,13 +159,6 @@
                                 <td><%=user1.getUserEmail()%></td>
                                 <td><%=user1.getUserPhone()%></td>
                                 <td><%=user1.getUserAddress()%></td>
-                                <td> <a href="user-management?action=update&id=<%=user1.getUserId()%>" style="color: green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-                                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
-                                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
-                                        </svg></a></td>
-                                <td><a href="#" onclick="alertDelete(<%=user1.getUserId()%>)" style="color: red"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                                        </svg></a></td>
                             </tr>   
                             <%
                                 }

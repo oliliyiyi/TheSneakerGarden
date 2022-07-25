@@ -149,6 +149,58 @@ public class UserManager {
         return list;
     }
 
+    public ArrayList<User> getAllAdmin() {
+        ArrayList<User> list = new ArrayList<>();
+        String query = "SELECT *"
+                + "  FROM [TSG].[dbo].[Customer]"
+                + "  WHERE [RoleID] = 1";
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new User(
+                        rs.getInt(1),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(2)));
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return list;
+    }
+    
+        public ArrayList<User> getAllCustomer() {
+        ArrayList<User> list = new ArrayList<>();
+        String query = "SELECT *"
+                + "  FROM [TSG].[dbo].[Customer]"
+                + "  WHERE [RoleID] = 2";
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new User(
+                        rs.getInt(1),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(2)));
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return list;
+    }
+
     public boolean insert(User user, String password) {
         boolean status = false;
 
@@ -194,6 +246,7 @@ public class UserManager {
                     + "', [Email] = '" + user.getUserEmail()
                     + "', [Phone]= '" + user.getUserPhone()
                     + "', [Address] = '" + user.getUserAddress()
+                    + "', [RoleID] = '" + user.getRoleID()
                     + "' WHERE [CustomerID] = " + user.getUserId());
             ps.executeUpdate();
             status = true;

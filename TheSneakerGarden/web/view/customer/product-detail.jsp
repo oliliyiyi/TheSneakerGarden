@@ -93,10 +93,6 @@
             .progress-5:after{
                 width:10%;
             }
-            .loder-ratimg{
-                display: inline-block;
-                width:40%;
-            }
             .start-part{
                 float:right;
                 width:30%;
@@ -390,58 +386,88 @@
         <section class="form-review">
             <div class="main-section">
                 <div class="hedding-title"><h1>Star Rating System</h1></div>
-                <div class="rating-part">
-                    <%
-                        double avgRate = Double.parseDouble(request.getAttribute("averageRating").toString());
-                    %>
-                    <div class="average-rating">
-                        <h2><%=avgRate%></h2>
-                        <%
-                            if (avgRate == 5) {
-                        %>        
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <%
-                        } else if (avgRate < 5 & avgRate >= 4) {
-                        %>        
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <%
-                        } else if (avgRate < 4 & avgRate >= 3) {
-                        %>        
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <%
-                        } else if (avgRate < 3 & avgRate >= 2) {
-                        %>        
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <%
-                        } else if (avgRate < 2 & avgRate >= 1) {
-                        %>        
-                        <i aria-hidden="true" class="fa fa-star"></i>
-                        <%
-                        } else if (avgRate < 1 & avgRate >= 0) {
-                        %>        
+                <%
+                    ReviewManager reviewManager = new ReviewManager();
+                    ArrayList<Review> listReview = reviewManager.getAllReviewByProductID(product.getId());
 
+                %>
+                <div class="rating-part">
+                    <div class="average-rating">
+                        <%                            if (listReview.size() != 0) {
+                                double sumRate = 0, averageRating;
+                                for (int i = 0; i < listReview.size(); i++) {
+                                    sumRate = sumRate + listReview.get(i).getRating();
+                                }
+                                averageRating = sumRate / listReview.size();
+                        %>
+                        <h2><%=averageRating%></h2>
+                        <%
+                            if (averageRating == 5) {
+                        %>        
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <%
+                        } else if (averageRating < 5 & averageRating >= 4) {
+                        %>        
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <%
+                        } else if (averageRating < 4 & averageRating >= 3) {
+                        %>        
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <%
+                        } else if (averageRating < 3 & averageRating >= 2) {
+                        %>        
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <%
+                        } else if (averageRating < 2 & averageRating >= 1) {
+                        %>        
+                        <i aria-hidden="true" class="fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <%
+                        } else if (averageRating < 1 & averageRating >= 0) {
+                        %>        
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <%
+                            }
+                        %>
+                        <%
+                        } else {
+                        %>
+                        <h2>0</h2>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
+                        <i class="text-muted fa fa-star"></i>
                         <%
                             }
                         %>
                         <p>Average Rating</p>
+
                     </div>
-                    <div class="loder-ratimg">
-                        <div class="progress"></div>
-                        <div class="progress-2"></div>
-                        <div class="progress-3"></div>
-                        <div class="progress-4"></div>
-                        <div class="progress-5"></div>
-                    </div>
+
                     <%
                         ArrayList<Review> listReviewByRating1 = (ArrayList<Review>) request.getAttribute("listReviewByRating1");
                         ArrayList<Review> listReviewByRating2 = (ArrayList<Review>) request.getAttribute("listReviewByRating2");
@@ -449,6 +475,7 @@
                         ArrayList<Review> listReviewByRating4 = (ArrayList<Review>) request.getAttribute("listReviewByRating4");
                         ArrayList<Review> listReviewByRating5 = (ArrayList<Review>) request.getAttribute("listReviewByRating5");
                     %>
+
                     <div class="start-part">
                         <i aria-hidden="true" class="fa fa-star"></i>
                         <i aria-hidden="true" class="fa fa-star"></i>
@@ -485,9 +512,11 @@
                     <div class="reviews">
                         <h1>Reviews</h1>
                     </div>
+                    <%
+                        if (listReview.size() != 0) {
+                    %>
                     <div class="comment-part">
                         <%
-                            ArrayList<Review> listReview = (ArrayList<Review>) request.getAttribute("listReview");
                             ArrayList<User> userList = (ArrayList<User>) request.getAttribute("userList");
                             if (listReview != null) {
                                 for (Review rv : listReview) {
@@ -550,6 +579,11 @@
                                     }
                                 }
                             }
+                        } else {
+                        %>
+                        <p>There are no reviews yet</p>
+                        <%
+                            }
                         %>
                         <%
                             if (session.getAttribute("user") != null) {
@@ -605,20 +639,6 @@
                         </div>
                         <div style="clear: both;"></div>
                         <%                            break;
-                        } else {
-                        %>
-                        <div class="user-img-part row">
-                            <div class="user-img col-12 col-md-6">
-                                <img src="/demo/man01.png">
-                            </div>
-                            <div class="user-text col-12 col-md-6">
-                                <p>Buy this product to add review</p> 
-                            </div>
-                            <div style="clear: both;"></div>
-                        </div>
-                        <div style="clear: both;"></div>
-                        <%
-                                        break;
                                     }
                                 }
                             }
@@ -659,7 +679,7 @@
                                 </a>
                                 <ul class="list-unstyled d-flex justify-content-center mb-1">
                                     <li>
-                                        
+
                                     </li>
                                 </ul>
                                 <p class="text-center mb-0" style="color: #333"><b><%=Math.round(listP2.get(i).getPrice())%> VNĐ</b></p>

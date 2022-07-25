@@ -51,18 +51,11 @@ public class DetailControl extends HttpServlet {
         Product p = manager.getProductByID(pID);
 
         ReviewManager reviewManager = new ReviewManager();
-        ArrayList<Review> listReview = reviewManager.getAllReviewByProductID(pID);
         ArrayList<Review> listReviewByRating1 = reviewManager.getAllReviewByRating(1, pID);
         ArrayList<Review> listReviewByRating2 = reviewManager.getAllReviewByRating(2, pID);
         ArrayList<Review> listReviewByRating3 = reviewManager.getAllReviewByRating(3, pID);
         ArrayList<Review> listReviewByRating4 = reviewManager.getAllReviewByRating(4, pID);
         ArrayList<Review> listReviewByRating5 = reviewManager.getAllReviewByRating(5, pID);
-
-        double sumRate = 0, averageRating;
-        for (int i = 0; i < listReview.size(); i++) {
-            sumRate = sumRate + listReview.get(i).getRating();
-        }
-        averageRating = sumRate / listReview.size();
 
         UserManager userManager = new UserManager();
         ArrayList<User> userList = userManager.getAllUser();
@@ -81,13 +74,11 @@ public class DetailControl extends HttpServlet {
             request.setAttribute("orderDetails", listItem);
         }
         
-        request.setAttribute("averageRating", averageRating);
         request.setAttribute("listReviewByRating1", listReviewByRating1);
         request.setAttribute("listReviewByRating2", listReviewByRating2);
         request.setAttribute("listReviewByRating3", listReviewByRating3);
         request.setAttribute("listReviewByRating4", listReviewByRating4);
         request.setAttribute("listReviewByRating5", listReviewByRating5);
-        request.setAttribute("listReview", listReview);
         request.setAttribute("userList", userList);
         request.setAttribute("detail", p);
         request.getRequestDispatcher("./view/customer/product-detail.jsp").forward(request, response);

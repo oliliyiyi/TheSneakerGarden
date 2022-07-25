@@ -18,36 +18,36 @@
                                 <form method="POST" action="./register" class="needs-validation" onsubmit="return validateForm();" autocomplete="off">
                                     <div class="mb-3">
                                         <label class="mb-2 text-muted" for="username">UserName</label>
-                                        <input id="username" type="text" class="form-control" name="username" value="" required
+                                        <input id="username" type="text" class="form-control" name="username" value="" 
                                                autofocus>
                                         <small id="username-err" class="invalid-message"></small>
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2 text-muted" for="fullname">FullName</label>
-                                        <input id="fullname" type="text" class="form-control" name="fullname" value="" required
+                                        <input id="fullname" type="text" class="form-control" name="fullname" value="" 
                                                autofocus>
                                         <small id="fullname-err" class="invalid-message"></small>
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2 text-muted" for="email">E-Mail Address</label>
-                                        <input id="email" type="email" class="form-control" name="email" value="" required>
+                                        <input id="email" type="email" class="form-control" name="email" value="" >
                                         <small id="email-err" class="invalid-message"></small>
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2 text-muted" for="phone">Phone</label>
-                                        <input id="phone" type="text" class="form-control" name="phone" value="" required
+                                        <input id="phone" type="text" class="form-control" name="phone" value="" 
                                                autofocus>
                                         <small id="phone-err" class="invalid-message"></small>
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2 text-muted" for="address">Address</label>
-                                        <input id="address" type="text" class="form-control" name="address" value="" required
+                                        <input id="address" type="text" class="form-control" name="address" value="" 
                                                autofocus>
                                         <small id="address-err" class="invalid-message"></small>
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2 text-muted" for="password">Password</label>
-                                        <input id="password" type="password" class="form-control" name="password" required>
+                                        <input id="password" type="password" class="form-control" name="password" >
                                         <small id="password-err" class="invalid-message"></small>
                                     </div>
 
