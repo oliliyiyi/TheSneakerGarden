@@ -79,7 +79,7 @@
                                 <%
                                     }
                                 %>
-                                <% if (session.getAttribute("user") == null) {%>
+
                                 <li class="list-group-item d-flex align-items-center justify-content-between py-4">
                                     <div class="col-12">
                                         <h4 class="mb-3">Billing address</h4>
@@ -119,7 +119,7 @@
                                         <hr class="my-4">
                                     </div>
                                 </li>
-                                <% } else {%>
+
                                 <li class="list-group-item d-flex align-items-center justify-content-between py-4">
                                     <h5 class="my-0">Payment Method</h5>
                                     <div class="">
@@ -136,7 +136,7 @@
                                         <!--<span class="text-muted text-uppercase">Change</span>-->
                                     </div>
                                 </li>
-                                <% }%>
+
                                 <li class="list-group-item d-flex justify-content-between align-items-center py-4">
                                     <span class="my-0">Total</span>
                                     <strong style="font-size: 1.5rem;"><%=total%> VND</strong>

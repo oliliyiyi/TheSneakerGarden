@@ -118,9 +118,12 @@
         <%@include file="../../components/sidebar-dashboard.jsp" %>  
         <div class="main-content">
             <header>
-                <div class="search-wrapper"><span class="las la-search"></span>
-                    <input type="search" placeholder="Search..."/>
-                </div> 
+                <div class="search-wrapper">
+                    <form action="search-account-admin">
+                        <input name="txtsearch" type="text" placeholder="Search by name..."/>
+                        <button style="submit" class="btn btn-warning"><span class="las la-search"></span></button>
+                    </form>
+                </div>
                 <div class="user-wrapper">
                     <div>
                         <h4><%=user.getUserFullName()%></h4>   
@@ -173,74 +176,74 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
         <script>
-                                    function alertDelete(id) {
-                                        const title = "Warnning";
-                                        const message = ' Are you want to delete this item?';
-                                        const position = "center";
-                                        const duration = 3000;
-                                        const type = 'dialog';
-                                        let callback = null;
+            function alertDelete(id) {
+                const title = "Warnning";
+                const message = ' Are you want to delete this item?';
+                const position = "center";
+                const duration = 3000;
+                const type = 'dialog';
+                let callback = null;
 
-                                        if (type === 'dialog') {
-                                            callback = (result) => {
-                                                console.log('result = ', result);
-                                                if (result === 'ok') {
-                                                    //sleep(3500).then(() => { window.location.replace("./item-management?action=delete&id="+id) });
-                                                    window.location.replace("./user-management?action=delete&id=" + id);
-                                                }
-                                            };
-                                        }
+                if (type === 'dialog') {
+                    callback = (result) => {
+                        console.log('result = ', result);
+                        if (result === 'ok') {
+                            //sleep(3500).then(() => { window.location.replace("./item-management?action=delete&id="+id) });
+                            window.location.replace("./user-management?action=delete&id=" + id);
+                        }
+                    };
+                }
 
-                                        const popup = Notification({
-                                            position: position,
-                                            duration: duration
-                                        });
+                const popup = Notification({
+                    position: position,
+                    duration: duration
+                });
 
-                                        if (!popup[type]) {
-                                            popup.error({
-                                                title: 'Error',
-                                                message: `Notification has no such method "${type}"`
-                                            });
-                                            return;
-                                        }
+                if (!popup[type]) {
+                    popup.error({
+                        title: 'Error',
+                        message: `Notification has no such method "${type}"`
+                    });
+                    return;
+                }
 
-                                        popup[type]({
-                                            title: title,
-                                            message: message,
-                                            callback: callback
-                                        });
-                                    }
+                popup[type]({
+                    title: title,
+                    message: message,
+                    callback: callback
+                });
+            }
 
-                                    function alertSuccess() {
-                                        const title = "Delete";
-                                        const message = 'Delete user success';
-                                        const position = "bottom-right";
-                                        const duration = 3000;
-                                        const type = 'success';
-                                        let callback = null;
+            function alertSuccess() {
+                const title = "Delete";
+                const message = 'Delete user success';
+                const position = "bottom-right";
+                const duration = 3000;
+                const type = 'success';
+                let callback = null;
 
-                                        const popup = Notification({
-                                            position: position,
-                                            duration: duration
-                                        });
+                const popup = Notification({
+                    position: position,
+                    duration: duration
+                });
 
-                                        if (!popup[type]) {
-                                            popup.error({
-                                                title: 'Error',
-                                                message: `Notification has no such method "${type}"`
-                                            });
-                                            return;
-                                        }
+                if (!popup[type]) {
+                    popup.error({
+                        title: 'Error',
+                        message: `Notification has no such method "${type}"`
+                    });
+                    return;
+                }
 
-                                        popup[type]({
-                                            title: title,
-                                            message: message,
-                                            callback: callback
-                                        });
-                                    }
-                                    function sleep(ms) {
-                                        return new Promise(resolve => setTimeout(resolve, ms));
-                                    }
+                popup[type]({
+                    title: title,
+                    message: message,
+                    callback: callback
+                });
+            }
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
         </script>
         <%
             if (request.getAttribute("delete") != null) {

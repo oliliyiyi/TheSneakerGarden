@@ -257,6 +257,31 @@ public class OrderManager {
         }
         return status;
     }
+    
+        public ArrayList<Order> search(String keyword) {
+        ArrayList<Order> list = new ArrayList<>();
+        String query = "SELECT * FROM [dbo].[Orders] WHERE FullName like ?";
+        try {
+            con = db.getConnectDB();//mo ket noi voi sql
+            ps = con.prepareStatement(query);
+            ps.setString(1, "%" + keyword + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Order(rs.getInt("OrderID"),
+                        rs.getInt("CustomerID"),
+                        rs.getString("FullName"),
+                        rs.getString("Phone"),
+                        rs.getString("ShipAddress"),
+                        rs.getString("Email"),
+                        rs.getDate("OrderDate"),
+                        rs.getDate("ShippedDate"),
+                        0,
+                        rs.getInt("Status")));
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
 
     public ArrayList<PaymentType> getPaymentType() {
         ArrayList<PaymentType> list = new ArrayList<>();

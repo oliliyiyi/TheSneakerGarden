@@ -16,7 +16,7 @@
     ArrayList<Inventory> list = p.getProductQuantityByProID(product.getId());
     ArrayList<Product> listP = p.getAllProduct();
     ArrayList<Product> listP2 = new ArrayList<>();
-
+    ReviewManager reviewManager = new ReviewManager();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -246,12 +246,73 @@
                                     <%=product.getName()%>
                                 </h1>
                                 <ul class="list-unstyled d-flex justify-content-start mb-1">
+                                    <%
+                                        float averageRating1 = reviewManager.getRatingProductByProductID(product.getId());
+                                        if (averageRating1 != 0) {
+                                    %>
                                     <li>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
-                                        <i class="text-warning fa fa-star"></i>
+                                        <%
+                                            if (averageRating1 == 5) {
+                                        %>        
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <%
+                                        } else if (averageRating1 < 5 & averageRating1 >= 4) {
+                                        %>        
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                        } else if (averageRating1 < 4 & averageRating1 >= 3) {
+                                        %>        
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
                                         <i class="text-muted fa fa-star"></i>
                                         <i class="text-muted fa fa-star"></i>
+                                        <%
+                                        } else if (averageRating1 < 3 & averageRating1 >= 2) {
+                                        %>        
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                        } else if (averageRating1 < 2 & averageRating1 >= 1) {
+                                        %>        
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                        } else if (averageRating1 < 1 & averageRating1 >= 0) {
+                                        %>        
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                            }
+                                        %>
+                                        <%
+                                        } else {
+                                        %>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                            }
+                                        %>
                                     </li>
                                 </ul>
                                 <p class="h3 py-2 mb-0"><%=Math.round(product.getPrice())%>₫</p>
@@ -387,13 +448,12 @@
             <div class="main-section">
                 <div class="hedding-title"><h1>Star Rating System</h1></div>
                 <%
-                    ReviewManager reviewManager = new ReviewManager();
                     ArrayList<Review> listReview = reviewManager.getAllReviewByProductID(product.getId());
-
                 %>
                 <div class="rating-part">
                     <div class="average-rating">
-                        <%                            if (listReview.size() != 0) {
+                        <%
+                            if (listReview.size() != 0) {
                                 double sumRate = 0, averageRating;
                                 for (int i = 0; i < listReview.size(); i++) {
                                     sumRate = sumRate + listReview.get(i).getRating();
@@ -678,8 +738,73 @@
                                     <h5><%=listP2.get(i).getName()%></h5>
                                 </a>
                                 <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                    <%
+                                        float averageRating2 = reviewManager.getRatingProductByProductID(listP2.get(i).getId());
+                                        if (averageRating2 != 0) {
+                                    %>
                                     <li>
-
+                                        <%
+                                            if (averageRating2 == 5) {
+                                        %>        
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <%
+                                        } else if (averageRating2 < 5 & averageRating2 >= 4) {
+                                        %>        
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                        } else if (averageRating2 < 4 & averageRating2 >= 3) {
+                                        %>        
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                        } else if (averageRating2 < 3 & averageRating2 >= 2) {
+                                        %>        
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                        } else if (averageRating2 < 2 & averageRating2 >= 1) {
+                                        %>        
+                                        <i aria-hidden="true" class="fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                        } else if (averageRating2 < 1 & averageRating2 >= 0) {
+                                        %>        
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                            }
+                                        %>
+                                        <%
+                                        } else {
+                                        %>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <%
+                                            }
+                                        %>
                                     </li>
                                 </ul>
                                 <p class="text-center mb-0" style="color: #333"><b><%=Math.round(listP2.get(i).getPrice())%> VNĐ</b></p>

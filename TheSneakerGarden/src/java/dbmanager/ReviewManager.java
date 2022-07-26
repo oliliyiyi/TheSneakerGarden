@@ -97,7 +97,7 @@ public class ReviewManager {
         }
         return list;
     }
-    
+
     public ArrayList<Review> getAllReviewByRating(double rating, int productID) {
         ArrayList<Review> list = new ArrayList<>();
         String query = "SELECT *"
@@ -199,4 +199,22 @@ public class ReviewManager {
         }
     }
 
+    public float getRatingProductByProductID(int productID) {
+        float rating = 0;
+        String sql = "SELECT AVG(Rating)\n"
+                + " FROM dbo.Review\n"
+                + " WHERE [ProductID] = " + productID;
+        try {
+            conn = db.getConnectDB();
+            ps = conn.prepareCall(sql);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                rating = rs.getFloat(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return rating;
+    }
 }

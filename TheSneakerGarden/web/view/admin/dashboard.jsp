@@ -39,7 +39,6 @@
         <%@include file="../../components/sidebar-dashboard.jsp" %>
         <div class="main-content">
             <header>
-
                 <div class="search-wrapper">
                     <form action="Search">
                         <input type="text" placeholder="Search..."/>
