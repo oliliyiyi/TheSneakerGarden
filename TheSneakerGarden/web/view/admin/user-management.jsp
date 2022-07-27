@@ -118,9 +118,10 @@
         <%@include file="../../components/sidebar-dashboard.jsp" %>  
         <div class="main-content">
             <header>
-                <div class="search-wrapper"><span class="las la-search"></span>
-                    <input type="search" placeholder="Search..."/>
-                </div> 
+                <form action="search-account-customer">
+                        <input name="txtsearch" type="text" placeholder="Search by name..."/>
+                        <button style="submit" class="btn btn-warning"><span class="las la-search"></span></button>
+                    </form> 
                 <div class="user-wrapper">
                     <div>
                         <h4><%=user.getUserFullName()%></h4>   

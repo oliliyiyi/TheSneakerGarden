@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Category;
 import model.Product;
 import model.User;
 
@@ -101,7 +102,7 @@ public class ProductManagerControl extends HttpServlet {
                     request.getRequestDispatcher("./view/admin/add-item.jsp").forward(request, response);
                 }
             }
-            
+
             if ("update".equals(request.getParameter("action"))) {
                 int id = Integer.valueOf(request.getParameter("id"));
                 String name = request.getParameter("name");

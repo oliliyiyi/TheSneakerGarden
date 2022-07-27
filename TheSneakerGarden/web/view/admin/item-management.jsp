@@ -116,8 +116,11 @@
         <%@include file="../../components/sidebar-dashboard.jsp"%>  
         <div class="main-content">
             <header>
-                <div class="search-wrapper"><span class="las la-search"></span>
-                    <input type="search" placeholder="Search..."/>
+                <div class="search-wrapper">
+                    <form action="search-product">
+                        <input name="txtsearch" type="text" placeholder="Search by name..."/>
+                        <button style="submit" class="btn btn-warning"><span class="las la-search"></span></button>
+                    </form>
                 </div> 
                 <div class="user-wrapper">
                     <div>
@@ -146,7 +149,8 @@
                                 <th>Description</th> 
                                 <th>Update</th>
                                 <th>Delete</th>
-                                <th>Details</th>
+                                <th>Inventory</th>
+                                <th>Review</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -186,7 +190,10 @@
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                         </svg></a></td>
                                 <td><a href="ProductSize?action=view&id=<%=product.getId()%>" style="color: blue">
-                                        Details
+                                        View
+                                    </a></td>
+                                <td><a href="dsadsadsa?action=feedback&id=<%=product.getId()%>" style="color: blue">
+                                        View
                                     </a></td>
                             </tr>   
                             <%

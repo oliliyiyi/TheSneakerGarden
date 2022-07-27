@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("listProduct");
+    ReviewManager reviewManager = new ReviewManager();
     int tab = (int) list.size() / 6;
     if (tab * 6 < list.size()) {
         tab += 1;
@@ -133,10 +134,73 @@
                                 <div class="card-body card-body-height">
                                     <h5 class="h3 text-decoration-none text-dark"><%=list.get(i).getName()%></h5>
                                     <ul class="list-unstyled d-flex justify-content-center mb-1">
-
+                                        <%
+                                            float averageRating = reviewManager.getRatingProductByProductID(list.get(i).getId());
+                                            if (averageRating != 0) {
+                                        %>
                                         <li>
-                                            
-
+                                            <%
+                                                if (averageRating == 5) {
+                                            %>        
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <%
+                                            } else if (averageRating < 5 & averageRating >= 4) {
+                                            %>        
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <%
+                                            } else if (averageRating < 4 & averageRating >= 3) {
+                                            %>        
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <%
+                                            } else if (averageRating < 3 & averageRating >= 2) {
+                                            %>        
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <%
+                                            } else if (averageRating < 2 & averageRating >= 1) {
+                                            %>        
+                                            <i aria-hidden="true" class="fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <%
+                                            } else if (averageRating < 1 & averageRating >= 0) {
+                                            %>        
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <%
+                                                }
+                                            %>
+                                            <%
+                                            } else {
+                                            %>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <i class="text-muted fa fa-star"></i>
+                                            <%
+                                                }
+                                            %>
                                         </li>
                                     </ul>
                                     <p class="text-center mb-0" style="color: #333"><b><%=Math.round(list.get(i).getPrice())%> VNĐ</b></p>
@@ -144,8 +208,8 @@
                             </a>
                         </div>
                         <%
-                                }
-                            
+                            }
+
 
                         %>
                         <div div="row">

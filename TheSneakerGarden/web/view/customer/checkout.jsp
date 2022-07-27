@@ -63,7 +63,6 @@
                                             CartItem val = en.getValue();
                                             Product product = pro.getProductByID(en.getValue().getProductID());
                                             total += product.getPrice() * en.getValue().getQuantity();
-
                                 %>
                                 <li class="list-group-item d-flex justify-content-between align-items-center lh-sm py-4">
                                     <div class="d-flex justify-content-between">
@@ -71,17 +70,19 @@
                                             <img src="<%=product.getImage()%>"/>
                                         </div>
                                         <div class="my-2 mx-5">
-                                            <h6 class="my-0"><%=product.getName()%>x<%=en.getValue().getQuantity()%></h6>
+                                            <h6 class="my-0"><%=product.getName()%> x<%=en.getValue().getQuantity()%></h6>
                                             <small class="text-muted"><%=product.getPrice()%></small>
                                         </div>
                                     </div>
-                                    <span class="text-muted my-2"><%=product.getPrice() * en.getValue().getQuantity()%></span>
+                                    <span class="text-muted my-2"><%=product.getPrice() * en.getValue().getQuantity()%> VND</span>
                                 </li>
                                 <%
-
                                     }
                                 %>
-                                <% if (session.getAttribute("user") == null) {%>
+
+                                <%
+                                    if (session.getAttribute("user") == null) {
+                                %>
                                 <li class="list-group-item d-flex align-items-center justify-content-between py-4">
                                     <div class="col-12">
                                         <h4 class="mb-3">Billing address</h4>
@@ -121,11 +122,57 @@
                                         <hr class="my-4">
                                     </div>
                                 </li>
-                                <% } else {%>
+                                <%
+                                } else {
+                                    User userSession = (User) session.getAttribute("user");
+                                %>
+                                <li class="list-group-item d-flex align-items-center justify-content-between py-4">
+                                    <div class="col-12">
+                                        <h4 class="mb-3">Billing address</h4>
+                                        <div class="row g-3">
+                                            <div class="col-sm-6">
+                                                <label for="fullname" class="form-label">Full name</label>
+                                                <input type="text" class="form-control" placeholder="" name="fullname" value="<%=userSession.getUserFullName()%>" required>
+                                                <div class="invalid-feedback">
+                                                    Valid Full name is required.
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="phone" class="form-label">Phone</label>
+                                                <input type="text" class="form-control" placeholder="" name="phone" value="<%=userSession.getUserPhone()%>" required>
+                                                <div class="invalid-feedback">
+                                                    Valid Phone is required.
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" name="email" value="<%=userSession.getUserEmail()%>">
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid email address for shipping updates.
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="address" class="form-label">Address</label>
+                                                <input type="text" class="form-control" name="address" value="<%=userSession.getUserAddress()%>" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter your shipping address.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="my-4">
+                                    </div>
+                                </li>
+                                <%
+                                    }
+                                %>
+
                                 <li class="list-group-item d-flex align-items-center justify-content-between py-4">
                                     <h5 class="my-0">Payment Method</h5>
                                     <div class="">
-                                            <img class="payment-image-type mx-2 d-none" style="width:50px" src="#"/>
+                                        <img class="payment-image-type mx-2 d-none" style="width:50px" src="#"/>
                                         <select onchange="handleChange()" class="custom-select text-uppercase p-1" id="inputGroupSelect01" name="typeId">
                                             <%
                                                 for (PaymentType type : types) {
@@ -138,10 +185,10 @@
                                         <!--<span class="text-muted text-uppercase">Change</span>-->
                                     </div>
                                 </li>
-                                <% }%>
+
                                 <li class="list-group-item d-flex justify-content-between align-items-center py-4">
                                     <span class="my-0">Total</span>
-                                    <strong style="font-size: 1.5rem;"><%=total%></strong>
+                                    <strong style="font-size: 1.5rem;"><%=total%> VND</strong>
                                     <input type="hidden" value="<%=total%>" name="amount"/>
                                 </li>
                                 <button class="btn btn-black btn-lg mt-5" onclick="" type="submit">Continue to checkout</button>
@@ -159,31 +206,31 @@
 
         <script>
             function handleChange() {
-                if($('.custom-select').val()==="1"){
+                if ($('.custom-select').val() === "1") {
                     $('.payment-image-type').addClass('d-none')
                 }
-                if($('.custom-select').val()==="2"){
-                    $('.payment-image-type').css('width','50px')
+                if ($('.custom-select').val() === "2") {
+                    $('.payment-image-type').css('width', '50px')
                     $('.payment-image-type').removeClass('d-none')
-                    $('.payment-image-type').attr('src','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1bHjHnPSDXgBS2WSVOAm57BdPvoAmwBMcqXwjTGUiiJGYrkvUZuVgZHXeZJWWX7kLlCg&usqp=CAU')
+                    $('.payment-image-type').attr('src', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1bHjHnPSDXgBS2WSVOAm57BdPvoAmwBMcqXwjTGUiiJGYrkvUZuVgZHXeZJWWX7kLlCg&usqp=CAU')
                 }
-                if($('.custom-select').val()==="3"){
-                    $('.payment-image-type').css('width','50px')
+                if ($('.custom-select').val() === "3") {
+                    $('.payment-image-type').css('width', '50px')
                     $('.payment-image-type').removeClass('d-none')
-                    $('.payment-image-type').attr('src','https://monfin.vn/images/source/Congty/viettelpay.png')
+                    $('.payment-image-type').attr('src', 'https://monfin.vn/images/source/Congty/viettelpay.png')
                 }
-                if($('.custom-select').val()==="4"){
-                    $('.payment-image-type').css('width','200px')
+                if ($('.custom-select').val() === "4") {
+                    $('.payment-image-type').css('width', '200px')
                     $('.payment-image-type').removeClass('d-none')
-                    $('.payment-image-type').attr('src','http://hangkhong247.vn/image/thanhtoanvisa.png')
+                    $('.payment-image-type').attr('src', 'http://hangkhong247.vn/image/thanhtoanvisa.png')
                 }
-                if($('.custom-select').val()==="5"){
-                    $('.payment-image-type').css('width','50px')
+                if ($('.custom-select').val() === "5") {
+                    $('.payment-image-type').css('width', '50px')
                     $('.payment-image-type').removeClass('d-none')
-                    $('.payment-image-type').attr('src','https://brademar.com/wp-content/uploads/2022/05/Visa-Logo-PNG-1976-%E2%80%93-1992.png')
+                    $('.payment-image-type').attr('src', 'https://brademar.com/wp-content/uploads/2022/05/Visa-Logo-PNG-1976-%E2%80%93-1992.png')
                 }
             }
-            
+
         </script>
         <%@include file="../../components/footer.jsp" %>
         <script src="${pageContext.request.contextPath}/js/form-validation.js"></script>

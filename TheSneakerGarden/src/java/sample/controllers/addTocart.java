@@ -80,7 +80,6 @@ public class addTocart extends HttpServlet {
                     } else {
                         cart.put((ID + 1) * size, new CartItem(1, ID, Integer.valueOf(request.getParameter("product-quantity")), size));
                     }
-
                 } else {
                     cart.put((ID + 1) * size, new CartItem(1, ID, 1, size));
                 }
@@ -125,9 +124,7 @@ public class addTocart extends HttpServlet {
                     if (cart.size() <= 0) {
                         session.setAttribute("cart", null);
                     }
-
             }
-
         }
         request.getRequestDispatcher("/cart").include(request, response);
     }

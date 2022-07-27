@@ -12,8 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Category;
 import model.Inventory;
-
 
 /**
  *
@@ -139,12 +139,12 @@ public class ProductManager {
 
             PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[Products] "
                     + "SET "
-                    + "[ProductName] = '" + product.getName() 
-                    + "', [CategoryID] = '" + product.getcId() 
-                    + "', [BrandID] = '" + product.getbrandID() 
-                    + "', [Price] = '" + product.getPrice() 
-                    + "', [ImageLink] = '" + product.getImage() 
-                    + "', [Description] = '" + product.getDescription() 
+                    + "[ProductName] = '" + product.getName()
+                    + "', [CategoryID] = '" + product.getcId()
+                    + "', [BrandID] = '" + product.getbrandID()
+                    + "', [Price] = '" + product.getPrice()
+                    + "', [ImageLink] = '" + product.getImage()
+                    + "', [Description] = '" + product.getDescription()
                     + "' WHERE [ProductID] = " + product.getId());
             ps.executeUpdate();
             status = true;
@@ -265,27 +265,21 @@ public class ProductManager {
         }
         return check;
     }
-    
-//    public ArrayList<Category> getAllCategory() {
-//        ArrayList<Product> list = new ArrayList<>();
-//        String query = "SELECT * FROM [dbo].[Products] WHERE [status] = 1";
-//        try {
-//            conn = db.getConnectDB();//mo ket noi voi sql
-//            ps = conn.prepareStatement(query);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                list.add(new Product(rs.getInt("ProductID"),
-//                        rs.getString("ProductName"),
-//                        rs.getString("ImageLink"),
-//                        rs.getDouble("Price"),
-//                        rs.getString("Description"),
-//                        rs.getInt("CategoryID"),
-//                        rs.getInt("BrandID"),
-//                        rs.getInt("Status")));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return list;
-//    }
+
+    public ArrayList<Category> getAllCategory() {
+        ArrayList<Category> list = new ArrayList<>();
+        String query = "SELECT *"
+                + "  FROM [TSG].[dbo].[Categories]";
+        try {
+            conn = db.getConnectDB();//mo ket noi voi sql
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Category(rs.getInt("CategoryID"), rs.getString("CategoryName")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
 }

@@ -105,8 +105,15 @@
                                     <div class="col-3 mb-4 text-end">
                                         <h6>Phone</h6>
                                     </div>
+                                    
                                     <div class="col-9 mb-4">
                                         <input type="text" class="input-profile" name="phone" value="<%=userInfo.getUserPhone()%>"/>
+                                    </div>
+                                    <div class="col-3 mb-4 text-end">
+                                        <h6>Address</h6>
+                                    </div>
+                                    <div class="col-9 mb-4">
+                                        <input type="text" class="input-profile" name="address" value="<%=userInfo.getUserAddress()%>"/>
                                     </div>
                                     <div class="offset-3 col-9 mb-4">
                                         <button class="btn btn-black">Update</button>
