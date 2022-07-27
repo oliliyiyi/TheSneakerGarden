@@ -71,7 +71,20 @@
                 border-color: #9b59b6;
             }
 
-
+            .user-input .input-user select:valid {
+                border-color: #9b59b6;
+            }
+            .user-input .input-user select {
+                height: 45px;
+                width: 100%;
+                outline: none;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                padding-left: 15px;
+                font-size: 16px;
+                border-bottom-width: 2px;
+                transition: all 0.3s ease;
+            }
             .buttonAdd {
                 display: flex;
                 justify-content: center;
@@ -133,22 +146,34 @@
                                         />
                                 </div>
                                 <div class="input-user">
-                                    <span class="details">Category</span>
-                                    <input
-                                        name="cate"
-                                        type="number"
-                                        placeholder="Enter type"
-                                        required
-                                        />
-                                </div>
-                                <div class="input-user">
-                                    <span class="details">Brand</span>
-                                    <input
-                                        name="brand"
-                                        type="number"
-                                        placeholder="Enter type"
-                                        required
-                                        />
+                                <span class="details">Category</span>
+                                <select name="cate">
+                                    <option value="1">
+                                        Shoes
+                                    </option>
+                                    <option value="2">
+                                        Shock
+                                    </option>
+                                    <option value="3">
+                                        Hat
+                                    </option>
+                                    <option value="4">
+                                        Backpack
+                                    </option>
+                                </select>
+                      
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Brand</span>
+                                <select name="brand"  >
+                                    <option value="1">
+                                        Nike
+                                    </option>
+                                    <option value="2">
+                                        Adidas
+                                    </option>
+                                    
+                                </select>
                                 </div>
                                 <div class="input-user">
                                     <span class="details">Price</span>
