@@ -1,16 +1,15 @@
 <%-- 
-    Document   : user-management
-    Created on : Mar 19, 2022, 6:13:37 PM
+    Document   : item-review
+    Created on : Jul 28, 2022, 10:13:27 AM
     Author     : Admin
 --%>
 
-<%@page import="java.text.DecimalFormat"%>
+<%@page import="model.Review"%>
 <%@page import="model.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    DecimalFormat formatter = new DecimalFormat("###,###,###");
     if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
@@ -133,74 +132,86 @@
             </header>
             <main>
                 <div class="table-container">
-                    <h1 class="heading">Items Management</h1>
-                    <div class="button-add">
-                        <button type="button" onclick="location.href = './item-management?action=add'" ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-                            </svg>Add items</button>
-                    </div>
+                    <h1 class="heading">Item Review</h1>
                     <table class="table" style="width: 100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Image</th> 
-                                <th>Name</th>
-                                <th>Brand</th>
-                                <th>Category</th>
-                                <th>Price</th> 
-                                <th>Description</th> 
-                                <th>Update</th>
+                                <th>Username</th>
+                                <th>Time</th> 
+                                <th>Rating</th>
+                                <th>Message</th>
                                 <th>Delete</th>
-                                <th>Inventory</th>
-                                <th>Review</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
-                                ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("listProduct");
-                                String brand = null;
-                                String cate = null;
-                                for (Product product : list) {
-                                    if (product.getbrandID() == 1) {
-                                        brand = "Nike";
-                                    } else {
-                                        brand = "Adidas";
-                                    }
-                                    if (product.getcId() == 1) {
-                                        cate = "Shoes";
-                                    } else if (product.getcId() == 2) {
-                                        cate = "Shock";
-                                    } else if (product.getcId() == 3) {
-                                        cate = "Hat";
-                                    } else {
-                                        cate = "Backpack";
-                                    }
+                                ArrayList<Review> listReview = (ArrayList<Review>) request.getAttribute("listReview");
+                                ArrayList<User> userList = (ArrayList<User>) request.getAttribute("userList");
+                                if (listReview != null) {
+                                    for (Review rv : listReview) {
+                                        for (User u : userList) {
+                                            if (u.getUserId() == rv.getCustomerID()) {
+
                             %>
                             <tr>
-                                <td><%=product.getId()%></td>
-                                <td><img src="<%=product.getImage()%>" alt="" width="50" height="50"></td>
-                                <td><%=product.getName()%></td>
-                                <td><%=brand%></td>
-                                <td><%=cate%></td>
-                                <td><%=formatter.format(product.getPrice())+" VNĐ"%></td>
-                                <td><%=product.getDescription()%></td>
-                                <td> <a href="item-management?action=update&id=<%=product.getId()%>" style="color: green"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-                                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
-                                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
-                                        </svg></a></td>
-                                <td><a href="#" onclick="alertDelete(<%=product.getId()%>)" style="color: red"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <td><%=u.getUserAccount()%></td>
+                                <td><%=rv.getReviewDate()%></td>
+                                <td>
+                                    <%
+                                        if (rv.getRating() == 5) {
+                                    %>        
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <%
+                                    } else if (rv.getRating() < 5 & rv.getRating() >= 4) {
+                                    %>        
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <%
+                                    } else if (rv.getRating() < 4 & rv.getRating() >= 3) {
+                                    %>        
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <%
+                                    } else if (rv.getRating() < 3 & rv.getRating() >= 2) {
+                                    %>        
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <%
+                                    } else if (rv.getRating() < 2 & rv.getRating() >= 1) {
+                                    %>        
+                                    <i aria-hidden="true" class="fa fa-star"></i>
+                                    <%
+                                    } else if (rv.getRating() < 1 & rv.getRating() >= 0) {
+                                    %>        
+
+                                    <%
+                                        }
+                                    %>
+                                </td>
+                                <td><%=rv.getMessage()%></td>
+                                <td><a href="#" onclick="alertDelete(<%=rv.getReviewID()%>)" style="color: red"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                                        </svg></a></td>
-                                <td><a href="ProductSize?action=view&id=<%=product.getId()%>" style="color: blue">
-                                        View
-                                    </a></td>
-                                <td><a href="ReviewControl?action=feedback&id=<%=product.getId()%>" style="color: blue">
-                                        View
-                                    </a></td>
-                            </tr>   
-                            <%
-                                }
-                            %>
+                                        </svg>
+                                    </a>
+                                </td>
+                                <%
+                                            }
+                                        }
+                                    }
+                                } else {
+                                %>
+                        <p>There are no reviews yet</p>
+                        <%
+                            }
+                        %>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -211,6 +222,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
         <script>
+                                    var myParam = location.search.split('id=')[1].charAt(0);
                                     function alertDelete(id) {
                                         const title = "Warnning";
                                         const message = ' Are you want to delete this item?';
@@ -224,7 +236,7 @@
                                                 console.log('result = ', result);
                                                 if (result === 'ok') {
                                                     //sleep(3500).then(() => { window.location.replace("./item-management?action=delete&id="+id) });
-                                                    window.location.replace("./item-management?action=delete&id=" + id);
+                                                    window.location.replace("./ReviewControl?action=delete&id="+myParam+"&rid=" + id);
                                                 }
                                             };
                                         }

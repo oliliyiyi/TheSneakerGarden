@@ -49,7 +49,6 @@ public class DetailControl extends HttpServlet {
         //int rating = Integer.valueOf(request.getParameter("rating"));
         ProductManager manager = new ProductManager();
         Product p = manager.getProductByID(pID);
-
         ReviewManager reviewManager = new ReviewManager();
         ArrayList<Review> listReviewByRating1 = reviewManager.getAllReviewByRating(1, pID);
         ArrayList<Review> listReviewByRating2 = reviewManager.getAllReviewByRating(2, pID);

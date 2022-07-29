@@ -4,11 +4,13 @@
     Author     : Admin
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.Order"%>
 <%@page import="model.Product"%>
 <%@page import="model.User"%>
 <%@page import="java.util.ArrayList"%>
 <%
+    DecimalFormat formatter = new DecimalFormat("###,###,###");
     if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
@@ -123,7 +125,7 @@
                                                 <td><%=product.getName()%></td>
                                                 <td><%=brand%></td>
                                                 <td><%=cate%></td>
-                                                <td><%=Math.round(product.getPrice())%> VND</td>
+                                                <td><%=formatter.format(product.getPrice())+" VNĐ"%></td>
                                             </tr>
                                             <%
                                                 }

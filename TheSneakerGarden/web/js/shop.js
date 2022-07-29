@@ -43,7 +43,7 @@ $(document).ready(function () {
         $(this).addClass("btn-secondary");
         return false;
     });
-    var myParam = location.search.split('tab=')[1];
+    var myParam = location.search.split('tab=')[1].charAt(0);
     $('.page-link#'+myParam).click( function (e) {
         e.preventDefault();
     });

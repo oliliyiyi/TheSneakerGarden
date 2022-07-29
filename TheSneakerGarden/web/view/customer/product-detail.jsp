@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="dbmanager.ReviewManager"%>
 <%@page import="dbmanager.OrderManager"%>
 <%@page import="model.CartItem"%>
@@ -10,6 +11,7 @@
 <%@page import="model.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+    DecimalFormat formatter = new DecimalFormat("###,###,###");
     Product product = (Product) request.getAttribute("detail");
 
     ProductManager p = new ProductManager();
@@ -250,6 +252,7 @@
                                         float averageRating1 = reviewManager.getRatingProductByProductID(product.getId());
                                         if (averageRating1 != 0) {
                                     %>
+                                    <p class="mr-2 fw-bold"><%=(float)Math.round(averageRating1*10)/10%>&nbsp</p>
                                     <li>
                                         <%
                                             if (averageRating1 == 5) {
@@ -315,7 +318,7 @@
                                         %>
                                     </li>
                                 </ul>
-                                <p class="h3 py-2 mb-0"><%=Math.round(product.getPrice())%>₫</p>
+                                <p class="h3 py-2 mb-0"><%=formatter.format(product.getPrice())+" VNĐ"%></p>
                                 <hr class="mb-2 h-auto"/>
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
@@ -585,7 +588,7 @@
                         %>
                         <div class="user-img-part row">
                             <div class="user-img col-12 col-md-6">
-                                <img src="/demo/man01.png">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" />
                             </div>
                             <div class="user-text col-12 col-md-6">
                                 <h4><%=rv.getReviewDate()%></h4>
@@ -653,7 +656,7 @@
                         %>
                         <div class="user-img-part">
                             <div class="user-img">
-                                <img src="/demo/man01.png">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" />
                             </div>
                             <div class="user-text">
                                 <p>Me</p>
@@ -729,7 +732,7 @@
                     <div class="p-2 pb-3">
                         <div class="product-wap card rounded-0">
                             <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src=<%=listP2.get(i).getImage()%>>
+                                <img class="card-img rounded-0 img-fluid" src="<%=listP2.get(i).getImage()%>">
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                 </div>
                             </div>

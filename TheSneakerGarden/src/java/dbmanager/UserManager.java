@@ -56,7 +56,7 @@ public class UserManager {
 
     public User CheckUserExist(String userName) {
         String query = "SELECT *"
-                + "  FROM [TSG].[dbo].[Customer]"
+                + "  FROM [dbo].[Customer]"
                 + "  WHERE [Account] =?";
         try {
             conn = db.getConnectDB();//mo ket noi voi sql
@@ -83,7 +83,7 @@ public class UserManager {
     public User getUser(int id) {
         User user = new User();
         String query = "SELECT *"
-                + "  FROM [TSG].[dbo].[Customer]"
+                + "  FROM [dbo].[Customer]"
                 + "  WHERE [CustomerID] =" + id;
         try {
             conn = db.getConnectDB();//mo ket noi voi sql
@@ -126,8 +126,7 @@ public class UserManager {
     public ArrayList<User> getAllUser() {
         ArrayList<User> list = new ArrayList<>();
         String query = "SELECT *"
-                + "  FROM [TSG].[dbo].[Customer]"
-                + "  WHERE [Status] = 1";
+                + "  FROM [dbo].[Customer]";
         try {
             conn = db.getConnectDB();//mo ket noi voi sql
             ps = conn.prepareStatement(query);
@@ -152,7 +151,7 @@ public class UserManager {
     public ArrayList<User> getAllAdmin() {
         ArrayList<User> list = new ArrayList<>();
         String query = "SELECT *"
-                + "  FROM [TSG].[dbo].[Customer]"
+                + "  FROM [dbo].[Customer]"
                 + "  WHERE [RoleID] = 1";
         try {
             conn = db.getConnectDB();//mo ket noi voi sql
@@ -178,7 +177,7 @@ public class UserManager {
     public ArrayList<User> getAllCustomer() {
         ArrayList<User> list = new ArrayList<>();
         String query = "SELECT *"
-                + "  FROM [TSG].[dbo].[Customer]"
+                + "  FROM [dbo].[Customer]"
                 + "  WHERE [RoleID] = 2";
         try {
             conn = db.getConnectDB();//mo ket noi voi sql

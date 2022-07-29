@@ -123,7 +123,7 @@ public class ReviewManager {
 
     public Review getReviewByID(int reviewID) {
         Review review = new Review();
-        String sql = "select ReviewID, ProductID, CustomerID, [Message], ReviewDate from dbo.Review "
+        String sql = "select ReviewID, ProductID, CustomerID, [Message], ReviewDate, Rating from dbo.Review "
                 + "where ReviewID = ?";
         try {
             conn = db.getConnectDB();
@@ -143,7 +143,6 @@ public class ReviewManager {
             return null;
         }
     }
-
     public boolean addReview(int productID, int userID, String mess, Date rvDate, double rating) {
         String sql = "INSERT INTO [dbo].[Review]\n"
                 + "           ([ProductID]\n"

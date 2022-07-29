@@ -1,9 +1,11 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.Review"%>
 <%@page import="dbmanager.ReviewManager"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+    DecimalFormat formatter = new DecimalFormat("###,###,###");
     ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("listProduct");
     ReviewManager reviewManager = new ReviewManager();
     int tab = (int) list.size() / 6;
@@ -203,7 +205,7 @@
                                             %>
                                         </li>
                                     </ul>
-                                    <p class="text-center mb-0" style="color: #333"><b><%=Math.round(list.get(i).getPrice())%> VNĐ</b></p>
+                                    <p class="text-center mb-0" style="color: #333"><b><span><%=formatter.format(list.get(i).getPrice())+" VNĐ"%></span></b></p>
                                 </div>
                             </a>
                         </div>
@@ -214,12 +216,11 @@
                         %>
                         <div div="row">
                             <ul class="pagination pagination-lg justify-content-end">
-                                <%                                    for (int i = 0;
-                                            i < tab;
-                                            i++) {
+                                <%                                    
+                                    for (int i = 0; i < tab; i++) {
                                 %>
                                 <li class="page-item text-dark">
-                                    <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="shop?tab=<%=i + 1%>&bId=<%=paramBId%>&type=<%=paramType%>&price=<%=paramPrice%>"
+                                    <a id="<%=i+1%>" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="shop?tab=<%=i + 1%>&bId=<%=paramBId%>&type=<%=paramType%>&price=<%=paramPrice%>"
                                        ><%=i + 1%></a>
                                 </li>
                                 <%}%>
