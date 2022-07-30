@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.PaymentType"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dbmanager.UserManager"%>
@@ -8,6 +9,7 @@
 <%@page import="model.CartItem"%>
 <%@page import="dbmanager.ProductManager"%>
 <%
+    DecimalFormat formatter = new DecimalFormat("###,###,###");
     UserManager userManager = new UserManager();
     ArrayList<PaymentType> types = (ArrayList<PaymentType>) request.getAttribute("type");
 %>
@@ -71,10 +73,10 @@
                                         </div>
                                         <div class="my-2 mx-5">
                                             <h6 class="my-0"><%=product.getName()%> x<%=en.getValue().getQuantity()%></h6>
-                                            <small class="text-muted"><%=product.getPrice()%></small>
+                                            <small class="text-muted"><%=formatter.format(product.getPrice())+" VND"%></small>
                                         </div>
                                     </div>
-                                    <span class="text-muted my-2"><%=product.getPrice() * en.getValue().getQuantity()%> VND</span>
+                                    <span class="text-muted my-2"><%=formatter.format(product.getPrice() * en.getValue().getQuantity())+" VND"%></span>
                                 </li>
                                 <%
                                     }
@@ -188,7 +190,7 @@
 
                                 <li class="list-group-item d-flex justify-content-between align-items-center py-4">
                                     <span class="my-0">Total</span>
-                                    <strong style="font-size: 1.5rem;"><%=total%> VND</strong>
+                                    <strong style="font-size: 1.5rem;"><%=formatter.format(total)+" VND"%></strong>
                                     <input type="hidden" value="<%=total%>" name="amount"/>
                                 </li>
                                 <button class="btn btn-black btn-lg mt-5" onclick="" type="submit">Continue to checkout</button>

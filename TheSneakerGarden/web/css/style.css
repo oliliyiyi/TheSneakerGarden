@@ -1,5 +1,6 @@
 /* Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@1&display=swap');
 * {
     font-family: "Poppins", sans-serif;
     margin: 0;
@@ -32,8 +33,13 @@ html::-webkit-scrollbar-thumb {
 img {
     width: 100%;
 }
+*{
+    padding:0;
+    margin: 0;
+}
 body {
     color: var(--text-color);
+
 }
 section {
     padding: 0 0 1rem;
@@ -42,12 +48,101 @@ section {
     max-width: 1300px;
     margin: auto;
 }
+
 .carousel-item {
+    position:relative;
   	transition: -webkit-transform 0.5s ease;
   	transition: transform 0.5s ease;
   	transition: transform 0.5s ease, -webkit-transform 0.5s ease;
   	-webkit-backface-visibility: visible;
   	backface-visibility: visible;
+}
+.carousel-caption{padding-bottom:80px;}
+
+h2{font-size: 60px;}
+p{padding:10px}
+
+/* Background images are set within the HTML using inline CSS, not here */
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    opacity:0.6;
+}
+/*content carousel 1*/
+.banner {
+	display: block;
+	min-height: 200px;
+	width: 100%;
+	position: relative;
+}
+.typed_wrap {
+	display: block;
+/*	border: 4px solid #ecf0f1;*/
+        border: none;
+	width: 100%;
+	height: auto;
+	padding: 30px;
+	
+	/*centers it in the .banner*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	-moz-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	-o-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+}
+
+.typed_wrap h1 {
+	display: inline;
+        font-family: 'Roboto Mono', monospace;
+}
+.typed{
+            font-family: 'Roboto Mono', monospace;
+font-weight: bold;
+}
+
+/*Add custom cursor so it auto inherits font styles*/
+.typed::after {
+	content: '|';
+	display: inline;
+	-webkit-animation: blink 0.7s infinite;
+	-moz-animation: blink 0.7s infinite;
+	animation: blink 0.7s infinite;
+        font-family: 'Roboto Mono', monospace;
+}
+
+/*Removes cursor that comes with typed.js*/
+.typed-cursor{
+   opacity: 0;
+	display: none;
+}
+#tshirt{
+   height:28.4rem;
+   display: block !important;
+}
+/*Custom cursor animation*/
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
 }
 header {
     /*    max-width: 1300px;
@@ -160,7 +255,7 @@ header {
 .home {
     max-width: 1300px;
     margin: auto;
-    min-height: 640px;
+    min-height: 400px;
     display: flex;
     align-items: center;
     background: var(--container-color);
@@ -214,6 +309,7 @@ header {
 .heading {
     text-align: center;
     margin: 2rem 0;
+    font-weight: bold;
 }
 .heading span {
     border-bottom: 3px solid var(--main-color);
@@ -558,7 +654,7 @@ h5 {
     color:#7B7C7E;
 }
 .carousel-height, .carousel-image {
-    height: 45rem;
+    height: 40rem;
 }
 .account-profile {
     text-decoration: none;
@@ -1038,3 +1134,66 @@ a {
 .invalid-message {
     color: red;
 }
+.row>*{
+    padding: 0;
+}
+.introduction{
+    margin-top: 8rem;
+}
+.carousel__3d__block {
+  width: 40em;
+  height: 25em;
+  margin: 0 auto;
+  position: relative;
+}
+
+.carousel__3d .items {
+  width: 400px !important;
+  height: 400px;
+  display: inline-block;
+  
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  overflow: hidden;
+}
+
+
+
+.items {
+  position: absolute;
+}
+
+.main-pos {
+  margin-left: 2em !important;
+  z-index: 3000;
+  /*background-image: url('https://dl.dropbox.com/u/32649907/imgs/shadow.png');*/
+}
+
+.left-pos {
+  opacity: .3;
+  margin-left: -17em !important;
+  z-index: 1000;
+  -webkit-transform: scale(.75);
+  -moz-transform: scale(.75);
+  transform: scale(.75);
+}
+
+.back-pos {
+  margin-left: 2em !important;
+  opacity: .05;
+  -webkit-transform: scale(.5);
+  -moz-transform: scale(.5);
+  transform: scale(.5);
+}
+
+.right-pos {
+  opacity: .3;
+  margin-left:  21em !important;
+  z-index: 1000;
+  -webkit-transform: scale(.75);
+  -moz-transform: scale(.75);
+  transform: scale(.75);
+}
+
+

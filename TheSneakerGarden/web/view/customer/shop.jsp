@@ -122,7 +122,7 @@
                             }
                             for (int i = step; i < index; i++) {
                         %>
-                        <div class="col-md-4">
+                        <div style="padding:10px" class="col-md-4">
                             <a class="card mb-4 product-wap rounded-0" href="product-detail?id=<%=list.get(i).getId()%>" tabindex="0">
                                 <div class="card rounded-0">
                                     <img class="card-img-product card-img rounded-0 img-fluid" src="<%=list.get(i).getImage()%>" />
@@ -140,7 +140,7 @@
                                             float averageRating = reviewManager.getRatingProductByProductID(list.get(i).getId());
                                             if (averageRating != 0) {
                                         %>
-                                        <li>
+                                        <li style="color:#FDC91B">
                                             <%
                                                 if (averageRating == 5) {
                                             %>        
@@ -205,7 +205,7 @@
                                             %>
                                         </li>
                                     </ul>
-                                    <p class="text-center mb-0" style="color: #333"><b><span><%=formatter.format(list.get(i).getPrice())+" VNĐ"%></span></b></p>
+                                    <p class="text-center mb-0" style="color: #333"><b><span><%=formatter.format(list.get(i).getPrice())+" VND"%></span></b></p>
                                 </div>
                             </a>
                         </div>

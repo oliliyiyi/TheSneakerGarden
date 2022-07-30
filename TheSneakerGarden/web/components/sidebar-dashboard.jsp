@@ -30,7 +30,7 @@
             }
 
             .active, .accordion:hover {
-                background-color: #ccc; 
+                background-color: #ccc;
             }
 
             .panel {
@@ -56,9 +56,9 @@
                             <span>Dashboard</span></a>
                     </li>
                     <li>
-                        <button class="accordion"><span class="las la-users"></span> User</button>
+                        <a class="accordion" id="user"><span class="las la-users"></span> <span>User</span></a></a>
                         <div class="panel">
-                            <a href="admin-management" id="user-management">
+                            <a href="admin-management" id="admin-management">
                                 <span>Admin</span></a>
                             <a href="user-management" id="user-management">
                                 <span>Customer</span></a>
@@ -75,6 +75,7 @@
                 </ul>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="${pageContext.request.contextPath}/js/header_dashboard.js"></script>
         <script>
             var acc = document.getElementsByClassName("accordion");
@@ -91,6 +92,7 @@
                     }
                 });
             }
+
         </script>
     </body>
 </html>

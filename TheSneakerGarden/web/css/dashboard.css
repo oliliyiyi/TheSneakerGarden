@@ -52,18 +52,18 @@
 .sidebar-menu  li {
     width: 100%;
     margin-bottom: 2rem;
-    padding-left: 1rem;
+   
 }
 
 .sidebar-menu  a{
     padding-left: 1rem;
     display: block;
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .sidebar-menu a span:first-child {
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding-right: 1rem;
 }
 
@@ -98,7 +98,7 @@
     text-decoration: none;
 }
 .sidebar-menu a:hover{
-    background: #fff;
+    background: #e6e6e6;
     padding-top: 1rem;
     padding-bottom: 1rem;
     color: black;
@@ -107,7 +107,7 @@
 }
 
 .sidebar-menu a.active{
-    background: #fff;
+    background: #F0F0F0 !important;
     padding-top: 1rem;
     padding-bottom: 1rem;
     color: black;
@@ -148,12 +148,12 @@ header label span{
     height: 50px;
     display: flex;
     align-items: center;
-    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .search-wrapper span{
     display: inline-block;
-    padding: 0rem 1rem;
+    padding: 1rem 1rem;
     font-size: 1.5rem;
 }
 
@@ -287,6 +287,13 @@ td{
     display: inline-block;
     margin-left: .4rem;
     color: #DD2F6E1;
+}
+a.accordion {
+    background-color: inherit;
+}
+.sidebar-menu a.active {
+    background-color: white;
+    color: black;
 }
 
 @media only screen and (max-width: 1200px){

@@ -318,7 +318,7 @@
                                         %>
                                     </li>
                                 </ul>
-                                <p class="h3 py-2 mb-0"><%=formatter.format(product.getPrice())+" VNĐ"%></p>
+                                <p class="h3 py-2 mb-0"><%=formatter.format(product.getPrice())+" VND"%></p>
                                 <hr class="mb-2 h-auto"/>
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
@@ -463,7 +463,7 @@
                                 }
                                 averageRating = sumRate / listReview.size();
                         %>
-                        <h2><%=averageRating%></h2>
+                        <h2><%=(float)Math.round(averageRating*10)/10%></h2>
                         <%
                             if (averageRating == 5) {
                         %>        
@@ -810,7 +810,7 @@
                                         %>
                                     </li>
                                 </ul>
-                                <p class="text-center mb-0" style="color: #333"><b><%=Math.round(listP2.get(i).getPrice())%> VNĐ</b></p>
+                                <p class="text-center mb-0" style="color: #333"><b><%=Math.round(listP2.get(i).getPrice())%> VND</b></p>
                             </div>
                         </div>
                     </div>

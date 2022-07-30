@@ -3,8 +3,12 @@
 <%
     User user = (User) session.getAttribute("user");
 %>
-<header class="main-container container position-sticky top-0">
-    <div class="row">
+<header style="position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: top 0.3s ease-in-out;">
+    <div class="row container-fluid">
         <div class="col-lg-3 col-2 logo">
             <a class="navbar-brand pb-4" href="home">
                 <img src="${pageContext.request.contextPath}/img/logo1.png" alt=""width="100px" height="150"

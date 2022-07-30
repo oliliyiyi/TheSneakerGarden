@@ -1,7 +1,12 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.Product"%>
 <%@page import="dbmanager.ProductManager"%>
 <%@page import="model.CartItem"%>
 <%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    DecimalFormat formatter = new DecimalFormat("###,###,###");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -49,11 +54,11 @@
                                         <div class="col-md-3 col-lg-3 col-xl-3">
                                             <p class="lead fw-normal mb-2"><%=product.getName()%> - Size: <%=en.getValue().getSize()%></p>
                                         </div>
-                                        <% } else { %>
+                                        <% } else {%>
                                         <div class="col-md-3 col-lg-3 col-xl-3">
                                             <p class="lead fw-normal mb-2"><%=product.getName()%></p>
                                         </div>
-                                        <% } %>
+                                        <% }%>
 
                                         <div class="col-md col-xl d-flex">
                                             <button class="btn btn-link px-2" 
@@ -70,7 +75,7 @@
                                             </button>
                                         </div>
                                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                            <h5 class="mb-0"><%=product.getPrice()%> VND</h5>
+                                            <h5 class="mb-0"><%=formatter.format(product.getPrice())+" VND"%></h5>
                                         </div>
                                         <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                             <a href="#!" class="text-danger"><i class="bi bi-trash-fill"

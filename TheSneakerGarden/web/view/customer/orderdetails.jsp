@@ -87,7 +87,7 @@
                                                 x <%=list.get(i).getQuantity()%>
                                             </div>
                                             <div class="col-md-3 col-lg-2 col-xl-3 offset-lg-1">
-                                                <h5 class="mb-0 text-end"><%=Math.round(product.getPrice() * list.get(i).getQuantity())%> VNĐ</h5>
+                                                <h5 class="mb-0 text-end"><%=Math.round(product.getPrice() * list.get(i).getQuantity())%> VND</h5>
                                             </div>
                                         </div>
                                     </div>

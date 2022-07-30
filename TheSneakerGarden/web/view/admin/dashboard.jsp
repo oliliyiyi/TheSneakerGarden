@@ -44,7 +44,7 @@
                 <div class="search-wrapper">
                     <form action="Search">
                         <input type="text" placeholder="Search..."/>
-                        <button style="submit" class="btn btn-warning"><span class="las la-search"></span></button>
+                        <button style="padding:0 0" type="submit" class="btn btn-dark"><span class="las la-search"></span></button>
                     </form>
                 </div> 
                 <div class="user-wrapper">
@@ -125,7 +125,7 @@
                                                 <td><%=product.getName()%></td>
                                                 <td><%=brand%></td>
                                                 <td><%=cate%></td>
-                                                <td><%=formatter.format(product.getPrice())+" VNĐ"%></td>
+                                                <td><%=formatter.format(product.getPrice())+" VND"%></td>
                                             </tr>
                                             <%
                                                 }

@@ -120,7 +120,7 @@
             <header>
                 <form action="search-account-customer">
                         <input name="txtsearch" type="text" placeholder="Search by name..."/>
-                        <button style="submit" class="btn btn-warning"><span class="las la-search"></span></button>
+                        <button style="submit" class="btn btn-dark"><span class="las la-search"></span></button>
                     </form> 
                 <div class="user-wrapper">
                     <div>
