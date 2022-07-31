@@ -109,7 +109,12 @@
                     justify-content: center;
                     font-size: 40px; color:#00C897  ">Update order</h3>
                 <div class="container" >
-                    <form action="order-management?action=update" method="POST" id="someFormId">
+                    <form action="order-management?action=update" class="needs-validation" 
+                          method="POST" 
+                          onsubmit="return validateOrderForm();" 
+                          id="someFormId"
+                          autocomplete="off"
+                          >
                         <div class="user-input">
                             <input type="hidden" name="id" value="<%=order.getOrderId()%>">
                             <input type="hidden" name="username" value="<%=order.getFullName()%>">
@@ -135,17 +140,21 @@
                             </div>
                             <div class="input-user">
                                 <span class="details">Order Date</span>
-                                <input type="date" name="orderdatea" value="<%=order.getOrderDate()%>" required disabled="" >
+                                <input type="date"
+                                       id="orderdate"
+                                       name="orderdatea" value="<%=order.getOrderDate()%>" required disabled="" >
                             </div>
 
                             <div class="input-user">
                                 <span class="details">Ship Date</span>
                                 <input
+                                    id="shipdate"
                                     type="date"
                                     name="shipdate"
                                     value="<%=order.getShipDate()%>"
                                     required
                                     />
+                                <small style="color: red" id="shipdate-err" class="invalid-message"></small>
                             </div>
                             <div class="input-user">
                                 <span class="details">Status</span>
@@ -158,7 +167,7 @@
                             </div>
                         </div>
                         <div class="buttonAdd"> 
-                            <Button>
+                            <Button type="submit">
                                 Update order
                             </Button>
                         </div>
@@ -167,69 +176,14 @@
             </main>
         </div>
         <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
-        <script>
-            window.addEventListener('DOMContentLoaded', function () {
-
-                const form = document.querySelector('form');
-
-
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
-
-                    // Form elements
-                    const title = "Success";
-                    const message = "Update user successful";
-                    const position = "bottom-right";
-                    const duration = 3000;
-                    /*
-                     Available methods:
-                     error
-                     warning
-                     success
-                     info
-                     dialog 
-                     
-                     If you use dialog - 
-                     the third parameter is the callback function
-                     */
-                    const type = "success";
-                    let callback = null;
-                    const popup = Notification({
-                        position: position,
-                        duration: duration
-                    });
-
-                    if (!popup[type]) {
-                        popup.error({
-                            title: 'Error',
-                            message: `Notification has no such method "${type}"`
-                        });
-                        return;
-                    }
-
-                    popup[type]({
-                        title: title,
-                        message: message,
-                        callback: callback
-                    });
-                    sleep(3500).then(() => {
-                        document.getElementById('someFormId').submit();
-                    });
-                });
-
-
-            });
-            function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-
-        </script>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
         <script>
             document.querySelectorAll('pre code').forEach((el) => {
                 hljs.highlightElement(el);
             });
         </script>
+        <script><%@include file="../../js/order-validation.js" %></script>
     </body>
 </html>
 <%

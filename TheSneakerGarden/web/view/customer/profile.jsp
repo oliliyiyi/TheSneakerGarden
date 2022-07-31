@@ -23,7 +23,7 @@
     <body>
         <%@include file="../../components/header.jsp" %>
         <!-- Navbar -->
-        <section class="mt-5 ">
+        <section class="mt-5 " style="margin-top: 15rem !important ">
             <div class="container py-5 px-5 h-100">
                 <div class="row d-flex justify-content-center align-items-start h-100">
                     <div class="col-md-3 gradient-custom text-start text-white py-4"
@@ -84,32 +84,32 @@
                             <form action="profile?id=<%=userInfo.getUserId()%>" method="POST">
                                 <div class="row pt-1 align-items-center">
                                     <!--<input type="hidden" name="id" value="<%=userInfo.getUserId()%>"/>-->
-                                    <div class="col-3 mb-4 text-end">
-                                        <h6>User name</h6>
+                                    <div class="col-3 mb-4 text-center">
+                                        <h6>Username</h6>
                                     </div>
                                     <div class="col-9 mb-4">
-                                        <p class="text-muted"><%=userInfo.getUserAccount()%></p>
+                                        <p style="padding-bottom:2.5px " class="text-muted"><%=userInfo.getUserAccount()%></p>
                                     </div>
-                                    <div class="col-3 mb-4 text-end">
+                                    <div class="col-3 mb-4 text-center">
                                         <h6>Full name</h6>
                                     </div>
                                     <div class="col-9 mb-4">
                                         <input type="text" class="input-profile" name="fullname" value="<%=userInfo.getUserFullName()%>"/>
                                     </div>
-                                    <div class="col-3 mb-4 text-end">
+                                    <div class="col-3 mb-4 text-center">
                                         <h6>Email</h6>
                                     </div>
                                     <div class="col-9 mb-4">
                                         <input type="text" class="input-profile" name="email" value="<%=userInfo.getUserEmail()%>"/>
                                     </div>
-                                    <div class="col-3 mb-4 text-end">
+                                    <div class="col-3 mb-4 text-center">
                                         <h6>Phone</h6>
                                     </div>
                                     
                                     <div class="col-9 mb-4">
                                         <input type="text" class="input-profile" name="phone" value="<%=userInfo.getUserPhone()%>"/>
                                     </div>
-                                    <div class="col-3 mb-4 text-end">
+                                    <div class="col-3 mb-4 text-center">
                                         <h6>Address</h6>
                                     </div>
                                     <div class="col-9 mb-4">
@@ -133,19 +133,19 @@
                             <div class="row align-items-center">
                                 <div class="col-9">
                                     <div class="row pt-1 align-items-center">
-                                        <div class="col-3 mb-3 text-end">
+                                        <div class="col-3 mb-3 text-center">
                                             <h6>Full name</h6>
                                         </div>
                                         <div class="col-9 mb-3">
                                             <p class="text-muted" style="font-size:1.4rem;"><%=userInfo.getUserFullName()%></p>
                                         </div>
-                                        <div class="col-3 text-end">
+                                        <div class="col-3 text-center">
                                             <h6>Phone</h6>
                                         </div>
                                         <div class="col-9">
                                             <p class="text-muted"><%=userInfo.getUserPhone()%></p>
                                         </div>
-                                        <div class="col-3 text-end">
+                                        <div class="col-3 text-center">
                                             <h6>Address</h6>
                                         </div>
                                         <div class="col-9">
@@ -247,5 +247,26 @@
         <!-- MDB -->
         <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>-->
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/cart.js"></script>
+          <script>var prevScrollpos = window.pageYOffset;
+
+            /* Get the header element and it's position */
+            var headerDiv = document.querySelector("header");
+            var headerBottom = headerDiv.offsetTop + headerDiv.offsetHeight;
+
+            window.onscroll = function () {
+                var currentScrollPos = window.pageYOffset;
+
+                /* if we're scrolling up, or we haven't passed the header,
+                 show the header at the top */
+                if (prevScrollpos > currentScrollPos || currentScrollPos < headerBottom) {
+                    headerDiv.style.top = "0";
+                } else {
+                    /* otherwise we're scrolling down & have passed the header so hide it */
+                    headerDiv.style.top = "-20rem";
+                }
+
+                prevScrollpos = currentScrollPos;
+            }
+        </script>
     </body>
 </html>

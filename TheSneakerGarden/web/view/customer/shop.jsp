@@ -57,7 +57,7 @@
     <body>
         <%@include file="../../components/header.jsp" %>
         <!-- Start Content -->
-        <div class="container py-5 mt-0" style="margin-top: 80px">
+        <div class="container py-5 mt-0" style="margin-top: 15rem !important">
             <div class="row mt-5">
                 <div class="col-lg-3">
                     <h1 class="h2 pb-4">Categories</h1>
@@ -344,6 +344,27 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="${pageContext.request.contextPath}/js/shop.js"></script>
         <!-- End Script -->
+          <script>var prevScrollpos = window.pageYOffset;
+
+            /* Get the header element and it's position */
+            var headerDiv = document.querySelector("header");
+            var headerBottom = headerDiv.offsetTop + headerDiv.offsetHeight;
+
+            window.onscroll = function () {
+                var currentScrollPos = window.pageYOffset;
+
+                /* if we're scrolling up, or we haven't passed the header,
+                 show the header at the top */
+                if (prevScrollpos > currentScrollPos || currentScrollPos < headerBottom) {
+                    headerDiv.style.top = "0";
+                } else {
+                    /* otherwise we're scrolling down & have passed the header so hide it */
+                    headerDiv.style.top = "-20rem";
+                }
+
+                prevScrollpos = currentScrollPos;
+            }
+        </script>
     </body>
 
 </html>

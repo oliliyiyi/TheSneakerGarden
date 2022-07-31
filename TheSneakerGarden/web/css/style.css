@@ -33,12 +33,16 @@ html::-webkit-scrollbar-thumb {
 img {
     width: 100%;
 }
+html{
+    height: 100%;
+}
 *{
     padding:0;
     margin: 0;
 }
 body {
     color: var(--text-color);
+    min-height: 100%;
 
 }
 section {
@@ -446,6 +450,7 @@ header {
 
     margin-top: 50px !important;
     background: black;
+   min-height: calc(100vh-220px);
 }
 .footer .logo {
     margin-bottom: 1rem;
