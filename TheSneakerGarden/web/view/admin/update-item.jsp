@@ -215,14 +215,6 @@
                                     >
                             </div>
 
-                            <div class="input-user">
-                                <span class="details">Cate</span>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected><%=product.getcId()%></option>
-
-
-                                </select>
-                            </div>
 
                         </div>
                         <div class="buttonAdd"> 
