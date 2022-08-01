@@ -213,8 +213,7 @@ public class UserManager {
                     + "           ,[FullName]\n"
                     + "           ,[Email]\n"
                     + "           ,[Phone]\n"
-                    + "           ,[Address]\n"
-                    + "           ,[Status])"
+                    + "           ,[Address])"
                     + "VALUES "
                     + "( " + user.getRoleID()
                     + ", N'" + user.getUserAccount()
@@ -223,7 +222,7 @@ public class UserManager {
                     + "', N'" + user.getUserEmail()
                     + "', N'" + user.getUserPhone()
                     + "', N'" + user.getUserAddress()
-                    + "', 1)");
+                    + "')");
             ps.executeUpdate();
             status = true;
 

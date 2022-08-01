@@ -119,7 +119,7 @@ if (session.getAttribute("user") == null) {
 
                 <div style="display: flex; justify-content: space-between">
                     <div class="container" >
-                        <form action="user-management?action=add_admin" method="POST" id="someFormId">
+                        <form action="admin-management?action=add_admin" method="POST" id="someFormId">
                         <div class="user-input">
                             <div class="input-user">
                                 <span class="details">ID </span>
