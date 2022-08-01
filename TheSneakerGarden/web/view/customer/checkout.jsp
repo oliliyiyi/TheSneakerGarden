@@ -27,6 +27,12 @@
                 -moz-user-select: none;
                 user-select: none;
             }
+         select {
+	appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+
+}
 
             @media (min-width: 768px) {
                 .bd-placeholder-img-lg {
@@ -177,9 +183,9 @@
 
                                         <li class="list-group-item d-flex align-items-center justify-content-between py-4">
                                             <h5 class="my-0">Payment Method</h5>
-                                            <div class="">
-                                                <img class="payment-image-type mx-2 d-none" style="width:50px" src="#"/>
-                                                <select onchange="handleChange()" class="custom-select text-uppercase p-1" id="inputGroupSelect01" name="typeId">
+                                            <div class="row">
+                                                <img class="payment-image-type  d-none col-sm-3" style="width:1px;height:37px" src="#"/>
+                                                <select style="-webkit-appearance: none !important;" onchange="handleChange()" class="custom-select text-uppercase p-1 col-sm-9" id="inputGroupSelect01" name="typeId">
                                                     <%
                                                         for (PaymentType type : types) {
                                                     %>
@@ -242,24 +248,24 @@
                                 <script src="${pageContext.request.contextPath}/js/form-validation.js"></script>
                                 <script>var prevScrollpos = window.pageYOffset;
 
-                                  /* Get the header element and it's position */
-                                  var headerDiv = document.querySelector("header");
-                                  var headerBottom = headerDiv.offsetTop + headerDiv.offsetHeight;
+                                    /* Get the header element and it's position */
+                                    var headerDiv = document.querySelector("header");
+                                    var headerBottom = headerDiv.offsetTop + headerDiv.offsetHeight;
 
-                                  window.onscroll = function () {
-                                      var currentScrollPos = window.pageYOffset;
+                                    window.onscroll = function () {
+                                        var currentScrollPos = window.pageYOffset;
 
-                                      /* if we're scrolling up, or we haven't passed the header,
-                                       show the header at the top */
-                                      if (prevScrollpos > currentScrollPos || currentScrollPos < headerBottom) {
-                                          headerDiv.style.top = "0";
-                                      } else {
-                                          /* otherwise we're scrolling down & have passed the header so hide it */
-                                          headerDiv.style.top = "-20rem";
-                                      }
+                                        /* if we're scrolling up, or we haven't passed the header,
+                                         show the header at the top */
+                                        if (prevScrollpos > currentScrollPos || currentScrollPos < headerBottom) {
+                                            headerDiv.style.top = "0";
+                                        } else {
+                                            /* otherwise we're scrolling down & have passed the header so hide it */
+                                            headerDiv.style.top = "-20rem";
+                                        }
 
-                                      prevScrollpos = currentScrollPos;
-                                  }
+                                        prevScrollpos = currentScrollPos;
+                                    }
                                 </script>
                                 </body>
 

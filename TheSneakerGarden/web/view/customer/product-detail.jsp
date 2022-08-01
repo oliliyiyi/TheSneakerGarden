@@ -116,7 +116,10 @@
             .user-img-part{
                 width:30%;
                 float:left;
+                margin-top: 3rem;
+
             }
+
             .user-img{
                 width:48%;
                 /*                float:left;*/
@@ -138,7 +141,19 @@
             .comment{
                 width:68%;
                 float:right;
+                margin-top:3rem;
             }
+            .comment-part .last-comment{
+                margin-top:0 !important;
+            }
+
+            .comment p{
+                width: 75% ;
+                text-align: justify;
+                text-justify: inter-word;
+
+            }
+
             .cardComments {
                 position: relative;
                 display: flex;
@@ -228,6 +243,112 @@
             }
             .ellipsis {
                 content: "\22EE";
+            }
+            .kebab {
+                cursor: pointer;
+                position: absolute;
+                display: inline-block;
+                box-sizing: border-box;
+                padding: 0 16px;
+                bottom: 5%;
+                right: 1%;
+            }
+            .kebab figure {
+                width: 6px;
+                height: 6px;
+                border-radius: 5px;
+                background: #00bcd4;
+                margin: 3px 0;
+            }
+
+            .middle {
+                transition: all 0.25s cubic-bezier(0.72, 1.2, 0.71, 0.72);
+                transform: scale(1);
+                position: relative;
+                box-shadow: 0 0.1px 0.1px 0 rgba(0, 0, 0, 0.16), 0 0.1px 0.3px 0 rgba(0, 0, 0, 0.12);
+                -webkit-filter: blur(0.1px);
+                filter: blur(0.1px);
+            }
+
+            .middle.active {
+                transform: scale(4.5);
+                transition: all 0.25s cubic-bezier(0.32, 2.04, 0.85, 0.54);
+                box-shadow: 0 0.1px 0.1px 0 rgba(0, 0, 0, 0.16), 0 0.1px 0.3px 0 rgba(0, 0, 0, 0.12);
+            }
+
+            .cross {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                margin-top: -1px;
+                font-family: "Nunito", sans-serif;
+                color: white;
+                transition: all 0.2s cubic-bezier(0.72, 1.2, 0.71, 0.72);
+                font-size: 22px;
+                user-select: none;
+            }
+
+            .cross.active {
+                transform: translate(-50%, -50%) scale(1);
+                transition: all 0.15s cubic-bezier(0.32, 2.04, 0.85, 0.54);
+            }
+
+            h1, a, li {
+                font-family: Roboto, sans-serif;
+            }
+
+
+
+            a, li {
+                color: #6b6b6b;
+                text-decoration: none;
+            }
+
+            .nav {
+                position:absolute;
+                right:12%;
+            }
+            .nav > li {
+                display: inline-block;
+                padding: 1em 18px;
+                cursor: pointer;
+            }
+            .nav > li:hover {
+                background: #ebebeb;
+            }
+
+            .dropdownKebab {
+                position: absolute;
+                right: 100%;
+                top: 1em;
+                padding-left: 0;
+                transition: all 0.25s ease-out;
+                transform: scale(0);
+                transform-origin: 100% 0;
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+            }
+            .dropdownKebab li {
+                display: block;
+                width: 100%;
+            }
+            .dropdownKebab li a {
+                width: 100%;
+                padding: 1em 18px;
+                display: inline-block;
+                white-space: pre;
+                box-sizing: border-box;
+            }
+            .dropdownKebab li a:hover {
+                background: #ebebeb;
+            }
+            .dropdownKebab:hover ul {
+                transform: scale(1);
+            }
+
+            .dropdownKebab.active {
+                transform: scale(1);
+                transition: all 0.25s cubic-bezier(0.5, 1.8, 0.9, 0.8);
             }
         </style>
     </head>
@@ -590,6 +711,7 @@
                                         for (User u : userList) {
                                             if (u.getUserId() == rv.getCustomerID()) {
                         %>
+
                         <div class="user-img-part row">
                             <div class="user-img col-12 col-md-6">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" />
@@ -600,10 +722,12 @@
                             </div>
                             <div style="clear: both;"></div>
                         </div>
+                        <hr>
                         <div class="comment">
                             <%
                                 if (rv.getRating() == 5) {
-                            %>        
+                            %> 
+
                             <i aria-hidden="true" class="fa fa-star"></i>
                             <i aria-hidden="true" class="fa fa-star"></i>
                             <i aria-hidden="true" class="fa fa-star"></i>
@@ -649,6 +773,7 @@
                             for (User u : userList) {
                                 if (u.getUserId() == rv.getCustomerID() & userSession.getUserId() != u.getUserId()) {
                         %>
+
                         <div class="user-img-part row">
                             <div class="user-img col-12 col-md-6">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" />
@@ -659,7 +784,7 @@
                             </div>
                             <div style="clear: both;"></div>
                         </div>
-
+                        <hr>
                         <div class="comment">
                             <%
                                 if (rv.getRating() == 5) {
@@ -698,6 +823,7 @@
                             <%
                                 }
                             %>
+
                             <p><%=rv.getMessage()%></p>
                         </div>
                         <%
@@ -706,6 +832,7 @@
                             for (User u : userList) {
                                 if (u.getUserId() == rv.getCustomerID() & userSession.getUserId() == u.getUserId()) {
                         %>
+
                         <div class="user-img-part row">
                             <div class="user-img col-12 col-md-6">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" />
@@ -717,6 +844,19 @@
                             <div style="clear: both;"></div>
                         </div>
                         <div class="comment">
+                            <ul class="nav">
+                                <div class="kebab">
+                                    <figure></figure>
+                                    <figure class="middle"></figure>
+                                    <p class="cross">x</p>
+                                    <figure></figure>
+                                    <ul class="dropdownKebab">
+                                        <li><a href=#>Edit</a></li>
+                                        <li><a href=#>Delete</a></li>
+
+                                    </ul>
+                                </div>
+                            </ul>
                             <%
                                 if (rv.getRating() == 5) {
                             %>        
@@ -754,7 +894,9 @@
                             <%
                                 }
                             %>
-                            <span class="ellipsis">&#8942;</span>
+
+
+
                             <p><%=rv.getMessage()%></p>
                         </div>
                         <%
@@ -780,16 +922,17 @@
                                 for (int i = 0; i < listDetail.size(); i++) {
                                     if (listDetail.get(i).getProductID() == product.getId()) {
                         %>
-                        <div class="user-img-part">
-                            <div class="user-img">
+                        <div class="user-img-part row">
+                            <div class="user-img col-md-6">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" />
                             </div>
-                            <div class="user-text">
+                            <div class="user-text col-md-6">
                                 <p>Me</p>
                             </div>
                             <div style="clear: both;"></div>
                         </div>
-                        <div class="comment">
+                        <hr>
+                        <div class="comment last-comment">
                             <form action="product-detail?action=add&id=<%=product.getId()%>" method="POST">
                                 <div class="cardComments">
                                     <div class="row">
@@ -807,7 +950,7 @@
                                                     <textarea class="form-control" placeholder="what is your view?" name="feedback" rows="4"></textarea>
                                                 </div>
                                                 <div class="comment-btns mt-2">
-                                                    <div class="row">
+                                                    <div class="row" style="text-align:center">
                                                         <div class="col-6">
                                                             <div class="pull-left">
                                                                 <button class="btn btn-success btn-sm">Cancel</button>      
@@ -952,6 +1095,7 @@
         </section>
         <!-- End Article -->
 
+
         <%@include file="../../components/footer.jsp" %>
 
         <!-- Start Script -->
@@ -1015,6 +1159,18 @@
 
                 prevScrollpos = currentScrollPos;
             }
+        </script>
+        <script>
+            var kebab = document.querySelector('.kebab'),
+                    middle = document.querySelector('.middle'),
+                    cross = document.querySelector('.cross'),
+                    dropdown = document.querySelector('.dropdownKebab');
+
+            kebab.addEventListener('click', function () {
+                middle.classList.toggle('active');
+                cross.classList.toggle('active');
+                dropdown.classList.toggle('active');
+            })
         </script>
     </body>
 

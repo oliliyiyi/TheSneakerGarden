@@ -115,7 +115,7 @@ if (session.getAttribute("user") == null) {
             <main>
                 <h3 style="display: flex;
                     justify-content: center;
-                    font-size: 40px; color:#00C897 ">Add user</h3>
+                    font-size: 40px; color:#00C897 ">Add customer</h3>
 
                 <div style="display: flex; justify-content: space-between">
                     <div class="container" >

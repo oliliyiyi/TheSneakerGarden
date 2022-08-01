@@ -1085,7 +1085,7 @@ CREATE TABLE PaymentType(
 	)
 )
 GO
-INSERT INTO dbo.PaymentType(TypeName) VALUES (N'Cash on delivery')
+INSERT INTO dbo.PaymentType(TypeName) VALUES (N'Cash')
 INSERT INTO dbo.PaymentType(TypeName) VALUES (N'Momo')
 INSERT INTO dbo.PaymentType(TypeName) VALUES (N'Viettelpay')
 INSERT INTO dbo.PaymentType(TypeName) VALUES (N'Credit card')
