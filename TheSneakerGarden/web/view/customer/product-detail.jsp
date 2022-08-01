@@ -226,6 +226,9 @@
             .rating:hover>input:checked~label:before {
                 opacity: 0.4
             }
+            .ellipsis {
+                content: "\22EE";
+            }
         </style>
     </head>
 
@@ -252,7 +255,7 @@
                                         float averageRating1 = reviewManager.getRatingProductByProductID(product.getId());
                                         if (averageRating1 != 0) {
                                     %>
-                                    <p class="mr-2 fw-bold"><%=(float)Math.round(averageRating1*10)/10%>&nbsp</p>
+                                    <p class="mr-2 fw-bold"><%=(float) Math.round(averageRating1 * 10) / 10%>&nbsp</p>
                                     <li>
                                         <%
                                             if (averageRating1 == 5) {
@@ -318,7 +321,7 @@
                                         %>
                                     </li>
                                 </ul>
-                                <p class="h3 py-2 mb-0"><%=formatter.format(product.getPrice())+" VND"%></p>
+                                <p class="h3 py-2 mb-0"><%=formatter.format(product.getPrice()) + " VND"%></p>
                                 <hr class="mb-2 h-auto"/>
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
@@ -463,7 +466,7 @@
                                 }
                                 averageRating = sumRate / listReview.size();
                         %>
-                        <h2><%=(float)Math.round(averageRating*10)/10%></h2>
+                        <h2><%=(float) Math.round(averageRating * 10) / 10%></h2>
                         <%
                             if (averageRating == 5) {
                         %>        
@@ -583,8 +586,9 @@
                             ArrayList<User> userList = (ArrayList<User>) request.getAttribute("userList");
                             if (listReview != null) {
                                 for (Review rv : listReview) {
-                                    for (User u : userList) {
-                                        if (u.getUserId() == rv.getCustomerID()) {
+                                    if (session.getAttribute("user") == null) {
+                                        for (User u : userList) {
+                                            if (u.getUserId() == rv.getCustomerID()) {
                         %>
                         <div class="user-img-part row">
                             <div class="user-img col-12 col-md-6">
@@ -592,7 +596,7 @@
                             </div>
                             <div class="user-text col-12 col-md-6">
                                 <h4><%=rv.getReviewDate()%></h4>
-                                <p><%=u.getUserFullName()%></p> 
+                                <p><%=u.getUserFullName()%></p>
                             </div>
                             <div style="clear: both;"></div>
                         </div>
@@ -638,7 +642,128 @@
                         </div>
                         <div style="clear: both;"></div>
                         <%
-                                        }
+                                }
+                            }
+                        } else {
+                            User userSession = (User) session.getAttribute("user");
+                            for (User u : userList) {
+                                if (u.getUserId() == rv.getCustomerID() & userSession.getUserId() != u.getUserId()) {
+                        %>
+                        <div class="user-img-part row">
+                            <div class="user-img col-12 col-md-6">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" />
+                            </div>
+                            <div class="user-text col-12 col-md-6">
+                                <h4><%=rv.getReviewDate()%></h4>
+                                <p><%=u.getUserFullName()%></p>
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+
+                        <div class="comment">
+                            <%
+                                if (rv.getRating() == 5) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 5 & rv.getRating() >= 4) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 4 & rv.getRating() >= 3) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 3 & rv.getRating() >= 2) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 2 & rv.getRating() >= 1) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 1 & rv.getRating() >= 0) {
+                            %>        
+
+                            <%
+                                }
+                            %>
+                            <p><%=rv.getMessage()%></p>
+                        </div>
+                        <%
+                                }
+                            }
+                            for (User u : userList) {
+                                if (u.getUserId() == rv.getCustomerID() & userSession.getUserId() == u.getUserId()) {
+                        %>
+                        <div class="user-img-part row">
+                            <div class="user-img col-12 col-md-6">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="Avatar" />
+                            </div>
+                            <div class="user-text col-12 col-md-6">
+                                <h4><%=rv.getReviewDate()%></h4>
+                                <p>Me</p>
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+                        <div class="comment">
+                            <%
+                                if (rv.getRating() == 5) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 5 & rv.getRating() >= 4) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 4 & rv.getRating() >= 3) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 3 & rv.getRating() >= 2) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 2 & rv.getRating() >= 1) {
+                            %>        
+                            <i aria-hidden="true" class="fa fa-star"></i>
+                            <%
+                            } else if (rv.getRating() < 1 & rv.getRating() >= 0) {
+                            %>        
+
+                            <%
+                                }
+                            %>
+                            <span class="ellipsis">&#8942;</span>
+                            <p><%=rv.getMessage()%></p>
+                        </div>
+                        <%
+                                }
+                            }
+                        %>
+
+                        <div style="clear: both;"></div>
+                        <%
                                     }
                                 }
                             }
@@ -649,7 +774,8 @@
                             }
                         %>
                         <%
-                            if (session.getAttribute("user") != null) {
+                            if (session.getAttribute(
+                                    "user") != null) {
                                 ArrayList<CartItem> listDetail = (ArrayList<CartItem>) request.getAttribute("orderDetails");
                                 for (int i = 0; i < listDetail.size(); i++) {
                                     if (listDetail.get(i).getProductID() == product.getId()) {
@@ -720,14 +846,18 @@
 
                 <!--Start Carousel Wrapper-->
                 <div id="carousel-related-product">
-                    <%  for (int i = 0; i < listP.size(); i++) {
+                    <%  for (int i = 0;
+                                i < listP.size();
+                                i++) {
                             if (listP.get(i).getbrandID() == product.getbrandID()) {
                                 if (listP.get(i).getId() != product.getId()) {
                                     listP2.add(listP.get(i));
                                 }
                             }
                         }
-                        for (int i = 0; i < listP2.size(); i++) {
+                        for (int i = 0;
+                                i < listP2.size();
+                                i++) {
                     %>
                     <div class="p-2 pb-3">
                         <div class="product-wap card rounded-0">
@@ -865,7 +995,7 @@
                                     });
         </script>
         <!-- End Slider Script -->
-          <script>var prevScrollpos = window.pageYOffset;
+        <script>var prevScrollpos = window.pageYOffset;
 
             /* Get the header element and it's position */
             var headerDiv = document.querySelector("header");

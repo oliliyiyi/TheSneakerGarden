@@ -56,12 +56,24 @@
                 border-bottom-width: 2px;
                 transition: all 0.3s ease;
             }
-
+            .user-input .input-user select {
+                height: 45px;
+                width: 100%;
+                outline: none;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                padding-left: 15px;
+                font-size: 16px;
+                border-bottom-width: 2px;
+                transition: all 0.3s ease;
+            }
             .user-input .input-user input:focus,
             .user-input .input-user input:valid {
                 border-color: #9b59b6;
             }
-
+            .user-input .input-user select:valid {
+                border-color: #9b59b6;
+            }
 
             .buttonAdd {
                 display: flex;
@@ -158,12 +170,15 @@
                             </div>
                             <div class="input-user">
                                 <span class="details">Status</span>
-                                <input 
-                                    type="number"
-                                    name="status"
-                                    value="<%=order.getStatus()%>"
-                                    required
-                                    />
+                                <select name="status"  value="<%=order.getStatus()%>">
+                                    <option value="0">
+                                        Pending
+                                    </option>
+                                    <option value="1">
+                                        Done
+                                    </option>
+                                </select>
+
                             </div>
                         </div>
                         <div class="buttonAdd"> 
@@ -176,12 +191,12 @@
             </main>
         </div>
         <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
-        
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
         <script>
-            document.querySelectorAll('pre code').forEach((el) => {
-                hljs.highlightElement(el);
-            });
+                              document.querySelectorAll('pre code').forEach((el) => {
+                                  hljs.highlightElement(el);
+                              });
         </script>
         <script><%@include file="../../js/order-validation.js" %></script>
     </body>
