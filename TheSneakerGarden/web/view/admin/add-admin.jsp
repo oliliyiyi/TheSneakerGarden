@@ -20,7 +20,7 @@ if (session.getAttribute("user") == null) {
     <head>
         <%--<%@include file="./../../components/head.jsp" %>--%>   
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" type="image/x-icon">
-        <title>Add user</title>
+        <title>Add Admin</title>
         <link href="${pageContext.request.contextPath}/notification/notification.css" rel="stylesheet" type="text/css">
         <style type="text/css">
             *{
@@ -115,11 +115,11 @@ if (session.getAttribute("user") == null) {
             <main>
                 <h3 style="display: flex;
                     justify-content: center;
-                    font-size: 40px; color:#00C897 ">Add user</h3>
+                    font-size: 40px; color:#00C897 ">Add Admin</h3>
 
                 <div style="display: flex; justify-content: space-between">
                     <div class="container" >
-                        <form action="user-management?action=add" method="POST" id="someFormId">
+                        <form action="user-management?action=add_admin" method="POST" id="someFormId">
                         <div class="user-input">
                             <div class="input-user">
                                 <span class="details">ID </span>
@@ -171,7 +171,7 @@ if (session.getAttribute("user") == null) {
                         </div>
                         <div class="buttonAdd">
                             <Button type="submit">
-                                Add users
+                                Add admin
                             </Button>
                         </div>
                     </form>

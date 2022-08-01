@@ -216,7 +216,7 @@ public class UserManager {
                     + "           ,[Address]\n"
                     + "           ,[Status])"
                     + "VALUES "
-                    + "(2"
+                    + "( " + user.getRoleID()
                     + ", N'" + user.getUserAccount()
                     + "', '" + password
                     + "', N'" + user.getUserFullName()

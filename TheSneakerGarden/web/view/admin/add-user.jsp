@@ -7,21 +7,20 @@
 <%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    if (session.getAttribute("user") == null) {
+if (session.getAttribute("user") == null) {
         response.sendRedirect("./login");
     } else {
         User user = (User) session.getAttribute("user");
         if (user.getRoleID() != 1) {
             response.sendRedirect("./login");
         } else {
-            User user1 = (User) request.getAttribute("user1");
 %>
 <!DOCTYPE html>
 <html>
     <head>
-        <%--<%@include file="../../components/head.jsp" %>--%>  
+        <%--<%@include file="./../../components/head.jsp" %>--%>   
         <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/LogoTheSneakerGarden.png" type="image/x-icon">
-        <title>Update user</title>
+        <title>Add user</title>
         <link href="${pageContext.request.contextPath}/notification/notification.css" rel="stylesheet" type="text/css">
         <style type="text/css">
             *{
@@ -29,9 +28,7 @@
                 padding: 0;
                 box-sizing: border-box;
                 font-family: 'Poppins', sans-serif;
-
             }
-
             .container form .user-input {
                 display: flex;
                 flex-wrap: wrap;
@@ -99,10 +96,9 @@
 
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
     </head>
     <body>
-        <%@include file="../../components/sidebar-dashboard.jsp" %>  
+        <%@include file="./../../components/sidebar-dashboard.jsp" %>  
         <div class="main-content">
             <header>
                 <div class="search-wrapper"><span class="las la-search"></span>
@@ -115,132 +111,136 @@
                     </div>
                 </div>
             </header>
+
             <main>
                 <h3 style="display: flex;
                     justify-content: center;
-                    font-size: 40px; color:#00C897  ">Update user</h3>
-                <div class="container">
-                    <form action="user-management?action=update" method="POST" id="someFormId">
+                    font-size: 40px; color:#00C897 ">Add user</h3>
 
+                <div style="display: flex; justify-content: space-between">
+                    <div class="container" >
+                        <form action="user-management?action=add_customer" method="POST" id="someFormId">
                         <div class="user-input">
-                            <input type="hidden" name="id" value="<%=user1.getUserId()%>">
-                            <input type="hidden" name="account" value="<%=user1.getUserAccount()%>">
-
                             <div class="input-user">
-                                <span class="details">Account</span>
-                                <input type="text" name="accounta" value="<%=user1.getUserAccount()%>" required disabled="" >
+                                <span class="details">ID </span>
+                                <input type="text" name="id" value="" required disabled="" >
                             </div>
-
                             <div class="input-user">
-                                <span class="details">Name</span>
+                                <span class="details">Account </span>
                                 <input
-                                    name="name"
-                                    value="<%=user1.getUserFullName()%>"
+                                    name="account"
+                                    value=""
                                     required
                                     />
                             </div>
                             <div class="input-user">
-                                <span class="details">Email</span>
+                                <span class="details">Name </span>
+                                <input
+                                    name="name"
+                                    value=""
+                                    required
+                                    />
+                            </div>
+                            <div class="input-user">
+                                <span class="details">Email </span>
                                 <input type="email"
-                                       name="email"
-                                       value="<%=user1.getUserEmail()%>"
-
-                                       required
-                                       />
+                                    name="email"
+                                    value=""
+                                    
+                                    required
+                                    />
                             </div>
                             <div class="input-user">
                                 <span class="details">Phone</span>
                                 <input type="text"  
-                                       name="phone"
-                                       value="<%=user1.getUserPhone()%>"
-
-                                       required
-                                       />
+                                    name="phone"
+                                    value=""
+                                    
+                                    required
+                                    />
                             </div>
                             <div class="input-user">
                                 <span class="details">Address</span>
                                 <input type="text"      
-                                       name="address" 
-                                       value="<%=user1.getUserAddress()%>"
-
-                                       required
-                                       >
+                                    name="address" 
+                                    value=""
+                                    
+                                    required
+                                    >
                             </div>
-                            
                         </div>
                         <div class="buttonAdd">
                             <Button type="submit">
-                                Update user
+                                Add users
                             </Button>
                         </div>
                     </form>
+                    </div>
                 </div>
             </main>
         </div>
         <script src="${pageContext.request.contextPath}/notification/notification.js" type="text/javascript"></script>
-        <script>
-            window.addEventListener('DOMContentLoaded', function () {
-
-                const form = document.querySelector('form');
-
-
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
-
-                    // Form elements
-                    const title = "Success";
-                    const message = "Update user successful";
-                    const position = "bottom-right";
-                    const duration = 3000;
-                    /*
-                     Available methods:
-                     error
-                     warning
-                     success
-                     info
-                     dialog 
-                     
-                     If you use dialog - 
-                     the third parameter is the callback function
-                     */
-                    const type = "success";
-                    let callback = null;
-                    const popup = Notification({
-                        position: position,
-                        duration: duration
-                    });
-
-                    if (!popup[type]) {
-                        popup.error({
-                            title: 'Error',
-                            message: `Notification has no such method "${type}"`
-                        });
-                        return;
-                    }
-
-                    popup[type]({
-                        title: title,
-                        message: message,
-                        callback: callback
-                    });
-                    sleep(3500).then(() => {
-                        document.getElementById('someFormId').submit();
-                    });
-                });
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        
+        const form = document.querySelector('form');
 
 
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          
+          // Form elements
+          const title = "Success";
+          const message = "Add new user successful";
+          const position = "bottom-right";
+          const duration = 3000;
+          /*
+            Available methods:
+              error
+              warning
+              success
+              info
+              dialog 
+
+            If you use dialog - 
+              the third parameter is the callback function
+          */  
+          const type = "success";
+          let callback = null;
+          const popup = Notification({
+            position: position,
+            duration: duration
+          });
+
+          if (!popup[type]) {
+            popup.error({
+              title: 'Error',
+              message: `Notification has no such method "${type}"`
             });
-            function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
+            return;
+          }
 
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-        <script>
-            document.querySelectorAll('pre code').forEach((el) => {
-                hljs.highlightElement(el);
-            });
-        </script>
+          popup[type]({
+            title: title,
+            message: message,
+            callback: callback
+          });
+          sleep(3500).then(() => { document.getElementById('someFormId').submit(); });
+        });
+
+
+      });
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+      
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <script>
+      document.querySelectorAll('pre code').forEach((el) => {
+        hljs.highlightElement(el);
+      });
+    </script>
     </body>
 </html>
 <%
