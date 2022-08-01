@@ -111,7 +111,6 @@ public class ProductManager {
                     + "           ,[Price]\n"
                     + "           ,[ImageLink]\n"
                     + "           ,[Description]\n"
-                    + "           ,[Rate]\n"
                     + "           ,[Status])"
                     + "VALUES "
                     + "(" + product.getcId()
@@ -120,7 +119,7 @@ public class ProductManager {
                     + "', " + product.getPrice()
                     + ", N'" + product.getImage()
                     + "', N'" + product.getDescription()
-                    + "', 3 ,1)");
+                    + "',1)");
 
             ps.executeUpdate();
 

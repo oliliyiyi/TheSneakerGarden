@@ -146,34 +146,34 @@
                                         />
                                 </div>
                                 <div class="input-user">
-                                <span class="details">Category</span>
-                                <select name="cate">
-                                    <option value="1">
-                                        Shoes
-                                    </option>
-                                    <option value="2">
-                                        Shock
-                                    </option>
-                                    <option value="3">
-                                        Hat
-                                    </option>
-                                    <option value="4">
-                                        Backpack
-                                    </option>
-                                </select>
-                      
-                            </div>
-                            <div class="input-user">
-                                <span class="details">Brand</span>
-                                <select name="brand"  >
-                                    <option value="1">
-                                        Nike
-                                    </option>
-                                    <option value="2">
-                                        Adidas
-                                    </option>
-                                    
-                                </select>
+                                    <span class="details">Category</span>
+                                    <select name="cate">
+                                        <option value="1">
+                                            Shoes
+                                        </option>
+                                        <option value="2">
+                                            Shock
+                                        </option>
+                                        <option value="3">
+                                            Hat
+                                        </option>
+                                        <option value="4">
+                                            Backpack
+                                        </option>
+                                    </select>
+
+                                </div>
+                                <div class="input-user">
+                                    <span class="details">Brand</span>
+                                    <select name="brand"  >
+                                        <option value="1">
+                                            Nike
+                                        </option>
+                                        <option value="2">
+                                            Adidas
+                                        </option>
+
+                                    </select>
                                 </div>
                                 <div class="input-user">
                                     <span class="details">Price</span>
@@ -238,7 +238,7 @@
                      success
                      info
                      dialog 
-                 
+                     
                      If you use dialog - 
                      the third parameter is the callback function
                      */
