@@ -90,7 +90,14 @@ public class ShopControl extends HttpServlet {
         ArrayList<Product> list4 = new ArrayList<>(list3);
         if (request.getParameter("tab") != null) {
             int tab = Integer.valueOf(request.getParameter("tab"));
-            request.setAttribute("tab", tab);
+            if(tab > 0){
+                request.setAttribute("tab", tab);
+            }
+            
+        }
+        if (request.getParameter("showTab") != null) {
+            int showTab = Integer.valueOf(request.getParameter("showTab"));
+            request.setAttribute("showTab", showTab);
         }
         ArrayList<Product> list5 = new ArrayList<>(list4);
         if(request.getParameter("type") != null ){

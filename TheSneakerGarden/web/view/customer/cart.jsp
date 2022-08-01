@@ -66,7 +66,7 @@
                                                 <i class="bi bi-dash"></i>
                                             </button>
 
-                                            <input id="form1" min="0" name="quantity" value="<%=en.getValue().getQuantity()%>" type="number"
+                                            <input id="form1" class="quantity" min="0" name="quantity" value="<%=en.getValue().getQuantity()%>" type="number"
                                                    class="form-control form-control-sm" style="margin-right: 1em"/>
 
                                             <button class="btn btn-link px-2"
@@ -126,7 +126,23 @@
         <script src="${pageContext.request.contextPath}/js/product-detail.js"></script>
         <!-- MDB -->
         <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>-->
-  <script>var prevScrollpos = window.pageYOffset;
+  <script>
+      
+            document.querySelectorAll('.quantity').forEach((item, index) => {
+              item.addEventListener('change', event => {
+                var x = document.getElementsByClassName('quantity');
+                window.location.href = '/TheSneakerGarden/addToCart?action=add&quantity='+x[index].value+'&index='+index+'&id=0'
+                console.log(x[index].value);
+              });
+            });
+//            selectElement.forEach(item => {
+//            item.addEventListener('click', event => {
+//              //handle click
+//              
+//            })
+//          });
+            
+            var prevScrollpos = window.pageYOffset;
 
             /* Get the header element and it's position */
             var headerDiv = document.querySelector("header");

@@ -55,14 +55,24 @@ public class addTocart extends HttpServlet {
         }
         if ("add".equals(action)) {
             boolean found = false;
+            int i = 0;
             for (Map.Entry<Integer, CartItem> entry : cart.entrySet()) {
-                if (entry.getKey() == ID) {
+                if(request.getParameter("quantity") != null && request.getParameter("index") != null ){
+                    int abc = Integer.valueOf(request.getParameter("index"));
+                    if(i == Integer.valueOf(request.getParameter("index"))){
+                        if (pm.getProductQuantityByProSize(entry.getValue().getSize(), entry.getValue().getProductID()) < Integer.valueOf(request.getParameter("quantity"))) {
+                                entry.getValue().setQuantity(pm.getProductQuantityByProSize(entry.getValue().getSize(), entry.getValue().getProductID()));
+                            }else{
+                            entry.getValue().setQuantity(Integer.valueOf(request.getParameter("quantity")));
+                        }
+                    }
+                }else if (entry.getKey() == ID) {
                     //Product product = pm.getProductByID(ID);
                     if (entry.getValue().getSize() != size) {
                         if (request.getParameter("product-quantity") != null) {
                             if (pm.getProductQuantityByProSize(size, ID) < Integer.valueOf(request.getParameter("product-quantity"))) {
                                 entry.getValue().setQuantity(pm.getProductQuantityByProSize(size, ID));
-                            } else {
+                            }else {
                                 entry.getValue().setQuantity(entry.getValue().getQuantity() + Integer.valueOf(request.getParameter("product-quantity")));
                             }
                             found = true;
@@ -72,6 +82,7 @@ public class addTocart extends HttpServlet {
                         }
                     }
                 }
+                i++;
             }
             if (!found) {
                 if (request.getParameter("product-quantity") != null) {
@@ -80,7 +91,7 @@ public class addTocart extends HttpServlet {
                     } else {
                         cart.put((ID + 1) * size, new CartItem(1, ID, Integer.valueOf(request.getParameter("product-quantity")), size));
                     }
-                } else {
+                } else if(request.getParameter("quantity") == null) {
                     cart.put((ID + 1) * size, new CartItem(1, ID, 1, size));
                 }
 

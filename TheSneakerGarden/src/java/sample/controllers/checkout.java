@@ -113,14 +113,13 @@ public class checkout extends HttpServlet {
                 Product product = productManager.getProductByID(en.getValue().getProductID());
                 total += product.getPrice() * en.getValue().getQuantity();
             }
-            if (orderManager.insertOder(fullname, phone, address, email, orderDate)) {
-                for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
+            orderManager.insertOder(fullname, phone, address, email, orderDate);
+            for (Map.Entry<Integer, CartItem> en : cart.entrySet()) {
                     Product product = productManager.getProductByID(en.getValue().getProductID());
                     orderManager.insertOderItem(orderManager.getOrderID(), en.getValue().getProductID(), en.getValue().getSize(), en.getValue().getQuantity(), product.getPrice());
                     orderManager.insertPayment(Integer.parseInt(typeId), orderManager.getOrderID(), Double.parseDouble(amount));
                     productManager.updateSize(en.getValue().getSize(), en.getValue().getProductID(), productManager.getProductQuantityByProSize(en.getValue().getSize(), en.getValue().getProductID()) - en.getValue().getQuantity());
                 }
-            }
         }
 
         session.setAttribute("cart", null);

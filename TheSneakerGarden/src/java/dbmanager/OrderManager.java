@@ -76,7 +76,7 @@ public class OrderManager {
             pst.setString(4, email);
             pst.setDate(5, orderDate);
             pst.executeUpdate();
-            rs = pst.getGeneratedKeys();
+//            rs = pst.getGeneratedKeys();
             rs.next();//
             return true;
         } catch (SQLException ex) {

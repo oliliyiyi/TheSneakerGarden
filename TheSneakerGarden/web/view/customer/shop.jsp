@@ -9,6 +9,10 @@
     ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("listProduct");
     ReviewManager reviewManager = new ReviewManager();
     int tab = (int) list.size() / 6;
+    int showTab = 0;
+    if (request.getAttribute("showTab") != null) {
+        showTab = Integer.valueOf(request.getAttribute("showTab").toString());
+    }
     if (tab * 6 < list.size()) {
         tab += 1;
     }
@@ -216,14 +220,27 @@
                         %>
                         <div div="row">
                             <ul class="pagination pagination-lg justify-content-end">
-                                <%                                    
-                                    for (int i = 0; i < tab; i++) {
-                                %>
                                 <li class="page-item text-dark">
-                                    <a id="<%=i+1%>" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="shop?tab=<%=i + 1%>&bId=<%=paramBId%>&type=<%=paramType%>&price=<%=paramPrice%>"
+                                    <a id="" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="shop?tab=<%=showTab * 3 - 4 < 0 ? 0 : ((showTab - 1) * 3)+1%>&bId=<%=paramBId%>&type=<%=paramType%>&price=<%=paramPrice%>&showTab=<%=showTab - 1 < 0 ? 0 : showTab - 1%>"
+                                       ><<</a>
+                                </li>
+                                <%          
+                                    int maxTab = 0;
+                                    if(showTab * 3 + 3 > tab){
+                                        maxTab = tab;
+                                    }else{
+                                        maxTab = showTab * 3 + 3; 
+                                    }
+                                    for (int i = showTab * 3; i < maxTab; i++) {
+                                %>
+                                
+                                <li class="page-item text-dark">
+                                    <a id="<%=i+1%>" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="shop?tab=<%=i + 1%>&bId=<%=paramBId%>&type=<%=paramType%>&price=<%=paramPrice%>&showTab=<%=showTab%>"
                                        ><%=i + 1%></a>
                                 </li>
                                 <%}%>
+                                <a id="" class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="shop?tab=<%=showTab * 3  + 4 > tab ? showTab * 3 + 1 : showTab * 3  + 4%>&bId=<%=paramBId%>&type=<%=paramType%>&price=<%=paramPrice%>&showTab=<%=showTab * 3 + 4 > tab ? showTab : showTab + 1%>"
+                                       >>></a>
                             </ul>
                         </div>
                     </div>
