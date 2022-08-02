@@ -526,7 +526,7 @@
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <div class="col d-grid">
-                                                        <button type="submit" class="btn btn-black btn-lg">
+                                                        <button type="submit" class="btn-add-to-cart btn btn-black btn-lg">
                                                             <a>Add to cart</a>
                                                         </button>
                                                     </div>
@@ -843,6 +843,7 @@
                             </div>
                             <div style="clear: both;"></div>
                         </div>
+                                <hr>
                         <div class="comment">
                             <ul class="nav">
                                 <div class="kebab">
@@ -1083,7 +1084,7 @@
                                         %>
                                     </li>
                                 </ul>
-                                <p class="text-center mb-0" style="color: #333"><b><%=Math.round(listP2.get(i).getPrice())%> VND</b></p>
+                                <p class="text-center mb-0" style="color: #333"><b><%=formatter.format(listP2.get(i).getPrice()) + " VND"%></b></p>
                             </div>
                         </div>
                     </div>

@@ -55,7 +55,17 @@ $(document).ready(function () {
         size.addClass("active");
         $('#size').val(size.val());
         let text = size.attr('stock');
-        $('.product-availble').text("In stock: " + text);
+        if(text == 0){
+            $('.product-availble').text("Out of stock");
+            $('.product-availble').css('color','red');
+            $('.btn-add-to-cart').prop("disabled",true);
+            
+        } else {
+            $('.product-availble').text("In stock: " + text);
+            $('.product-availble').css('color','black');
+            $('.btn-add-to-cart').removeAttr("disabled");
+        }
+        
     });
 });
 

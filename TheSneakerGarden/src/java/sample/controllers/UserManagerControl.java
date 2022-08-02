@@ -104,7 +104,8 @@ public class UserManagerControl extends HttpServlet {
                 String phone = request.getParameter("phone");
                 String address = request.getParameter("address");
                 User user = new User(1, account, name, email, phone, address, 2);
-                if (userManager.insert(user, "12345")) {
+                if (userManager.CheckUserExist(account) == null) {
+                    userManager.insert(user, "12345");
                     listUser = userManager.getAllCustomer();
                     request.setAttribute("listUser", listUser);
                     request.getRequestDispatcher("./view/admin/user-management.jsp").forward(request, response);
