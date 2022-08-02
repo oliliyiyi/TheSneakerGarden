@@ -105,7 +105,7 @@
                                     <div class="col-3 mb-4 text-center">
                                         <h6>Phone</h6>
                                     </div>
-                                    
+
                                     <div class="col-9 mb-4">
                                         <input type="text" class="input-profile" name="phone" value="<%=userInfo.getUserPhone()%>"/>
                                     </div>
@@ -176,6 +176,7 @@
                             <hr class="mt-0 mb-4">
                             <div class="row pt-1 align-items-center">
                                 <%
+                                    String status = null;
                                     if (session.getAttribute("user") != null && ((ArrayList<CartItem>) request.getAttribute("orderHistory")).size() > 0) {
                                         ProductManager pm = new ProductManager();
                                         ArrayList<Order> listOrder = (ArrayList<Order>) request.getAttribute("listOrderHistory");
@@ -183,6 +184,11 @@
                                         CartItem product1 = list.get(1);
                                         Product product = pm.getProductByID(product1.getProductID());
                                         for (Order order : listOrder) {
+                                            if (order.getStatus() == 0) {
+                                                status = "Pending";
+                                            } else {
+                                                status = "Done";
+                                            }
                                 %>
                                 <div id="myCart">
                                     <div class="card artItem rounded-3 mb-4">
@@ -191,12 +197,27 @@
                                                 <div class="col-md-2 col-lg-2 col-xl-2">
                                                     <img src="<%=product.getImage()%>" class="img-fluid rounded-3" alt="Cotton T-shirt">
                                                 </div>
-                                                <div class="col-md-4 col-lg-4 col-xl-4">
-                                                    <p class="lead fw-normal mb-2">Invoice: <%=order.getOrderId()%> </p>
-                                                    <p><span class="text-muted">Ship Address: </span><%=order.getShipAddress()%>
-                                                    <p><span class="text-muted">Order Date: </span><%=order.getOrderDate()%></p>    
-                                                </div>
 
+                                                <%
+                                                    if (order.getStatus() == 0) {
+                                                %>
+                                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                                    <p class="lead fw-normal mb-2">Status: <%=status%> </p>
+                                                    <p><span class="text-muted">Ship Address: </span><%=order.getShipAddress()%>
+                                                    <p><span class="text-muted">Order Date: </span><%=order.getOrderDate()%></p> 
+                                                </div>
+                                                <%
+                                                } else {
+                                                %>
+                                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                                    <p class="lead fw-normal mb-2">Status: <%=status%> </p>
+                                                    <p><span class="text-muted">Ship Address: </span><%=order.getShipAddress()%>
+                                                    <p><span class="text-muted">Order Date: </span><%=order.getOrderDate()%></p> 
+                                                    <p><span class="text-muted">Ship Date: </span><%=order.getShipDate()%></p> 
+                                                </div>
+                                                <%
+                                                    }
+                                                %>
                                                 <div class="col-md-3 col-lg-2 col-xl-3 offset-lg-1">
                                                     <p><a class="view-detail" href="detail-history?id=<%=order.getOrderId()%>"><span>View detail</span></a></p> 
                                                 </div>
@@ -247,7 +268,7 @@
         <!-- MDB -->
         <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>-->
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/cart.js"></script>
-          <script>var prevScrollpos = window.pageYOffset;
+        <script>var prevScrollpos = window.pageYOffset;
 
             /* Get the header element and it's position */
             var headerDiv = document.querySelector("header");
